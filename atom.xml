@@ -258,6 +258,8 @@
     
     <category term="pentest" scheme="http://example.com/tags/pentest/"/>
     
+    <category term="工具" scheme="http://example.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
     <category term="SiteHunter" scheme="http://example.com/tags/SiteHunter/"/>
     
     <category term="Information" scheme="http://example.com/tags/Information/"/>
@@ -271,8 +273,6 @@
     <category term="子域名" scheme="http://example.com/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/"/>
     
     <category term="目錄爆破" scheme="http://example.com/tags/%E7%9B%AE%E9%8C%84%E7%88%86%E7%A0%B4/"/>
-    
-    <category term="工具" scheme="http://example.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -304,9 +304,9 @@
     
     <category term="backdoor" scheme="http://example.com/tags/backdoor/"/>
     
-    <category term="工具" scheme="http://example.com/tags/%E5%B7%A5%E5%85%B7/"/>
-    
     <category term="Alien" scheme="http://example.com/tags/Alien/"/>
+    
+    <category term="工具" scheme="http://example.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -334,11 +334,11 @@
     
     <category term="webshell" scheme="http://example.com/tags/webshell/"/>
     
+    <category term="code" scheme="http://example.com/tags/code/"/>
+    
     <category term="trojan" scheme="http://example.com/tags/trojan/"/>
     
     <category term="backdoor" scheme="http://example.com/tags/backdoor/"/>
-    
-    <category term="code" scheme="http://example.com/tags/code/"/>
     
   </entry>
   

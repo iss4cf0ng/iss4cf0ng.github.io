@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-07-14T12:55:09.809Z</updated>
+  <updated>2025-12-31T13:42:17.897Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Code] C# - Simple way to pass parameters to Thread() method and invoke control</title>
+    <link href="http://example.com/2024/12/04/CSharp-ThreadWithParameters/"/>
+    <id>http://example.com/2024/12/04/CSharp-ThreadWithParameters/</id>
+    <published>2024-12-03T16:15:38.000Z</published>
+    <updated>2025-12-31T13:42:17.897Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Today, I’ll share a straightforward approach to passing parameters to the Thread method in C#. I’ll also cover how to invoke a control safely within a thread.</p><h1 id="The-Common-Approach-You-See-Online"><a href="#The-Common-Approach-You-See-Online" class="headerlink" title="The Common Approach You See Online"></a>The Common Approach You See Online</h1><p>This is what I saw in online:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">void Function1(object data)<br>&#123;<br>    //SOME CODE...<br>&#125;<br><br>void Function2(object data)<br>&#123;<br>    object[] objs = (object[])data; //Convert object into object array.<br>    int x = (int)objs[0]; //Convert 1st element into integer.<br>    string y = (string)objs[1]; //Convert 2nd element into integer.<br><br>    //SOME CODE.....<br>&#125;<br><br>//Function 1<br>object obj = &quot;Hello world!&quot;;<br>Thread thread1 = new Thread(new ParameterizedThreadStart(Function1));<br>thread1.Start(obj);<br><br>//Function 2<br>object[] objs = new object[] &#123; 666, &quot;What?&quot; &#125;;<br>Thread thread1 = new Thread(new ParameterizedThreadStart(Function2));<br>thread1.Start(objs);<br><br></code></pre></td></tr></table></figure><p>This method works but feels clunky and error-prone. It involves boxing&#x2F;unboxing and manually unpacking parameters, which isn’t ideal.</p><h1 id="A-Simpler-Way-to-Pass-Parameters"><a href="#A-Simpler-Way-to-Pass-Parameters" class="headerlink" title="A Simpler Way to Pass Parameters"></a>A Simpler Way to Pass Parameters</h1><p>We can use the lamda function</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">void Function(int x, string y)<br>&#123;<br>    //SOME CODE.....<br>&#125;<br><br>Thread thread = new Thread(() =&gt; Function(666, &quot;Good&quot;));<br>thread.Start();<br><br></code></pre></td></tr></table></figure><p>With this approach, the Thread constructor doesn’t need a separate method like ParameterizedThreadStart. Instead, the lambda expression lets you pass the exact arguments to your method.</p><h2 id="Going-Even-Further"><a href="#Going-Even-Further" class="headerlink" title="Going Even Further"></a>Going Even Further</h2><p>If you don’t need to reuse the thread reference, you can make it even cleaner</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">void Function(int x, string y)<br>&#123;<br>    //SOME CODE.....<br>&#125;<br><br>new Thread(() =&gt; Function(666, &quot;Nice&quot;)).Start();<br></code></pre></td></tr></table></figure><p>This method eliminates the need for intermediate objects entirely. It’s cleaner, concise, and less error-prone.</p><h1 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h1><p>More elegant ways</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">void Function(int x, string y)<br>&#123;<br>    // SOME CODE...<br>&#125;<br><br>Task.Run(() =&gt; Function(666, &quot;Oh...&quot;));<br><br></code></pre></td></tr></table></figure><p>This is concise, highly readable, and works seamlessly with async&#x2F;await patterns.</p><hr><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">void Function(int x, string y)<br>&#123;<br>    // SOME CODE...<br>&#125;<br><br>ThreadPool.QueueUserWorkItem(_ =&gt; Function(666, &quot;ThreadPool&quot;));<br></code></pre></td></tr></table></figure><p>Thread pooling is efficient and avoids the overhead of creating a dedicated thread for every task!</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h1&gt;&lt;p&gt;Today, I’ll share a straightforward approach t</summary>
+      
+    
+    
+    
+    
+    <category term="Code" scheme="http://example.com/tags/Code/"/>
+    
+    <category term="C#" scheme="http://example.com/tags/C/"/>
+    
+    <category term="Program" scheme="http://example.com/tags/Program/"/>
+    
+  </entry>
   
   <entry>
     <title>【Tool】LazyUrl2TXT</title>
@@ -97,34 +123,6 @@
     <category term="C#" scheme="http://example.com/tags/C/"/>
     
     <category term="Program" scheme="http://example.com/tags/Program/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【Nonsense】資安圈 = 娛樂圈 ? 對資安圈現在的想法</title>
-    <link href="http://example.com/2023/06/12/%E3%80%90Nonsense%E3%80%91hack-entertain/"/>
-    <id>http://example.com/2023/06/12/%E3%80%90Nonsense%E3%80%91hack-entertain/</id>
-    <published>2023-06-12T08:06:38.000Z</published>
-    <updated>2023-06-13T12:18:19.238Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一直以來黑&#x2F;駭客(本文用黑客一詞)給人的感覺都是很神秘和很帥，<br>在很多電影中黑客給一種就是救埸王的感覺，小事就是入侵手機，大事就是入侵衛星。<br>但真的是這樣嗎 ?<br>我在資安這圈子時間也不算短了，打算分享一下我的想法。</p><hr><h1 id="技術的發展"><a href="#技術的發展" class="headerlink" title="技術的發展"></a>技術的發展</h1><p>從古到今一直都有出現很多很令人興奮的新技術，這些技術不管是在文化還是科技上都把文明的時鐘推前了一大步，這些技術發展到今都有有些共同的特徵，會出現現狂熱朝，大家都在討論這種技術，當技術慢慢地成熟時，技術的細節已經不是大眾能理解的了，而是由幾個這方面領域的專家開拓的。<br>那技術成熟之後呢 ? 當大家都可以接觸到這種技術的表面時，就會出現很奇怪的現像，大家都想分高下，看看誰能了解得更多，每當有人對這件事進行提問題，大家都會爭先恐後地發表自己所知道的。</p><hr><h1 id="對黑客的印象"><a href="#對黑客的印象" class="headerlink" title="對黑客的印象"></a>對黑客的印象</h1><h2 id="現實大眾對黑客的印象"><a href="#現實大眾對黑客的印象" class="headerlink" title="現實大眾對黑客的印象"></a>現實大眾對黑客的印象</h2><p>大眾對黑客的印象大概就是「天才」之類的。</p><h2 id="動漫中的黑客"><a href="#動漫中的黑客" class="headerlink" title="動漫中的黑客"></a>動漫中的黑客</h2><p class='item-img' data-src='/pic/hackentainmentquestionmark/2.png'><img src="/pic/hackentainmentquestionmark/2.png"><br class='item-img' data-src='/pic/hackentainmentquestionmark/3.png'><img src="/pic/hackentainmentquestionmark/3.png"><br>全是美少女，帥哥</p><h2 id="電影中的黑客"><a href="#電影中的黑客" class="headerlink" title="電影中的黑客"></a>電影中的黑客</h2><p class='item-img' data-src='/pic/hackentainmentquestionmark/9.png'><img src="/pic/hackentainmentquestionmark/9.png"><br class='item-img' data-src='/pic/hackentainmentquestionmark/10.png'><img src="/pic/hackentainmentquestionmark/10.png"><br>全是帥哥美女，</p><h2 id="現實中的黑帽黑客"><a href="#現實中的黑帽黑客" class="headerlink" title="現實中的黑帽黑客"></a>現實中的黑帽黑客</h2><p class='item-img' data-src='/pic/hackentainmentquestionmark/7.png'><img src="/pic/hackentainmentquestionmark/7.png"><br>做不好就等死吧。</p><hr><h1 id="媒體的渲染"><a href="#媒體的渲染" class="headerlink" title="媒體的渲染"></a>媒體的渲染</h1><p class='item-img' data-src='/pic/hackentainmentquestionmark/4.png'><img src="/pic/hackentainmentquestionmark/4.png"><br class='item-img' data-src='/pic/hackentainmentquestionmark/5.png'><img src="/pic/hackentainmentquestionmark/5.png"><br class='item-img' data-src='/pic/hackentainmentquestionmark/6.png'><img src="/pic/hackentainmentquestionmark/6.png"><br>媒體很喜歡把少年黑客叫做「天才」「最強」</p><h1 id="資安VS畫畫"><a href="#資安VS畫畫" class="headerlink" title="資安VS畫畫"></a>資安VS畫畫</h1><p>在美術領域中從來不乏年輕而且畫畫很漂亮的人，<br>在資安領域也是一樣，但是可以被同行稱為高手或大師的人又有多少個 ?<br>我以前也有做過類似的事，可是後來我覺得這是很愚蠢的行為。</p><hr><h1 id="黑客甚麼都能黑"><a href="#黑客甚麼都能黑" class="headerlink" title="黑客甚麼都能黑?"></a>黑客甚麼都能黑?</h1><p>這是很大的誤會，以iphone為例子，雖然一直有一個說法是iphone有國家的後門存在，<br>但要破解Iphone這種手機對大部分黑客(白帽+黑帽)都絕對不是甚麼容易的事，<br>本文中第一部份說到入侵手機是一事「小事」，如果你指的入侵是任何一個人的手機只要有打開就能入侵的話，那這絕對不是甚麼小事。<br>有很多人一聽到黑客這兩個事就會問他「你能幫我破解FB嗎 ?」<br>大概在大眾的眼中破解一個帳號是一件很容易的事。<br>漏洞找不到就是找不到，就像100%的HTML網頁，只有hello world的程式<br>你要資安人士在這找出漏洞，他大概只會想打你。</p><hr><h1 id="找漏洞是很有趣的事"><a href="#找漏洞是很有趣的事" class="headerlink" title="找漏洞是很有趣的事 ?"></a>找漏洞是很有趣的事 ?</h1><p>能找到漏洞然後寫出Exploit或者POC當然有趣，那要是找不到呢 ?<br>相信有滲透相關經驗的人都體驗過那種坐在電腦前甚麼都找不到的感想，<br>然後還是寫一個簡單的reflect xss在報告上。</p><hr><h1 id="實力上的比較"><a href="#實力上的比較" class="headerlink" title="實力上的比較"></a>實力上的比較</h1><h2 id="比較的意義"><a href="#比較的意義" class="headerlink" title="比較的意義"></a>比較的意義</h2><p>全心全意討論技術的人可以說是越來越少了，很多人學了資安相關的技術就要馬上告訴全世界自己是黑客，能得到身邊同年齡人的認可的確很重要，但絕對不是用這種方法。</p><h2 id="領域的比較"><a href="#領域的比較" class="headerlink" title="領域的比較"></a>領域的比較</h2><p>一直有人覺得黑客有所謂的最強，首先資訊安全是一個很大的領域，密碼破解、滲透測試、緩衝區溢位、物聯網安全、大規模監控、大規模掃瞄、數據修改、黑帽SEO等等…<br>不同領域的實力強弱比較是沒有太大意義的，就好像要在跑步和跳高兩個領域進行比較並不合理一樣。<br>如果要比較，那就應該是對社會XXX或者年薪等等有共通點的比較。</p><h2 id="Bug-Bounty計劃"><a href="#Bug-Bounty計劃" class="headerlink" title="Bug Bounty計劃"></a>Bug Bounty計劃</h2><p>Bug Bounty的確是一個能看排名的計劃，2016年大陸的烏雲網還沒關閉時就有一個長期在榜一的大哥，叫做豬豬俠(曾發現阿里巴巴，百度等等存在高危漏洞)，Bug Bounty的漏洞是會以分數進行計算的，如此一看那的確是可以在滲透方面分出高下。</p><h2 id="工具編寫"><a href="#工具編寫" class="headerlink" title="工具編寫"></a>工具編寫</h2><p>寫工具也是一個很多比較的方法，總會有人因為寫出很有名和很好用的工具而成名</p><h1 id="黑客與英雄主義"><a href="#黑客與英雄主義" class="headerlink" title="黑客與英雄主義"></a>黑客與英雄主義</h1><p>資安領域也有著英雄主義，會有黑客因為做出某件事而被大眾稱為英雄，</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">OpenBSD crowd is a bunch of masturbating monkeys — Linus<br></code></pre></td></tr></table></figure><p>這句話是Linux之父Linus罵OpenBSD的話，因為Linus認為軟體的bug比安全漏洞還要多，而資安人士因為找到漏洞成為英雄但忽略了一般bug的問題。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;一直以來黑&amp;#x2F;駭客(本文用黑客一詞)給人的感覺都是很神秘和很帥，&lt;br&gt;在很多電影中黑客給一種就是救埸王的感覺，小事就是入侵手機，大</summary>
-      
-    
-    
-    
-    <category term="Nonsense" scheme="http://example.com/categories/Nonsense/"/>
-    
-    
-    <category term="nonsense" scheme="http://example.com/tags/nonsense/"/>
-    
-    <category term="thinking" scheme="http://example.com/tags/thinking/"/>
-    
-    <category term="hacker" scheme="http://example.com/tags/hacker/"/>
     
   </entry>
   
@@ -304,9 +302,9 @@
     
     <category term="webshell" scheme="http://example.com/tags/webshell/"/>
     
-    <category term="工具" scheme="http://example.com/tags/%E5%B7%A5%E5%85%B7/"/>
-    
     <category term="backdoor" scheme="http://example.com/tags/backdoor/"/>
+    
+    <category term="工具" scheme="http://example.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
     <category term="Alien" scheme="http://example.com/tags/Alien/"/>
     

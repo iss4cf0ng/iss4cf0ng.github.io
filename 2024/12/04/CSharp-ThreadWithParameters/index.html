@@ -1,59 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <title>[Code] C# - Simple way to pass parameters to Thread() method and invoke control</title>
-  <link rel="stylesheet" href="/css/main.css">
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC's blog" type="application/atom+xml">
-</head>
-<body>
-
-<header class="header">
-  <div class="logo"><a href="/">ISSAC&#39;s blog</a></div>
-  <nav class="nav">
-    
-      <a href="/">Home</a>
-    
-      <a href="/archives">Archives</a>
-    
-      <a href="/about">About</a>
-    
-  </nav>
-</header>
-
-<section class="hero">
-  
-    <div class="hero-slide active" style="background-image:url(/images/slider/1.png)">
-      <div class="hero-mask"></div>
-      <div class="hero-text">
-        <h1>Offensive Security Research</h1>
-        <p>Red Team · Exploit · Loader</p>
-      </div>
-    </div>
-  
-    <div class="hero-slide " style="background-image:url(/images/slider/2.png)">
-      <div class="hero-mask"></div>
-      <div class="hero-text">
-        <h1>System &amp; Kernel Notes</h1>
-        <p>ELF · Windows · Linux</p>
-      </div>
-    </div>
-  
-    <div class="hero-slide " style="background-image:url(/images/slider/3.png)">
-      <div class="hero-mask"></div>
-      <div class="hero-text">
-        <h1>Malware &amp; C2</h1>
-        <p>SMB · HTTPS · Reflective Loading</p>
-      </div>
-    </div>
-  
-</section>
-
-
-<main class="container">
-  <article class="post">
-  <h1>[Code] C# - Simple way to pass parameters to Thread() method and invoke control</h1>
-  <div class="content"><h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Today, I’ll share a straightforward approach to passing parameters to the Thread method in C#. I’ll also cover how to invoke a control safely within a thread.</p>
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Code] C# - Simple way to pass parameters to Thread() method and invoke control | ISSAC's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/about/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/contact/"><span class="navItemTitle">Contact</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Tools/"><span class="navItemTitle">Tools</span></a></li><li class="navItem"><a class="navBlock" href="/tags/blackhat"><span class="navItemTitle">BlackHat</span></a></li><li class="navItem"><a class="navBlock" href="/PenTest/"><span class="navItemTitle">Pentest</span></a></li><li class="navItem"><a class="navBlock" href="/Nonsense"><span class="navItemTitle">Nonsense</span></a></li><li class="navItem"><a class="navBlock" href="/tags/Code"><span class="navItemTitle">Code</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Code] C# - Simple way to pass parameters to Thread() method and invoke control</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2024-12-03T16:15:38.000Z" id="date"> 2024-12-04</time></div></span><br><span>Last Update: <div class="control"><time datetime="2025-12-31T13:42:17.897Z" id="updated"> 2025-12-31</time></div></span><br><span>Word Count: <div class="control">329</div></span><br><span>Read Time: <div class="control">2 min</div></span></div></div><hr><div id="post-content"><h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>Today, I’ll share a straightforward approach to passing parameters to the Thread method in C#. I’ll also cover how to invoke a control safely within a thread.</p>
 <h1 id="The-Common-Approach-You-See-Online"><a href="#The-Common-Approach-You-See-Online" class="headerlink" title="The Common Approach You See Online"></a>The Common Approach You See Online</h1><p>This is what I saw in online:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">void Function1(object data)<br>&#123;<br>    //SOME CODE...<br>&#125;<br><br>void Function2(object data)<br>&#123;<br>    object[] objs = (object[])data; //Convert object into object array.<br>    int x = (int)objs[0]; //Convert 1st element into integer.<br>    string y = (string)objs[1]; //Convert 2nd element into integer.<br><br>    //SOME CODE.....<br>&#125;<br><br>//Function 1<br>object obj = &quot;Hello world!&quot;;<br>Thread thread1 = new Thread(new ParameterizedThreadStart(Function1));<br>thread1.Start(obj);<br><br>//Function 2<br>object[] objs = new object[] &#123; 666, &quot;What?&quot; &#125;;<br>Thread thread1 = new Thread(new ParameterizedThreadStart(Function2));<br>thread1.Start(objs);<br><br></code></pre></td></tr></table></figure>
 <p>This method works but feels clunky and error-prone. It involves boxing&#x2F;unboxing and manually unpacking parameters, which isn’t ideal.</p>
@@ -70,17 +35,21 @@
 <hr>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">void Function(int x, string y)<br>&#123;<br>    // SOME CODE...<br>&#125;<br><br>ThreadPool.QueueUserWorkItem(_ =&gt; Function(666, &quot;ThreadPool&quot;));<br></code></pre></td></tr></table></figure>
 <p>Thread pooling is efficient and avoids the overhead of creating a dedicated thread for every task!</p>
-</div>
-</article>
-
-</main>
-
-<footer class="footer">
-  <span>© 2026 BlackDeck</span>
-</footer>
-
-
-<script src="/js/slider.js"></script>
-<script src="/js/code-copy.js"></script>
-</body>
-</html>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2023/07/13/%E3%80%90Tool%E3%80%91LazyUrl2TXT/">【Tool】LazyUrl2TXT Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://ak.hypergryph.com/assets/index/images/ak/pc/faction/1.png" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Look behind you...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/malbuffer4pt"><i class="GitHub" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://zeroday.hitcon.org/user/ISSAC_f0ng"><i class="ZeroDay Hitcon" alt="ZeroDay Hitcon"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#The-Common-Approach-You-See-Online"><span class="toc-number">2.</span> <span class="toc-text">The Common Approach You See Online</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Simpler-Way-to-Pass-Parameters"><span class="toc-number">3.</span> <span class="toc-text">A Simpler Way to Pass Parameters</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Going-Even-Further"><span class="toc-number">3.1.</span> <span class="toc-text">Going Even Further</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Addition"><span class="toc-number">4.</span> <span class="toc-text">Addition</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>

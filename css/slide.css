@@ -30,30 +30,34 @@
   object-fit: cover;
   display: block;
 }
-.slide-title {
-  display: block;
+.slide .slide-caption {
   position: absolute;
   bottom: 30px;
-  left: 30px;
+  left: 50px;
   color: #fff;
-  font-size: 1.5rem;
-  text-shadow: 0 0 10px rgba(0,0,0,0.7);
-  z-index: 10;
+  text-shadow: 0 0 6px rgba(0,0,0,0.7);
+}
+.slide .slide-caption .slide-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.slide .slide-caption .slide-desc {
+  font-size: 16px;
 }
 .slide-dots {
   position: absolute;
-  bottom: 15px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  display: flex;
+  gap: 8px;
 }
 .slide-dots .dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 0 5px;
-  background: rgba(255,255,255,0.5);
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
+  background: rgba(255,255,255,0.5);
   cursor: pointer;
 }
 .slide-dots .dot.active {

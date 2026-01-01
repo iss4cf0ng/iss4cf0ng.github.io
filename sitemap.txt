@@ -1,3 +1,6 @@
+http://example.com/About/index.html
+http://example.com/EgoDrop/index.html
+http://example.com/DuplexSpy/index.html
 http://example.com/2024/12/04/CSharp-ThreadWithParameters/
 http://example.com/2023/07/13/%E3%80%90Tool%E3%80%91LazyUrl2TXT/
 http://example.com/Tools/index.html

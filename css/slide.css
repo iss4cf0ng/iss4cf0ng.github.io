@@ -31,20 +31,21 @@
   display: block;
 }
 .slide-title {
+  display: block;
   position: absolute;
   bottom: 30px;
   left: 30px;
   color: #fff;
   font-size: 1.5rem;
   text-shadow: 0 0 10px rgba(0,0,0,0.7);
-  z-index: 2;
+  z-index: 10;
 }
 .slide-dots {
   position: absolute;
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 2;
+  z-index: 10;
 }
 .slide-dots .dot {
   display: inline-block;

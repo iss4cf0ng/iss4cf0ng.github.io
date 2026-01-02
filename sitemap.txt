@@ -70,6 +70,7 @@ http://example.com/tags/DDoS/
 http://example.com/tags/StressTest/
 http://example.com/tags/DoS/
 http://example.com/tags/PHP/
+http://example.com/tags/Learning/
 http://example.com/categories/Code/
 http://example.com/categories/Tools/
 http://example.com/categories/BlackHat/

@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Note] C++ 20 for Programmers - An Objects-Natural Appraoch | ISSAC's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Tools/"><span class="navItemTitle">Tools</span></a></li><li class="navItem"><a class="navBlock" href="/tags/blackhat"><span class="navItemTitle">BlackHat</span></a></li><li class="navItem"><a class="navBlock" href="/PenTest/"><span class="navItemTitle">Pentest</span></a></li><li class="navItem"><a class="navBlock" href="/Nonsense"><span class="navItemTitle">Nonsense</span></a></li><li class="navItem"><a class="navBlock" href="/tags/code"><span class="navItemTitle">Code</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Note] C++ 20 for Programmers - An Objects-Natural Appraoch</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-01-02T11:50:24.000Z" id="date"> 2026-01-02</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-01-02T13:26:51.675Z" id="updated"> 2026-01-02</time></div></span><br><span>Word Count: <div class="control">426</div></span><br><span>Read Time: <div class="control">2 min</div></span></div></div><hr><div id="post-content"><h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/article/Cpp20/Cpp20forProgrammer.png'><img src="/images/article/Cpp20/Cpp20forProgrammer.png", width="500">
+</p>
+
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><h1 id="Chapter-8"><a href="#Chapter-8" class="headerlink" title="Chapter.8"></a>Chapter.8</h1><h2 id="8-7-Find-SubString-in-a-String"><a href="#8-7-Find-SubString-in-a-String" class="headerlink" title="8.7 - Find SubString in a String"></a>8.7 - Find SubString in a String</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">std::string s = &quot;Hello world&quot;;<br><br>s.find(&quot;l&quot;); //Start from the beginning.<br>s.rfind(&quot;l&quot;); //Start from the ending.<br><br>s.find_first_of(&quot;l&quot;);<br>s.find_last_of(&quot;l&quot;);<br>s.find_first_not_of(&quot;l&quot;);<br><br>s.erase(5); //Erase substring, start from index = 5;<br></code></pre></td></tr></table></figure>
+
+<h2 id="8-10-Type-conversion"><a href="#8-10-Type-conversion" class="headerlink" title="8.10 - Type conversion"></a>8.10 - Type conversion</h2><table>
+<thead>
+<tr>
+<th>To Integer</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stoi</td>
+<td>int</td>
+</tr>
+<tr>
+<td>stol</td>
+<td>long</td>
+</tr>
+<tr>
+<td>stoul</td>
+<td>unsigned long</td>
+</tr>
+<tr>
+<td>stoll</td>
+<td>long long</td>
+</tr>
+<tr>
+<td>stoull</td>
+<td>unsigned long long</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>To Float</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stof</td>
+<td>float</td>
+</tr>
+<tr>
+<td>stod</td>
+<td>double</td>
+</tr>
+<tr>
+<td>stold</td>
+<td>long double</td>
+</tr>
+</tbody></table>
+<h2 id="8-13-ofstream"><a href="#8-13-ofstream" class="headerlink" title="8.13 - ofstream"></a>8.13 - ofstream</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#include &lt;cstdlib&gt;<br>#include &lt;fmt/format.h&gt;<br>#include &lt;fstream&gt;<br>#include &lt;iostream&gt;<br>#include &lt;string&gt;<br><br>int main(int argc, char *argv[]) &#123;<br>    if (std::ofstream output&#123;&quot;clients.txt&quot;, std::ios::out&#125;) &#123;<br>        std::cout &lt;&lt; &quot;Enter the account, name, and balance.\n&quot;<br>        &lt;&lt; &quot;Enter the end-of-file to end input.\n? &quot;;<br><br>        int account;<br>        std::string name;<br>        double balance;<br><br>        while (std::cin &gt;&gt; account &gt;&gt; name &gt;&gt; balance) &#123;<br>            output &lt;&lt; fmt::format(&quot;&#123;&#125; &#123;&#125; &#123;&#125;\n&quot;, account, name, balance);<br>            std::cout &lt;&lt; &quot;? &quot;;<br>        &#125;<br>    &#125;<br>    else<br>    &#123;<br>        std::cerr &lt;&lt; &quot;File could not be opened\n&quot;;<br>        std::exit(EXIT_FAILURE);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ios::app</td>
+<td>Appending text to the end of the file.</td>
+</tr>
+<tr>
+<td>ios::ate</td>
+<td>Open a file for output(ofstrema), and seek to the end of the file.</td>
+</tr>
+<tr>
+<td>ios::in</td>
+<td>Open a file for input.</td>
+</tr>
+<tr>
+<td>ios::out</td>
+<td>Open a file for output.</td>
+</tr>
+<tr>
+<td>ios::trunc</td>
+<td>Open a file, and truncate(discard) the content without any warning. This is also the default action of std::out.</td>
+</tr>
+<tr>
+<td>ios::binary</td>
+<td>Open a binary file for input or output.</td>
+</tr>
+</tbody></table>
+<p>close:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">output.close();<br></code></pre></td></tr></table></figure>
+
+<h2 id="8-14-ifstream"><a href="#8-14-ifstream" class="headerlink" title="8.14 - ifstream"></a>8.14 - ifstream</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">fileObject.seekg(n);<br><br>fileObject.seekg(n, ios::cur);<br><br>fileObject.seekg(n, ios::end);<br><br>fileObject.seekg(0, ios::end);<br></code></pre></td></tr></table></figure>
+
+<h2 id="8-18-Raw-String-Literal"><a href="#8-18-Raw-String-Literal" class="headerlink" title="8.18 - Raw String Literal"></a>8.18 - Raw String Literal</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">std::string windowsPath&#123;R&quot;(C:\Windows\System32\cmd.exe)&quot;&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">R&quot;(multiple lines<br>of text)&quot;<br><br>is same as<br><br>&quot;multiple lines\nof text&quot;<br></code></pre></td></tr></table></figure>
+
+<h1 id="Chapter-9"><a href="#Chapter-9" class="headerlink" title="Chapter.9"></a>Chapter.9</h1><h2 id="9-9-Access-the-Member-of-class"><a href="#9-9-Access-the-Member-of-class" class="headerlink" title="9.9 - Access the Member of class"></a>9.9 - Access the Member of class</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">clsAccount acccount&#123;&#125;; //Declare a class object.<br>clsAccount&amp; ref&#123;account&#125;; //ref refer a class object.<br>clsAccount* ptr&#123;&amp;account&#125;; //ptr point a class object.<br><br>account.deposit(123.45); //Call by name.<br>ref.deposit(123.45); //Call by reference.<br>ptr-&gt;deposit(123.45); //Call by pointer.<br><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>According to <strong>CppCoreGuidelines</strong> instead of using pointe, we should use reference.</p>
+</blockquote>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/01/01/2026-1-1-SynFlooding/">[Code] SYN Flooding — From Principle to Practice Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Look behind you...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng"><i class="GitHub" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://zeroday.hitcon.org/user/ISSAC_f0ng"><i class="ZeroDay Hitcon" alt="ZeroDay Hitcon"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#El-libro"><span class="toc-number">1.</span> <span class="toc-text">El libro</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-8"><span class="toc-number">3.</span> <span class="toc-text">Chapter.8</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-7-Find-SubString-in-a-String"><span class="toc-number">3.1.</span> <span class="toc-text">8.7 - Find SubString in a String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-10-Type-conversion"><span class="toc-number">3.2.</span> <span class="toc-text">8.10 - Type conversion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-13-ofstream"><span class="toc-number">3.3.</span> <span class="toc-text">8.13 - ofstream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-14-ifstream"><span class="toc-number">3.4.</span> <span class="toc-text">8.14 - ifstream</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-18-Raw-String-Literal"><span class="toc-number">3.5.</span> <span class="toc-text">8.18 - Raw String Literal</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-9"><span class="toc-number">4.</span> <span class="toc-text">Chapter.9</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-9-Access-the-Member-of-class"><span class="toc-number">4.1.</span> <span class="toc-text">9.9 - Access the Member of class</span></a></li></ol></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

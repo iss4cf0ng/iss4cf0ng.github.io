@@ -1,9 +1,10 @@
+http://example.com/2026/01/02/2026-1-2-NoteCpp20forProgrammers/
+http://example.com/2026/01/01/2026-1-1-SocketInit/
 http://example.com/Notes/index.html
 http://example.com/About/index.html
 http://example.com/2026/01/01/2026-1-1-RobustiveNetworkProtocol/
 http://example.com/2026/01/01/2026-1-1-SynFlooding/
 http://example.com/2026/01/01/DomainPenetration1/
-http://example.com/2026/01/01/2026-1-1-SocketInit/
 http://example.com/EgoDrop/index.html
 http://example.com/DuplexSpy/index.html
 http://example.com/2024/12/04/CSharp-ThreadWithParameters/

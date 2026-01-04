@@ -914,7 +914,7 @@ nav li {
   line-height: 40px;
   padding: 0 12px;
   display: inline-block;
-  padding: 0.9375em 0;
+  padding: 1.153846153846154em 0;
   width: 100%;
 }
 .navBlock:active {
@@ -2885,6 +2885,48 @@ article .recent-excerpt p {
   align-self: center;
   height: 100%;
   position: relative;
+}
+.recent-post {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+.recent-cover {
+  flex: 0 0 120px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: var(--theme-bg-trans1);
+}
+.recent-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.recent-post > object {
+  flex: 1;
+  min-width: 0;
+}
+.recent-post:hover {
+  background-color: var(--theme-bg-soft);
+}
+.recent-post:hover .recent-cover img {
+  transform: scale(1.05);
+}
+.recent-cover img {
+  transition: transform 0.4s ease;
+}
+@media (max-width: 768px) {
+  .recent-post {
+    align-items: center;
+  }
+  .recent-cover {
+    flex: 0 0 72px;
+    height: 56px;
+  }
 }
 .tag-list {
   padding: 10px;

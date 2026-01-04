@@ -56,9 +56,9 @@
     <category term="Code" scheme="http://example.com/categories/Code/"/>
     
     
-    <category term="Code" scheme="http://example.com/tags/Code/"/>
-    
     <category term="Learning" scheme="http://example.com/tags/Learning/"/>
+    
+    <category term="Code" scheme="http://example.com/tags/Code/"/>
     
     <category term="DDoS" scheme="http://example.com/tags/DDoS/"/>
     
@@ -88,15 +88,15 @@
     
     <category term="Code" scheme="http://example.com/tags/Code/"/>
     
-    <category term="Development" scheme="http://example.com/tags/Development/"/>
+    <category term="C#" scheme="http://example.com/tags/C/"/>
     
     <category term="Network" scheme="http://example.com/tags/Network/"/>
+    
+    <category term="Development" scheme="http://example.com/tags/Development/"/>
     
     <category term="Socket" scheme="http://example.com/tags/Socket/"/>
     
     <category term="C++" scheme="http://example.com/tags/C/"/>
-    
-    <category term="C#" scheme="http://example.com/tags/C/"/>
     
     <category term="Python" scheme="http://example.com/tags/Python/"/>
     
@@ -124,9 +124,9 @@
     
     <category term="Code" scheme="http://example.com/tags/Code/"/>
     
-    <category term="Network" scheme="http://example.com/tags/Network/"/>
-    
     <category term="C#" scheme="http://example.com/tags/C/"/>
+    
+    <category term="Network" scheme="http://example.com/tags/Network/"/>
     
     <category term="Programming" scheme="http://example.com/tags/Programming/"/>
     

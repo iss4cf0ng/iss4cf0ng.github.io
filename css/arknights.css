@@ -2896,7 +2896,7 @@ article .recent-excerpt p {
 }
 .recent-cover {
   flex: 0 0 120px;
-  height: 80px;
+  height: 120px;
   overflow: hidden;
   border-radius: 6px;
   background-color: var(--theme-bg-trans1);

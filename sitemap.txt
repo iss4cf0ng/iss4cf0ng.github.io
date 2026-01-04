@@ -1,3 +1,5 @@
+http://example.com/2026/01/02/2026-1-2-NotePrivilegeEscalationTechnique/
+http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/
 http://example.com/2026/01/02/2026-1-2-NoteCpp20forProgrammers/
 http://example.com/2026/01/01/DomainPenetration1/
 http://example.com/About/index.html
@@ -78,6 +80,15 @@ http://example.com/tags/PHP/
 http://example.com/tags/Book/
 http://example.com/tags/Note/
 http://example.com/tags/Coding/
+http://example.com/tags/Blackhat/
+http://example.com/tags/Hacking/
+http://example.com/tags/Hack/
+http://example.com/tags/PrivilegeEscalation/
+http://example.com/tags/Privilege/
+http://example.com/tags/Penetration/
+http://example.com/tags/Pentest/
+http://example.com/tags/LAN/
+http://example.com/tags/Domain/
 http://example.com/categories/Code/
 http://example.com/categories/BlackHat/
 http://example.com/categories/Tools/

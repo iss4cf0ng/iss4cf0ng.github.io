@@ -75,6 +75,10 @@ http://example.com/tags/%E5%AD%90%E5%9F%9F%E5%90%8D/
 http://example.com/tags/%E7%9B%AE%E9%8C%84%E7%88%86%E7%A0%B4/
 http://example.com/tags/StressTest/
 http://example.com/tags/PHP/
+http://example.com/tags/Book/
+http://example.com/tags/Note/
+http://example.com/tags/Coding/
 http://example.com/categories/Code/
 http://example.com/categories/BlackHat/
 http://example.com/categories/Tools/
+http://example.com/categories/Book/

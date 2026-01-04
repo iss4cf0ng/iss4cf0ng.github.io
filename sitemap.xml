@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2026/01/02/2026-1-2-NoteLanPenetrationGuidelines/</loc>
+    
+    <lastmod>2026-01-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2026/01/02/2026-1-2-NotePrivilegeEscalationTechnique/</loc>
     
     <lastmod>2026-01-04</lastmod>
@@ -711,6 +720,13 @@
   
   <url>
     <loc>http://example.com/tags/Domain/</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/BufferOverflow/</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

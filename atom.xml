@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2026-01-04T13:24:39.907Z</updated>
+  <updated>2026-01-04T13:30:26.529Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2026.1.2-NotePrivilegeEscalationTechnique</title>
+    <title>[Book] Privilege Escalation - Offensive and Defensive Tactics and Techniques</title>
     <link href="http://example.com/2026/01/02/2026-1-2-NotePrivilegeEscalationTechnique/"/>
     <id>http://example.com/2026/01/02/2026-1-2-NotePrivilegeEscalationTechnique/</id>
     <published>2026-01-02T15:36:14.000Z</published>
-    <updated>2026-01-04T13:24:39.907Z</updated>
+    <updated>2026-01-04T13:30:26.529Z</updated>
     
     <content type="html"><![CDATA[<h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/PrivilegeEscalation/libro.png'><img src="/images/books/PrivilegeEscalation/libro.png"></p><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1>]]></content>
     
@@ -63,13 +63,53 @@
   </entry>
   
   <entry>
+    <title>2026.1.2-NoteLanPenetrationGuidelines</title>
+    <link href="http://example.com/2026/01/02/2026-1-2-NoteLanPenetrationGuidelines/"/>
+    <id>http://example.com/2026/01/02/2026-1-2-NoteLanPenetrationGuidelines/</id>
+    <published>2026-01-02T15:35:30.000Z</published>
+    <updated>2026-01-04T13:30:43.559Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;El-libro&quot;&gt;&lt;a href=&quot;#El-libro&quot; class=&quot;headerlink&quot; title=&quot;El libro&quot;&gt;&lt;/a&gt;El libro&lt;/h1&gt;&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; cla</summary>
+      
+    
+    
+    
+    
+    <category term="Learning" scheme="http://example.com/tags/Learning/"/>
+    
+    <category term="Book" scheme="http://example.com/tags/Book/"/>
+    
+    <category term="Note" scheme="http://example.com/tags/Note/"/>
+    
+    <category term="Blackhat" scheme="http://example.com/tags/Blackhat/"/>
+    
+    <category term="Hacking" scheme="http://example.com/tags/Hacking/"/>
+    
+    <category term="Hack" scheme="http://example.com/tags/Hack/"/>
+    
+    <category term="Penetration" scheme="http://example.com/tags/Penetration/"/>
+    
+    <category term="Pentest" scheme="http://example.com/tags/Pentest/"/>
+    
+    <category term="LAN" scheme="http://example.com/tags/LAN/"/>
+    
+    <category term="Domain" scheme="http://example.com/tags/Domain/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[Book] Windows Security Practice - Buffer Overflow</title>
     <link href="http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/"/>
     <id>http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/</id>
     <published>2026-01-02T15:30:38.000Z</published>
-    <updated>2026-01-04T13:22:12.012Z</updated>
+    <updated>2026-01-04T13:28:26.873Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/bufferoverflow/1.jpg'><img src="/images/books/bufferoverflow/1.jpg" width="500"></p><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/bufferoverflow/libro.jpg'><img src="/images/books/bufferoverflow/libro.jpg" width="500"></p><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1>]]></content>
     
     
       
@@ -79,6 +119,22 @@
     
     
     
+    <category term="Book" scheme="http://example.com/categories/Book/"/>
+    
+    
+    <category term="Learning" scheme="http://example.com/tags/Learning/"/>
+    
+    <category term="Book" scheme="http://example.com/tags/Book/"/>
+    
+    <category term="Note" scheme="http://example.com/tags/Note/"/>
+    
+    <category term="Blackhat" scheme="http://example.com/tags/Blackhat/"/>
+    
+    <category term="Hacking" scheme="http://example.com/tags/Hacking/"/>
+    
+    <category term="Hack" scheme="http://example.com/tags/Hack/"/>
+    
+    <category term="BufferOverflow" scheme="http://example.com/tags/BufferOverflow/"/>
     
   </entry>
   

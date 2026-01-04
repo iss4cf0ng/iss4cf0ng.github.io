@@ -1,3 +1,4 @@
+http://example.com/2026/01/02/2026-1-2-NoteLanPenetrationGuidelines/
 http://example.com/2026/01/02/2026-1-2-NotePrivilegeEscalationTechnique/
 http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/
 http://example.com/2026/01/02/2026-1-2-NoteCpp20forProgrammers/
@@ -89,6 +90,7 @@ http://example.com/tags/Penetration/
 http://example.com/tags/Pentest/
 http://example.com/tags/LAN/
 http://example.com/tags/Domain/
+http://example.com/tags/BufferOverflow/
 http://example.com/categories/Code/
 http://example.com/categories/BlackHat/
 http://example.com/categories/Tools/

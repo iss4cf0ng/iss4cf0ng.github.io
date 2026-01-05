@@ -11,18 +11,18 @@
   </url>
   
   <url>
-    <loc>http://example.com/2026/01/05/2026-1-5-RedBlueConfrontationFromAttCk/</loc>
+    <loc>http://example.com/2026/01/05/2026-1-5-LearningGo/</loc>
     
-    <lastmod>2026-01-04</lastmod>
+    <lastmod>2026-01-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/2026/01/05/2026-1-5-LearningGo/</loc>
+    <loc>http://example.com/2026/01/05/2026-1-5-RedBlueConfrontationFromAttCk/</loc>
     
-    <lastmod>2026-01-04</lastmod>
+    <lastmod>2026-01-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -31,7 +31,7 @@
   <url>
     <loc>http://example.com/2026/01/05/2026-1-5-ProgrammingRust/</loc>
     
-    <lastmod>2026-01-04</lastmod>
+    <lastmod>2026-01-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2026-01-05T12:27:05.925Z</updated>
+  <updated>2026-01-05T17:50:44.692Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,12 +17,19 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2026-1-5-RedBlueConfrontationFromAttCk</title>
+    <title>[Book] Practical Guide To Red-Blue Confrontation From ATT&amp;CK</title>
     <link href="http://example.com/2026/01/05/2026-1-5-RedBlueConfrontationFromAttCk/"/>
     <id>http://example.com/2026/01/05/2026-1-5-RedBlueConfrontationFromAttCk/</id>
     <published>2026-01-04T16:11:01.000Z</published>
-    <updated>2026-01-05T12:27:05.925Z</updated>
+    <updated>2026-01-05T17:50:44.692Z</updated>
     
+    <content type="html"><![CDATA[<h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/PracticalGuideToRedBlueConfrontationFromAttCk/libro.png'><img src="/images/books/PracticalGuideToRedBlueConfrontationFromAttCk/libro.png" width="500"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;El-libro&quot;&gt;&lt;a href=&quot;#El-libro&quot; class=&quot;headerlink&quot; title=&quot;El libro&quot;&gt;&lt;/a&gt;El libro&lt;/h1&gt;&lt;p align=&quot;center&quot; class=&#39;item-img&#39; data-src=&#39;/ima</summary>
+      
     
     
     
@@ -30,12 +37,19 @@
   </entry>
   
   <entry>
-    <title>2026-1-5-LearningGo</title>
+    <title>[Book] Learning Go</title>
     <link href="http://example.com/2026/01/05/2026-1-5-LearningGo/"/>
     <id>http://example.com/2026/01/05/2026-1-5-LearningGo/</id>
     <published>2026-01-04T16:10:20.000Z</published>
-    <updated>2026-01-05T12:27:05.925Z</updated>
+    <updated>2026-01-05T17:49:05.228Z</updated>
     
+    <content type="html"><![CDATA[<h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/LearningGo/libro.jpg'><img src="/images/books/LearningGo/libro.jpg"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;El-libro&quot;&gt;&lt;a href=&quot;#El-libro&quot; class=&quot;headerlink&quot; title=&quot;El libro&quot;&gt;&lt;/a&gt;El libro&lt;/h1&gt;&lt;p align=&quot;center&quot; class=&#39;item-img&#39; data-src=&#39;/ima</summary>
+      
     
     
     
@@ -43,12 +57,19 @@
   </entry>
   
   <entry>
-    <title>2026-1-5-ProgrammingRust</title>
+    <title>[Book] Programming Rust</title>
     <link href="http://example.com/2026/01/05/2026-1-5-ProgrammingRust/"/>
     <id>http://example.com/2026/01/05/2026-1-5-ProgrammingRust/</id>
     <published>2026-01-04T16:09:54.000Z</published>
-    <updated>2026-01-05T12:27:05.920Z</updated>
+    <updated>2026-01-05T17:48:29.719Z</updated>
     
+    <content type="html"><![CDATA[<h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/ProgrammingRust/libro.jpg'><img src="/images/books/ProgrammingRust/libro.jpg" width="500"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;El-libro&quot;&gt;&lt;a href=&quot;#El-libro&quot; class=&quot;headerlink&quot; title=&quot;El libro&quot;&gt;&lt;/a&gt;El libro&lt;/h1&gt;&lt;p align=&quot;center&quot; class=&#39;item-img&#39; data-src=&#39;/ima</summary>
+      
     
     
     

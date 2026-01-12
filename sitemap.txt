@@ -1,7 +1,7 @@
-http://example.com/2026/01/07/2026-1-7-CppTemplatesTheCompleteGuide2ed/
-http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
 http://example.com/2026/01/02/2026-1-2-NoteMasteringCppPointer/
 http://example.com/2026/01/05/2026-1-5-RedBlueConfrontationFromAttCk/
+http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
+http://example.com/2026/01/07/2026-1-7-CppTemplatesTheCompleteGuide2ed/
 http://example.com/2026/01/02/2026-1-2-NotePrivilegeEscalationTechnique/
 http://example.com/2026/01/01/DomainPenetration1/
 http://example.com/2026/01/09/2026-1-9-BookLinuxFirewall/

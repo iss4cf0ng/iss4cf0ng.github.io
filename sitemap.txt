@@ -1,9 +1,11 @@
+http://example.com/2026/01/07/2026-1-7-CppTemplatesTheCompleteGuide2ed/
+http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
+http://example.com/2026/01/05/2026-1-5-RedBlueConfrontationFromAttCk/
+http://example.com/2026/01/02/2026-1-2-NoteCpp20forProgrammers/
+http://example.com/2026/01/02/2026-1-2-NoteLanPenetrationGuidelines/
 http://example.com/2026/01/04/2026-1-4-BookReverseEngineeringCore/
 http://example.com/2026/01/05/2026-1-5-ProgrammingRust/
 http://example.com/2026/01/05/2026-1-5-LearningGo/
-http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
-http://example.com/2026/01/07/2026-1-7-CppTemplatesTheCompleteGuide2ed/
-http://example.com/2026/01/05/2026-1-5-RedBlueConfrontationFromAttCk/
 http://example.com/Notes/index.html
 http://example.com/2026/01/02/2026-1-2-NoteMasteringCppPointer/
 http://example.com/2026/01/02/2026-1-2-NotePrivilegeEscalationTechnique/
@@ -11,8 +13,6 @@ http://example.com/2026/01/01/DomainPenetration1/
 http://example.com/2026/01/09/2026-1-9-BookLinuxFirewall/
 http://example.com/2026/01/02/2026-1-2-NoteWebSecurityFromWhiteHat/
 http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/
-http://example.com/2026/01/02/2026-1-2-NoteLanPenetrationGuidelines/
-http://example.com/2026/01/02/2026-1-2-NoteCpp20forProgrammers/
 http://example.com/About/index.html
 http://example.com/2026/01/01/2026-1-1-SocketInit/
 http://example.com/2026/01/01/2026-1-1-RobustiveNetworkProtocol/
@@ -117,6 +117,13 @@ http://example.com/tags/Pentesting/
 http://example.com/tags/ActiveDirectory/
 http://example.com/tags/Windows/
 http://example.com/tags/Linux/
+http://example.com/tags/Study/
+http://example.com/tags/Reverse-Engineering/
+http://example.com/tags/PE/
+http://example.com/tags/OllyDbg/
+http://example.com/tags/Assembly/
+http://example.com/tags/CrackMe/
+http://example.com/tags/Concurrency/
 http://example.com/categories/Code/
 http://example.com/categories/BlackHat/
 http://example.com/categories/Tools/

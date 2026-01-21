@@ -35,15 +35,89 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
   --light-background: url('/img/bk.jpg');
 }</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="iss4cf0ng/ISSAC's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Tools/"><span class="navItemTitle">Tools</span></a></li><li class="navItem"><a class="navBlock" href="/tags/BlackHat"><span class="navItemTitle">BlackHat</span></a></li><li class="navItem"><a class="navBlock" href="/tags/code"><span class="navItemTitle">Code</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Book] Reverse Engineering Core (리버스 엔지니어링 핵심 원리)</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-01-04T13:41:45.000Z" id="date"> 2026-01-04</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-01-21T12:38:04.713Z" id="updated"> 2026-01-21</time></div></span><br><span>Word Count: <div class="control">9.8k</div></span><br><span>Read Time: <div class="control">60 min</div></span></div></div><hr><div id="post-content"><h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/ReverseEngineeringCore/libro.jpg'><img src="/images/books/ReverseEngineeringCore/libro.jpg" width="500">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Tools/"><span class="navItemTitle">Tools</span></a></li><li class="navItem"><a class="navBlock" href="/tags/BlackHat"><span class="navItemTitle">BlackHat</span></a></li><li class="navItem"><a class="navBlock" href="/tags/code"><span class="navItemTitle">Code</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Book] Reverse Engineering Core (리버스 엔지니어링 핵심 원리)</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-01-04T13:41:45.000Z" id="date"> 2026-01-04</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-01-21T13:19:51.947Z" id="updated"> 2026-01-21</time></div></span><br><span>Word Count: <div class="control">10.1k</div></span><br><span>Read Time: <div class="control">62 min</div></span></div></div><hr><div id="post-content"><h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/ReverseEngineeringCore/libro.jpg'><img src="/images/books/ReverseEngineeringCore/libro.jpg" width="500">
 </p>
 
 <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is used to keep notes and summaries of the book “Reverse Engineering Core”.<br>The content will be continuously updated as I read through the book.</p>
-<h1 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h1><p>This book <strong>DOES NOT</strong> involve <strong>Kernel Debugging</strong>.</p>
+<h1 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h1><p>Finally, I have completed this book.</p>
+<p>I had always wanted to read this book. Unfortunately, due to personal issues, I was unable to do so for a long time. Therefore, I am glad that I finally finished it.</p>
+<p>This book was originally written in Korean. It also has a Simplified Chinese translation. Unfortunately, I have not found an English version. Perhaps this is because there are already many books on reverse engineering written in English.</p>
+<p>This book describes the underlying principles of reverse engineering in both theoretical and practical ways.</p>
+<p>It introduces how to perform software reverse engineering on the Windows platform using tools such as OllyDbg, WinDbg, and PEView. IDA is rarely discussed. Therefore, this book is especially suitable for readers who want to master OllyDbg.</p>
+<p>This book <strong>DOES NOT</strong> cover <strong>kernel debugging</strong>.</p>
+<p>The book also provides both source code and compiled PE files for all chapters. This is a significant advantage for hands-on practice, because compiling the code yourself may produce different results depending on the environment. In addition, some of the provided code examples are difficult to find on the internet.</p>
+<p>This book includes:</p>
+<ul>
+<li>Reverse engineering on Windows</li>
+<li>OllyDbg</li>
+<li>WinDbg</li>
+<li>PE file format</li>
+<li>Windows API</li>
+<li>Techniques for improving reverse engineering skills</li>
+<li>The author’s experience (the author previously worked for an enterprise developing anti-virus software)</li>
+<li>Advanced debugging</li>
+<li>Anti-debugging</li>
+<li>Advanced anti-debugging</li>
+<li>Anti-anti-debugging</li>
+<li>Code injection</li>
+<li>DLL injection</li>
+<li>Application patching</li>
+<li>etc.</li>
+</ul>
+<p>This book does not include:</p>
+<ul>
+<li>Kernel debugging</li>
+<li>IDA Pro</li>
+<li>Ghidra</li>
+<li>Reverse engineering on Linux</li>
+<li>Reverse engineering of Android APKs</li>
+<li>Reverse engineering of iOS applications</li>
+</ul>
+<p>Prerequisites (Recommended):</p>
+<ul>
+<li>Basic knowledge of C/C++</li>
+<li>Basic knowledge of the Win32 API</li>
+<li>Basic understanding of Windows</li>
+<li>Passion, patience, and the ability to use Google</li>
+</ul>
+<p>You may feel frustrated during the process of reverse engineering. However, the author also mentioned that he experienced similar frustration.</p>
 <h1 id="Chapter-1-Reverse-Engineering"><a href="#Chapter-1-Reverse-Engineering" class="headerlink" title="Chapter 1 - Reverse Engineering"></a>Chapter 1 - Reverse Engineering</h1><p>Murmur….</p>
 <p>Blahblahblah….</p>
 <p>This chapter introduces the background and basic knowledge of reverse engineering.</p>
-<h1 id="Chapter-2-Hello-World"><a href="#Chapter-2-Hello-World" class="headerlink" title="Chapter 2 - Hello World!"></a>Chapter 2 - Hello World!</h1><h2 id="2-2-Debugging"><a href="#2-2-Debugging" class="headerlink" title="2.2 - Debugging"></a>2.2 - Debugging</h2><p><strong>Basic commands of OllyDbg</strong>:<br>| Command | Hotkey | Description |<br>| —- | —- | —- |<br>| Restart | Ctrl+F2 | Restart debugging. |<br>| Step Into | F7 | Execute an OP code. If the OP code is <code>CALL</code>, then go into the called code. |<br>| Step Over | F8 | Execute an OP code. If the OP code is <code>CALL</code>, then just execute the code rather then go into the called code. |<br>| Execute till Return | Ctrl+F9 | Keep executing code until it reached <code>RETN</code> |</p>
+<h1 id="Chapter-2-Hello-World"><a href="#Chapter-2-Hello-World" class="headerlink" title="Chapter 2 - Hello World!"></a>Chapter 2 - Hello World!</h1><h2 id="2-2-Debugging"><a href="#2-2-Debugging" class="headerlink" title="2.2 - Debugging"></a>2.2 - Debugging</h2><p><strong>Basic commands of OllyDbg</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Hotkey</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Restart</td>
+<td>Ctrl+F2</td>
+<td>Restart debugging.</td>
+</tr>
+<tr>
+<td>Step Into</td>
+<td>F7</td>
+<td>Execute an OP code. If the OP code is <code>CALL</code>, then go into the called code.</td>
+</tr>
+<tr>
+<td>Step Over</td>
+<td>F8</td>
+<td>Execute an OP code. If the OP code is <code>CALL</code>, then just execute the code rather then go into the called code.</td>
+</tr>
+<tr>
+<td>Execute till Return</td>
+<td>Ctrl+F9</td>
+<td>Keep executing code until it reached <code>RETN</code></td>
+</tr>
+</tbody>
+</table>
+</div>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#include &quot;windows.h&quot;<br>#include &quot;tchar.h&quot;<br><br>int _tmain(int argc, TCHAR *argv[])<br>&#123;<br>    MessageBox(<br>        NULL, <br>        L&quot;Hello World!&quot;, <br>        L&quot;www.reversecre.com&quot;, <br>        MB_OK<br>    );<br><br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p align="center" class='item-img' data-src='/images/books/ReverseEngineeringCore/2.1.png'><img src="/images/books/ReverseEngineeringCore/2.1.png" width="800">
 </p>

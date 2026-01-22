@@ -1,3 +1,7 @@
+http://example.com/2026/01/14/2016-1-14-BookDesigningAnonymousCommChains/
+http://example.com/2026/01/14/2016-1-14-BookLinuxSuperUser/
+http://example.com/2026/01/14/2016-1-14-BookLinuxCommand/
+http://example.com/2026/01/14/2016-1-14-BookPracticalLinuxForensics/
 http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/
 http://example.com/2026/01/04/2026-1-4-BookReverseEngineeringCore/
 http://example.com/About/index.html
@@ -117,6 +121,8 @@ http://example.com/tags/Pentesting/
 http://example.com/tags/ActiveDirectory/
 http://example.com/tags/Windows/
 http://example.com/tags/Linux/
+http://example.com/tags/Command-Line/
+http://example.com/tags/Linux-Command/
 http://example.com/tags/Study/
 http://example.com/tags/Reverse-Engineering/
 http://example.com/tags/PE/

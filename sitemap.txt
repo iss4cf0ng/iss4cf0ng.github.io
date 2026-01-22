@@ -1,3 +1,4 @@
+http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/
 http://example.com/2026/01/04/2026-1-4-BookReverseEngineeringCore/
 http://example.com/About/index.html
 http://example.com/2026/01/05/2026-1-5-ProgrammingRust/
@@ -13,7 +14,6 @@ http://example.com/2026/01/02/2026-1-2-NotePrivilegeEscalationTechnique/
 http://example.com/2026/01/01/DomainPenetration1/
 http://example.com/2026/01/09/2026-1-9-BookLinuxFirewall/
 http://example.com/2026/01/02/2026-1-2-NoteWebSecurityFromWhiteHat/
-http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/
 http://example.com/2026/01/01/2026-1-1-SocketInit/
 http://example.com/2026/01/01/2026-1-1-RobustiveNetworkProtocol/
 http://example.com/2026/01/01/2026-1-1-SynFlooding/

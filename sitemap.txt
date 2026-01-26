@@ -1,3 +1,4 @@
+http://example.com/2026/01/23/2026-1-23-SoftwareCrypto/
 http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/
 http://example.com/2026/01/14/2016-1-14-BookLinuxCommand/
 http://example.com/2026/01/14/2016-1-14-BookPracticalLinuxForensics/
@@ -133,6 +134,10 @@ http://example.com/tags/Concurrency/
 http://example.com/tags/Rust/
 http://example.com/tags/Go-Lang/
 http://example.com/tags/Go/
+http://example.com/tags/Cryptography/
+http://example.com/tags/WinDbg/
+http://example.com/tags/MD5/
+http://example.com/tags/AES/
 http://example.com/categories/Code/
 http://example.com/categories/BlackHat/
 http://example.com/categories/Tools/

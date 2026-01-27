@@ -1,6 +1,7 @@
-http://example.com/2026/01/23/2026-1-23-SoftwareCrypto/
 http://example.com/2026/01/26/2026-1-26-BookWindowsInternal-P1/
+http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
 http://example.com/2026/01/26/2026-1-26-BookWindowsInternal-P2/
+http://example.com/2026/01/23/2026-1-23-SoftwareCrypto/
 http://example.com/2026/01/14/2016-1-14-BookLinuxCommand/
 http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/
 http://example.com/2026/01/14/2016-1-14-BookPracticalLinuxForensics/
@@ -11,7 +12,6 @@ http://example.com/2026/01/04/2026-1-4-BookReverseEngineeringCore/
 http://example.com/About/index.html
 http://example.com/2026/01/05/2026-1-5-ProgrammingRust/
 http://example.com/2026/01/07/2026-1-7-CppTemplatesTheCompleteGuide2ed/
-http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
 http://example.com/2026/01/05/2026-1-5-RedBlueConfrontationFromAttCk/
 http://example.com/2026/01/02/2026-1-2-NoteCpp20forProgrammers/
 http://example.com/2026/01/02/2026-1-2-NoteLanPenetrationGuidelines/

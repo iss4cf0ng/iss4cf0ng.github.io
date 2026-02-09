@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Tools] dotNetPELoader——A C# PE loader for x64 and x86 PE files. | iss4cf0ng/ISSAC's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="iss4cf0ng/ISSAC's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Tools] dotNetPELoader——A C# PE loader for x64 and x86 PE files.</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-06T14:33:48.000Z" id="date"> 2026-02-06</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-02-06T15:13:12.391Z" id="updated"> 2026-02-06</time></div></span><br><span>Word Count: <div class="control">187</div></span><br><span>Read Time: <div class="control">1 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Recently, when I was developing a fileless execution method for <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/DuplexSpyCS">DuplexSpy RAT</a> version 2, I could hardly find a C#-based x86 PE loader.<br>Most existing implementations I found were x64-only, such as the one developed by <a target="_blank" rel="noopener" href="https://github.com/S3cur3Th1sSh1t/Creds/blob/master/Csharp/PEloader.cs">Casey Smith</a></p>
+<p align="center" class='item-img' data-src='/images/meme/mika_neko.png'><img src="/images/meme/mika_neko.png" width="300">
+</p>
+
+<p>Therefore, I decided to develop a C#-based x86 PE loader myself.</p>
+<p>This console application allows you to load either x86 or x64 PE files into memory.<br>First, it reads the file bytes from the specified file path, then determines the architecture of both the loader and the target PE file.</p>
+<p>An x64 PE cannot be loaded by an x86 loader, and vice versa.</p>
+<p>View the GitHub repository <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/dotNetPELoader">here</a>  </p>
+<h1 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h1><ul>
+<li>Load <strong>x86 PE in x86 process</strong></li>
+<li>Load <strong>x64 PE in x64 process</strong></li>
+<li>Handles relocation and import resolving</li>
+<li>Fully written in C#</li>
+</ul>
+<p>If you find this project useful, a ⭐ would be appreciated.</p>
+<p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/mika_cute.jpg'><img src="https://iss4cf0ng.github.io/images/meme/mika_cute.jpg" width="200">
+</p>
+
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dotNetPELoader.exe --x64 x64_file.exe<br>dotNetPELoader.exe --x86 x86_file.exe<br>dotNetPELoader.exe --coffee<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/hello.png'><img src="/images/article/tools/dotNetPELoader/hello.png" width="600">
+</p>
+
+<h1 id="Demonstration"><a href="#Demonstration" class="headerlink" title="Demonstration"></a>Demonstration</h1><h2 id="x64-mimikatz"><a href="#x64-mimikatz" class="headerlink" title="x64 - mimikatz"></a>x64 - mimikatz</h2><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/anycpu.png'><img src="/images/article/tools/dotNetPELoader/anycpu.png" width="600">
+</p>
+
+<p>If you try to load an x86 PE while the loader is an x64 loader, an exception will be thrown:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dotNetPELoader.exe --x64 mimikatz<br></code></pre></td></tr></table></figure></p>
+<p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x64.1.png'><img src="/images/article/tools/dotNetPELoader/x64.1.png" width="600">
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x64.2.png'><img src="/images/article/tools/dotNetPELoader/x64.2.png" width="600">
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x64.3.png'><img src="/images/article/tools/dotNetPELoader/x64.3.png" width="600">
+</p>
+
+<h2 id="x86-mimikatz"><a href="#x86-mimikatz" class="headerlink" title="x86 - mimikatz"></a>x86 - mimikatz</h2><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x86_cpu.png'><img src="/images/article/tools/dotNetPELoader/x86_cpu.png" width="600">
+</p>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dotNetPELoader.exe --x86 mimikatz<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x86.1.png'><img src="/images/article/tools/dotNetPELoader/x86.1.png" width="600">
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x86.2.png'><img src="/images/article/tools/dotNetPELoader/x86.2.png" width="600">
+</p>
+
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/rio_pc.jpg'><img src="/images/meme/rio_pc.jpg" width="400">
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/02/03/2026-2-3-DuplexSpyFilelessExec/">[DuplexSpy] Fileless Execution Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng"><i class="GitHub" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://zeroday.hitcon.org/user/ISSAC_f0ng"><i class="ZeroDay Hitcon" alt="ZeroDay Hitcon"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Features"><span class="toc-number">2.</span> <span class="toc-text">Features</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Usage"><span class="toc-number">3.</span> <span class="toc-text">Usage</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Demonstration"><span class="toc-number">4.</span> <span class="toc-text">Demonstration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#x64-mimikatz"><span class="toc-number">4.1.</span> <span class="toc-text">x64 - mimikatz</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x86-mimikatz"><span class="toc-number">4.2.</span> <span class="toc-text">x86 - mimikatz</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">5.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

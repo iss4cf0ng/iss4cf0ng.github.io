@@ -1,0 +1,279 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Book] Windows Internal Part 1 | iss4cf0ng/ISSAC's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="iss4cf0ng/ISSAC's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Book] Windows Internal Part 1</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-01-26T03:29:20.000Z" id="date"> 2026-01-26</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-01-29T10:56:48.047Z" id="updated"> 2026-01-29</time></div></span><br><span>Word Count: <div class="control">2.6k</div></span><br><span>Read Time: <div class="control">16 min</div></span></div></div><hr><div id="post-content"><h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/WindowsInternal1/libro.jpg'><img src="/images/books/WindowsInternal1/libro.jpg" width="500">
+</p>
+
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is used to keep notes and summaries of the book “Windows Internal Part 1”.<br>The content will be continuously updated as I read through the book.</p>
+<h1 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h1><h1 id="Chapter-1-Concepts-and-Tools"><a href="#Chapter-1-Concepts-and-Tools" class="headerlink" title="Chapter 1 - Concepts and Tools"></a>Chapter 1 - Concepts and Tools</h1><h2 id="Fundation-concepts-and-terms"><a href="#Fundation-concepts-and-terms" class="headerlink" title="Fundation concepts and terms"></a>Fundation concepts and terms</h2><h3 id="Windows-API"><a href="#Windows-API" class="headerlink" title="Windows API"></a>Windows API</h3><p>The Windows application programming interface (API) is the user-mode system programming interface to the Windows OS family. Prior to the introduction of 64-bit versions of Windows, the API to the 32-bit versions of the Windows OS was called the Win32 API to distinguish it from the original 16-bit Windows API.</p>
+<p>The term Windows API refers to both the 32-bit and 64-bit API to Windows.</p>
+<h3 id="Windows-API-flavors"><a href="#Windows-API-flavors" class="headerlink" title="Windows API flavors"></a>Windows API flavors</h3><p>COM was originally created to enable Microsoft Office applications to communicate and exchange data between documents (such as embedding an Excel chart inside a Word document or a PowerPoint presentation). This ability is called Object Linking and Embedding (OLE). OLE was originally implemented using an old Windows messaging mechanism called Dynamic Data Exchange (DDE).</p>
+<p>COM is baed on two foundational principles. First, client communicate with objects (sometimes called COM server object) through interfaces——well-defined contracts with a set of logically related methods grouped under the virtual table dispatch mechanism, wich is also a common way for C++ compilers to implement virtual functions dispatch.<br>The second principle is that component implementation is loaded dynamically rather than being statically linked to the client.</p>
+<p>The term COM server typically refers to a Dynamic Link Library (DLL) or an executable (EXE) where the COM classes are implemented.</p>
+<h3 id="The-Windows-Runtime"><a href="#The-Windows-Runtime" class="headerlink" title="The Windows Runtime"></a>The Windows Runtime</h3><p>Windows 8 introduced a new API and supporting runtime called Windows Runtime (sometimes abbreviated WinRT, not to be confused with Windows RT, the discontinued ARM-based Windows OS version).</p>
+<p>From an API perspective, WInRT is built on top of COM, adding various extensions to the base COM infrastructure.</p>
+<p><strong>The .NET Framework</strong><br>The .NET Framework is part of Windows.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Windows Version</th>
+<th>.NET Framework Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 8</td>
+<td>4.5</td>
+</tr>
+<tr>
+<td>Windows 8.1</td>
+<td>4.5.1</td>
+</tr>
+<tr>
+<td>Windows 10</td>
+<td>4.6</td>
+</tr>
+<tr>
+<td>Windows 10 version 1511</td>
+<td>4.6.1</td>
+</tr>
+<tr>
+<td>Windows 10 version 1607</td>
+<td>4.6.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The .NET Framework consists of two major components:</p>
+<ul>
+<li><strong>The Common Language Runtime (CLT)</strong></li>
+<li><strong>The .NET Framework Class Library (FCL)</strong></li>
+</ul>
+<p align="center" class='item-img' data-src='/images/books/WindowsInternal1/1.1.png'><img src="/images/books/WindowsInternal1/1.1.png" width="600">
+</p>
+
+<h3 id="Services-functions-and-routines"><a href="#Services-functions-and-routines" class="headerlink" title="Services, functions, and routines"></a>Services, functions, and routines</h3><ul>
+<li><strong>Windows API functions</strong></li>
+<li><strong>Native system service (or system calls)</strong></li>
+<li><strong>Kernel support functions (or routines)</strong></li>
+</ul>
+<h3 id="Processes"><a href="#Processes" class="headerlink" title="Processes"></a>Processes</h3><p>Although programs and process appear similar on the surface, they are fundamentally different.</p>
+<p>A <em>program</em> is a static sequence of instructions, whereas a <em>process</em> is a container for a set of resources used when executing the instance of the program.</p>
+<ul>
+<li><strong>A private virtual address space</strong></li>
+<li><strong>An executable program</strong></li>
+<li><strong>A list of open handles</strong></li>
+<li><strong>A security context</strong></li>
+<li><strong>A process ID</strong></li>
+<li><strong>At least one thread of execution</strong></li>
+</ul>
+<h3 id="Threads"><a href="#Threads" class="headerlink" title="Threads"></a>Threads</h3><p>A <em>thread</em> is an entity within a process that Windows schedules for execution. Without it, the process’s program can’t run. A thread includes the follow essential components:</p>
+<ul>
+<li>The contents of a set of CPU registers representing the state of the processor</li>
+<li>Two stacks——one for the thread to use while executing in kernel mode and one for executing in user mode.</li>
+<li>A private storage area called <em>thread-lcoal storage (TLS)*</em> for use by subsystems, run-time libraries, and DLLs.</li>
+<li>A unique identifier called a <em>thread ID</em> (part of an internal structure called a <em>client ID</em>; process IDs and thread IDs are generated out of the same namespace, so they never overlap)</li>
+</ul>
+<p>The threads of a 32-bit application running on a 64-bit version of WIndows will contain both 32-bit and 64-bit context, which Wow64 will use to switch the applicaion from running in 32-bit to 64-bit mode when required. These threads will have two user stacks and two <strong>CONTEXT</strong> blocks, and the usual Windows API functions will return the 64-bit context instead. The <code>Wow64GetThreadContext</code> function, however, will return the 32-bit context.</p>
+<h4 id="Fibers"><a href="#Fibers" class="headerlink" title="Fibers"></a>Fibers</h4><p>Fibers allow an application to schedule its own threads of execution rather than rely on the priority-based scheduling mechanism built into Windows. Fibers are often called <em>lightweight threads</em>. In terms of scheduling, they are invisible to the kernel because they are implementeed in user mode in <code>kernel32.dll</code>. To use fibers, you first make a call to the Windows <code>ConvertThreadToFiber</code> function. This function converts the thread to a running fiber. Afterward, the newly converted fiber can create additonal fibers via the <code>CreateFiber</code> function (Each fiber can have its own set of fibers).</p>
+<h4 id="User-mode-scheduling-threads"><a href="#User-mode-scheduling-threads" class="headerlink" title="User-mode scheduling threads"></a>User-mode scheduling threads</h4><p>User-mode schedulnig (UMS) threads, which are available only on 64-bit versions of Windows, provide the same basic advantages as fibers——and only a few of the disadvantages. UMS threads have their own kernel thread stat and are therefore visible to the kernel, which allows multiple UMS threads to issue blocking system calls and share and contend on resources.</p>
+<p align="center" class='item-img' data-src='/images/books/WindowsInternal1/1.2.png'><img src="/images/books/WindowsInternal1/1.2.png" width="600">
+</p>
+
+<h3 id="Jobs"><a href="#Jobs" class="headerlink" title="Jobs"></a>Jobs</h3><p>Windows provides an extension to the process model called a <em>job</em>. A job object’s main function is to allow the management and manipulation of groups of processes as a unit.</p>
+<p>A job object allows control of certain attributes and provides limits for the process or processes associated with the job.</p>
+<h3 id="Virtual-Memory"><a href="#Virtual-Memory" class="headerlink" title="Virtual Memory"></a>Virtual Memory</h3><p align="center" class='item-img' data-src='/images/books/WindowsInternal1/1.3.png'><img src="/images/books/WindowsInternal1/1.3.png" width="600">
+</p>
+
+<p>Windows implements a virtual memory system based on a flat (linear) address space that provides each process with the illusion of having its own large, private address space.</p>
+<p>Virtual memory provides a logical view of memory that might not correspond to its physical layout.</p>
+<p align="center" class='item-img' data-src='/images/books/WindowsInternal1/1.4.png'><img src="/images/books/WindowsInternal1/1.4.png" width="600">
+</p>
+
+<h3 id="Kernel-mode-vs-user-mode"><a href="#Kernel-mode-vs-user-mode" class="headerlink" title="Kernel mode vs. user mode"></a>Kernel mode vs. user mode</h3><p>To protect user applications from accessing and/or modifying critical OS data, Windows uses two processor access modes (even if the processor on which Windows is running supports more than two): <strong>user mode</strong> and <strong>kernel mode</strong>. User application code runs in user mode, whereas OS code (such as system services and device drivers) runs in kernel mode.</p>
+<p>Kernel mode refers to a mode of execution in a processor that grants access to all system memory and all CPU instructions.</p>
+<p>Although each Windows process has its own private memory space, the kernel-mode OS and device-driver code share a single virtual address space. Each page in virtual memory is tagged to indicate what access mode the processor must be in to read and/or write the page.</p>
+<p>Pages in system space can be accessed only from kernel mode, whereas all pages in the user address space are accessible from user mode and kernel mode.</p>
+<p>Windows 10 drivers must be signed by only two of the accepted certification authorities with a SHA-2 Extended Validation (EV) Hwardware certificate instead of the regular file-based SHA-1 certiicate and its 20 authorities.</p>
+<h3 id="Hypervisor"><a href="#Hypervisor" class="headerlink" title="Hypervisor"></a>Hypervisor</h3><p>The need for fast, efficient, and secure virtualization has driven new models of computing and reasoning about software.</p>
+<p>To provide such virtualization services, almost all modern solutions employ the use of a <strong>hypervisor</strong>, which is a specialized and highly privileged component that allows for the virtualization and isolation of all resources on the machine, from virtual to physical memory, to device interrupts, and even to PCI and USB devices.</p>
+<p>In Windows 10, Microsoft now leverages the Hyper-V hypervisor to provide a new set of services known as <strong>virtualization-based security (VBS)</strong>:</p>
+<ul>
+<li><strong>Device Guard</strong>: This provides Hypervisor Code Integrity (HVCI) for stronger code-signing guaratees over KMCS alone, and allows for the custumization of the signature policy of the Windows OS, for both user-mode and kernel mode code.</li>
+<li><strong>Hyper Guard</strong>: This protects key kernel-related and hypervisor-related data structures and code.</li>
+<li><strong>Credential Guard</strong>: This prevents unauthorized access to domain account credentials and secrets, combined with secure biometrics.</li>
+<li><strong>Application Guard</strong>: This provides an even stronger sandbox for the Microsoft Edge browser.</li>
+<li><strong>Host Guardian and Shielded Fabric</strong>: These leverage a virtual TPM (v-TPM) to protect a virtual machine from the infrastructure it’s running on.</li>
+</ul>
+<p>Additionally, the Hyper-V hypervisor enables certain key kernel mitigations against exploits and other attackers.</p>
+<h3 id="Firmware"><a href="#Firmware" class="headerlink" title="Firmware"></a>Firmware</h3><h3 id="Terminal-Services-and-multiple-sessions"><a href="#Terminal-Services-and-multiple-sessions" class="headerlink" title="Terminal Services and multiple sessions"></a>Terminal Services and multiple sessions</h3><p><strong>Terminal Services</strong> refers to the support in Windows for multiple interactive user sessions on a single systerm.</p>
+<p>With Windows Terminal Services, a remote user can establish a session on another machine, log in, and run applications on the server.</p>
+<p>The first session is considered the services session, or session zero, and contains system service hosing processes.</p>
+<h3 id="Objects-and-handles"><a href="#Objects-and-handles" class="headerlink" title="Objects and handles"></a>Objects and handles</h3><p>In the Windows OS, a <strong>kernel object</strong> is a single, run-time instance of a statically defined object type. An <strong>object type</strong> comprises a system-defined data type, functions that operate on instances of the data type, and a set of object attributes.</p>
+<p>The most fundamental difference between an object and an ordinary data structure is that the internal structure of an object is opaque. You must call an object service to get data out of or put data into an object. You can’t directly read or change data in side an object.</p>
+<p>Objects, through the help of a kernel component called the <strong>object manager</strong>.</p>
+<p>Not all data structures in the Windows OS are objects. Only data that needs to be shared, protected, named, or made visible to user-mode programs (via system services) is placed in objects. Structures used by only one component of the OS to implement internal functions are not objects.</p>
+<h3 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h3><p>Windows has three forms of access control over objects:</p>
+<ul>
+<li><strong>Discretionary access control</strong>: It’s the method by which owners of objects (such as files or printers) grant or deny access to others. With Windows Server 2012 and Windows 8, this form of discretionary control is further improved by implementing attribute-based access control (also called Dynamic Access Control).</li>
+<li><strong>Privileged access control</strong>: This is necessary for those times when discretionary access control is not enough. It’s a method of ensuring that someone can get to protected objects if the owner isn’t available.</li>
+<li><strong>Mandatory integrity control</strong>: This is required when an additional level of security control is needed to protect objects that are being accessed from within the same user account.</li>
+</ul>
+<p>Starting with Windows 8, a sandbox called an <strong>AppContainer</strong> is used to host Windows Apps, which provides isolation with relation to other AppContainers and non-Windows Apps processes.</p>
+<h3 id="Registry"><a href="#Registry" class="headerlink" title="Registry"></a>Registry</h3><h3 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h3><h1 id="Chapter-2-System-architecture"><a href="#Chapter-2-System-architecture" class="headerlink" title="Chapter 2 - System architecture"></a>Chapter 2 - System architecture</h1><h2 id="Operating-system-model"><a href="#Operating-system-model" class="headerlink" title="Operating system model"></a>Operating system model</h2><h2 id="Architecture-overview"><a href="#Architecture-overview" class="headerlink" title="Architecture overview"></a>Architecture overview</h2><p>Despite its pervasive use of objects to represent shared system resources, Windows is not an object-oriented system in the strict sense. Most of the kernel-mdoe OS code is written in C for portability. The C programming language doesn’t directly support object-oriented constructs such as polymorphic functions or class inheritance. Therefore, the C-based implementation of objects in Windows borrows from, but doesn’t depend on, features of particular object-oriented languages.</p>
+<p align="center" class='item-img' data-src='/images/books/WindowsInternal1/2.1.png'><img src="/images/books/WindowsInternal1/2.1.png" width="600">
+</p>
+
+<p>The boexes above the line represent user-mode processes, and the components below the line are kernel-mode OS services.</p>
+<p>A second dividing line between kernel-mode parts of Windwos and the hypervisor is also visible. The hypervisor still runs with the same CPU privilege level (0) as the kernel, but because it uses specialized CPU instructions (VT-x on Intel, SVM on AMD), it can both isolate itself from the kernel while also monitoring it (and applications). Some people may call it <strong>ring -1</strong>, which is <strong>INACCURATE</strong>.</p>
+<p>Four basic types of user-mode processes:</p>
+<ul>
+<li><strong>User processes</strong></li>
+<li><strong>Service processes</strong></li>
+<li><strong>System processes</strong></li>
+<li><strong>Environment sybsystem server processes</strong></li>
+</ul>
+<p>Windows 10 Version 1607 includes a Windows Sybsystem for Linux (WSL) in beta state for developers only. However, this is not a true subsystem as described in this section.</p>
+<p>Notice the Sybsystem DLLs blox below the Service Processes and User Processes boxes. Under Windows, user applications don’t call the native Windows OS services directly. Rather, they go through on or more <strong>subsystem dynamic-link libraries (DLLs)</strong>. The role of subsystem DLLs is to translate a documented function into the appropriate internal (and generally undocumented) native system service calls implemented mostly in <strong>Ntdll.dll</strong>.</p>
+<p>The kernel-mode components of Windows include the following:</p>
+<ul>
+<li><strong>Executive</strong>: The Windows executive contains the base OS services, such as memory management, process and thread management, security, I/O, networking, and inter-process communication.</li>
+<li><strong>The Windows kernel</strong></li>
+<li><strong>Device drivers</strong>: This includes both hardware device drivers, and non-hardware device drivers.</li>
+<li><strong>The Hardware Abstraction Layer (HAL)</strong></li>
+<li><strong>The windowing and graphics system</strong></li>
+<li><strong>The hypervisor layer</strong>: This is composed of the hypervisor itself. There are no drivers or other modules in this environment. The hypervisor is itself composed of multiple internal layers and services, such as its own memory manager, virtual processor scheduler, interrupt and timer management, synchronization routines, partitions, IPC and more.</li>
+</ul>
+<p>Core Windows System Files:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>File Name</th>
+<th>Components</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ntoskrnl.exe</td>
+<td>Executive and kernel</td>
+</tr>
+<tr>
+<td>Hal.dll</td>
+<td>HAL</td>
+</tr>
+<tr>
+<td>Win32.sys</td>
+<td>Kernel-mode part of the Windows subsystem (GUI)</td>
+</tr>
+<tr>
+<td>Hvix64.exe (Intel), Hvax64.exe (AMD)</td>
+<td>Hypervisor</td>
+</tr>
+<tr>
+<td>.sys file in \SystemRoot\System32\Drivers</td>
+<td>Core driver files, such as Direct X, Volume Manager, TCP/IP, TPM, andACPI supprot.</td>
+</tr>
+<tr>
+<td>Ntdll.dll</td>
+<td>Internal support functions and system service dispatch stubs to executive functions</td>
+</tr>
+<tr>
+<td>Kernel32.dll, Advapi32.dll, User32.dll, Gdi32.dll</td>
+<td>Core Windows subsystem DLLs.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Portability"><a href="#Portability" class="headerlink" title="Portability"></a>Portability</h3><p>Windows archives portability accross hardware architectures and platforms in two primary ways:</p>
+<ul>
+<li><strong>By using layered design</strong></li>
+<li><strong>By using C</strong></li>
+</ul>
+<h3 id="Symmetric-multiprocessing"><a href="#Symmetric-multiprocessing" class="headerlink" title="Symmetric multiprocessing"></a>Symmetric multiprocessing</h3><p>Windows is a <strong>symmetric multiprocessing (SMP)</strong> OS. There is no master processor——the OS as well as user threads can be scheduled to run on any processor. Also, all the processors share just one memory space. This module contrasts with <strong>asymmetric multiprocessing (ASMP)</strong>, in which the OS typically selects one processor to execute OS kernel code while other processors run only user code.</p>
+<p align="center" class='item-img' data-src='/images/books/WindowsInternal1/2.2.png'><img src="/images/books/WindowsInternal1/2.2.png" width="600">
+</p>
+
+<p>Windows also supports four modern types of multiprocessor system: multicore, simultaneous multi-threaded (SMT), heterogeneous, and non-uniform memory access (NUMA).</p>
+<h3 id="Scalability"><a href="#Scalability" class="headerlink" title="Scalability"></a>Scalability</h3><h3 id="Differences-between-client-and-server-versions"><a href="#Differences-between-client-and-server-versions" class="headerlink" title="Differences between client and server versions"></a>Differences between client and server versions</h3><h3 id="Checked-build"><a href="#Checked-build" class="headerlink" title="Checked build"></a>Checked build</h3><h2 id="Virtualization-based-security-architecture-overview"><a href="#Virtualization-based-security-architecture-overview" class="headerlink" title="Virtualization-based security architecture overview"></a>Virtualization-based security architecture overview</h2><p>The separation between user mode and kernel mode provides protection for the OS from user-mode code, whether malicious or not.</p>
+<p align="center" class='item-img' data-src='/images/books/WindowsInternal1/2.3.png'><img src="/images/books/WindowsInternal1/2.3.png" width="600">
+</p>
+
+<p>Here VBS stands for Virtualization-Based Security. VTL stands for Virtual Trust Levels.</p>
+<p>The user/kernel code is running on top of a Hyper-V hypervisor. The difference is that with VBS enabled, a VTL of 1 is now present, which contains its own secure kernel running in the privileged processor mode (that is, ring 0 on x86/x64).</p>
+<p>Similarly, a run-time user environment mode, called the Isolated User Mode (IUM), now exists, which runs in unprivileged mode (that is, ring 3).</p>
+<h2 id="Key-system-components"><a href="#Key-system-components" class="headerlink" title="Key system components"></a>Key system components</h2><p>The role of an environment subsystem is to expose some subset of the base Windows executive system services to application programs.</p>
+<p>User applications don’t call Windows system services directly. Instead, they go through one or more subsystem DLLs. These libraries export the documented interface that the programs linked to that subsystem can called.</p>
+<h3 id="Executive"><a href="#Executive" class="headerlink" title="Executive"></a>Executive</h3><p>The executive includes the following types of functions:</p>
+<ul>
+<li><strong>Functions that are exported and callable from user mode</strong>: These functions are called system services and are exported via Ntdll.dll</li>
+<li><strong>Device driver functions that are called through the DeviceIoControl function</strong></li>
+<li><strong>Functions that can be called only from kernel mode that are exported and documented in the WDK</strong></li>
+<li><strong>Functions that are defined as global symbols but are not exported</strong></li>
+<li><strong>Functions that are internal to a module that are not defined as global symbols</strong></li>
+</ul>
+<h3 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h3><p>The kernel consists of a set of functions in <code>Ntoskrnl.exe</code> that provides fundamental mechanisms. THese include thread-scheduling and synchronization services, used by the executive components, and low-level hardware architecture——dependent support, such as interrupt and exception dispatching, which is different on each processor architecture.</p>
+<p>The kernel provides a low-level based of well-defined, predictable OS primitives and mechanisms that allow higher-level components of the executive to do what they need to do.</p>
+<h3 id="HAL"><a href="#HAL" class="headerlink" title="HAL"></a>HAL</h3><h3 id="Device-Drivers"><a href="#Device-Drivers" class="headerlink" title="Device Drivers"></a>Device Drivers</h3><h3 id="System-Processes"><a href="#System-Processes" class="headerlink" title="System Processes"></a>System Processes</h3><h1 id="Chapter-3-Processes-and-jobs"><a href="#Chapter-3-Processes-and-jobs" class="headerlink" title="Chapter 3 - Processes and jobs"></a>Chapter 3 - Processes and jobs</h1><ul>
+<li>CreateProcess</li>
+<li>CreateProcessAsUser: If a different token is required.</li>
+<li>CreateProcessWithTokenW (advapi32.dll)</li>
+<li>CreateProcessWithLogonW (advapi32.dll)</li>
+<li>SlrCreateProcessWithLogon</li>
+</ul>
+<p align="center" class='item-img' data-src='/images/books/WindowsInternal1/3.1.png'><img src="/images/books/WindowsInternal1/3.1.png" width="600">
+</p>
+
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2026/01/26/2026-1-26-BookWindowsInternal-P2/">← Next [Book] Windows Internal Part 2</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/01/23/2026-1-23-SoftwareCrypto/">[Book] Encrypting and Decrypting a Software Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng"><i class="GitHub" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://zeroday.hitcon.org/user/ISSAC_f0ng"><i class="ZeroDay Hitcon" alt="ZeroDay Hitcon"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#El-libro"><span class="toc-number">1.</span> <span class="toc-text">El libro</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reflection"><span class="toc-number">3.</span> <span class="toc-text">Reflection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-1-Concepts-and-Tools"><span class="toc-number">4.</span> <span class="toc-text">Chapter 1 - Concepts and Tools</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fundation-concepts-and-terms"><span class="toc-number">4.1.</span> <span class="toc-text">Fundation concepts and terms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows-API"><span class="toc-number">4.1.1.</span> <span class="toc-text">Windows API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows-API-flavors"><span class="toc-number">4.1.2.</span> <span class="toc-text">Windows API flavors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Windows-Runtime"><span class="toc-number">4.1.3.</span> <span class="toc-text">The Windows Runtime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Services-functions-and-routines"><span class="toc-number">4.1.4.</span> <span class="toc-text">Services, functions, and routines</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Processes"><span class="toc-number">4.1.5.</span> <span class="toc-text">Processes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Threads"><span class="toc-number">4.1.6.</span> <span class="toc-text">Threads</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Fibers"><span class="toc-number">4.1.6.1.</span> <span class="toc-text">Fibers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#User-mode-scheduling-threads"><span class="toc-number">4.1.6.2.</span> <span class="toc-text">User-mode scheduling threads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jobs"><span class="toc-number">4.1.7.</span> <span class="toc-text">Jobs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Virtual-Memory"><span class="toc-number">4.1.8.</span> <span class="toc-text">Virtual Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel-mode-vs-user-mode"><span class="toc-number">4.1.9.</span> <span class="toc-text">Kernel mode vs. user mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hypervisor"><span class="toc-number">4.1.10.</span> <span class="toc-text">Hypervisor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Firmware"><span class="toc-number">4.1.11.</span> <span class="toc-text">Firmware</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Terminal-Services-and-multiple-sessions"><span class="toc-number">4.1.12.</span> <span class="toc-text">Terminal Services and multiple sessions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Objects-and-handles"><span class="toc-number">4.1.13.</span> <span class="toc-text">Objects and handles</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Security"><span class="toc-number">4.1.14.</span> <span class="toc-text">Security</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Registry"><span class="toc-number">4.1.15.</span> <span class="toc-text">Registry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unicode"><span class="toc-number">4.1.16.</span> <span class="toc-text">Unicode</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-2-System-architecture"><span class="toc-number">5.</span> <span class="toc-text">Chapter 2 - System architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Operating-system-model"><span class="toc-number">5.1.</span> <span class="toc-text">Operating system model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture-overview"><span class="toc-number">5.2.</span> <span class="toc-text">Architecture overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Portability"><span class="toc-number">5.2.1.</span> <span class="toc-text">Portability</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Symmetric-multiprocessing"><span class="toc-number">5.2.2.</span> <span class="toc-text">Symmetric multiprocessing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scalability"><span class="toc-number">5.2.3.</span> <span class="toc-text">Scalability</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Differences-between-client-and-server-versions"><span class="toc-number">5.2.4.</span> <span class="toc-text">Differences between client and server versions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Checked-build"><span class="toc-number">5.2.5.</span> <span class="toc-text">Checked build</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Virtualization-based-security-architecture-overview"><span class="toc-number">5.3.</span> <span class="toc-text">Virtualization-based security architecture overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-system-components"><span class="toc-number">5.4.</span> <span class="toc-text">Key system components</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Executive"><span class="toc-number">5.4.1.</span> <span class="toc-text">Executive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kernel"><span class="toc-number">5.4.2.</span> <span class="toc-text">Kernel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HAL"><span class="toc-number">5.4.3.</span> <span class="toc-text">HAL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Device-Drivers"><span class="toc-number">5.4.4.</span> <span class="toc-text">Device Drivers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System-Processes"><span class="toc-number">5.4.5.</span> <span class="toc-text">System Processes</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-3-Processes-and-jobs"><span class="toc-number">6.</span> <span class="toc-text">Chapter 3 - Processes and jobs</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

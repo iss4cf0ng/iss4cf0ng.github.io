@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[DuplexSpy] Using and Developing a Plugin. | iss4cf0ng/ISSAC's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="iss4cf0ng/ISSAC's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[DuplexSpy] Using and Developing a Plugin.</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-03T12:18:50.000Z" id="date"> 2026-02-03</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-02-08T04:56:00.026Z" id="updated"> 2026-02-08</time></div></span><br><span>Word Count: <div class="control">449</div></span><br><span>Read Time: <div class="control">2 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>DuplexSpy provides a simple remote plugin manager that allows you to load customized plugins into a compromised machine without writing them to disk.</p>
+<p>This article describes how to use and develop a custom plugin for DuplexSpy.</p>
+<p>Note that all plugins are implemented using .NET Framework 4.8 for compatibility reasons.</p>
+<p>The plugin manager interface provides a GUI ListView and a console.</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/1.png'><img src="/images/article/tools/duplexspy/plugin/1.png" width="700">
+</p>
+
+<h1 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h1><p>The C2 server sends the raw DLL bytes of plugin assemblies to the compromised machine. The payload loads these assemblies into memory using the <code>Assembly.Load()</code> method and stores their interfaces in a read-only dictionary. The payload can invoke plugin interfaces and pass parameters whenever it receives commands from the C2 server.</p>
+<p>When the payload is terminated, all loaded plugins are automatically released by the system.</p>
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><p>The plugin console provides the following commands:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>clear</code></td>
+      <td>Clear the console output.</td>
+    </tr>
+    <tr>
+      <td><code>show</code></td>
+      <td>List all available plugins under the plugin folder.</td>
+    </tr>
+    <tr>
+      <td><code>loaded</code></td>
+      <td>Show all currently loaded plugins.</td>
+    </tr>
+    <tr>
+      <td><code>load &lt;all | plugin name&gt;</code></td>
+      <td>Load specified plugin.</td>
+    </tr>
+    <tr>
+      <td><code>unload &lt;all | plugin name&gt;</code></td>
+      <td>Unload the specified plugin.</td>
+    </tr>
+    <tr>
+      <td><code>&lt;entry&gt; &lt;param1&gt; &lt;param2&gt; ...</code></td>
+      <td>Use specified plugin with parameters.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/2.png'><img src="/images/article/tools/duplexspy/plugin/2.png" width="700">
+</p>
+
+<h2 id="Example-1-Coffee"><a href="#Example-1-Coffee" class="headerlink" title="Example 1 - Coffee"></a>Example 1 - Coffee</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">coffee help<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/coffee.1.png'><img src="/images/article/tools/duplexspy/plugin/coffee.1.png" width="700">
+</p>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">coffee print=1<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/coffee.2.png'><img src="/images/article/tools/duplexspy/plugin/coffee.2.png" width="700">
+</p>
+
+<p>Note that the <strong>Plugin Manager</strong> throws an exception if an unhandled exception occurs inside a plugin and displays the corresponding error message. However, the payload itself will not be terminated.</p>
+<h2 id="Example-2-Dumper"><a href="#Example-2-Dumper" class="headerlink" title="Example 2 - Dumper"></a>Example 2 - Dumper</h2><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dumper.1.png'><img src="/images/article/tools/duplexspy/plugin/dumper.1.png" width="700">
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dumper.2.png'><img src="/images/article/tools/duplexspy/plugin/dumper.2.png" width="700">
+</p>
+
+<h2 id="Example-3-InfoSpyder"><a href="#Example-3-InfoSpyder" class="headerlink" title="Example 3 - InfoSpyder"></a>Example 3 - InfoSpyder</h2><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/infospyder.1.png'><img src="/images/article/tools/duplexspy/plugin/infospyder.1.png" width="700">
+</p>
+
+<h1 id="Development"><a href="#Development" class="headerlink" title="Development"></a>Development</h1><p>To develop a plugin. Firstly, create a new .NET framework 4.8 library project.</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.1.png'><img src="/images/article/tools/duplexspy/plugin/dev.1.png" width="600">
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.2.png'><img src="/images/article/tools/duplexspy/plugin/dev.2.png" width="600">
+    <figcaption>
+    Any name that you like. This name is regardless for the final result.
+    </figcaption>
+</p>
+
+<p>Add a reference <code>Plugin.Abstractions48</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.3.png'><img src="/images/article/tools/duplexspy/plugin/dev.3.png" width="600">
+    <figcaption>
+    Right click your project -> Add -> Reference
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.4.png'><img src="/images/article/tools/duplexspy/plugin/dev.4.png" width="600">
+    <figcaption>
+    Plugin.Abstractions48
+    </figcaption>
+</p>
+
+<p>Don’t forget to use it in your project.</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.5.png'><img src="/images/article/tools/duplexspy/plugin/dev.5.png" width="600">
+</p>
+
+<p>Add the required attributes and properties. The <code>HelpTable</code> is optional but recommended. The <code>Name</code> field must be a unique identifier for the plugin.</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.6.png'><img src="/images/article/tools/duplexspy/plugin/dev.6.png" width="600">
+</p>
+
+<p>Add the required functions:</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.7.png'><img src="/images/article/tools/duplexspy/plugin/dev.7.png" width="600">
+</p>
+
+<p>At this point, you have successfully developed a custom plugin. Before building the project, install <code>Costura.Fody</code> to ensure that all dependencies are merged into a single DLL, even if no additional NuGet packages are used.</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.8.png'><img src="/images/article/tools/duplexspy/plugin/dev.8.png" width="600">
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.9.png'><img src="/images/article/tools/duplexspy/plugin/dev.9.png" width="600">
+</p>
+
+<p>Build the DLL file:</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.10.png'><img src="/images/article/tools/duplexspy/plugin/dev.10.png" width="600">
+    <figcaption>
+    Right click your project -> Build
+    </figcaption>
+</p>
+
+<p>Move the generated DLL into the <code>.\Plugins</code> folder of DuplexSpy and create a JSON file <strong>WITH THE SAME FILE NAME (important)</strong>.</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.11.png'><img src="/images/article/tools/duplexspy/plugin/dev.11.png" width="600">
+</p>
+
+<p>The JSON file should be structured as follows. The <code>Name</code> field must match the plugin name defined in the code. The <code>Entry</code> field specifies the command name used in the plugin console. The <code>Command</code> field is reserved for future use.</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.12.png'><img src="/images/article/tools/duplexspy/plugin/dev.12.png" width="600">
+</p>
+
+<p>Go to DuplexSpy. Open <strong>Plugin</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.13.png'><img src="/images/article/tools/duplexspy/plugin/dev.13.png" width="600">
+</p>
+
+<p>Our <code>HelloWorld</code> plugin has been successfully installed. Now let’s try it in the console:</p>
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.14.png'><img src="/images/article/tools/duplexspy/plugin/dev.14.png" width="600">
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/tools/duplexspy/plugin/dev.15.png'><img src="/images/article/tools/duplexspy/plugin/dev.15.png" width="600">
+</p>
+
+<p>Congratulations! You have successfully developed and deployed a custom Duplex plugin.</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING!"></a>THANKS FOR READING!</h1><p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.gif'><img src="/images/meme/mika_nagisa_rollcake.gif" width="400">
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2026/02/03/2026-2-3-DuplexSpyProxy/">← Next [DuplexSpy] SOCKS5 Proxy</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/02/03/2026-2-3-DuplexSpyDllAndShellcode/">[DuplexSpy] DLL and Shellcode Injection and Loader Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng"><i class="GitHub" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://zeroday.hitcon.org/user/ISSAC_f0ng"><i class="ZeroDay Hitcon" alt="ZeroDay Hitcon"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Principle"><span class="toc-number">2.</span> <span class="toc-text">Principle</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Usage"><span class="toc-number">3.</span> <span class="toc-text">Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Example-1-Coffee"><span class="toc-number">3.1.</span> <span class="toc-text">Example 1 - Coffee</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example-2-Dumper"><span class="toc-number">3.2.</span> <span class="toc-text">Example 2 - Dumper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example-3-InfoSpyder"><span class="toc-number">3.3.</span> <span class="toc-text">Example 3 - InfoSpyder</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Development"><span class="toc-number">4.</span> <span class="toc-text">Development</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">5.</span> <span class="toc-text">THANKS FOR READING!</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

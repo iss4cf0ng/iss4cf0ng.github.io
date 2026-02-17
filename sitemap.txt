@@ -1,3 +1,4 @@
+http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
 http://example.com/2026/02/09/2026-2-9-ToolEdenRAT/
 http://example.com/2026/02/09/2026-2-9-EdenPentestInitialStage/
 http://example.com/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/
@@ -11,7 +12,6 @@ http://example.com/2023/06/06/%E3%80%90Tech%E3%80%91%E4%B8%80%E5%8F%A5%E8%A9%B1%
 http://example.com/tags/index.html
 http://example.com/Alien/index.html
 http://example.com/2026/01/26/2026-1-26-BookWindowsInternal-P1/
-http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
 http://example.com/2026/01/26/2026-1-26-BookWindowsInternal-P2/
 http://example.com/2026/01/23/2026-1-23-SoftwareCrypto/
 http://example.com/2026/01/14/2026-1-14-BookLinuxCommand/

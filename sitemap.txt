@@ -1,3 +1,6 @@
+http://example.com/2026/02/18/2026-2-18-StudyingRAT/
+http://example.com/2026/02/17/2026-2-17-JavaCodeAudit/
+http://example.com/2026/01/26/2026-1-26-BookWindowsInternal-P1/
 http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
 http://example.com/2026/02/09/2026-2-9-ToolEdenRAT/
 http://example.com/2026/02/09/2026-2-9-EdenPentestInitialStage/
@@ -11,7 +14,6 @@ http://example.com/About/index.html
 http://example.com/2023/06/06/%E3%80%90Tech%E3%80%91%E4%B8%80%E5%8F%A5%E8%A9%B1%E6%9C%A8%E9%A6%AC/
 http://example.com/tags/index.html
 http://example.com/Alien/index.html
-http://example.com/2026/01/26/2026-1-26-BookWindowsInternal-P1/
 http://example.com/2026/01/26/2026-1-26-BookWindowsInternal-P2/
 http://example.com/2026/01/23/2026-1-23-SoftwareCrypto/
 http://example.com/2026/01/14/2026-1-14-BookLinuxCommand/
@@ -145,9 +147,12 @@ http://example.com/tags/Alien/
 http://example.com/tags/%E5%B7%A5%E5%85%B7/
 http://example.com/tags/Eden-RAT/
 http://example.com/tags/Remote-Access-Tool/
+http://example.com/tags/Malware/
+http://example.com/tags/Malware-Analysis/
 http://example.com/categories/Code/
 http://example.com/categories/Book/
 http://example.com/categories/Tools/
 http://example.com/categories/Tools-Eden-RAT/
 http://example.com/categories/Tools-DuplexSpy/
 http://example.com/categories/Tools-dotNetPELoader/
+http://example.com/categories/Studying-RAT/

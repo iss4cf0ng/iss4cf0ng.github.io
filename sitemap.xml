@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/</loc>
+    
+    <lastmod>2026-02-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2026/01/05/2026-1-5-LearningGo/</loc>
     
     <lastmod>2026-02-20</lastmod>
@@ -122,15 +131,6 @@
     <loc>http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/</loc>
     
     <lastmod>2026-02-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/</loc>
-    
-    <lastmod>2026-02-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -1219,13 +1219,6 @@
   
   <url>
     <loc>http://example.com/categories/Tools/</loc>
-    <lastmod>2026-02-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/categories/Tools-DuplexSpy/</loc>
     <lastmod>2026-02-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

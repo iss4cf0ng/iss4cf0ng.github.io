@@ -1,3 +1,4 @@
+http://example.com/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/
 http://example.com/2026/01/05/2026-1-5-LearningGo/
 http://example.com/2026/02/18/2026-2-18-StudyingRAT/
 http://example.com/2026/02/18/2026-2-18-Netbus/
@@ -12,7 +13,6 @@ http://example.com/2026/02/03/2026-2-3-DuplexSpyDllAndShellcode/
 http://example.com/2026/02/17/2026-2-17-JavaCodeAudit/
 http://example.com/2026/01/26/2026-1-26-BookWindowsInternal-P1/
 http://example.com/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/
-http://example.com/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/
 http://example.com/2023/06/06/%E3%80%90Tech%E3%80%91%E4%B8%80%E5%8F%A5%E8%A9%B1%E6%9C%A8%E9%A6%AC/
 http://example.com/tags/index.html
 http://example.com/Alien/index.html
@@ -155,7 +155,6 @@ http://example.com/tags/Ghidra/
 http://example.com/categories/Code/
 http://example.com/categories/Book/
 http://example.com/categories/Tools/
-http://example.com/categories/Tools-DuplexSpy/
 http://example.com/categories/Studying-RAT/
 http://example.com/categories/Tools-DuplexSpy/
 http://example.com/categories/Tools-dotNetPELoader/

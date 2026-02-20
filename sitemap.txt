@@ -1,3 +1,6 @@
+http://example.com/2026/01/14/2026-1-14-BookLinuxSuperUser/
+http://example.com/2026/01/14/2026-1-14-BookLinuxCommand/
+http://example.com/2026/01/14/2026-1-14-BookPracticalLinuxForensics/
 http://example.com/2026/01/05/2026-1-5-LearningGo/
 http://example.com/2026/02/18/2026-2-18-Netbus/
 http://example.com/2026/02/18/2026-2-18-StudyingRAT/
@@ -18,11 +21,8 @@ http://example.com/tags/index.html
 http://example.com/Alien/index.html
 http://example.com/2026/01/26/2026-1-26-BookWindowsInternal-P2/
 http://example.com/2026/01/23/2026-1-23-SoftwareCrypto/
-http://example.com/2026/01/14/2026-1-14-BookLinuxCommand/
 http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/
-http://example.com/2026/01/14/2026-1-14-BookPracticalLinuxForensics/
 http://example.com/2026/01/14/2026-1-14-BookDesigningAnonymousCommChains/
-http://example.com/2026/01/14/2026-1-14-BookLinuxSuperUser/
 http://example.com/2026/01/04/2026-1-4-BookReverseEngineeringCore/
 http://example.com/2026/01/05/2026-1-5-ProgrammingRust/
 http://example.com/2026/01/07/2026-1-7-CppTemplatesTheCompleteGuide2ed/

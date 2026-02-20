@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2026/01/14/2026-1-14-BookLinuxSuperUser/</loc>
+    
+    <lastmod>2026-02-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2026/01/14/2026-1-14-BookLinuxCommand/</loc>
+    
+    <lastmod>2026-02-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2026/01/14/2026-1-14-BookPracticalLinuxForensics/</loc>
+    
+    <lastmod>2026-02-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2026/01/05/2026-1-5-LearningGo/</loc>
     
     <lastmod>2026-02-20</lastmod>
@@ -182,15 +209,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/2026/01/14/2026-1-14-BookLinuxCommand/</loc>
-    
-    <lastmod>2026-01-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/2026/01/02/2026-1-2-NoteWindowsBufferOverflow/</loc>
     
     <lastmod>2026-01-25</lastmod>
@@ -200,27 +218,9 @@
   </url>
   
   <url>
-    <loc>http://example.com/2026/01/14/2026-1-14-BookPracticalLinuxForensics/</loc>
-    
-    <lastmod>2026-01-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/2026/01/14/2026-1-14-BookDesigningAnonymousCommChains/</loc>
     
     <lastmod>2026-01-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2026/01/14/2026-1-14-BookLinuxSuperUser/</loc>
-    
-    <lastmod>2026-01-22</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

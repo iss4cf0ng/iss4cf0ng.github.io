@@ -150,6 +150,8 @@ http://example.com/tags/Eden-RAT/
 http://example.com/tags/Remote-Access-Tool/
 http://example.com/tags/Malware/
 http://example.com/tags/Malware-Analysis/
+http://example.com/tags/Netbus/
+http://example.com/tags/Ghidra/
 http://example.com/categories/Code/
 http://example.com/categories/Book/
 http://example.com/categories/Tools/

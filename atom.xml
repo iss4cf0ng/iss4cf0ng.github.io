@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2026-02-21T05:18:16.056Z</updated>
+  <updated>2026-02-21T05:23:44.451Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2026/02/21/2026-2-21-WinXpVMWareTool/"/>
     <id>http://example.com/2026/02/21/2026-2-21-WinXpVMWareTool/</id>
     <published>2026-02-21T03:32:09.000Z</published>
-    <updated>2026-02-21T05:18:16.056Z</updated>
+    <updated>2026-02-21T05:23:44.451Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article explains how to install VMware Tools on Windows XP and Windows 95 using WMware Workstation 17. </p><p>The installation enables features such as drag-and-drop and copy-and-paste between the host and the virtual machine.</p><h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Recently, while learning malware analysi, I installed multiple legacy operating systems in VMware Workstation. I then realized that VMware Tools included in Workstation 17 does not support legacy operating systems such as Windows XP by default.</p><p>After successfully completing the installation, I found that the official instructions were not very user-friendly. Therefore, I decided to write this article to help anyone facing the same issue.</p><h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><h2 id="Windows-XP"><a href="#Windows-XP" class="headerlink" title="Windows XP"></a>Windows XP</h2><p>Power on your virtual machine. From the toolbar in VMware Workstation, navigate to:</p><p>VM -&gt; Install VMware Tools</p><p>You should see the following error message:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/1.png'><img src="/images/article/2026-2-21-VMWareTool/1.png" width=500></p><p>The first URL (an ISO file) provides VMware Tools for legacy Windows operating systems, while the second URL contains instructions—which may not be very user-friendly.</p><p>Click the first URL to download the ISO file, and move it to an appropriate directory.</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/2.png'><img src="/images/article/2026-2-21-VMWareTool/2.png" width=900></p><p>Before installing VMware Tools, power off your virtual machine. Next, open the virtual machine settings:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/3.png'><img src="/images/article/2026-2-21-VMWareTool/3.png" width=400></p><p>Select “CD/DVD” and modify the ISO image file path to the ISO file you downloaded eariler:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/4.png'><img src="/images/article/2026-2-21-VMWareTool/4.png" width=700></p><p>Start your virtual machine and open “My Computer”:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/5.png'><img src="/images/article/2026-2-21-VMWareTool/5.png" width=400></p><p>If the ISO file is mounted successfully, you shoud see VMware Tools listed as a removable drive:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/6.png'><img src="/images/article/2026-2-21-VMWareTool/6.png" width=700></p><p>Double-click “VMWare Tools” to launch the installer:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/7.png'><img src="/images/article/2026-2-21-VMWareTool/7.png" width=400></p><p>Follow the installation wizard to complete the setup:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/8.png'><img src="/images/article/2026-2-21-VMWareTool/8.png" width=400></p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/9.png'><img src="/images/article/2026-2-21-VMWareTool/9.png" width=400></p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/10.png'><img src="/images/article/2026-2-21-VMWareTool/10.png" width=400></p><p>After installation, restart your virtual machine:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/11.png'><img src="/images/article/2026-2-21-VMWareTool/11.png" width=400></p><p>If the VMWare Tools has been installed successfully, you will be able to use features such as drag-and-drop and copy-and-paste between the host and the guest system.</p><h2 id="Windows-95"><a href="#Windows-95" class="headerlink" title="Windows 95"></a>Windows 95</h2><p>Installing VMWare Tools on Windows 95 is almost following the same procedure, but the ISO file is different. </p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/12.png'><img src="/images/article/2026-2-21-VMWareTool/12.png" width=400></p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/13.png'><img src="/images/article/2026-2-21-VMWareTool/13.png" width=800></p><p>Select “CD/DVD” and modify the ISO image file path to the ISO file you downloaded eariler:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/14.png'><img src="/images/article/2026-2-21-VMWareTool/14.png" width=700></p><p>Start your virtual machine and open “My Computer”, If the ISO file is mounted successfully, you shoud see VMware Tools listed as a removable drive:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/15.png'><img src="/images/article/2026-2-21-VMWareTool/15.png" width=600></p><p>Follow the installation wizard to complete the setup:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/16.png'><img src="/images/article/2026-2-21-VMWareTool/16.png" width=600></p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/17.png'><img src="/images/article/2026-2-21-VMWareTool/17.png" width=600></p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/18.png'><img src="/images/article/2026-2-21-VMWareTool/18.png" width=600></p><p>After installation, restart your virtual machine.  </p><p>If the VMWare Tools has been installed successfully, you will be able to use features such as drag-and-drop and copy-and-paste between the host and the guest system:</p><p align="center" class='item-img' data-src='/images/article/2026-2-21-VMWareTool/19.png'><img src="/images/article/2026-2-21-VMWareTool/19.png" width=600></p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.gif'><img src="/images/meme/mika_nagisa_rollcake.gif" width=500></p>]]></content>
     
@@ -33,6 +33,18 @@
     
     
     
+    <category term="Troubleshooting" scheme="http://example.com/categories/Troubleshooting/"/>
+    
+    
+    <category term="Troubleshooting" scheme="http://example.com/tags/Troubleshooting/"/>
+    
+    <category term="VMware" scheme="http://example.com/tags/VMware/"/>
+    
+    <category term="VMware Tools" scheme="http://example.com/tags/VMware-Tools/"/>
+    
+    <category term="Windows XP" scheme="http://example.com/tags/Windows-XP/"/>
+    
+    <category term="Windows 95" scheme="http://example.com/tags/Windows-95/"/>
     
   </entry>
   
@@ -98,11 +110,11 @@
     
     <category term="RAT" scheme="http://example.com/tags/RAT/"/>
     
-    <category term="Remote Access Tool" scheme="http://example.com/tags/Remote-Access-Tool/"/>
-    
     <category term="Malware" scheme="http://example.com/tags/Malware/"/>
     
     <category term="Malware Analysis" scheme="http://example.com/tags/Malware-Analysis/"/>
+    
+    <category term="Remote Access Tool" scheme="http://example.com/tags/Remote-Access-Tool/"/>
     
   </entry>
   
@@ -192,11 +204,11 @@
     
     <category term="Pentesting" scheme="http://example.com/tags/Pentesting/"/>
     
+    <category term="Remote Access Tool" scheme="http://example.com/tags/Remote-Access-Tool/"/>
+    
     <category term="Tools" scheme="http://example.com/tags/Tools/"/>
     
     <category term="Eden-RAT" scheme="http://example.com/tags/Eden-RAT/"/>
-    
-    <category term="Remote Access Tool" scheme="http://example.com/tags/Remote-Access-Tool/"/>
     
   </entry>
   
@@ -534,6 +546,8 @@
     
     
     
+    <category term="Learning" scheme="http://example.com/tags/Learning/"/>
+    
     <category term="Linux" scheme="http://example.com/tags/Linux/"/>
     
     <category term="Command Line" scheme="http://example.com/tags/Command-Line/"/>
@@ -541,8 +555,6 @@
     <category term="Linux Command" scheme="http://example.com/tags/Linux-Command/"/>
     
     <category term="Book" scheme="http://example.com/tags/Book/"/>
-    
-    <category term="Learning" scheme="http://example.com/tags/Learning/"/>
     
     <category term="Study" scheme="http://example.com/tags/Study/"/>
     

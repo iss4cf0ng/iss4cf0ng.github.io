@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iss4cf0ng.github.io/Notes/index.html</loc>
+    
+    <lastmod>2026-02-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/About/index.html</loc>
+    
+    <lastmod>2026-02-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/</loc>
     
     <lastmod>2026-02-21</lastmod>
@@ -77,15 +95,6 @@
     <loc>https://iss4cf0ng.github.io/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/</loc>
     
     <lastmod>2026-02-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/About/index.html</loc>
-    
-    <lastmod>2026-02-18</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -293,15 +302,6 @@
     <loc>https://iss4cf0ng.github.io/2026/01/02/2026-1-2-NoteLanPenetrationGuidelines/</loc>
     
     <lastmod>2026-01-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/Notes/index.html</loc>
-    
-    <lastmod>2026-01-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

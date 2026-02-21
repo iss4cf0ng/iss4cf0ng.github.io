@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Alien FileManager | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Alien FileManager</h1></div><hr><div id="post-content"><h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><p>主要的File Manager介面參考了Hatchet的UI，<br>有以下功能 :  </p>
+<h3 id="FileManager"><a href="#FileManager" class="headerlink" title="FileManager"></a>FileManager</h3><ul>
+<li>Basic(基本的讀寫增刪、上傳、下載、WGET)</li>
+<li>看圖片(這是以往的工具沒有的功能, 如果伺服器內有身份證之類的圖片就可以證明漏洞的問題)</li>
+<li>ShortCut : 上方的ToolStrip</li>
+<li>FastDir : 會掃瞄指定的dir，如果有那就加到TreeView，只要點一下就可以快速打開</li>
+<li>Other : 顯示其他資料<h3 id="Search-File"><a href="#Search-File" class="headerlink" title="Search File"></a>Search File</h3>掃描指定的檔案名，可自定掃瞄模式。<h3 id="Priviledge"><a href="#Priviledge" class="headerlink" title="Priviledge"></a>Priviledge</h3>掃播指定Directory和SubDirectory，列出讀寫權限<h3 id="Logs"><a href="#Logs" class="headerlink" title="Logs"></a>Logs</h3>把進行過的操作記下，可保存</li>
+</ul>
+<h2 id="看圖片功能"><a href="#看圖片功能" class="headerlink" title="看圖片功能"></a>看圖片功能</h2><p>某些情況下Folder內有上千張圖片，這種情況有可能是個人資料，<br>可以使用該功能打開選中圖片，也可以一次打開當前dir下的所有Image檔。<br>如果是前者那圖片會在不同分頁開啟，如果是後者那所有圖片都會在同一個分頁內<br>雙撃分頁內任一張的圖片可以在新分頁打開。<br>以分頁打開的圖片可以改SizeMode，有以下5種 :  </p>
+<ul>
+<li>AutoSize : 自動調整大小</li>
+<li>CenterImage : 把視角放在圖片的中心，不改變圖片大小</li>
+<li>Normal : 顯示在左上角，但過大的圖片會被切掉</li>
+<li>ScretchImage : 對圖片進行拉長或收縮至符合PictureBox的大小</li>
+<li>Zoom : 對圖片進行拉長或收縮，但不改變圖片Width和Height的比例</li>
+</ul>
+<p>由於可能會有很多圖片，所以可以設定Thread。  </p>
+<p>PS: 作者曾經沒有寫Thread功能，然後10張圖片直接卡死，而FastDir是把所有Directory都一次掃瞄，<br>這是我目前測試後認為最好的做法，如果讀者有更好的方法歡迎提交issues。</p>
+<div id="paginator"></div></div><div id="post-footer"></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng"><i class="GitHub" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%B4%B9"><span class="toc-number">1.</span> <span class="toc-text">介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileManager"><span class="toc-number">1.1.</span> <span class="toc-text">FileManager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Search-File"><span class="toc-number">1.2.</span> <span class="toc-text">Search File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Priviledge"><span class="toc-number">1.3.</span> <span class="toc-text">Priviledge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Logs"><span class="toc-number">1.4.</span> <span class="toc-text">Logs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%8B%E5%9C%96%E7%89%87%E5%8A%9F%E8%83%BD"><span class="toc-number">2.</span> <span class="toc-text">看圖片功能</span></a></li></ol></div><section id="total"><a id="total-archives" href="/archives"><span class="total-title">Archives Total:</span><span class="total-number">42</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">98</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">8</span></div></section></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

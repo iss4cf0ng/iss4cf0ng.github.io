@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Studying] Inside Different Generations of RATs | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Inside Different Generations of RATs</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-18T05:02:44.000Z" id="date"> 2026-02-18</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-02-20T14:36:23.318Z" id="updated"> 2026-02-20</time></div></span><br><span>Word Count: <div class="control">399</div></span><br><span>Read Time: <div class="control">2 min</div></span></div></div><hr><div id="post-content"><h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Recently, I have been developing different types of remote access tools (RATs).<br>My interest in RAT development originates from personal curiosity and long-term fascination with how remote control malware works internally.</p>
+<p>Years ago, when I was a begineer in cybersecurity——and by “begineer,” I truly mean knowing almost nothing beyond simple denial-of-service attempts using the <code>ping</code> command in <code>cmd.exe</code>——I used to download numerous tools from various websites. At that time, I barely understood operational security or the risks involved. However, experimenting with existing tools was, in my case, the only accessible way to explore cybersecurity as a middle school student.</p>
+<p>Over the years, my perspective has changed. Instead of merely using tools, I become more interested in understanding how they are designed and implemented. Today, I have published several remote access tools for educational and research purposes, such as <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/DuplexSpyCS">DuplexSpy</a> and <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/Eden-RAT">Eden-RAT</a>. Other projects are still under development or being rewritten. </p>
+<p>Some may ask: why develop multiple RATs? What are the differences? Looking back at 2016, when The Shadow Brokers leaked numerous tools allegedly associated with the National Security Agency <sup><a href="#fn_1" id="reffn_1">1</a></sup>, one important lesson become clear: advanced threat groups often develop multiple implants and remote access tools tailored for different operational stages and objectives.</p>
+<p>During my own development process, I began recalling the older RATs I had downloaded but never truly understood. Recently, as I have been studying reverse engineering and malware analysis more systemically, I realized this presents and excellent opportunity to revist those historical tools——not to use them, but to analyze and understand their architecture.</p>
+<p>Cybersecurity has gradually become more complex. The number of domains, tools, and technologies continues to grow, while learning resources can feel fragmented. The gap between begineers and experienced professional seems wider than ever. This is one of the reasons I started publishing technical articles on my blog. While blogging may feel somewhat old-school, I prefer structed and long-form documentation of knowlege.</p>
+<p>In this series, I will analyze different generations of remote access tools——from <strong>early legacy trojans</strong> to more <strong>modern modular RATs</strong>——focusing on architecture, communication protocols, and design evolution from a reverse engineering perspective.</p>
+<h1 id="Articles"><a href="#Articles" class="headerlink" title="Articles"></a>Articles</h1><p>The table below lists all articles in this series analyzing various remote access tools.<br>It will be updated continuously as new research is published.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>RAT</th>
+<th>Article</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NetBus</td>
+<td><a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-Netbus/">Analyzing NetBus</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><blockquote id="fn_1">
+<sup>1</sup>. <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/The_Shadow_Brokers">https://en.wikipedia.org/wiki/The_Shadow_Brokers</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2026/02/18/2026-2-18-Netbus/">← Next [Studying] Analyzing NetBus</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/02/17/2026-2-17-JavaCodeAudit/">[Book] Java Code Audit (Fundamental) Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng"><i class="GitHub" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Articles"><span class="toc-number">2.</span> <span class="toc-text">Articles</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">3.</span> <span class="toc-text">References</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

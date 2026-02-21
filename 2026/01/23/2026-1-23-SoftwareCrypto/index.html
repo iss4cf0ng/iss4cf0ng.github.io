@@ -1,0 +1,333 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Book] Encrypting and Decrypting a Software | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Book] Encrypting and Decrypting a Software</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-01-22T16:47:22.000Z" id="date"> 2026-01-23</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-01-27T07:31:37.920Z" id="updated"> 2026-01-27</time></div></span><br><span>Word Count: <div class="control">1.6k</div></span><br><span>Read Time: <div class="control">9 min</div></span></div></div><hr><div id="post-content"><h1 id="El-libro"><a href="#El-libro" class="headerlink" title="El libro"></a>El libro</h1><p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/libro.jpg'><img src="/images/books/SoftwareCrypto/libro.jpg" width="500">
+</p>
+
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is used to keep notes and summaries of the book “Encrypting and Decrypting a Software”.<br>The content will be continuously updated as I read through the book.</p>
+<h1 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h1><p>This book covers many topics and has almost 1,000 pages.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.png'><img src="/images/meme/mika_nagisa_rollcake.png" width="300">
+</p>
+
+<p>The book includes the following topics:</p>
+<ul>
+<li>Software cracking (patching and bypassing)</li>
+<li>Mathematical cryptography (with formulas and expressions)</li>
+<li>Software vulnerabilities (stack buffer overflow and heap buffer overflow)</li>
+<li>Software packing, unpacking, and packer stubs</li>
+<li>Reverse engineering</li>
+</ul>
+<p>Most of the topics focus on Windows rather than Linux.</p>
+<p>Personally, I do not recommend this book for beginners in reverse engineering. Although the topics are broad, the book does not explore them in great depth. While the book introduces a wide range of topics, some of them could benefit from more detailed explanations, which may make the book less accessible to beginners.</p>
+<p>There are several typos in the book, such as misusing the terms <em>byte</em> and <em>bit</em>, which was quite confusing.</p>
+<p>The biggest drawback is that the example source code is very difficult to obtain for foreign readers. It would be excellent if the authors uploaded their source code to GitHub, similar to the author of <a href="https://iss4cf0ng.github.io/2026/01/04/2026-1-4-BookReverseEngineeringCore/">Reverse Engineering Core</a>.</p>
+<p>On the other hand, since the book covers many topics, it can be used as a reference or dictionary. In addition, it includes some topics that are rarely discussed in other books.</p>
+<h1 id="Chapter-1-Fundamental-Knowledge"><a href="#Chapter-1-Fundamental-Knowledge" class="headerlink" title="Chapter 1 - Fundamental Knowledge"></a>Chapter 1 - Fundamental Knowledge</h1><h2 id="1-3-Windows-OS"><a href="#1-3-Windows-OS" class="headerlink" title="1.3 - Windows OS"></a>1.3 - Windows OS</h2><h3 id="Win32-API"><a href="#Win32-API" class="headerlink" title="Win32 API"></a>Win32 API</h3><ul>
+<li>Kernel (kernel32.dll): Processes, threads, memory, file IO, etc.</li>
+<li>User (user32.dll): Mouse click, keyboard input, window, menu, etc.</li>
+<li>GDI (gdi32.dll): Display text.</li>
+<li>advapi32.dll</li>
+<li>comctl32.dll</li>
+<li>comdlg32.dll</li>
+<li>shell32.dll</li>
+<li>netapi32.dll</li>
+</ul>
+<p>For Win32 API functions, “A” stands for ANSI. “W” stands for Widechars(Unicode).</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">int MessageBox(<br>    HWND hWnd,<br>    LPCTSTR lpText,<br>    LPCTSTR lpCaption,<br>    UINT uType<br>);<br></code></pre></td></tr></table></figure>
+<h3 id="WOW64"><a href="#WOW64" class="headerlink" title="WOW64"></a>WOW64</h3><p>WOW64 stands for <strong>Windows on Windows 64-bit</strong>.</p>
+<h3 id="Windows-Message-Mechanism"><a href="#Windows-Message-Mechanism" class="headerlink" title="Windows Message Mechanism"></a>Windows Message Mechanism</h3><p><strong>SendMessage()</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">LRESULT SendMessage(<br>    HWND hWnd,<br>    UINT Msg,<br>    WPARAM wParam,<br>    LPARAM lParam<br>);<br></code></pre></td></tr></table></figure></p>
+<p><strong>WM_COMMAND</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">WM_COMMAND<br>    wNotifyCode = HIWORD(wParam);<br>    wID = LOWORD(wParam);<br>    hwndCtl = (HWND)lParam;<br></code></pre></td></tr></table></figure></p>
+<p><strong>WM_GETTEXT</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">WM_GETTEXT<br>    wParam = (WPARAM)cchTextMax;<br>    lParam = (LPARAM)lpszText;<br></code></pre></td></tr></table></figure></p>
+<p><strong>WM_QUIT</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">WM_QUIT<br>    nExitCode = (int)wParam;<br></code></pre></td></tr></table></figure></p>
+<p><strong>WM_LBUTTONDOWN</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">WM_LBUTTONDOWN<br>    fwKeys = wParam;<br>    xPos = LOWORD(lParam);<br>    yPos = HIWORD(lParam);<br></code></pre></td></tr></table></figure></p>
+<h3 id="Virtual-Memory"><a href="#Virtual-Memory" class="headerlink" title="Virtual Memory"></a>Virtual Memory</h3><h1 id="Chapter-2-Dynamic-Analysis"><a href="#Chapter-2-Dynamic-Analysis" class="headerlink" title="Chapter 2 - Dynamic Analysis"></a>Chapter 2 - Dynamic Analysis</h1><h2 id="2-1-OllyDbg"><a href="#2-1-OllyDbg" class="headerlink" title="2.1 - OllyDbg"></a>2.1 - OllyDbg</h2><h3 id="BreakPoint"><a href="#BreakPoint" class="headerlink" title="BreakPoint"></a>BreakPoint</h3><ol>
+<li>INT 3  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">004013A5 CC D0404000<br></code></pre></td></tr></table></figure>
+OllyDbg replaces the original instruction to <code>0xCC</code>. However, the original instruction in displayed.</li>
+<li><p>Hardware BreakPoint<br>Hardware break points are implemented with <code>DRx</code> registers. The addresses of break points are stored into <code>DR0</code> ~ <code>DR3</code>, while <code>DR7</code> stores the status. Thus, the maximum number of hardware break points are is 4.</p>
+ <p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.1.png'><img src="/images/books/SoftwareCrypto/2.1.png" width="500">
+ </p>
+
+ <p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.2.png'><img src="/images/books/SoftwareCrypto/2.2.png" width="500">
+ </p>
+
+ <p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.3.png'><img src="/images/books/SoftwareCrypto/2.3.png" width="500">
+ </p>
+
+ <p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.4.png'><img src="/images/books/SoftwareCrypto/2.4.png" width="500">
+ </p>
+
+ <p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.5.png'><img src="/images/books/SoftwareCrypto/2.5.png" width="500">
+ </p>
+
+ <p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.6.png'><img src="/images/books/SoftwareCrypto/2.6.png" width="500">
+ </p>
+</li>
+<li><p>Memory BreakPoint</p>
+<ol>
+<li>On Access</li>
+<li><p>On Write</p>
+<p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.7.png'><img src="/images/books/SoftwareCrypto/2.7.png" width="500">
+</p>
+</li>
+</ol>
+</li>
+<li><p>Set break-on-access</p>
+ <p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.8.png'><img src="/images/books/SoftwareCrypto/2.8.png" width="500">
+ </p>
+</li>
+<li><p>Message BreakPoint</p>
+<ol>
+<li>View -&gt; Windows</li>
+<li><p>Message breakpoint on ClassProc</p>
+<p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.9.png'><img src="/images/books/SoftwareCrypto/2.9.png" width="500">
+</p>
+
+<p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.10.png'><img src="/images/books/SoftwareCrypto/2.10.png" width="500">
+</p>
+</li>
+</ol>
+</li>
+<li><p>Conditional BreakPoint</p>
+ <p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/2.11.png'><img src="/images/books/SoftwareCrypto/2.11.png" width="500">
+ <figcaption>
+ Shift+F2
+ </figcaption>
+ </p></li>
+<li>Conditional Log</li>
+</ol>
+<h2 id="2-3-MDebug"><a href="#2-3-MDebug" class="headerlink" title="2.3 - MDebug"></a>2.3 - MDebug</h2><h2 id="2-4-WinDbg"><a href="#2-4-WinDbg" class="headerlink" title="2.4 - WinDbg"></a>2.4 - WinDbg</h2><h1 id="Chapter-3-Static-Analysis"><a href="#Chapter-3-Static-Analysis" class="headerlink" title="Chapter 3 - Static Analysis"></a>Chapter 3 - Static Analysis</h1><h2 id="3-2-Disassembly-Engine"><a href="#3-2-Disassembly-Engine" class="headerlink" title="3.2 - Disassembly Engine"></a>3.2 - Disassembly Engine</h2><ol>
+<li>ODDisasm</li>
+<li>BeaEngine</li>
+<li>Udis86</li>
+<li>Capstone</li>
+<li>AsmJit</li>
+<li>Keystone</li>
+</ol>
+<h2 id="3-3-Static-Disassembly"><a href="#3-3-Static-Disassembly" class="headerlink" title="3.3 - Static Disassembly"></a>3.3 - Static Disassembly</h2><h3 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h3><p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/3.1.png'><img src="/images/books/SoftwareCrypto/3.1.png" width="500">
+</p>
+
+<p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/3.2.png'><img src="/images/books/SoftwareCrypto/3.2.png" width="700">
+</p>
+
+<p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/3.3.png'><img src="/images/books/SoftwareCrypto/3.3.png" width="700">
+</p>
+
+<p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/3.4.png'><img src="/images/books/SoftwareCrypto/3.4.png" width="700">
+</p>
+
+<p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/3.5.png'><img src="/images/books/SoftwareCrypto/3.5.png" width="700">
+</p>
+
+<h3 id="Hexadecimal-Tools"><a href="#Hexadecimal-Tools" class="headerlink" title="Hexadecimal Tools"></a>Hexadecimal Tools</h3><ul>
+<li>HexWorkship</li>
+<li>WinHex</li>
+<li>Hiew</li>
+</ul>
+<h1 id="Chapter-4-Reverse-Engineering-Techniques"><a href="#Chapter-4-Reverse-Engineering-Techniques" class="headerlink" title="Chapter 4 - Reverse Engineering Techniques"></a>Chapter 4 - Reverse Engineering Techniques</h1><h2 id="4-1-Reverse-Engineering-on-x32-Platform"><a href="#4-1-Reverse-Engineering-on-x32-Platform" class="headerlink" title="4.1 - Reverse Engineering on x32 Platform"></a>4.1 - Reverse Engineering on x32 Platform</h2><h3 id="Calling-Convention"><a href="#Calling-Convention" class="headerlink" title="Calling Convention"></a>Calling Convention</h3><p>Example1:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">test1(p1, p2, p3);<br></code></pre></td></tr></table></figure></p>
+<p><strong>__cdecl</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">push p3     ; right to left<br>push p2<br>push p1<br>call test1<br>add esp,0C  ; stack cleanup<br></code></pre></td></tr></table></figure></p>
+<p><strong>pascal</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">push p1     ; left to right<br>push p2<br>push p3<br>call test1  ; stack cleanup in the function<br></code></pre></td></tr></table></figure></p>
+<p><strong>stdcall</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">push p3     ; right to left<br>push p2<br>push p1<br>call test1  ; stack cleanup in the function<br></code></pre></td></tr></table></figure></p>
+<hr>
+<p>Example2:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">test2(p1, p2);<br></code></pre></td></tr></table></figure></p>
+<p><strong>stdcall</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">push p2                         ; Parameter 2<br>push p1                         ; Parameter 1<br>call test2<br>&#123;<br>    push ebp                    ; Original EBP pointer<br>    mov ebp, esp                ; New EBP pointer<br>    mov eax, dword ptr[ebp+0C]  ; Parameter 2<br>    mov ebx, dword ptr[ebp+08]  ; Parameter 1<br>    sub esp, 8                  ; Reserve space for local variables<br><br>    ...<br><br>    add esp, 8                  ; Release space of local variables<br>    pop ebp                     ; Original EBP pointer<br>    ret 8                       ; return (Equal to ret # add esp, 8)<br>                                ; 2 (Parameter) x 4h = 8<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<ul>
+<li>enter: push ebp # mov ebp,esp # sub esp, xxx</li>
+<li>leave: add esp, xxx # pop ebp</li>
+</ul>
+<p>We can rewrite the script above<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">enter xxxx, 0   ; Reserver space xxxx for local variable<br><br>...<br><br>leave<br>ret 8<br></code></pre></td></tr></table></figure></p>
+<hr>
+<p>Enable <strong>Maximum Speed</strong> in VC6.0<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">push p2<br>push p1<br>call test2<br>&#123;<br>    mov eax, dword ptr [esp+04]     ; Call parameter 1<br>    mov ecx, dword ptr [esp+08]     ; Call parameter 2<br><br>    ...<br><br>    ret 8                           ; return<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<h3 id="Virtual-Function"><a href="#Virtual-Function" class="headerlink" title="Virtual Function"></a>Virtual Function</h3><h1 id="Chapter-5-Software-Protection-Demonstration"><a href="#Chapter-5-Software-Protection-Demonstration" class="headerlink" title="Chapter 5 - Software Protection Demonstration"></a>Chapter 5 - Software Protection Demonstration</h1><h2 id="5-1-Serial-Number-and-KeyGen"><a href="#5-1-Serial-Number-and-KeyGen" class="headerlink" title="5.1 - Serial Number and KeyGen"></a>5.1 - Serial Number and KeyGen</h2><ol>
+<li><script type="math/tex; mode=display">
+ \text{Serial Number} = F(\text{Username})</script></li>
+<li><script type="math/tex; mode=display">
+\text{Username} = F^{-1}(\text{Serial Number})</script></li>
+<li><script type="math/tex; mode=display">
+ F_1(\text{Username}) = F_2(\text{Serial Number})</script></li>
+<li><script type="math/tex; mode=display">
+ Some value = F(\text{Username}, \text{Serial Number})</script></li>
+</ol>
+<h3 id="Exploiting-Serial-Number-Protection-Mechanism"><a href="#Exploiting-Serial-Number-Protection-Mechanism" class="headerlink" title="Exploiting Serial Number Protection Mechanism"></a>Exploiting Serial Number Protection Mechanism</h3><p>Commonly used API functions for Serial Number Protection:</p>
+<ol>
+<li>The following functions are commonly used for input:<ul>
+<li>GetWindowTextA(W)</li>
+<li>GetDlgItemTextA(W)</li>
+<li>GetDlgItemInt</li>
+<li>hmencpy (Windows 9x/Me only)</li>
+</ul>
+</li>
+<li>The floowing functions are commonly used for messagebox:<ul>
+<li>MessageBoxA(W)</li>
+<li>MessageBoxExA(W)</li>
+<li>ShowWindow</li>
+<li>MessageBoxIndirectA(W)</li>
+<li>CreateDialogParamA(W)</li>
+<li>CreateDialogIndirectParamA(W)</li>
+<li>DialogBoxParamA(W)</li>
+<li>DialogBoxIndirectParamA(W)</li>
+</ul>
+</li>
+<li>Other functions:<ol>
+<li>Serial number might be stored in registry:<ul>
+<li>RegQueryValueExA(W)</li>
+</ul>
+</li>
+<li>Serial number might be stored in an INI file:<ul>
+<li>GetPrivateProfileStringA(W)</li>
+<li>GetPrivateProfileIntA(W)</li>
+<li>GetProfileStringA(W)</li>
+<li>GetProfileIntA(W)</li>
+</ul>
+</li>
+<li>Serial number might be stored in other file:<ul>
+<li>CreateFileA(W)</li>
+<li>_lopen()</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="KeyFile-Protection"><a href="#KeyFile-Protection" class="headerlink" title="KeyFile Protection"></a>KeyFile Protection</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>API Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FindFirstFileA</td>
+</tr>
+<tr>
+<td>CreateFileA, _lopen</td>
+</tr>
+<tr>
+<td>GetFileSize, GetFileSizeEx</td>
+</tr>
+<tr>
+<td>GetFileAttributesA, GetFileAttributesExA</td>
+</tr>
+<tr>
+<td>SetFilePointer, SetFilePointerEx</td>
+<td>Mov</td>
+</tr>
+<tr>
+<td>ReadFile</td>
+<td>Obtain file content.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="5-7-Disk-Protection"><a href="#5-7-Disk-Protection" class="headerlink" title="5.7 - Disk Protection"></a>5.7 - Disk Protection</h2><h2 id="5-8-Single-Instance"><a href="#5-8-Single-Instance" class="headerlink" title="5.8 - Single Instance"></a>5.8 - Single Instance</h2><h1 id="Chapter-6-Cryptography-Algorithm"><a href="#Chapter-6-Cryptography-Algorithm" class="headerlink" title="Chapter 6 - Cryptography Algorithm"></a>Chapter 6 - Cryptography Algorithm</h1><h2 id="6-1-Hashing"><a href="#6-1-Hashing" class="headerlink" title="6.1 - Hashing"></a>6.1 - Hashing</h2><h3 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h3><p>MD5 stands for <strong>Message Digest Algorithm 5</strong>.</p>
+<script type="math/tex; mode=display">
+A = 01234567h\\
+B = 89abcdefh\\
+C = fedcba98h\\
+D = 76543210h\\</script><script type="math/tex; mode=display">
+\begin{align*}
+F(X,Y,Z) &= (X\&Y) | ((\sim X)\&Z)\\
+G(X,Y,Z) &= (X\&Z) | (Y\&(\sim Z))\\
+H(X,Y,Z) &= X\text{\textasciicircum}Y\text{\textasciicircum}Z\\
+I(X,Y,Z) &= Y\text{\textasciicircum}(X|(\sim Z))
+\end{align*}</script><h3 id="SHA"><a href="#SHA" class="headerlink" title="SHA"></a>SHA</h3><p>SHA stands for <strong>Secure Hash Algorithm</strong>.</p>
+<ul>
+<li>SHA-1</li>
+<li>SHA-256</li>
+<li>SHA-384</li>
+<li>SHA-512</li>
+</ul>
+<h2 id="6-2-Symmetric-Encryption"><a href="#6-2-Symmetric-Encryption" class="headerlink" title="6.2 - Symmetric Encryption"></a>6.2 - Symmetric Encryption</h2><ul>
+<li>DES (Data Encryption Standard)</li>
+<li>IDEA (International Data Encryption Algorithm)</li>
+<li>AES (Advanced Encryption Standard)</li>
+<li>BlowFish</li>
+<li>TwoFish</li>
+</ul>
+<h3 id="RC4"><a href="#RC4" class="headerlink" title="RC4"></a>RC4</h3><p>RC4 stands for <strong>Rivest Cipher 4</strong>.</p>
+<p><strong>KSA (Key-Scheduling Algorithm)</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">RC4-KSA(Key)<br>    for i := 0 to 255 do<br>        S[i] := i<br>    end for<br><br>    j := 0<br>    for i := 0 to 255 do<br>        j := (j + S[i] + Key[i mod keylength]) mod 256<br>        swap S[i] and S[j]<br>    end for<br><br>    return S<br><br></code></pre></td></tr></table></figure></p>
+<p><strong>PRGA (Pseudo-Random Generation Algorithm)</strong><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">RC4-PRGA(S)<br>    i := 0<br>    j := 0<br><br>    while true do<br>        i := (i + 1) mod 256<br>        j := (j + S[i]) mod 256<br>        swap S[i] and S[j]<br>        t := (S[i] + S[j]) mod 256<br>        K := S[t]<br>        output K<br>    end while<br></code></pre></td></tr></table></figure></p>
+<h3 id="TEA"><a href="#TEA" class="headerlink" title="TEA"></a>TEA</h3><p>TEA stands for <strong>Tiny Encryption Algorithm</strong>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">TEA_Encrypt(v[2], k[4])<br>&#123;<br>    uint32 v0 = v[0], v1 = v[1];<br>    uint32 sum = 0;<br>    uint32 delta = 0x9E3779B9;<br><br>    for (i = 0; i &lt; 32; i++)<br>    &#123;<br>        sum += delta;<br>        v0 += ((v1 &lt;&lt; 4) + k[0]) ^ (v1 + sum) ^ ((v1 &gt;&gt; 5) + k[1]);<br>        v1 += ((v0 &lt;&lt; 4) + k[2]) ^ (v0 + sum) ^ ((v0 &gt;&gt; 5) + k[3]);<br>    &#125;<br><br>    v[0] = v0;<br>    v[1] = v1;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">TEA_Decrypt(v[2], k[4])<br>&#123;<br>    uint32 v0 = v[0], v1 = v[1];<br>    uint32 delta = 0x9E3779B9;<br>    uint32 sum = delta * 32;<br><br>    for (i = 0; i &lt; 32; i++)<br>    &#123;<br>        v1 -= ((v0 &lt;&lt; 4) + k[2]) ^ (v0 + sum) ^ ((v0 &gt;&gt; 5) + k[3]);<br>        v0 -= ((v1 &lt;&lt; 4) + k[0]) ^ (v1 + sum) ^ ((v1 &gt;&gt; 5) + k[1]);<br>        sum -= delta;<br>    &#125;<br><br>    v[0] = v0;<br>    v[1] = v1;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Where:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+
+delta &= \frac{\sqrt{5} - 1}{2} \times 2^{32}\\
+&= (\sqrt{5} - 1) \times 2^{31}
+\end{align*}</script><h3 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h3><h3 id="BlowFish"><a href="#BlowFish" class="headerlink" title="BlowFish"></a>BlowFish</h3><h3 id="AES"><a href="#AES" class="headerlink" title="AES"></a>AES</h3><h1 id="Chapter-7-Windows-Kernel-Fundamentals"><a href="#Chapter-7-Windows-Kernel-Fundamentals" class="headerlink" title="Chapter 7 - Windows Kernel Fundamentals"></a>Chapter 7 - Windows Kernel Fundamentals</h1><h2 id="7-1-Kernel-Fundamentals"><a href="#7-1-Kernel-Fundamentals" class="headerlink" title="7.1 - Kernel Fundamentals"></a>7.1 - Kernel Fundamentals</h2><p align="center" class='item-img' data-src='/images/books/SoftwareCrypto/7.1.png'><img src="/images/books/SoftwareCrypto/7.1.png" width="500">
+    <figcaption>
+    Source: https://www.linkedin.com/pulse/windows-os-rings-role-event-monitoring-jacob-stickney-thv5c
+    </figcaption>
+</p>
+
+
+<h2 id="7-2-Important-Kernel-Data-Structure"><a href="#7-2-Important-Kernel-Data-Structure" class="headerlink" title="7.2 - Important Kernel Data Structure"></a>7.2 - Important Kernel Data Structure</h2><h2 id="7-3-Fundamentals-of-Kernel-Debugging"><a href="#7-3-Fundamentals-of-Kernel-Debugging" class="headerlink" title="7.3 - Fundamentals of Kernel Debugging"></a>7.3 - Fundamentals of Kernel Debugging</h2><h1 id="Chapter-8-Windows-Exception-Handling"><a href="#Chapter-8-Windows-Exception-Handling" class="headerlink" title="Chapter 8 - Windows Exception Handling"></a>Chapter 8 - Windows Exception Handling</h1><h2 id="8-1-Fundamentals-of-Exception-Handling"><a href="#8-1-Fundamentals-of-Exception-Handling" class="headerlink" title="8.1 - Fundamentals of Exception Handling"></a>8.1 - Fundamentals of Exception Handling</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">VOID RaiseException(<br>  [in] DWORD           dwExceptionCode,<br>  [in] DWORD           dwExceptionFlags,<br>  [in] DWORD           nNumberOfArguments,<br>  [in] const ULONG_PTR *lpArguments<br>);<br><br>//Source: https://learn.microsoft.com/en-us/windows/win32/api/errhandlingapi/nf-errhandlingapi-raiseexception<br></code></pre></td></tr></table></figure>
+<p>When an interrupt or exception occurs, the CPU looks up the corresponding handler in the IDT.</p>
+<p>The IDT (Interrupt Descriptor Table) is a linear table stored in memory. It consists of 256 entries. Each entry is 8 bytes long on x86 (32-bit) platforms and 16 bytes long on x64 (64-bit) platforms.</p>
+<p>The base address and size of the IDT are described by the IDTR (IDT Register). The IDTR is 48 bits long on x86 systems. Although the IDTR can be accessed using the SIDT and LIDT instructions, the LIDT instruction can only be executed with Ring 0 privilege.</p>
+<h2 id="8-2-SEH"><a href="#8-2-SEH" class="headerlink" title="8.2 - SEH"></a>8.2 - SEH</h2><h1 id="Chapter-9-Win32-API-Debugging"><a href="#Chapter-9-Win32-API-Debugging" class="headerlink" title="Chapter 9 - Win32 API Debugging"></a>Chapter 9 - Win32 API Debugging</h1><h1 id="Chapter-14-Vulnerability-Techniques"><a href="#Chapter-14-Vulnerability-Techniques" class="headerlink" title="Chapter 14 - Vulnerability Techniques"></a>Chapter 14 - Vulnerability Techniques</h1><h2 id="14-1-Software-Vulnerability"><a href="#14-1-Software-Vulnerability" class="headerlink" title="14.1 - Software Vulnerability"></a>14.1 - Software Vulnerability</h2><h3 id="Stack-Buffer-Overflow"><a href="#Stack-Buffer-Overflow" class="headerlink" title="Stack Buffer Overflow"></a>Stack Buffer Overflow</h3><h3 id="Heap-Buffer-Overflow"><a href="#Heap-Buffer-Overflow" class="headerlink" title="Heap Buffer Overflow"></a>Heap Buffer Overflow</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#include &lt;stdio.h&gt;<br>#include &lt;Windows.h&gt;<br><br>int main(int argc, char *argv[]) &#123;<br>    char str[] = &quot;\nHello123456789213456789\n&quot;;<br>    char *a, *b, *c;<br>    long *hHeap;<br>    hHeap = (long *)HeapCreate(0x00040000, 0, 0);<br>    printf(&quot;\n(+) Creating a heap at: 0x00%xh\n&quot;, hHeap);<br>    printf(&quot;(+) Allocating chunk A\n&quot;);<br><br>    a = (char *)HeapAlloc(hHeap, HEAP_ZERO_MEMORY, 0x10);<br>    printf(&quot;(+) Allocating chunk B\n&quot;);<br>    b = (char *)HeapAlloc(hHeap, HEAP_ZERO_MEMORY, 0x10);<br>    printf(&quot;(+) Chunk A=0x00%x\n(+) Chunk=0x00%x\n&quot;, a, b);<br>    printf(&quot;(+) Freeing chunk B to the lookaside\n&quot;);<br>    HeapFree(hHeap, 0, b);<br>    printf(&quot;(+) Now overflow chunk A:\n&quot;);<br><br>    printf(&quot;%x\n&quot;, str);<br>    printf(str);<br>    memcpy(a, &quot;XXXXXXXXXXXXXXXXAAAABBBB\x64\xff\x12\x00&quot;, 28);<br>    printf(&quot;(+) Allocating chunk B\n&quot;);<br>    b = (char *)HeapAlloc(hHeap, HEAP_ZERO_MEMORY, 0x10);<br>    printf(&quot;(+) Allocating chunk C\n&quot;);<br>    c = (char *)HeapAlloc(hHeap, HEAP_ZERO_MEMROY, 0x10);<br>    printf(&quot;(+) Chunk A=0x00%x\n(+) Chunk B = 0x00%x\n(+) Chunk C=0x00%x\n&quot;, a, b, c);<br>    strcpy(c, &quot;AAAAAAAAAAAA\n&quot;);<br>    printf(str);<br><br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="14-2-Shellcode"><a href="#14-2-Shellcode" class="headerlink" title="14.2 - Shellcode"></a>14.2 - Shellcode</h1><h1 id="CHapter-15-Software-Unpacking"><a href="#CHapter-15-Software-Unpacking" class="headerlink" title="CHapter 15 - Software Unpacking"></a>CHapter 15 - Software Unpacking</h1><h2 id="15-2-Packer"><a href="#15-2-Packer" class="headerlink" title="15.2 - Packer"></a>15.2 - Packer</h2><ul>
+<li>UPX</li>
+<li>ASPack</li>
+</ul>
+<h2 id="15-3-Packer-Stub"><a href="#15-3-Packer-Stub" class="headerlink" title="15.3 - Packer Stub"></a>15.3 - Packer Stub</h2><ul>
+<li>ASProtect</li>
+<li>Armadillo</li>
+<li>EXECryptor</li>
+<li>Themida</li>
+</ul>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.gif'><img src="/images/meme/mika_nagisa_rollcake.gif" width="300">
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2026/01/26/2026-1-26-BookWindowsInternal-P1/">← Next [Book] Windows Internal Part 1</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/01/14/2026-1-14-BookPracticalLinuxForensics/">[Book] Practical Linux Forenics Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng"><i class="GitHub" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#El-libro"><span class="toc-number">1.</span> <span class="toc-text">El libro</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reflection"><span class="toc-number">3.</span> <span class="toc-text">Reflection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-1-Fundamental-Knowledge"><span class="toc-number">4.</span> <span class="toc-text">Chapter 1 - Fundamental Knowledge</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Windows-OS"><span class="toc-number">4.1.</span> <span class="toc-text">1.3 - Windows OS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Win32-API"><span class="toc-number">4.1.1.</span> <span class="toc-text">Win32 API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WOW64"><span class="toc-number">4.1.2.</span> <span class="toc-text">WOW64</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows-Message-Mechanism"><span class="toc-number">4.1.3.</span> <span class="toc-text">Windows Message Mechanism</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Virtual-Memory"><span class="toc-number">4.1.4.</span> <span class="toc-text">Virtual Memory</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-2-Dynamic-Analysis"><span class="toc-number">5.</span> <span class="toc-text">Chapter 2 - Dynamic Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-OllyDbg"><span class="toc-number">5.1.</span> <span class="toc-text">2.1 - OllyDbg</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BreakPoint"><span class="toc-number">5.1.1.</span> <span class="toc-text">BreakPoint</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-MDebug"><span class="toc-number">5.2.</span> <span class="toc-text">2.3 - MDebug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-WinDbg"><span class="toc-number">5.3.</span> <span class="toc-text">2.4 - WinDbg</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-3-Static-Analysis"><span class="toc-number">6.</span> <span class="toc-text">Chapter 3 - Static Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Disassembly-Engine"><span class="toc-number">6.1.</span> <span class="toc-text">3.2 - Disassembly Engine</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Static-Disassembly"><span class="toc-number">6.2.</span> <span class="toc-text">3.3 - Static Disassembly</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IDA"><span class="toc-number">6.2.1.</span> <span class="toc-text">IDA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexadecimal-Tools"><span class="toc-number">6.2.2.</span> <span class="toc-text">Hexadecimal Tools</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-4-Reverse-Engineering-Techniques"><span class="toc-number">7.</span> <span class="toc-text">Chapter 4 - Reverse Engineering Techniques</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Reverse-Engineering-on-x32-Platform"><span class="toc-number">7.1.</span> <span class="toc-text">4.1 - Reverse Engineering on x32 Platform</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Calling-Convention"><span class="toc-number">7.1.1.</span> <span class="toc-text">Calling Convention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Virtual-Function"><span class="toc-number">7.1.2.</span> <span class="toc-text">Virtual Function</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-5-Software-Protection-Demonstration"><span class="toc-number">8.</span> <span class="toc-text">Chapter 5 - Software Protection Demonstration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-Serial-Number-and-KeyGen"><span class="toc-number">8.1.</span> <span class="toc-text">5.1 - Serial Number and KeyGen</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exploiting-Serial-Number-Protection-Mechanism"><span class="toc-number">8.1.1.</span> <span class="toc-text">Exploiting Serial Number Protection Mechanism</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KeyFile-Protection"><span class="toc-number">8.1.2.</span> <span class="toc-text">KeyFile Protection</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-7-Disk-Protection"><span class="toc-number">8.2.</span> <span class="toc-text">5.7 - Disk Protection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-8-Single-Instance"><span class="toc-number">8.3.</span> <span class="toc-text">5.8 - Single Instance</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-6-Cryptography-Algorithm"><span class="toc-number">9.</span> <span class="toc-text">Chapter 6 - Cryptography Algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-Hashing"><span class="toc-number">9.1.</span> <span class="toc-text">6.1 - Hashing</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MD5"><span class="toc-number">9.1.1.</span> <span class="toc-text">MD5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SHA"><span class="toc-number">9.1.2.</span> <span class="toc-text">SHA</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-Symmetric-Encryption"><span class="toc-number">9.2.</span> <span class="toc-text">6.2 - Symmetric Encryption</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RC4"><span class="toc-number">9.2.1.</span> <span class="toc-text">RC4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TEA"><span class="toc-number">9.2.2.</span> <span class="toc-text">TEA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IDEA"><span class="toc-number">9.2.3.</span> <span class="toc-text">IDEA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BlowFish"><span class="toc-number">9.2.4.</span> <span class="toc-text">BlowFish</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AES"><span class="toc-number">9.2.5.</span> <span class="toc-text">AES</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-7-Windows-Kernel-Fundamentals"><span class="toc-number">10.</span> <span class="toc-text">Chapter 7 - Windows Kernel Fundamentals</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-Kernel-Fundamentals"><span class="toc-number">10.1.</span> <span class="toc-text">7.1 - Kernel Fundamentals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-Important-Kernel-Data-Structure"><span class="toc-number">10.2.</span> <span class="toc-text">7.2 - Important Kernel Data Structure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-Fundamentals-of-Kernel-Debugging"><span class="toc-number">10.3.</span> <span class="toc-text">7.3 - Fundamentals of Kernel Debugging</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-8-Windows-Exception-Handling"><span class="toc-number">11.</span> <span class="toc-text">Chapter 8 - Windows Exception Handling</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-Fundamentals-of-Exception-Handling"><span class="toc-number">11.1.</span> <span class="toc-text">8.1 - Fundamentals of Exception Handling</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-SEH"><span class="toc-number">11.2.</span> <span class="toc-text">8.2 - SEH</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-9-Win32-API-Debugging"><span class="toc-number">12.</span> <span class="toc-text">Chapter 9 - Win32 API Debugging</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-14-Vulnerability-Techniques"><span class="toc-number">13.</span> <span class="toc-text">Chapter 14 - Vulnerability Techniques</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#14-1-Software-Vulnerability"><span class="toc-number">13.1.</span> <span class="toc-text">14.1 - Software Vulnerability</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack-Buffer-Overflow"><span class="toc-number">13.1.1.</span> <span class="toc-text">Stack Buffer Overflow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Heap-Buffer-Overflow"><span class="toc-number">13.1.2.</span> <span class="toc-text">Heap Buffer Overflow</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14-2-Shellcode"><span class="toc-number">14.</span> <span class="toc-text">14.2 - Shellcode</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CHapter-15-Software-Unpacking"><span class="toc-number">15.</span> <span class="toc-text">CHapter 15 - Software Unpacking</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#15-2-Packer"><span class="toc-number">15.1.</span> <span class="toc-text">15.2 - Packer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-3-Packer-Stub"><span class="toc-number">15.2.</span> <span class="toc-text">15.3 - Packer Stub</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">16.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

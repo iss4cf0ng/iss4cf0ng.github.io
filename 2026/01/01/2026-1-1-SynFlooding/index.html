@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Code] SYN Flooding — From Principle to Practice | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Code] SYN Flooding — From Principle to Practice</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-01-01T12:58:39.000Z" id="date"> 2026-01-01</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-01-02T08:15:07.563Z" id="updated"> 2026-01-02</time></div></span><br><span>Word Count: <div class="control">607</div></span><br><span>Read Time: <div class="control">3 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article introduces one of the most common stress-testing methods——SYN flooding——from its underlying principles to practical implementation. A hands-on flooding experiment is also included.</p>
+<hr>
+<h1 id="Disclamer"><a href="#Disclamer" class="headerlink" title="Disclamer"></a>Disclamer</h1><p>The scripts provided in this article are for educational purposes and authorized stress testing only. Do <strong>NOT</strong> use them for illegal activities.<br><strong>Anyone who abuses this knoeledge mut take full responsibility for their actions.</strong></p>
+<p align="center" class='item-img' data-src='/images/meme/mika_punch.jpg'><img src="/images/meme/mika_punch.jpg", width="600">
+</p>
+
+<hr>
+<h1 id="What-Is-SYN"><a href="#What-Is-SYN" class="headerlink" title="What Is SYN"></a>What Is SYN</h1><p>Before understanding what <em>SYN</em> is, you should first understand how <em>TCP handshaking</em> works.</p>
+<p align="center" class='item-img' data-src='/images/article/network/tcp_handshake.jpg'><img src="/images/article/network/tcp_handshake.jpg" alt="TCP three-way handshake">
+    <figcaption>
+        Source: https://afteracademy.com/blog/what-is-a-tcp-3-way-handshake-process/
+    </figcaption>
+</p>
+
+<p>TCP is a reliable, connection-oriented protocol. Its connection establishment process is called the three-way handshake.</p>
+<ol>
+<li><p>The client sends a SYN (Synchronize) packet to the server.</p>
+</li>
+<li><p>The server replies with a SYN+ACK (Synchronize + Acknowledgement) packet.</p>
+</li>
+<li><p>After receiving the SYN+ACK, the client responds with an ACK packet.</p>
+</li>
+</ol>
+<p>Once these steps are completed, a TCP connection between the client and server is successfully established.</p>
+<p align="center" class='item-img' data-src='/images/meme/mari_praying.png'><img src="/images/meme/mari_praying.png", width="200">
+</p>
+
+<hr>
+<h1 id="How-SYN-Flooding-Happens"><a href="#How-SYN-Flooding-Happens" class="headerlink" title="How SYN Flooding Happens."></a>How SYN Flooding Happens.</h1><p>TCP was originally designed to provide reliable communication. Security considerations were not a primary concern at that time.</p>
+<p>SYN flooding exploits the initial stage of the TCP handshake.</p>
+<p>When a server receives a SYN packet, the corresponding socket enters the SYN_RECEIVED state. The server then sends a SYN+ACK packet and waits for the final ACK from the client.</p>
+<ul>
+<li><p>If 1,000 clients attempt to connect, the server must maintain 1,000 half-open connections.</p>
+</li>
+<li><p>If millions of clients do the same, the server may be unable to handle such a large number of pending connections.</p>
+</li>
+</ul>
+<p>This situation is commonly referred to as TCP flooding.</p>
+<p>Now, what happens if the server never receives the final ACK packet?</p>
+<p align="center" class='item-img' data-src='/images/meme/hakari_confused.gif'><img src="/images/meme/hakari_confused.gif", width="200">
+</p>
+
+<p>The answer is simple:</p>
+<blockquote>
+<p>The half-open connection will eventually be terminated after a timeout<br>(usually around 1 minute, sometimes longer).</p>
+</blockquote>
+<p>However, during this waiting period, the connection still occupies server resources.</p>
+<p>Since each listening port has a limited backlog queue, once all slots are filled, the server can no longer accept new incoming connections—even from legitimate users.</p>
+<p>A simple analogy:</p>
+<blockquote>
+<p>Imagine someone occupying a bathroom while playing on their phone.<br>As long as they stay inside, others cannot use it.<br>This is known as resource exhaustion.</p>
+</blockquote>
+<p align="center" class='item-img' data-src='/images/meme/koyuki_nihahahaha.png'><img src="/images/meme/koyuki_nihahahaha.png", width="800">
+</p>
+
+<hr>
+<h1 id="Why-SYN-Flooding-is-a-headache"><a href="#Why-SYN-Flooding-is-a-headache" class="headerlink" title="Why SYN Flooding is a headache"></a>Why SYN Flooding is a headache</h1><p>SYN flooding is particularly problematic because:</p>
+<ul>
+<li><p>Half-open connections consume resources for a relatively long time.</p>
+</li>
+<li><p>IP and TCP headers can be easily spoofed.</p>
+</li>
+</ul>
+<p>As a result, an attacker can construct SYN packets with fake source IP addresses, meaning the server will never receive the final ACK packet.</p>
+<p>Additionally, a SYN flooding attack does not necessarily require a botnet, making it easier to execute compared to other types of DDoS attacks.</p>
+<hr>
+<h1 id="Lab"><a href="#Lab" class="headerlink" title="Lab"></a>Lab</h1><h2 id="Environment-setting-up"><a href="#Environment-setting-up" class="headerlink" title="Environment setting up"></a>Environment setting up</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>IP</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 64-bit(VM)</td>
+<td>172.20.10.2</td>
+<td>Target device.</td>
+</tr>
+<tr>
+<td>Windows 10</td>
+<td>172.20.10.3</td>
+<td>Attacker device.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Tool"><a href="#Tool" class="headerlink" title="Tool"></a>Tool</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Introduction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/LaserGunDDoS">LaserGunDDoS</a></td>
+<td>Flooding script.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Stress-testing"><a href="#Stress-testing" class="headerlink" title="Stress testing"></a>Stress testing</h2><p>Attacker:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python main.py &quot;Wi-Fi&quot;<br></code></pre></td></tr></table></figure></p>
+<p align="center" class='item-img' data-src='/images/article/2026.1.1-synflooding/1.png'><img src="/images/article/2026.1.1-synflooding/1.png">
+</p>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; show<br><br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026.1.1-synflooding/2.png'><img src="/images/article/2026.1.1-synflooding/2.png">
+</p>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; set ip 172.20.10.2<br>&gt; show mode<br>&gt; set ports 22<br></code></pre></td></tr></table></figure>
+<ul>
+<li>Notice: The target port that you want to attack must be open.<p align="center" class='item-img' data-src='/images/article/2026.1.1-synflooding/3.png'><img src="/images/article/2026.1.1-synflooding/3.png">
+</p>
+
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; run<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026.1.1-synflooding/4.png'><img src="/images/article/2026.1.1-synflooding/4.png">
+</p>
+
+<p>Target:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ netstat -ano | grep &quot;SYN_RECV&quot;<br></code></pre></td></tr></table></figure><br>Notice that the source hosts are all fake.</p>
+<p align="center" class='item-img' data-src='/images/article/2026.1.1-synflooding/5.png'><img src="/images/article/2026.1.1-synflooding/5.png">
+</p>
+
+<hr>
+<h1 id="Mitigation-amp-Modern-Defenses"><a href="#Mitigation-amp-Modern-Defenses" class="headerlink" title="Mitigation &amp; Modern Defenses"></a>Mitigation &amp; Modern Defenses</h1><p>Modern operating systems implement several mechanisms to mitigate SYN flooding attacks.<br>One common approach is <strong>SYN cookies</strong>, which allow the server to avoid allocating resources<br>until the final ACK packet is received.<br>Other mitigations include increasing the TCP backlog size, rate limiting incoming SYN packets,<br>and deploying firewall or IDS/IPS rules.</p>
+<hr>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This articles describes the underlying priciples of SYN flooding. Furthermore, it demonstrates the implementations, it also provides the modern defnese of this kind of flooding.</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2026/01/02/2026-1-2-NoteCpp20forProgrammers/">← Next [Book] C++ 20 for Programmers - An Objects-Natural Appraoch</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/01/01/2026-1-1-SocketInit/">[Learning] Socket Initialization. Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng"><i class="GitHub" alt="GitHub"></i></a></div></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Disclamer"><span class="toc-number">2.</span> <span class="toc-text">Disclamer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What-Is-SYN"><span class="toc-number">3.</span> <span class="toc-text">What Is SYN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#How-SYN-Flooding-Happens"><span class="toc-number">4.</span> <span class="toc-text">How SYN Flooding Happens.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-SYN-Flooding-is-a-headache"><span class="toc-number">5.</span> <span class="toc-text">Why SYN Flooding is a headache</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lab"><span class="toc-number">6.</span> <span class="toc-text">Lab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Environment-setting-up"><span class="toc-number">6.1.</span> <span class="toc-text">Environment setting up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tool"><span class="toc-number">6.2.</span> <span class="toc-text">Tool</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stress-testing"><span class="toc-number">6.3.</span> <span class="toc-text">Stress testing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mitigation-amp-Modern-Defenses"><span class="toc-number">7.</span> <span class="toc-text">Mitigation &amp; Modern Defenses</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> Theme <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>by <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

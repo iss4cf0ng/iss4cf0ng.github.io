@@ -110,11 +110,11 @@
     
     <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
     
-    <category term="Remote Access Tool" scheme="https://iss4cf0ng.github.io/tags/Remote-Access-Tool/"/>
-    
     <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
     
     <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
+    
+    <category term="Remote Access Tool" scheme="https://iss4cf0ng.github.io/tags/Remote-Access-Tool/"/>
     
   </entry>
   

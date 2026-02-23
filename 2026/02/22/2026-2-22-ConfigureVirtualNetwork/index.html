@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learning] How to Configure the Network of Your Virtual Machine using VMware Workstation | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learning] How to Configure the Network of Your Virtual Machine using VMware Workstation</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-22T04:15:57.000Z" id="date"> 2026-02-22</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-02-23T08:45:13.829Z" id="updated"> 2026-02-23</time></div></span><br><span>Word Count: <div class="control">891</div></span><br><span>Read Time: <div class="control">5 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>I the <a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/">previos article</a>, I described how to setup a virtual environment for malware analysis. However, I did not fully explain the virtual network configuration. Therefore, I decided to write this article to help anyone facing the same issue. It also serves as a personal note on setting up an analysis environment efficiently.</p>
+<p>This article explains how virtual networks operate between virtual machines and introduces the configuration of different network adapters.</p>
+<h1 id="Caution"><a href="#Caution" class="headerlink" title="Caution"></a>Caution</h1><p>Sometimes the network may still be misconfigured after you have tried all possible options. Based on my experience, reinstalling the virtual machine (possibly using a different, newest ISO image) can sometimes be a more effective solution.</p>
+<p align="center" class='item-img' data-src='/images/meme/koyuki_crying.gif'><img src="/images/meme/koyuki_crying.gif" width=300>
+</p>
+
+<h1 id="Network-Configuration"><a href="#Network-Configuration" class="headerlink" title="Network Configuration"></a>Network Configuration</h1><h2 id="Fundamental-Network-Knowledge"><a href="#Fundamental-Network-Knowledge" class="headerlink" title="Fundamental Network Knowledge"></a>Fundamental Network Knowledge</h2><p>Before configuring the network of your virtual machines. You should understand the following terms:</p>
+<ul>
+<li>DHCP: A network management protocol that automatically assigns IP addresses, subnet masks, default gateways, and DNS server details to devices on a network.</li>
+<li>Subnet mask: A 32-bit value (for IPv4 addresses) used to divide an IP address into network and host portions, defining which devices belong to the same local network.</li>
+<li>Default gateway: A nework node—typically a router—that acts as an access point or “exit door” for traffic leaving a local network to reach other networks or the internet.</li>
+</ul>
+<p align="center" class='item-img' data-src='/images/meme/mari_praying.png'><img src="/images/meme/mari_praying.png" width=300>
+</p>
+
+<h2 id="Network-Adapter"><a href="#Network-Adapter" class="headerlink" title="Network Adapter"></a>Network Adapter</h2><p>VMware Workstation 17 provides five different network adapter modes:</p>
+<ul>
+<li>Bridged: This mode allows a virtual machine to connect directly to the physical network. The virtual machine can communicate with other devices on the same local network. It can also access the internet if the host machine is connected to router or Wi-Fi access point.</li>
+<li>NAT: This mode allows virtual machines to share the host computer’s IP address to access external networks, such as the internet. Virtual machines can access the internet through the host’s connection.</li>
+<li>Host-only: This mode creates a private, isolated network within the host computer. Virtual machines can communicate only with the host and other VMs on the same host-only network. They cannot access the external internet.</li>
+<li>Custom: This mode enables advanced networking configurations by allowing VMs to connect to specific virtual networks configured in the Virtual Network Editor. It is ideal for complex multi-VM lab environments where traffic isolation is required.</li>
+<li>LAN segment: It creates a completely isolated virtual network that connects multiple virtual machines together without allowing communication with the host or the external network.</li>
+</ul>
+<p align="center" class='item-img' data-src='/images/meme/mika_rollcake.png'><img src="/images/meme/mika_rollcake.png" width=300>
+</p>
+
+<h2 id="Which-Network-Adapter-should-you-use"><a href="#Which-Network-Adapter-should-you-use" class="headerlink" title="Which Network Adapter should you use?"></a>Which Network Adapter should you use?</h2><p>In depends on your purpose:</p>
+<ul>
+<li>If you want your virtual machines to access other physical devices on the local network (LAN), use <strong>Bridged</strong> mode.</li>
+<li>If you only need internet access, use <strong>NAT</strong> mode.</li>
+<li>If you are conducting malware analysis and require strict network isolation, use <strong>LAN segment</strong> mode.</li>
+</ul>
+<h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><p>Before configuring your network adapter, make sure your virtual machines are properly installed.</p>
+<h2 id="Configure-Your-Network-Adapter"><a href="#Configure-Your-Network-Adapter" class="headerlink" title="Configure Your Network Adapter"></a>Configure Your Network Adapter</h2><p>Navigate to your virtual machine, right-click it, and select <strong>Settings</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/2.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/2.png" width=600>
+</p>
+
+<p>Now you can choose the desired network adapter mode:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/3.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/3.png" width=600>
+</p>
+
+<p>You can also add an additional network adapter for multi-network adapter:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/4.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/4.png" width=600>
+</p>
+
+<p>Remember to enable “Connected” and “Connect at power on”:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/5.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/5.png" width=500>
+</p>
+
+<p>Configuring the adapter as <strong>Bridged</strong>, <strong>NAT</strong>, or <strong>Host-only</strong> is straightforward. Next, I will explain how to configure <strong>Custom</strong> and <strong>LAN segment modes</strong>.</p>
+<h2 id="Custom"><a href="#Custom" class="headerlink" title="Custom"></a>Custom</h2><p>The difference between <strong>Custom</strong> and the first three network connection is that <strong>Custom</strong> provides more advanced configuration options.</p>
+<p>To configure it, navigate to the VMware Workstation menu and select:</p>
+<p>Edit -&gt; Virtual Network Editor</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/6.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/6.png" width=600>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/7.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/7.png" width=500>
+</p>
+
+<p>From there, you can customize the configuration as needed. For example, you can specify which physical network adapter the bridged network shoud use.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/8.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/8.png" width=500>
+</p>
+
+<p>You can also manually define the subnet IP and subnet mask for your virtual network.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/9.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/9.png" width=500>
+</p>
+
+<h2 id="LAN-segment"><a href="#LAN-segment" class="headerlink" title="LAN segment"></a>LAN segment</h2><p>Configuring a LAN segment is slightly more complex.</p>
+<p>First, create a new LAN segment using the Global LAN Segments wizard, then start your virtual machines.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/1.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/1.png" width=600>
+</p>
+
+<p>Since this mode does not provide a DHCP service, you must manually assign IP addresses to your machines.</p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>If your virtual machine runs Windows, execute the following command to opent the Network Connections panel:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; ncpa.cpl<br></code></pre></td></tr></table></figure></p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/10.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/10.png" width=600>
+</p>
+
+<p>Right-click the network adapter and select “Properties”:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/11.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/11.png" width=600>
+</p>
+
+<p>Select “Internet Protocol Version 4 (TCP/IPv4)” and click the “Properties”:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/12.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/12.png" width=600>
+</p>
+
+<p>Manually configure the IPv4 address for your virtual machines:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/13.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/13.png" width=600 alt="Windows 10">
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/14.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/14.png" width=600 alt="Windows XP">
+</p>
+
+<p>To test connectivity, run:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; ping 192.168.85.2<br></code></pre></td></tr></table></figure></p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/15.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/15.png" width=600 alt="Windows 10">
+</p>
+
+<p>If the destination host is unreachable, the firewall may be blocking ICMP requests:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/16.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/16.png" width=600 alt="Windows XP">
+</p>
+
+<p>In this case, disable the Windows firewall temporarily for testing:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/17.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/17.png" width=600>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/18.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/18.png" width=600>
+</p>
+
+<p>If the virtual machines still cannot communicate with each other, verify that their subnet masks match. Machines will not be able to reach each other if the subnet mask values are different. (In this case, both use <code>255.255.255.0</code>)</p>
+<h3 id="Linux-Debian-Kali-Linux"><a href="#Linux-Debian-Kali-Linux" class="headerlink" title="Linux (Debian / Kali Linux)"></a>Linux (Debian / Kali Linux)</h3><p>Manually assigning an IP address on Linux is different from Windows.</p>
+<p>First, identify your network interface name:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ ip a<br></code></pre></td></tr></table></figure><br>It should be something like <strong>ens33</strong>, <strong>ens160</strong> or <strong>eth0</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/20.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/20.png" width=600>
+</p>
+
+<p>Edit <code>interfaces</code> file:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ sudo nano /etc/network/interfaces<br></code></pre></td></tr></table></figure></p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/21.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/21.png" width=600>
+</p>
+
+<p>Replace or add:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">auto eth0<br>iface eth0 inet static<br>    address 192.168.100.30<br>    netmask 255.255.255.0<br></code></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Important: Replace <code>eth0</code> with your actual interface</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/22.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/22.png" width=600>
+</p>
+
+</blockquote>
+<p>Restart networking:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sudo systemctl restart networking<br></code></pre></td></tr></table></figure></p>
+<p>Verify:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/23.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/23.png" width=700>
+</p>
+
+<p>Test connectivity:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-22-ConfigureVirtualNetwork/24.png'><img src="/images/article/2026-2-22-ConfigureVirtualNetwork/24.png" width=700>
+</p>
+
+<h3 id="Linux-Ubuntu"><a href="#Linux-Ubuntu" class="headerlink" title="Linux (Ubuntu)"></a>Linux (Ubuntu)</h3><p>Configuring Ubuntu is almost the same, but with the different configuration file:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sudo nano /etc/netplan/01-network-manager-all.yaml<br></code></pre></td></tr></table></figure></p>
+<p>Replace contents with:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">network:<br>  version: 2<br>  renderer: NetworkManager<br>  ethernets:<br>    eth0:<br>      dhcp4: no<br>      addresses:<br>        - 192.168.85.5/24<br></code></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Important: Replace <code>ens33</code> with your interface</p>
+</blockquote>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/mika_rollcake_hit.png'><img src="/images/meme/mika_rollcake_hit.png" width=500>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/02/21/2026-2-21-WinXpVMWareTool/">[Troubleshooting] Installing VMware Tools on Windows XP and Windows 95 with VMware WorkStation 17 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center"><img class="music-anime" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/musa.mp3",
+    "/mp3/music/air.mp3",
+    "/mp3/music/last_page.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Caution"><span class="toc-number">2.</span> <span class="toc-text">Caution</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Network-Configuration"><span class="toc-number">3.</span> <span class="toc-text">Network Configuration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fundamental-Network-Knowledge"><span class="toc-number">3.1.</span> <span class="toc-text">Fundamental Network Knowledge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Network-Adapter"><span class="toc-number">3.2.</span> <span class="toc-text">Network Adapter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Which-Network-Adapter-should-you-use"><span class="toc-number">3.3.</span> <span class="toc-text">Which Network Adapter should you use?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Getting-Started"><span class="toc-number">4.</span> <span class="toc-text">Getting Started</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Configure-Your-Network-Adapter"><span class="toc-number">4.1.</span> <span class="toc-text">Configure Your Network Adapter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Custom"><span class="toc-number">4.2.</span> <span class="toc-text">Custom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LAN-segment"><span class="toc-number">4.3.</span> <span class="toc-text">LAN segment</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows"><span class="toc-number">4.3.1.</span> <span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-Debian-Kali-Linux"><span class="toc-number">4.3.2.</span> <span class="toc-text">Linux (Debian &#x2F; Kali Linux)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-Ubuntu"><span class="toc-number">4.3.3.</span> <span class="toc-text">Linux (Ubuntu)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">5.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

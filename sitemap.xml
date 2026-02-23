@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iss4cf0ng.github.io/2026/02/22/2026-2-22-ConfigureVirtualNetwork/</loc>
+    
+    <lastmod>2026-02-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/2023/06/12/%E3%80%90Tech%E3%80%91-PenTest-phpmyadmingetshell/</loc>
+    
+    <lastmod>2026-02-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/2023/06/06/%E3%80%90Tech%E3%80%91%E4%B8%80%E5%8F%A5%E8%A9%B1%E6%9C%A8%E9%A6%AC/</loc>
+    
+    <lastmod>2026-02-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/</loc>
     
     <lastmod>2026-02-23</lastmod>
@@ -194,15 +221,6 @@
     <loc>https://iss4cf0ng.github.io/2026/01/08/2026-1-8-BookCppConcurrencyInAction2ed/</loc>
     
     <lastmod>2026-02-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/2023/06/06/%E3%80%90Tech%E3%80%91%E4%B8%80%E5%8F%A5%E8%A9%B1%E6%9C%A8%E9%A6%AC/</loc>
-    
-    <lastmod>2026-02-08</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -426,15 +444,6 @@
   
   <url>
     <loc>https://iss4cf0ng.github.io/2023/06/14/%E3%80%90Code%E3%80%91CSharpInvokeMethod/</loc>
-    
-    <lastmod>2023-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/2023/06/12/%E3%80%90Tech%E3%80%91-PenTest-phpmyadmingetshell/</loc>
     
     <lastmod>2023-06-17</lastmod>
     
@@ -1328,6 +1337,55 @@
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Unpacked/</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/VMware-WorkStation/</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/Configuration/</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/Network-Configuration/</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/Virtual-Network/</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/Virtual-Network-Configuration/</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/Kali/</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/Kali-Linux/</loc>
     <lastmod>2026-02-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

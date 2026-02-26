@@ -4,7 +4,16 @@
   <url>
     <loc>https://iss4cf0ng.github.io/2026/02/18/2026-2-18-BackOrifice/</loc>
     
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/</loc>
+    
+    <lastmod>2026-02-26</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -32,15 +41,6 @@
     <loc>https://iss4cf0ng.github.io/2026/02/22/2026-2-22-ConfigureVirtualNetwork/</loc>
     
     <lastmod>2026-02-24</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/</loc>
-    
-    <lastmod>2026-02-23</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -598,7 +598,7 @@
 
   <url>
     <loc>https://iss4cf0ng.github.io/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -606,833 +606,833 @@
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Code/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Development/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Network/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Socket/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/C/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/C/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Python/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Programming/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Network-Programming/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Learning/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/DDoS/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/DoS/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Linux/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Command-Line/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Linux-Command/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Book/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Study/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Note/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Blackhat/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Hacking/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Hack/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/LAN/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Domain/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Penetration/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Pentest/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Coding/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/PrivilegeEscalation/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Privilege/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Program/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/C/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Java/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Pointer/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Reference/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/WebSecurity/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Security/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/CyberSecurity/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Studying/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/PHP/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/ASP/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/ASPX/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/JSP/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Cryptography/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Reverse-Engineering/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/OllyDbg/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/WinDbg/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Assembly/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/MD5/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/AES/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/BufferOverflow/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/DuplexSpy/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/RAT/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Documentation/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Go-Lang/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Go/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/ATT-CK/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Pentesting/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/ActiveDirectory/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Windows/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Rust/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/PE/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/CrackMe/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Templates/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Concurrency/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Back-Orifice/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Malware/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Malware-Analysis/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Remote-Access-Tool/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Netbus/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Ghidra/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Setup/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Experiment/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Beast/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/BeastDoor/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Beast-RAT/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Packing/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Packed/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Unpacking/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Unpacked/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/PEView/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/PE-File/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/VMware/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/VMware-WorkStation/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Configuration/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Network-Configuration/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Virtual-Network/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Virtual-Network-Configuration/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Kali/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Kali-Linux/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Troubleshooting/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/VMware-Tools/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Windows-XP/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Windows-95/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Tools/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Fileless-Execution/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Lua/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Unofficial-Redistribution/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Lua-Loader/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Tool/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/DLL-Injection/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Shell-Injection/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/DLL-Loader/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Shell-Loader/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Remote-Plugin/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/NET/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/SOCKS5/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Proxy/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Eden-RAT/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/PE-Loader/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/x86/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/x64/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/pentest/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/php/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/phpmyadmin/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/getshell/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/webshell/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/Alien/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/backdoor/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/trojan/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -1441,70 +1441,70 @@
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Code/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Book/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Tools-DuplexSpy/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Studying-RAT/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Learning/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Troubleshooting/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Malware-Analysis/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Tools-Eden-RAT/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Tools-dotNetPELoader/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Tools/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

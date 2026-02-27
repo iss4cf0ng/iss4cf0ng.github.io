@@ -35,7 +35,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
   --light-background: url('/img/bk.jpg');
 }</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing Sub7 (SubSeven)</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-18T08:53:31.000Z" id="date"> 2026-02-18</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-02-27T13:11:33.991Z" id="updated"> 2026-02-27</time></div></span><br><span>Word Count: <div class="control">1.3k</div></span><br><span>Read Time: <div class="control">7 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generations of RATs</a>. If you are interested in the full series, please visit the linked page.</p>
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing Sub7 (SubSeven)</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-18T08:53:31.000Z" id="date"> 2026-02-18</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-02-27T13:19:12.070Z" id="updated"> 2026-02-27</time></div></span><br><span>Word Count: <div class="control">1.3k</div></span><br><span>Read Time: <div class="control">7 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generations of RATs</a>. If you are interested in the full series, please visit the linked page.</p>
 <h1 id="Sub7"><a href="#Sub7" class="headerlink" title="Sub7"></a>Sub7</h1><p>Sub7 (SubSeven/Sub7Server) is a remote access trojan which was originally released in Februry 1999.</p>
 <p>Starting with version 2.1 (1999) it could be controlled via IRC. It works on the Windows 9x and Windows NT operating systems.</p>
 <p>Many versions were released over time. The latest release is version 2.3. In this article, I analyzed version 2.0, since it is the only ersion that functions properly in my test environment.</p>
@@ -211,7 +211,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <script type="math/tex; mode=display">
 \begin{align*}
 
-Address \enspace of \enspace e\text{\_}lfanew = BaseAddress + \texttt{0x3C}
+Address \enspace of \enspace \texttt{e\_lfanew} = BaseAddress + \texttt{0x3C}
 
 \end{align*}</script><p align="center" class='item-img' data-src='/images/article/2026-2-18-Sub7/27.png'><img src="/images/article/2026-2-18-Sub7/27.png" width=800>
 </p>
@@ -219,8 +219,8 @@ Address \enspace of \enspace e\text{\_}lfanew = BaseAddress + \texttt{0x3C}
 <p>The 4-byte result is: <code>00 01 00 00</code>. Since the system uses <strong>little-endian</strong> format, the PE header offset is <code>0x0100</code>. Therefore:</p>
 <script type="math/tex; mode=display">
 \begin{align*}
-\text{Base Address} + 0\text{x}0100 &= 0\text{x}00400000 + 0\text{x}0100  \\
-&= 0\text{x}00400100
+\texttt{Base Address} + 0\texttt{x}0100 &= 0\texttt{x}00400000 + 0\texttt{x}0100  \\
+&= 0\texttt{x}00400100
 \end{align*}</script><p>Navigate to this address in <strong>x32dbg</strong>:</p>
 <p align="center" class='item-img' data-src='/images/article/2026-2-18-Sub7/28.png'><img src="/images/article/2026-2-18-Sub7/28.png" width=800>
 </p>
@@ -230,29 +230,29 @@ Address \enspace of \enspace e\text{\_}lfanew = BaseAddress + \texttt{0x3C}
 <script type="math/tex; mode=display">
 \begin{align*}
 
-\text{Note that: Size of PE signature} &= 4 \enspace bytes \\
-\text{Size of IMAGE\_FILE\_HEADER} &= 20 \enspace bytes
+\texttt{Note that: Size of PE signature} &= 4 \enspace bytes \\
+\texttt{IMAGE\_FILE\_HEADER} &= 20 \enspace bytes
 
 \end{align*}</script><script type="math/tex; mode=display">
 \begin{align*}
 
-\therefore \text{Address of IMAGE\_OPTIONAL\_HEADER} &= 0\text{x}00400100 + (20+4)_{10} \\
-&= 0\text{x}00400100 + 0\text{x}18 \\
-&= 0\text{x}00400118
+\therefore \texttt{Address of IMAGE\_OPTIONAL\_HEADER} &= 0\texttt{x}00400100 + (20+4)_{10} \\
+&= 0\texttt{x}00400100 + 0\texttt{x}18 \\
+&= 0\texttt{x}00400118
 
 \end{align*}</script><script type="math/tex; mode=display">
 \begin{align*}
-\text{Data Directory is located at: OptionalHeader + 0x60} &= 0\text{x}00400118 + 0\text{x}60 \\
-&= 0\text{x}00400178
+\texttt{Data Directory is located at: OptionalHeader + 0x60} &= 0\texttt{x}00400118 + 0\texttt{x}60 \\
+&= 0\texttt{x}00400178
 \end{align*}</script><p align="center" class='item-img' data-src='/images/article/2026-2-18-Sub7/29.png'><img src="/images/article/2026-2-18-Sub7/29.png" width=800>
 </p>
 
 <p>Each directory entry occupies 8 bytes. The TLS directory is the 9-th entry. Therefore:</p>
 <script type="math/tex; mode=display">
 \begin{align*}
-\text{TLS} &= 0\text{x}00400178 + (8 \times 9) \\
-&= 0\text{x}00400178 + 0\text{x}48 \\
-&= 0\text{x}004001C0
+\texttt{TLS} &= 0\texttt{x}00400178 + (8 \times 9) \\
+&= 0\texttt{x}00400178 + 0\texttt{x}48 \\
+&= 0\texttt{x}004001C0
 \end{align*}</script><p>Notice that the value of <strong>AddressOfCallbacks</strong> is zero, indicating that no TLS callback is defined. Therefore, it is reasonable to assume that the TLS structure was added by Delphi by default.</p>
 <p>After further studying, I confirmed that the Import Address Table (IAT) of the dumped PE file was not properly fixed. Therefore, it needed to be repaired using Scylla. (Scylla also provides functionality for rebuilding the IAT after identifying the correct OEP.)</p>
 <p align="center" class='item-img' data-src='/images/article/2026-2-18-Sub7/22.png'><img src="/images/article/2026-2-18-Sub7/22.png" width=400>

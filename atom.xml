@@ -72,21 +72,21 @@
     <category term="Learning" scheme="https://iss4cf0ng.github.io/categories/Learning/"/>
     
     
-    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
-    
     <category term="Network" scheme="https://iss4cf0ng.github.io/tags/Network/"/>
+    
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
     
     <category term="Linux" scheme="https://iss4cf0ng.github.io/tags/Linux/"/>
     
     <category term="Windows" scheme="https://iss4cf0ng.github.io/tags/Windows/"/>
+    
+    <category term="Setup" scheme="https://iss4cf0ng.github.io/tags/Setup/"/>
     
     <category term="VMware" scheme="https://iss4cf0ng.github.io/tags/VMware/"/>
     
     <category term="VMware WorkStation" scheme="https://iss4cf0ng.github.io/tags/VMware-WorkStation/"/>
     
     <category term="Configuration" scheme="https://iss4cf0ng.github.io/tags/Configuration/"/>
-    
-    <category term="Setup" scheme="https://iss4cf0ng.github.io/tags/Setup/"/>
     
     <category term="Network Configuration" scheme="https://iss4cf0ng.github.io/tags/Network-Configuration/"/>
     
@@ -198,6 +198,12 @@
     
     <category term="Ghidra" scheme="https://iss4cf0ng.github.io/tags/Ghidra/"/>
     
+    <category term="Beast" scheme="https://iss4cf0ng.github.io/tags/Beast/"/>
+    
+    <category term="BeastDoor" scheme="https://iss4cf0ng.github.io/tags/BeastDoor/"/>
+    
+    <category term="Beast RAT" scheme="https://iss4cf0ng.github.io/tags/Beast-RAT/"/>
+    
     <category term="Packing" scheme="https://iss4cf0ng.github.io/tags/Packing/"/>
     
     <category term="Packed" scheme="https://iss4cf0ng.github.io/tags/Packed/"/>
@@ -209,12 +215,6 @@
     <category term="PEView" scheme="https://iss4cf0ng.github.io/tags/PEView/"/>
     
     <category term="PE File" scheme="https://iss4cf0ng.github.io/tags/PE-File/"/>
-    
-    <category term="Beast" scheme="https://iss4cf0ng.github.io/tags/Beast/"/>
-    
-    <category term="BeastDoor" scheme="https://iss4cf0ng.github.io/tags/BeastDoor/"/>
-    
-    <category term="Beast RAT" scheme="https://iss4cf0ng.github.io/tags/Beast-RAT/"/>
     
   </entry>
   
@@ -252,14 +252,6 @@
     
     <category term="Ghidra" scheme="https://iss4cf0ng.github.io/tags/Ghidra/"/>
     
-    <category term="Sub7" scheme="https://iss4cf0ng.github.io/tags/Sub7/"/>
-    
-    <category term="SubSeven" scheme="https://iss4cf0ng.github.io/tags/SubSeven/"/>
-    
-    <category term="Sub7 RAT" scheme="https://iss4cf0ng.github.io/tags/Sub7-RAT/"/>
-    
-    <category term="SybSeven RAT" scheme="https://iss4cf0ng.github.io/tags/SybSeven-RAT/"/>
-    
     <category term="Packing" scheme="https://iss4cf0ng.github.io/tags/Packing/"/>
     
     <category term="Packed" scheme="https://iss4cf0ng.github.io/tags/Packed/"/>
@@ -268,6 +260,18 @@
     
     <category term="Unpacked" scheme="https://iss4cf0ng.github.io/tags/Unpacked/"/>
     
+    <category term="PEView" scheme="https://iss4cf0ng.github.io/tags/PEView/"/>
+    
+    <category term="PE File" scheme="https://iss4cf0ng.github.io/tags/PE-File/"/>
+    
+    <category term="Sub7" scheme="https://iss4cf0ng.github.io/tags/Sub7/"/>
+    
+    <category term="SubSeven" scheme="https://iss4cf0ng.github.io/tags/SubSeven/"/>
+    
+    <category term="Sub7 RAT" scheme="https://iss4cf0ng.github.io/tags/Sub7-RAT/"/>
+    
+    <category term="SybSeven RAT" scheme="https://iss4cf0ng.github.io/tags/SybSeven-RAT/"/>
+    
     <category term="UPX" scheme="https://iss4cf0ng.github.io/tags/UPX/"/>
     
     <category term="ASPack" scheme="https://iss4cf0ng.github.io/tags/ASPack/"/>
@@ -275,10 +279,6 @@
     <category term="Manually Unpacking" scheme="https://iss4cf0ng.github.io/tags/Manually-Unpacking/"/>
     
     <category term="x32dbg" scheme="https://iss4cf0ng.github.io/tags/x32dbg/"/>
-    
-    <category term="PEView" scheme="https://iss4cf0ng.github.io/tags/PEView/"/>
-    
-    <category term="PE File" scheme="https://iss4cf0ng.github.io/tags/PE-File/"/>
     
   </entry>
   
@@ -542,9 +542,9 @@
     
     <category term="Documentation" scheme="https://iss4cf0ng.github.io/tags/Documentation/"/>
     
-    <category term="Fileless Execution" scheme="https://iss4cf0ng.github.io/tags/Fileless-Execution/"/>
-    
     <category term="Tools" scheme="https://iss4cf0ng.github.io/tags/Tools/"/>
+    
+    <category term="Fileless Execution" scheme="https://iss4cf0ng.github.io/tags/Fileless-Execution/"/>
     
   </entry>
   

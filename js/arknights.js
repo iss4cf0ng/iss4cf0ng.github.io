@@ -858,3 +858,10 @@ new Comments();
 /// <reference path="include/pjaxSupport.ts" />
 /// <reference path="include/ColorMode.ts" />
 /// <reference path="include/Comments.ts" />
+
+// ===== MathJax Fix for PJAX =====
+document.addEventListener('pjax:complete', function () {
+    if (window.MathJax && window.MathJax.Hub) {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+});

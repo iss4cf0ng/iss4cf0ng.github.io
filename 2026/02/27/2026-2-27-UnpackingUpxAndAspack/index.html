@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learning] How to Manually Unpacking UPX and ASPack | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learning] How to Manually Unpacking UPX and ASPack</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-27T11:54:55.000Z" id="date"> 2026-02-27</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-02-28T16:06:45.646Z" id="updated"> 2026-03-01</time></div></span><br><span>Word Count: <div class="control">795</div></span><br><span>Read Time: <div class="control">4 min</div></span></div></div><hr><div id="post-content"><h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Recently, I have been studying different RATs (If you are interested in my research, you can read this article: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generations of RATs</a>). I encountered many payloads packed with UPX or ASPack. Initially, the only thing I could do was unpack them using specific tools(e.g., <code>AsDie</code>, <code>UPX</code>). </p>
+<p>However, while studying <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-Subseven/">Sub7</a>, I successfully unpacked the payload manually. Therefore, I decided to write an article for anyone who have encountered the same problem. This article also serves as my personal note while studying reverse engineering.</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article explains the fundamental principles behind UPX and ASPack packing. It also demonstrates how to perform manual unpacking using <strong>x32dbg</strong>, <strong>OllyDbg</strong> and <strong>Scylla</strong>.</p>
+<p>Before reading this article, I assume that you have fundamental knowledge of reverse engineering. You should understand the functionality of ESP and the mechanism of the stack frame.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_love.png'><img src="/images/meme/mika_love.png" width=200>
+</p>
+
+<h1 id="What-Are-Packing-and-Unpacking"><a href="#What-Are-Packing-and-Unpacking" class="headerlink" title="What Are Packing and Unpacking?"></a>What Are Packing and Unpacking?</h1><p>Software packing is the process of compressing, encrypting, or modifying an executable file to reduce its size and disguise its structure, often used to protect code or evade detection.</p>
+<p>Unpacking reverses this process, restoring the original code in memory for execution or analysis.</p>
+<h1 id="Why-Does-It-Matter"><a href="#Why-Does-It-Matter" class="headerlink" title="Why Does It Matter?"></a>Why Does It Matter?</h1><p>An unpacked application is preferred rather than a packed one when conducting reverse engineering. Reverse engineering frameworks such as IDA and Ghidra read imported libraries and APIs via the Import Address Table (IAT). If the IAT cannot be read correctly, it becomes difficult to identify different functionalities through those APIs.</p>
+<p>Packing software such as UPX and ASPack modifies the IAT of an application and rebuilds it at runtime, which increases the difficulty of analysis.</p>
+<h1 id="Unpacking"><a href="#Unpacking" class="headerlink" title="Unpacking"></a>Unpacking</h1><p>Unpacking UPX and ASPack using <strong>x32dbg</strong> or <strong>OllyDbg</strong> is almost the same. In this article, I use Sub7 version 2.0 and version 2.3 payloads as examples</p>
+<p>Notice that the version 2.0 payload is packed with UPX, while version 2.3 is packed with ASPack:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/1.png'><img src="/images/article/2026-2-27-Unpacking/1.png" width=600>
+    <figcaption>
+    Version 2.0
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/2.png'><img src="/images/article/2026-2-27-Unpacking/2.png" width=600>
+    <figcaption>
+    Version 2.3
+    </figcaption>
+</p>
+
+<p>Open the payload using <strong>x32dbg</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/3.png'><img src="/images/article/2026-2-27-Unpacking/3.png" width=800>
+</p>
+
+<p>Sometimes the value of EIP may point to an address starting with <code>0x77</code>.<br>This indicates that the instruction pointer is currently executing code inside a system DLL rather than the main module of the payload, as part of the DLL loading process.</p>
+<p>If you open the payload with <strong>OllyDbg</strong>, this loading process with be skipped:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/4.png'><img src="/images/article/2026-2-27-Unpacking/4.png" width=800>
+</p>
+
+<p>To return to the main module, press <strong>F9</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/5.png'><img src="/images/article/2026-2-27-Unpacking/5.png" width=800>
+</p>
+
+<p>The instruction is now at the entry point of the main module (usually an address starts with <code>0x004</code>).</p>
+<p>However, this is not the original entry point (OEP). The instruction pointer will eventually reach the OEP after the unpacking algorithm has been executed. UPX and ASPack implement the unpacking algorithm using the <code>PUSHAD</code> and <code>POPAD</code> instructions.</p>
+<p>Therefore, our target is clear: we need to stop the instruction pointer by setting a breakpoint at the address where the unpacking function completes. To do this, first check the instruction at the entry point:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/6.png'><img src="/images/article/2026-2-27-Unpacking/6.png" width=800>
+    <figcaption>
+    PUSHAD
+    </figcaption>
+</p>
+
+<p>Next, execute the instruction <code>PUSHAD</code> by pressing <strong>F7</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/7.png'><img src="/images/article/2026-2-27-Unpacking/7.png" width=600>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/8.png'><img src="/images/article/2026-2-27-Unpacking/8.png" width=600>
+</p>
+
+<p>The address of the entry point is pushed onto the stack. Next, right-click the stack entry that stores the entry point address (<code>0x004E7000</code>) and navigate to: Breakpoint -&gt; Hardware, Access -&gt; Byte</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/9.png'><img src="/images/article/2026-2-27-Unpacking/9.png" width=600>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/10.png'><img src="/images/article/2026-2-27-Unpacking/10.png" width=1000>
+</p>
+
+<p>Then, press <strong>F9</strong> to execute the unpacking algorithm. If everything works correctly, the instruction pointer will stop at the breakpoint that we set:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/11.png'><img src="/images/article/2026-2-27-Unpacking/11.png" width=700>
+    <figcaption>
+    In my case, it was stopped at 0x004E7198
+    </figcaption>
+</p>
+
+<p>Now, press <strong>F7</strong> to execute this instruction: <code>jmp subseven v2.0.4B4180</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/12.png'><img src="/images/article/2026-2-27-Unpacking/12.png" width=700>
+</p>
+
+<p>If you have successfully reached the OEP, it should look like this. Typically, the OEP begins with the following instructions:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">push ebp<br>mov ebp, esp<br>add esp, FFFFFFF4<br></code></pre></td></tr></table></figure></p>
+<p>Therefore, we can presume that the OEP address is <code>0x004B4180</code> (in my case).</p>
+<p>To dump the file, you can use a tool such as <strong>Scylla</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/13.png'><img src="/images/article/2026-2-27-Unpacking/13.png" width=700>
+</p>
+
+<p>Note that we must use <strong>Scylla x86</strong> since the Sub7 payload is an x86 PE file.</p>
+<p>Scylla allows you to attach to the running executable:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/14.png'><img src="/images/article/2026-2-27-Unpacking/14.png" width=600>
+</p>
+
+<p>Modify the OEP value and click <strong>IAT Autosearch</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/15.png'><img src="/images/article/2026-2-27-Unpacking/15.png" width=600>
+</p>
+
+<p>If the value of OEP is correct, you can obtain the imported libraries correctly:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/16.png'><img src="/images/article/2026-2-27-Unpacking/16.png" width=600>
+</p>
+
+<p>Next, dump the file:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/17.png'><img src="/images/article/2026-2-27-Unpacking/17.png" width=600>
+</p>
+
+<p>And fix the file that you dumped:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/18.png'><img src="/images/article/2026-2-27-Unpacking/18.png" width=600>
+</p>
+
+<p>Open the executable using Ghidra or IDA. We should now see that the imported modules are correctly displayed:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/19.png'><img src="/images/article/2026-2-27-Unpacking/19.png" width=700>
+</p>
+
+<p>If you are using OllyDbg without any plugins, there is another way to quickly locate the OEP.</p>
+<p>Since both UPX and ASPack use instructions <code>PUSHAD</code> and <code>POPAD</code> instructions, we can search the instruction <code>POPAD</code> using <strong>Ctrl+L</strong> and quickly reach the OEP:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/20.png'><img src="/images/article/2026-2-27-Unpacking/20.png" width=700>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-2-27-Unpacking/21.png'><img src="/images/article/2026-2-27-Unpacking/21.png" width=700>
+</p>
+
+<p>Here, the OEP address is <code>0x4B4180</code>, which is the same as the one we found using <strong>x32dbg</strong>.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>Manual unpacking may not be an advanced or breakthrough technique for reverse engineering, but is has significant meaning for me as a begineer in malware analysis.</p>
+<h1 id="Murmur"><a href="#Murmur" class="headerlink" title="Murmur"></a>Murmur</h1><p>Although I have not been in the best mood recently… I still wish all of you the best. Goodnight.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_love.png'><img src="/images/meme/mika_love.png" width=200>
+</p>
+
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.gif'><img src="/images/meme/mika_nagisa_rollcake.gif" width=400>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/02/24/2026-2-24-UnofficialRedistribution/">[Reverse Engineering] How I Found a Suspicious Redistribution of My Project Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/musa.mp3",
+    "/mp3/music/air.mp3",
+    "/mp3/music/last_page.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What-Are-Packing-and-Unpacking"><span class="toc-number">3.</span> <span class="toc-text">What Are Packing and Unpacking?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Does-It-Matter"><span class="toc-number">4.</span> <span class="toc-text">Why Does It Matter?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unpacking"><span class="toc-number">5.</span> <span class="toc-text">Unpacking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">6.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Murmur"><span class="toc-number">7.</span> <span class="toc-text">Murmur</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">8.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

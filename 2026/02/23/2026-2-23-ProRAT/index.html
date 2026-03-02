@@ -35,8 +35,11 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
   --light-background: url('/img/bk.jpg');
 }</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing ProRat</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-23T15:06:59.000Z" id="date"> 2026-02-23</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-02T10:11:40.957Z" id="updated"> 2026-03-02</time></div></span><br><span>Word Count: <div class="control">1.3k</div></span><br><span>Read Time: <div class="control">7 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generations of RATs</a>. If you are interested in the full series, please refer to the linked article above.</p>
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing ProRat</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-23T15:06:59.000Z" id="date"> 2026-02-23</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-02T10:17:10.516Z" id="updated"> 2026-03-02</time></div></span><br><span>Word Count: <div class="control">1.3k</div></span><br><span>Read Time: <div class="control">8 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generations of RATs</a>. If you are interested in the full series, please refer to the linked article above.</p>
 <p>This is the first time I have conducted reverse engineering analysis using IDA (Freeware) instead of Ghidra. I also experimented with more tools compared to my previous articles.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_XD.png'><img src="/images/meme/mika_XD.png" width=200>
+</p>
+
 <h1 id="ProRat"><a href="#ProRat" class="headerlink" title="ProRat"></a>ProRat</h1><p>ProRat is a remote access tool designed for unauthorized remote access, released by PRO Group in the early 2000s. It adopts a client-server (C/S) architecture for communication. From a network perspective, the ProRat controller GUI can function as both a server and a client.</p>
 <p>The term “server” may be confusing from a modern perspective. In early-generation RATs, a “server” executable referred to the payload deployed on the victim machine, while a “client” referred to the application used to control the victim machine. As firewall technologies evolved and network security improved, attackers gradually shifted from direct connections to reverse connections.</p>
 <p>To avoid confusion, this article uses the following terms:</p>
@@ -55,12 +58,32 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </thead>
 <tbody>
 <tr>
-<td></td>
+<td>ExeInfo PE</td>
+<td>Executable analysis tool used to detect packers, compilers, and basic file properties</td>
+</tr>
+<tr>
+<td>Detect It Easy (DIE)</td>
+<td>File identification tool used to detect packers, protectors, and compiler signatures</td>
+</tr>
+<tr>
+<td>RegShot</td>
+<td>Registry comparison tool used to monitor changes made to the Windows registry</td>
+</tr>
+<tr>
+<td>UPX</td>
+<td>Open-source executable packer used to compress and decompress binaries</td>
+</tr>
+<tr>
+<td>Wireshark</td>
+<td>Network protocol analyzer used to capture and inspect live or recorded traffic</td>
+</tr>
+<tr>
+<td>IDA (Freeware)</td>
+<td>Disassembler used for software reverse engineering</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>| Wireshark | Network protocol analyzer used to capture and inspect live or recorded traffic |<br>| IDA (Freeware) | Disassembler used for software reverse engineering |</p>
 <hr>
 <div class="table-container">
 <table>
@@ -82,6 +105,11 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <td>192.168.85.3</td>
 <td>Analysis machine used for reverse engineering</td>
 </tr>
+<tr>
+<td>Kali Linux (VM)</td>
+<td>192.168.85.4</td>
+<td>Protocol re-implementation testing</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -93,136 +121,136 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <blockquote>
 <p>In this article, I used IDA Freeware to conduct reverse engineering. Note that IDA Freeware requires internet for decompilation, while IDA Pro does not. Since the price of IDA Pro might be unaffordable for independent users (including myself), I enabled internet access (NAT configuration) for static analysis. You should be cautious and avoid launching the payload, even inside a virtual machine, to prevent unintended external communication.</p>
 </blockquote>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/21.png'><img src="images/article/2026-2-23-ProRAT/21.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/21.png'><img src="/images/article/2026-2-23-ProRAT/21.png" width=600>
 </p>
 
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/22.png'><img src="images/article/2026-2-23-ProRAT/22.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/22.png'><img src="/images/article/2026-2-23-ProRAT/22.png" width=600>
 </p>
 
 <h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><p>The GUI of controller is illustrated below:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/4.png'><img src="images/article/2026-2-23-ProRAT/4.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/4.png'><img src="/images/article/2026-2-23-ProRAT/4.png" width=600>
 </p>
 
 <p>Create a payload using the provided feature:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/1.png'><img src="images/article/2026-2-23-ProRAT/1.png" width=500>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/1.png'><img src="/images/article/2026-2-23-ProRAT/1.png" width=500>
 </p>
 
 <p>ProRat allows users to configure various options when building the payload:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/2.png'><img src="images/article/2026-2-23-ProRAT/2.png" width=500>
-    <img src="images/article/2026-2-23-ProRAT/3.png" width=500>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/2.png'><img src="/images/article/2026-2-23-ProRAT/2.png" width=500>
+    <img src="/images/article/2026-2-23-ProRAT/3.png" width=500>
 </p>
 
 <p>Before deploying the payload, launch <strong>RegShot</strong>:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/5.png'><img src="images/article/2026-2-23-ProRAT/5.png" width=400>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/5.png'><img src="/images/article/2026-2-23-ProRAT/5.png" width=400>
 </p>
 
 <p>After deploying the payload, <strong>RegShot</strong> showed that many registry keys were modified or added:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/6.png'><img src="images/article/2026-2-23-ProRAT/6.png" width=1000>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/6.png'><img src="/images/article/2026-2-23-ProRAT/6.png" width=1000>
 </p>
 
 <p>Several files were added for persistence:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">C:\WINDOWS\system\sservice.exe<br>C:\WINDOWS\system32\fservice.exe<br>C:\WINDOWS\system32\reginv.dll<br>C:\WINDOWS\system32\winkey.dll<br>C:\WINDOWS\services.exe<br></code></pre></td></tr></table></figure></p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/7.png'><img src="images/article/2026-2-23-ProRAT/7.png" width=800>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/7.png'><img src="/images/article/2026-2-23-ProRAT/7.png" width=800>
 </p>
 
 <h1 id="Protocol-Analysis"><a href="#Protocol-Analysis" class="headerlink" title="Protocol Analysis"></a>Protocol Analysis</h1><p>ProRat transfers data in plain text without any protection. It uses different integer values to identify different C2 commands:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/8.png'><img src="images/article/2026-2-23-ProRAT/8.png" width=500>
-    <img src="images/article/2026-2-23-ProRAT/9.png" width=500>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/8.png'><img src="/images/article/2026-2-23-ProRAT/8.png" width=500>
+    <img src="/images/article/2026-2-23-ProRAT/9.png" width=500>
 </p>
 
 <p>Notice that ProRat assigns a different port number for its features:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/11.png'><img src="images/article/2026-2-23-ProRAT/11.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/11.png'><img src="/images/article/2026-2-23-ProRAT/11.png" width=600>
 </p>
 
 <p>It uses different port for screenshot:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/12.png'><img src="images/article/2026-2-23-ProRAT/12.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/12.png'><img src="/images/article/2026-2-23-ProRAT/12.png" width=600>
 </p>
 
 <p>Furthermore, it assigns different port for remote plugins and file uploading:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/15.png'><img src="images/article/2026-2-23-ProRAT/15.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/15.png'><img src="/images/article/2026-2-23-ProRAT/15.png" width=600>
 </p>
 
 <p>While analyzing the remote plugins feature, a suspicious executable was detected by <strong>WindowsDefender</strong>:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/13.png'><img src="images/article/2026-2-23-ProRAT/13.png" width=400>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/13.png'><img src="/images/article/2026-2-23-ProRAT/13.png" width=400>
 </p>
 
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/14.png'><img src="images/article/2026-2-23-ProRAT/14.png" width=400>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/14.png'><img src="/images/article/2026-2-23-ProRAT/14.png" width=400>
 </p>
 
 <p>Based on the <strong>MZ</strong> symbol observed in the packet, we can infer that the remote plugin mechanism of ProRat works as follows: It drops a specific executable into the local <code>%TEMP%</code> directory, uploads it to the compromised machine, and the payload executes the plugin file and returns the result to the controller.</p>
 <h1 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h1><p>Unlike my previous articles, this time I conducted reverse engineering using IDA (Freeware).</p>
 <p>Both <strong>ExeInfo</strong> and <strong>DIE (Detect It Easy)</strong> confirmed the payload is packed with <strong>UPX</strong>. In addition, it was compiled using Visual Studio C/C++:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/10.png'><img src="images/article/2026-2-23-ProRAT/10.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/10.png'><img src="/images/article/2026-2-23-ProRAT/10.png" width=600>
 </p>
 
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/16.png'><img src="images/article/2026-2-23-ProRAT/16.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/16.png'><img src="/images/article/2026-2-23-ProRAT/16.png" width=700>
 </p>
 
 <p><strong>ExeInfo</strong> also showed that the controller application is packed with an unknown packer named <strong>ProCrypt</strong>. I initially assumed that this packer was developed by PRO Group, the author(s) for this tool, but I then found out it doesn’t obstruct the reverse engineering work.</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/18.png'><img src="images/article/2026-2-23-ProRAT/18.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/18.png'><img src="/images/article/2026-2-23-ProRAT/18.png" width=600>
 </p>
 
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/19.png'><img src="images/article/2026-2-23-ProRAT/19.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/19.png'><img src="/images/article/2026-2-23-ProRAT/19.png" width=700>
 </p>
 
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/34.png'><img src="images/article/2026-2-23-ProRAT/34.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/34.png'><img src="/images/article/2026-2-23-ProRAT/34.png" width=700>
 </p>
 
 <p>We can easily unpack the payload using <code>upx.exe</code>:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; upx -d server.exe -o unpacked.exe<br></code></pre></td></tr></table></figure></p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/16.png'><img src="images/article/2026-2-23-ProRAT/16.png" width=800>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/16.png'><img src="/images/article/2026-2-23-ProRAT/16.png" width=800>
 </p>
 
 <p>Alternatively, we can manually unpack the payload. If you are interested in manually unpacking UPX and ASPack, please <a href="https://iss4cf0ng.github.io/2026/02/27/2026-2-27-UnpackingUpxAndAspack/">read this</a></p>
 <p>Open the unpacked payload with IDA:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/20.png'><img src="images/article/2026-2-23-ProRAT/20.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/20.png'><img src="/images/article/2026-2-23-ProRAT/20.png" width=700>
 </p>
 
 <p>Notice that the API names were not shown in <strong>Imports</strong> view. This is likely due to the compiler’s behavior (e.g., Visual C++), which may import functions by ordinal.</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/23.png'><img src="images/article/2026-2-23-ProRAT/23.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/23.png'><img src="/images/article/2026-2-23-ProRAT/23.png" width=600>
 </p>
 
 <p>IDA Freeware can display the corresponding names of the ordinal values at the bottom:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/27.png'><img src="images/article/2026-2-23-ProRAT/27.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/27.png'><img src="/images/article/2026-2-23-ProRAT/27.png" width=600>
 </p>
 
 <p>On the other hand, there are several simple methods to resolve this problem. The first method is to open <code>C:\Windows\SysWOW64\ws_32.dll</code> in IDA and navigate to <strong>Exports</strong> view:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/24.png'><img src="images/article/2026-2-23-ProRAT/24.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/24.png'><img src="/images/article/2026-2-23-ProRAT/24.png" width=700>
 </p>
 
 <blockquote>
 <p>Important: Since the payload is an <strong>x86 (32-bit)</strong> executable, you should open <code>C:\Windows\SysWOW64\ws_32.dll</code> instead of <code>C:\Windows\System32\ws_32.dll.exe</code>.</p>
 </blockquote>
 <p>You can also obtain the ordinal value using <strong>CFF Explorer</strong> or <strong>dumpbin.exe</strong>:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/25.png'><img src="images/article/2026-2-23-ProRAT/25.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/25.png'><img src="/images/article/2026-2-23-ProRAT/25.png" width=700>
 </p>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dumpbin.exe C:\Windows\SysWOW64\ws_32.dll<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>Note that the output is sorted by RVA rather than by ordinal value.</p>
 </blockquote>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/26.png'><img src="images/article/2026-2-23-ProRAT/26.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/26.png'><img src="/images/article/2026-2-23-ProRAT/26.png" width=600>
 </p>
 
 <p>Click the item with ordinal value <code>16</code> (which is <code>0x10</code>, corresponding to <code>recv</code>):</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/27.png'><img src="images/article/2026-2-23-ProRAT/27.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/27.png'><img src="/images/article/2026-2-23-ProRAT/27.png" width=600>
 </p>
 
 <p>Select <strong>Jump to xref to operand</strong> or press the hotkey <strong>X</strong>:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/28.png'><img src="images/article/2026-2-23-ProRAT/28.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/28.png'><img src="/images/article/2026-2-23-ProRAT/28.png" width=600>
 </p>
 
 <p>Navigate to the corresponding function:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/29.png'><img src="images/article/2026-2-23-ProRAT/29.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/29.png'><img src="/images/article/2026-2-23-ProRAT/29.png" width=600>
 </p>
 
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/30.png'><img src="images/article/2026-2-23-ProRAT/30.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/30.png'><img src="/images/article/2026-2-23-ProRAT/30.png" width=600>
 </p>
 
 <p>We can also locate the message handler by searching for specific keywords:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/31.png'><img src="images/article/2026-2-23-ProRAT/31.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/31.png'><img src="/images/article/2026-2-23-ProRAT/31.png" width=600>
 </p>
 
 <p>Eventually, we can identify the message handler within the ProRat payload:</p>
-<p align="center" class='item-img' data-src='images/article/2026-2-23-ProRAT/32.png'><img src="images/article/2026-2-23-ProRAT/32.png" width=800>
+<p align="center" class='item-img' data-src='/images/article/2026-2-23-ProRAT/32.png'><img src="/images/article/2026-2-23-ProRAT/32.png" width=800>
 </p>
 
 <h1 id="Protocol-Re-Implementation-And-Abuse"><a href="#Protocol-Re-Implementation-And-Abuse" class="headerlink" title="Protocol Re-Implementation And Abuse"></a>Protocol Re-Implementation And Abuse</h1><p>Since ProRat uses plain text as network communication. It is vulnerable to MITM (Man-in-the-Middle) attacks, which may allow attackers to obtain credentials. Furthermore, the file upload feature can be abused:</p>

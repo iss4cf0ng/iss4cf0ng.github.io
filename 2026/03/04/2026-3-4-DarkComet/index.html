@@ -35,7 +35,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
   --light-background: url('/img/bk.jpg');
 }</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing DarkComet</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-03T17:52:06.000Z" id="date"> 2026-03-04</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-09T12:06:16.405Z" id="updated"> 2026-03-09</time></div></span><br><span>Word Count: <div class="control">1.5k</div></span><br><span>Read Time: <div class="control">9 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>DarkComet is one of the most well-known remote access trojans (RATs) widely used during the late 2000s and early 2010s. Despite being originally developed as a remote administration tool, it was later abused by threat actors to gain unauthorized access to victim systems.</p>
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing DarkComet</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-03T17:52:06.000Z" id="date"> 2026-03-04</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-09T12:11:36.601Z" id="updated"> 2026-03-09</time></div></span><br><span>Word Count: <div class="control">1.5k</div></span><br><span>Read Time: <div class="control">9 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>DarkComet is one of the most well-known remote access trojans (RATs) widely used during the late 2000s and early 2010s. Despite being originally developed as a remote administration tool, it was later abused by threat actors to gain unauthorized access to victim systems.</p>
 <p>In this article, I analyze the DarkComet payload through static analysis and reverse engineering. The goal is to understand how the malware establishes command-and-control (C2) communication and how its core functionalities are implemented internally.</p>
 <p>This article is part of my series <strong><a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generations of RATs</a></strong>, where I study the evolution of RAT malware by reversing different families from various time periods. If you are interested in the full series, please refer to the article linked above.</p>
 <p align="center" class='item-img' data-src='/images/meme/seia_evil.jpg'><img src="/images/meme/seia_evil.jpg" width=200>
@@ -185,28 +185,25 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-4-DarkComet/18.png'><img src="/images/article/2026-3-4-DarkComet/18.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-4-DarkComet/19.png'><img src="/images/article/2026-3-4-DarkComet/19.png" width=700>
     <figcaption>
     small.exe
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-4-DarkComet/19.png'><img src="/images/article/2026-3-4-DarkComet/19.png" width=500>
+<p align="center" class='item-img' data-src='/images/article/2026-3-4-DarkComet/18.png'><img src="/images/article/2026-3-4-DarkComet/18.png" width=500>
     <figcaption>
     normal.exe
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-4-DarkComet/20.png'><img src="/images/article/2026-3-4-DarkComet/20.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-4-DarkComet/22.png'><img src="/images/article/2026-3-4-DarkComet/22.png" width=700>
     <figcaption>
     normal.exe
     </figcaption>
 </p>
 
 <p><code>normal.exe</code> appears to be unpacked. However, it has relatively high entropy:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-4-DarkComet/22.png'><img src="/images/article/2026-3-4-DarkComet/22.png" width=800>
-</p>
-
 <p align="center" class='item-img' data-src='/images/article/2026-3-4-DarkComet/21.png'><img src="/images/article/2026-3-4-DarkComet/21.png" width=800>
 </p>
 

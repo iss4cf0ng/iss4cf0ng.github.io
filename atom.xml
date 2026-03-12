@@ -6,7 +6,7 @@
   <link href="https://iss4cf0ng.github.io/atom.xml" rel="self"/>
   
   <link href="https://iss4cf0ng.github.io/"/>
-  <updated>2026-03-12T15:54:42.715Z</updated>
+  <updated>2026-03-12T17:37:13.425Z</updated>
   <id>https://iss4cf0ng.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Thoughts] After Reaching 100+ GitHub Followers: Something I Want to Say</title>
+    <link href="https://iss4cf0ng.github.io/2026/03/13/2026-3-13-OneHundredFollowers/"/>
+    <id>https://iss4cf0ng.github.io/2026/03/13/2026-3-13-OneHundredFollowers/</id>
+    <published>2026-03-12T16:03:22.000Z</published>
+    <updated>2026-03-12T17:37:13.425Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>A couple of days ago, I released a project for loading PE files into memory and executing them (if you are interested, please <a href="https://github.com/iss4cf0ng/IronPE">click here</a>). After that, I noticed that I now have more than 100 followers on GitHub (I hope the number won’t drop below 100!).</p><p>First, let me celebrate it. I am going to show you how to eat a cake with my face:</p><p align="center" class='item-img' data-src='/images/meme/natsu_cake.jpg'><img src="/images/meme/natsu_cake.jpg" width=300>    <figcaption>    Waaaahhhhhhhhhhh!    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/terrible_cake.png'><img src="/images/meme/terrible_cake.png" width=300>    <figcaption>    Another cake.....ok, just kidding......    </figcaption></p><p>Then, I would like to say something beyond techniques and cybersecurity. Last December, I only had around 40 followers and about 200 stars on GitHub in total. Now, I have more than 100 followers and nearly 500 stars in total.</p><h1 id="My-Background"><a href="#My-Background" class="headerlink" title="My Background"></a>My Background</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ <span class="hljs-built_in">whoami</span><br>Currently an undergraduated college student <span class="hljs-keyword">in</span> Taiwan, but studying as a foreign student.<br></code></pre></td></tr></table></figure><blockquote><p>Foreign student? But your speak Mandarin, don’t you?</p></blockquote><p>Yes, I do. I am actually a native speaker, but my background is a little complicated. Anyway, offically I am still considered an international student.</p><h1 id="Depression"><a href="#Depression" class="headerlink" title="Depression"></a>Depression</h1><p>Althought my major is electrical engineering, I have had terrible grades in university—too terrible to even admit it.  </p><p>As a international student, I sometimes find it harder to handle exams compared to local students. Moreover, I couldn’t really fit myself in with others, and still I still can’t. Different cultures, speaking Mandarine with an accent, no friends, no associations, no family in this place.</p><p>Have you ever imagined someone speaking almost nothing for an entire week? Or even month?</p><p align="center" class='item-img' data-src='/images/meme/nagusa_crying.jpg'><img src="/images/meme/nagusa_crying.jpg" width=250></p><p>Gradually, I started struggling with depression, and everything became worse. As mentioned in my <a href="https://iss4cf0ng.github.io/About/">About</a>:</p><blockquote><p>Unfortunately, I am currently struggling with mental issues and sometimes feel lost in an endless abyss, unable to find the right help even from professionals</p></blockquote><p>During that period, I started coding and learning cybersecurity again after it aside for several years.  </p><p>I don’t even know why I suddenly had the motivation again, but I knew one thing: If I did nothing, the ending would be worse—far worse than I could even imagine.</p><h1 id="Learning-Cybersecurity-Again"><a href="#Learning-Cybersecurity-Again" class="headerlink" title="Learning Cybersecurity Again"></a>Learning Cybersecurity Again</h1><p>I wasn’t easy. I still had to pass several difficult courses in my major. After I did it, it didn’t change anything immediately—the terrible GPA is still there, and it will remain on my record forever.</p><p>But…</p><blockquote><p>What happened, has happened. We cannot change it.</p></blockquote><p>I don’t even know who said this, but I believe it. </p><p>So, I tried to ignore it, even though it still bothers me late at night…</p><p>During the winter vacation, I spent more than a month reading books that I had never finished them (you can see many notes in my blog posts), learning programming, Active Directory penetration testing, Windows APIs programming, shellcode development, reverse engineering and malware analysis.  </p><p>I also finished the second version of <a href="https://github.com/iss4cf0ng/DuplexSpyCS">DuplexSpy</a>, and released <a href="https://github.com/iss4cf0ng/Eden-RAT">Eden-RAT</a>, <a href="https://github.com/iss4cf0ng/dotNetPELoader">dotNetPELoader</a>, <a href="https://github.com/iss4cf0ng/OpenShell">OpenShell</a>, <a href="https://github.com/iss4cf0ng/IronPE">IronPE</a> and <a href="https://github.com/iss4cf0ng/Elfina">Elfina</a>.</p><p>DuplexSpy is probably the most complicated project I have ever developed, it was exhausting to build everything by myself, but I have to say that I learned a lot from it—and truly enjoyed the process. </p><p>I also started a blog series called “<a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generations of RATs</a>“ to study malware.</p><p>Reading feedback and analysis reports from the internet is exactly why I developed these tools. Honestly, I have never coded this frequently before.</p><p align="center" class='item-img' data-src='/images/meme/nagisa_neko.png'><img src="/images/meme/nagisa_neko.png" width=200></p><h1 id="What-Is-Next"><a href="#What-Is-Next" class="headerlink" title="What Is Next?"></a>What Is Next?</h1><p>Umm… good question. </p><p>I want to apply the graduated schools abroad, probably Europe or the United States. Therefore, I need to prepare for English proficiency tests and other requirements.  </p><p>Objectively speaking, my situation is not ideal: a poor GPA, upcoming language tests, and other uncertainities. </p><p>Another challenge is that most professors at my university are not familiar with the kind of work I have been doing. They are experts in theory, but not ncessarily in practical cybersity. For example, when they think about cybersecurity, they often think of mathematical cryptography. However, I am more interested in topics like EternalBlue, malware, and Advanced Persistent Threats. That difference makes it difficult for them to fully understand what I have been working on.</p><p>As a result, it is hard for me to obtain recommendation letters for graduate school applications.</p><p>Recently, I have been trying to reach out to experts outside my university for advice and help.</p><p>About my future? </p><p>well… I don’t know.</p><p>Recently, “I don’t know” and “future” might be the words I hate the most.</p><p>But what else can I do?</p><p>Maybe the only thing I can do is to keep moving forward, even with these wounds.</p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/hakari_crying.jpeg'><img src="/images/meme/hakari_crying.jpeg" width=800></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Preface&quot;&gt;&lt;a href=&quot;#Preface&quot; class=&quot;headerlink&quot; title=&quot;Preface&quot;&gt;&lt;/a&gt;Preface&lt;/h1&gt;&lt;p&gt;A couple of days ago, I released a project for loa</summary>
+      
+    
+    
+    
+    <category term="Thoughts" scheme="https://iss4cf0ng.github.io/categories/Thoughts/"/>
+    
+    
+    <category term="Thoughts" scheme="https://iss4cf0ng.github.io/tags/Thoughts/"/>
+    
+    <category term="Reflection" scheme="https://iss4cf0ng.github.io/tags/Reflection/"/>
+    
+    <category term="Personal" scheme="https://iss4cf0ng.github.io/tags/Personal/"/>
+    
+    <category term="Notes" scheme="https://iss4cf0ng.github.io/tags/Notes/"/>
+    
+  </entry>
   
   <entry>
     <title>[Tools] Elfina—A multi-architecture ELF loader supporting x86 and x86-64 binaries</title>
@@ -176,9 +206,9 @@
     
     <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
     
-    <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
-    
     <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
+    <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
     
     <category term="Conclusioin" scheme="https://iss4cf0ng.github.io/tags/Conclusioin/"/>
     
@@ -210,11 +240,11 @@
     
     <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
     
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
     <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
     
     <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
-    
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
     
     <category term="PE" scheme="https://iss4cf0ng.github.io/tags/PE/"/>
     
@@ -268,9 +298,9 @@
     
     <category term="PoisonIvy" scheme="https://iss4cf0ng.github.io/tags/PoisonIvy/"/>
     
-    <category term="IDA Freeware" scheme="https://iss4cf0ng.github.io/tags/IDA-Freeware/"/>
-    
     <category term="Poison Ivy" scheme="https://iss4cf0ng.github.io/tags/Poison-Ivy/"/>
+    
+    <category term="IDA Freeware" scheme="https://iss4cf0ng.github.io/tags/IDA-Freeware/"/>
     
     <category term="DIE" scheme="https://iss4cf0ng.github.io/tags/DIE/"/>
     
@@ -308,13 +338,13 @@
     
     <category term="Ghidra" scheme="https://iss4cf0ng.github.io/tags/Ghidra/"/>
     
-    <category term="Packing" scheme="https://iss4cf0ng.github.io/tags/Packing/"/>
-    
-    <category term="Unpacking" scheme="https://iss4cf0ng.github.io/tags/Unpacking/"/>
-    
     <category term="Sub7" scheme="https://iss4cf0ng.github.io/tags/Sub7/"/>
     
     <category term="SubSeven" scheme="https://iss4cf0ng.github.io/tags/SubSeven/"/>
+    
+    <category term="Packing" scheme="https://iss4cf0ng.github.io/tags/Packing/"/>
+    
+    <category term="Unpacking" scheme="https://iss4cf0ng.github.io/tags/Unpacking/"/>
     
     <category term="UPX" scheme="https://iss4cf0ng.github.io/tags/UPX/"/>
     
@@ -384,11 +414,13 @@
     
     <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
     
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
     <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
     
     <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
     
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    <category term="SubSeven" scheme="https://iss4cf0ng.github.io/tags/SubSeven/"/>
     
     <category term="Packing" scheme="https://iss4cf0ng.github.io/tags/Packing/"/>
     
@@ -397,8 +429,6 @@
     <category term="Unpacking" scheme="https://iss4cf0ng.github.io/tags/Unpacking/"/>
     
     <category term="Unpacked" scheme="https://iss4cf0ng.github.io/tags/Unpacked/"/>
-    
-    <category term="SubSeven" scheme="https://iss4cf0ng.github.io/tags/SubSeven/"/>
     
     <category term="UPX" scheme="https://iss4cf0ng.github.io/tags/UPX/"/>
     
@@ -442,9 +472,9 @@
     
     <category term="Windows" scheme="https://iss4cf0ng.github.io/tags/Windows/"/>
     
-    <category term="Setup" scheme="https://iss4cf0ng.github.io/tags/Setup/"/>
-    
     <category term="VMware" scheme="https://iss4cf0ng.github.io/tags/VMware/"/>
+    
+    <category term="Setup" scheme="https://iss4cf0ng.github.io/tags/Setup/"/>
     
     <category term="VMware WorkStation" scheme="https://iss4cf0ng.github.io/tags/VMware-WorkStation/"/>
     
@@ -552,19 +582,13 @@
     
     <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
     
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
     <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
     
     <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
     
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
-    
     <category term="Ghidra" scheme="https://iss4cf0ng.github.io/tags/Ghidra/"/>
-    
-    <category term="Beast" scheme="https://iss4cf0ng.github.io/tags/Beast/"/>
-    
-    <category term="BeastDoor" scheme="https://iss4cf0ng.github.io/tags/BeastDoor/"/>
-    
-    <category term="Beast RAT" scheme="https://iss4cf0ng.github.io/tags/Beast-RAT/"/>
     
     <category term="Packing" scheme="https://iss4cf0ng.github.io/tags/Packing/"/>
     
@@ -577,6 +601,12 @@
     <category term="PEView" scheme="https://iss4cf0ng.github.io/tags/PEView/"/>
     
     <category term="PE File" scheme="https://iss4cf0ng.github.io/tags/PE-File/"/>
+    
+    <category term="Beast" scheme="https://iss4cf0ng.github.io/tags/Beast/"/>
+    
+    <category term="BeastDoor" scheme="https://iss4cf0ng.github.io/tags/BeastDoor/"/>
+    
+    <category term="Beast RAT" scheme="https://iss4cf0ng.github.io/tags/Beast-RAT/"/>
     
   </entry>
   
@@ -606,25 +636,13 @@
     
     <category term="OllyDbg" scheme="https://iss4cf0ng.github.io/tags/OllyDbg/"/>
     
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
     <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
     
     <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
     
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
-    
     <category term="Ghidra" scheme="https://iss4cf0ng.github.io/tags/Ghidra/"/>
-    
-    <category term="Packing" scheme="https://iss4cf0ng.github.io/tags/Packing/"/>
-    
-    <category term="Packed" scheme="https://iss4cf0ng.github.io/tags/Packed/"/>
-    
-    <category term="Unpacking" scheme="https://iss4cf0ng.github.io/tags/Unpacking/"/>
-    
-    <category term="Unpacked" scheme="https://iss4cf0ng.github.io/tags/Unpacked/"/>
-    
-    <category term="PEView" scheme="https://iss4cf0ng.github.io/tags/PEView/"/>
-    
-    <category term="PE File" scheme="https://iss4cf0ng.github.io/tags/PE-File/"/>
     
     <category term="Sub7" scheme="https://iss4cf0ng.github.io/tags/Sub7/"/>
     
@@ -634,6 +652,14 @@
     
     <category term="SubSeven RAT" scheme="https://iss4cf0ng.github.io/tags/SubSeven-RAT/"/>
     
+    <category term="Packing" scheme="https://iss4cf0ng.github.io/tags/Packing/"/>
+    
+    <category term="Packed" scheme="https://iss4cf0ng.github.io/tags/Packed/"/>
+    
+    <category term="Unpacking" scheme="https://iss4cf0ng.github.io/tags/Unpacking/"/>
+    
+    <category term="Unpacked" scheme="https://iss4cf0ng.github.io/tags/Unpacked/"/>
+    
     <category term="UPX" scheme="https://iss4cf0ng.github.io/tags/UPX/"/>
     
     <category term="ASPack" scheme="https://iss4cf0ng.github.io/tags/ASPack/"/>
@@ -641,6 +667,10 @@
     <category term="Manual Unpacking" scheme="https://iss4cf0ng.github.io/tags/Manual-Unpacking/"/>
     
     <category term="x32dbg" scheme="https://iss4cf0ng.github.io/tags/x32dbg/"/>
+    
+    <category term="PEView" scheme="https://iss4cf0ng.github.io/tags/PEView/"/>
+    
+    <category term="PE File" scheme="https://iss4cf0ng.github.io/tags/PE-File/"/>
     
   </entry>
   
@@ -668,11 +698,11 @@
     
     <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
     
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
     <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
     
     <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
-    
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
     
     <category term="Back Orifice" scheme="https://iss4cf0ng.github.io/tags/Back-Orifice/"/>
     
@@ -702,11 +732,11 @@
     
     <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
     
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
     <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
     
     <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
-    
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
     
     <category term="Netbus" scheme="https://iss4cf0ng.github.io/tags/Netbus/"/>
     
@@ -738,11 +768,11 @@
     
     <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
     
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
     <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
     
     <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
-    
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
     
     <category term="Remote Access Tool" scheme="https://iss4cf0ng.github.io/tags/Remote-Access-Tool/"/>
     
@@ -797,44 +827,6 @@
     <category term="Penetration" scheme="https://iss4cf0ng.github.io/tags/Penetration/"/>
     
     <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
-    
-    <category term="Tools" scheme="https://iss4cf0ng.github.io/tags/Tools/"/>
-    
-    <category term="Eden-RAT" scheme="https://iss4cf0ng.github.io/tags/Eden-RAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Tool] Eden-RAT——A lightweight Remote Access Tool (RAT) designed for the initial stage of penetration testing</title>
-    <link href="https://iss4cf0ng.github.io/2026/02/09/2026-2-9-ToolEdenRAT/"/>
-    <id>https://iss4cf0ng.github.io/2026/02/09/2026-2-9-ToolEdenRAT/</id>
-    <published>2026-02-09T08:53:54.000Z</published>
-    <updated>2026-02-18T06:32:48.897Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>While developing <a href="https://github.com/iss4cf0ng/EgoDrop/">EgoDrop</a> and <a href="https://github.com/iss4cf0ng/DuplexSpyCS/">DuplexSpy</a>, I successfully implemented an interactive shell within a C#-based GUI application. I then recalled one of my earlier projects that had been suspended due to my limited development experience at the time. Therefore, I decided to revisit and complete it.</p><p>The idea of this project originated when I was learning web penetration testing.<br>When discovering an RCE (Remote Code/Command Execution) vulnerability, we usually demonstrate it with simple Linux commands(e.g., <code>id</code>, <code>whoami</code>, <code>ls</code>, <code>cat /etc/passwd</code>), and that is often the end of the story. However, if we want to conduct further post-exploitation——such as pivoting into the internal network——we may rely on reverse shell tools like <code>metasploit</code>, <code>nc</code> or <code>openssl</code>. Although they are powerful and widely used, they still have certain limitations in practical penetration testing scenario.s<br>Therefore, I decided to develop a GUI-based remote access tool which can be leveraged after achieving RCE, establishing a robust and secure channel with an interactive shell and file manager.</p><p>Developing and maintaining this tool entirely on my own is challenging due to limited time, resources, and experience. As a result, the project may still contain undiscovered defects or design flaws. If you encounter any issues while using this tool, please feel free to open an issue or contact me.</p><p>If you find this tool informative or helpful, a star ⭐ will be greatly appreciated. </p><p>If you are interested in a demonstration of exploitation, please <a href="https://iss4cf0ng.github.io/2026/02/09/2026-2-9-EdenPentestInitialStage/">click here</a>.</p><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Eden-RAT is a lightweight Remote Access Tool (RAT) designed for the initial stage of penetration testing.<br>It provides a Graphical User Interface (GUI) with multiple features targeting Linux systems, including a file manager and an interactive shell.</p><p>The interactive shell enables full command execution, allowing users to run commands such as <code>ssh</code>, <code>apt</code>, <code>pip install</code>, <code>vim</code>, and other interactive programs seamlessly.</p><p>Github Repository: <a href="https://github.com/iss4cf0ng/Eden-RAT/">https://github.com/iss4cf0ng/Eden-RAT/</a></p><h1 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h1><h1 id="Features-1"><a href="#Features-1" class="headerlink" title="Features"></a>Features</h1><h2 id="Eden-Operator"><a href="#Eden-Operator" class="headerlink" title="Eden (Operator)"></a>Eden (Operator)</h2><ul><li>Build Payload</li><li>Multi Listener</li><li>Encrypted Channels</li></ul><h2 id="Infected-Machine"><a href="#Infected-Machine" class="headerlink" title="Infected Machine"></a>Infected Machine</h2><ul><li>Information</li><li>File Manager<ul><li>Display Image</li><li>Edit, Copy, Move, Paste, Upload, Download, Rename, Datetime</li><li>WGET</li><li>Archive: Compress, Extract</li><li>New: Folder, Text File</li></ul></li><li>Process View</li><li>Service View</li><li>Connection: Disconnect, Reconnect</li></ul><h1 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h1><p>This project was developed out of personal interest in cybersecurity research and education.<br>It must <strong>not</strong> be used for illegal or unauthorized activities.<br>The author is not responsible for any misuse or damage caused by this software.</p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/koyuki_jail.jpg'><img src="https://iss4cf0ng.github.io/images/meme/koyuki_jail.jpg" width=300></p><h1 id="Technical-Overview"><a href="#Technical-Overview" class="headerlink" title="Technical Overview"></a>Technical Overview</h1><p>Eden-RAT supprots encrypted communication using either AES/RSA hybrid encryption or TLS.</p><p>The AES pure implementation is adapted from:<br><a href="https://github.com/bozhu/AES-Python">https://github.com/bozhu/AES-Python</a></p><p>Once a payload successfully connects to the Eden server, it dynamically loads additional modules delivered by the server. These modules are executed via <code>exec()</code> and their class instances are registered within an internal dictionary-based class registry.</p><p>The overall architecture is illustrated below:</p><p align="center" class='item-img' data-src='/images/article/tools/eden/main/technical.png'><img src="/images/article/tools/eden/main/technical.png" width="700"></p><h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><p>Eden-RAT consists of three components——Eden-Server, Eden-Client and the payload. </p><p>The overall architecture is shown as below:</p><p align="center" class='item-img' data-src='/images/article/tools/eden/main/architecture.png'><img src="/images/article/tools/eden/main/architecture.png" width="1000"></p><p>All communication channels are point-to-point encrypted. The communication channel between the Eden-Server and the Eden-Client is encrypted using AES+RSA, while a channel between the Eden-Server and the target Linux server is encrypted using either AES+RSA or TLS.</p><h2 id="Eden-Server"><a href="#Eden-Server" class="headerlink" title="Eden-Server"></a>Eden-Server</h2><p>An Eden-Server is a python-based socket server. It provides multiple listeners for accepting and handling socket session from <strong>Eden-Clients</strong> and target Linux servers. It forwards messages between infected Linux systems and Eden-Clients, and processes tasks such as <strong>adding listener</strong>, <strong>building payload</strong> requested by Eden-Clients. </p><p>Note that an Eden-Server requires <code>pycryptodome</code>.</p><p>Available argument:</p><p align="center" class='item-img' data-src='/images/article/tools/eden/server/1.png'><img src="/images/article/tools/eden/server/1.png" width="700"></p><h2 id="Eden-Client"><a href="#Eden-Client" class="headerlink" title="Eden-Client"></a>Eden-Client</h2><p>An Eden-Client is a C2 user who performs exploitation. All the tasks can only be processed after the Eden-Client connects to an Eden-Server.</p><p align="center" class='item-img' data-src='/images/article/tools/eden/main/4.png'><img src="/images/article/tools/eden/main/4.png" width="700"></p><h2 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h2><p>A payload is a script which is used for exploitation. <strong>All cryptographic algorithms implemented in the payload are written natively</strong>. It means the target Linux server doesn’t requires any third-party libraries (such as <code>pycryptodome</code>), but only a compatible runtime environment (e.g., python 3.10).</p><h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><h2 id="Information"><a href="#Information" class="headerlink" title="Information"></a>Information</h2><p align="center" class='item-img' data-src='/images/article/tools/eden/info/1.png'><img src="/images/article/tools/eden/info/1.png" width="700"></p><h2 id="File-Manager"><a href="#File-Manager" class="headerlink" title="File Manager"></a>File Manager</h2><p align="center" class='item-img' data-src='/images/article/tools/eden/file/1.png'><img src="/images/article/tools/eden/file/1.png" width="700"></p><p align="center" class='item-img' data-src='/images/article/tools/eden/file/2.png'><img src="/images/article/tools/eden/file/2.png" width="700"></p><h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p align="center" class='item-img' data-src='/images/article/tools/eden/init_stage/6.png'><img src="/images/article/tools/eden/init_stage/6.png" width="700"></p><h2 id="Process-View"><a href="#Process-View" class="headerlink" title="Process View"></a>Process View</h2><p align="center" class='item-img' data-src='/images/article/tools/eden/process/1.png'><img src="/images/article/tools/eden/process/1.png" width="700"></p><h2 id="Service-View"><a href="#Service-View" class="headerlink" title="Service View"></a>Service View</h2><p align="center" class='item-img' data-src='/images/article/tools/eden/service/1.png'><img src="/images/article/tools/eden/service/1.png" width="700"></p><h1 id="Demonstration"><a href="#Demonstration" class="headerlink" title="Demonstration"></a>Demonstration</h1><h2 id="Deploy-Eden-C2-Server"><a href="#Deploy-Eden-C2-Server" class="headerlink" title="Deploy Eden C2 Server"></a>Deploy Eden C2 Server</h2><p>Before starting the C2 server, you need to install <code>pycryptodome</code>:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pip3 install pycryptodome<br></code></pre></td></tr></table></figure></p><p>After installing the package, <strong>you must generate an SSL private key and certificate:</strong>:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -nodes<br></code></pre></td></tr></table></figure><br>Make sure the files are named exactly:</p><ul><li><code>key.pem</code></li><li><code>cert.pem</code></li></ul><p>Finally, start the C2 server:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python3 eden_server.py -lvvp 4444<br></code></pre></td></tr></table></figure></p><p>Our Eden-Server has been deployed.</p><p align="center" class='item-img' data-src='/images/article/tools/eden/server/1.png'><img src="/images/article/tools/eden/server/1.png" width="700"></p><h2 id="Start-Eden-Client-and-Connect-to-the-C2-Server"><a href="#Start-Eden-Client-and-Connect-to-the-C2-Server" class="headerlink" title="Start Eden Client and Connect to the C2 Server"></a>Start Eden Client and Connect to the C2 Server</h2><p>The default C2 user’s credential are:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">username = sdksdk<br>password = 123456<br></code></pre></td></tr></table></figure></p><p align="center" class='item-img' data-src='/images/article/tools/eden/main/2.png'><img src="/images/article/tools/eden/main/2.png" width="400"></p><p>After logging in successfully, you should see the following message box:</p><p align="center" class='item-img' data-src='/images/article/tools/eden/main/3.png'><img src="/images/article/tools/eden/main/3.png" width="500"></p><h2 id="Add-Delete-a-C2-User"><a href="#Add-Delete-a-C2-User" class="headerlink" title="Add/Delete a C2 User"></a>Add/Delete a C2 User</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python3 eden_server.py --db<br></code></pre></td></tr></table></figure><p align="center" class='item-img' data-src='/images/article/tools/eden/user/1.png'><img src="/images/article/tools/eden/user/1.png" width="700"></p><p>Note that your input of password is invisible, which is expected.</p><h2 id="Generate-a-payload"><a href="#Generate-a-payload" class="headerlink" title="Generate a payload"></a>Generate a payload</h2><p>Both the encryption and decryption mechanisms are implemented natively (pure implementation).<br>This means the target platform does not require any third-party libraries.</p><p align="center" class='item-img' data-src='/images/article/tools/eden/init_stage/3.png'><img src="/images/article/tools/eden/init_stage/3.png" width="300"></p><h2 id="Infection"><a href="#Infection" class="headerlink" title="Infection"></a>Infection</h2><p>You can run the payload script directly:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python3 payload.py<br></code></pre></td></tr></table></figure></p><p>You can also execute the payload after achieving RCE. If you are interested in a demonstration of exploitation, please <a href="https://iss4cf0ng.github.io/2026/02/09/2026-2-9-EdenPentestInitialStage/">click here</a>.</p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/tea_party.gif'><img src="/images/meme/tea_party.gif" width="500"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Preface&quot;&gt;&lt;a href=&quot;#Preface&quot; class=&quot;headerlink&quot; title=&quot;Preface&quot;&gt;&lt;/a&gt;Preface&lt;/h1&gt;&lt;p&gt;While developing &lt;a href=&quot;https://github.com/iss4c</summary>
-      
-    
-    
-    
-    <category term="Tools/Eden-RAT" scheme="https://iss4cf0ng.github.io/categories/Tools-Eden-RAT/"/>
-    
-    
-    <category term="Code" scheme="https://iss4cf0ng.github.io/tags/Code/"/>
-    
-    <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
-    
-    <category term="Python" scheme="https://iss4cf0ng.github.io/tags/Python/"/>
-    
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
-    
-    <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
-    
-    <category term="Remote Access Tool" scheme="https://iss4cf0ng.github.io/tags/Remote-Access-Tool/"/>
     
     <category term="Tools" scheme="https://iss4cf0ng.github.io/tags/Tools/"/>
     

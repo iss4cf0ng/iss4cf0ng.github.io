@@ -6,7 +6,7 @@
   <link href="https://iss4cf0ng.github.io/atom.xml" rel="self"/>
   
   <link href="https://iss4cf0ng.github.io/"/>
-  <updated>2026-03-10T10:17:39.547Z</updated>
+  <updated>2026-03-12T15:51:50.034Z</updated>
   <id>https://iss4cf0ng.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Tools] Elfina—A multi-architecture ELF loader supporting x86 and x86-64 binaries</title>
+    <link href="https://iss4cf0ng.github.io/2026/03/12/2026-3-12-Elfina/"/>
+    <id>https://iss4cf0ng.github.io/2026/03/12/2026-3-12-Elfina/</id>
+    <published>2026-03-12T08:08:55.000Z</published>
+    <updated>2026-03-12T15:51:50.034Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Elfina"><a href="#Elfina" class="headerlink" title="Elfina"></a>Elfina</h1><p>Elfina is a multi-architecture ELF loader supporting x86 and x86-64 binaries.</p><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Recently, I have been studying reverse engineering on Windows and the PE file format.<br>After that, I started exploring ELF binaries to learn more about Linux reverse engineering and rootkit development.</p><p>To better understand how ELF executables are loaded and executed, I developed <strong>Elfina</strong> as a learning project focused on the Linux kernel and the ELF file format.</p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/himari_elf.png'><img src="https://iss4cf0ng.github.io/images/meme/himari_elf.png" width="700"></p><p align="center">    If you find this project useful or informative, a ⭐ would be appreciated!</p><h2 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h2><p>This project is intended for <strong>educational and research purposes only</strong>.</p><p>It is designed to help understand:</p><ul><li>ELF file format</li><li>Reverse engineering concepts</li></ul><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/mika_rollcake_hit.png'><img src="https://iss4cf0ng.github.io/images/meme/mika_rollcake_hit.png" width=300></p><h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul><li>Multi-architecture ELF loader</li><li>Support for x86 and x86-64 ELF binaries</li><li>Multiple execution methods<ul><li><code>--mmap</code> loading</li><li><code>--memfd</code> execution</li></ul></li><li>ELF probing<ul><li><code>--info</code> displays ELF metadata and structure</li></ul></li></ul><h2 id="Supported-ELF-Architectures"><a href="#Supported-ELF-Architectures" class="headerlink" title="Supported ELF Architectures"></a>Supported ELF Architectures</h2><div class="table-container"><table><thead><tr><th>Architecture</th><th>Bits</th><th>Common Devices</th></tr></thead><tbody><tr><td>x86 (i386)</td><td>32-bit</td><td>Old PCs, 32-bit Linux</td></tr><tr><td>x86-64</td><td>64-bit</td><td>Modern PCs, servers</td></tr><tr><td>ARM32</td><td>32-bit</td><td>Raspberry Pi 2, older Android</td></tr><tr><td>AArch64 (ARM64)</td><td>64-bit</td><td>Raspberry Pi 3/4/5, modern Android</td></tr><tr><td>RISC-V 64</td><td>64-bit</td><td>SiFive boards, VisionFive, emerging Linux devices</td></tr></tbody></table></div><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install gcc-multilib<br></code></pre></td></tr></table></figure><p>Download and extract the release package:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://github.com/iss4cf0ng/Elfina/releases/latest/download/elfina-linux.tar.gz<br>tar -xzf elfina-linux.tar.gz<br><span class="hljs-built_in">cd</span> elfina<br><span class="hljs-built_in">chmod</span> +x ./elfina<br><span class="hljs-built_in">chmod</span> +x ./elfina32<br></code></pre></td></tr></table></figure></p><p>The layout is shown as follows:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">elfina/<br> ├ elfina<br> └ elfina32<br></code></pre></td></tr></table></figure></p><h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">./elfina --coffee<br>./elfina --info &lt;x64_elf_path&gt;<br>./elfina --mmap &lt;x64_elf_path&gt; [arguments]<br>./elfina --memfd &lt;x64_elf_path&gt; [arguments]<br><br>./elfina32 --coffee<br>./elfina32 --info &lt;x86_elf_path&gt;<br>./elfina32 --mmap &lt;x86_elf_path&gt; [arguments]<br>./elfina32 --memfd &lt;x86_elf_path&gt; [arguments] <br></code></pre></td></tr></table></figure><h2 id="Build-from-Source"><a href="#Build-from-Source" class="headerlink" title="Build from Source"></a>Build from Source</h2><p>Clone the repository and compile the project:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/iss4cf0ng/Elfina<br><span class="hljs-built_in">cd</span> Elfina<br>make<br></code></pre></td></tr></table></figure><br>or<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x build.sh<br>./build.sh<br></code></pre></td></tr></table></figure></p><h2 id="Demonstration"><a href="#Demonstration" class="headerlink" title="Demonstration"></a>Demonstration</h2><h3 id="elfina-x86-64"><a href="#elfina-x86-64" class="headerlink" title="elfina (x86-64)"></a>elfina (x86-64)</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/1.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/1.png" width=700></p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/2.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/2.png" width=700></p><hr><h3 id="elfina32-32-bit"><a href="#elfina32-32-bit" class="headerlink" title="elfina32 (32-bit)"></a>elfina32 (32-bit)</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/3.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/3.png" width=700></p><p>On Windows Subsystem for Linux (WSL2), Elfina cannot execute 32-bit ELF binary files. Probing (<code>--info</code>) and 64-bit execution work fine. For full 32-bit support, use a native Linux environment or a VM such as VirtualBox or VMWare.</p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/4.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/4.png" width=700></p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/tea_party_sakura.jpg'><img src="/images/tea_party_sakura.jpg" width=700></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Elfina&quot;&gt;&lt;a href=&quot;#Elfina&quot; class=&quot;headerlink&quot; title=&quot;Elfina&quot;&gt;&lt;/a&gt;Elfina&lt;/h1&gt;&lt;p&gt;Elfina is a multi-architecture ELF loader supporting x</summary>
+      
+    
+    
+    
+    <category term="Tools/Elfina" scheme="https://iss4cf0ng.github.io/categories/Tools-Elfina/"/>
+    
+    
+    <category term="Linux" scheme="https://iss4cf0ng.github.io/tags/Linux/"/>
+    
+    <category term="C" scheme="https://iss4cf0ng.github.io/tags/C/"/>
+    
+    <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
+    
+    <category term="Fileless Execution" scheme="https://iss4cf0ng.github.io/tags/Fileless-Execution/"/>
+    
+    <category term="Fileless" scheme="https://iss4cf0ng.github.io/tags/Fileless/"/>
+    
+    <category term="ELF" scheme="https://iss4cf0ng.github.io/tags/ELF/"/>
+    
+    <category term="Loader" scheme="https://iss4cf0ng.github.io/tags/Loader/"/>
+    
+    <category term="ELF Loader" scheme="https://iss4cf0ng.github.io/tags/ELF-Loader/"/>
+    
+    <category term="C Language" scheme="https://iss4cf0ng.github.io/tags/C-Language/"/>
+    
+    <category term="C Lang" scheme="https://iss4cf0ng.github.io/tags/C-Lang/"/>
+    
+    <category term="Kernel" scheme="https://iss4cf0ng.github.io/tags/Kernel/"/>
+    
+  </entry>
   
   <entry>
     <title>[Tools] IronPE—Minimal Windows PE manual loader written in Rust</title>
@@ -795,42 +839,6 @@
     <category term="Tools" scheme="https://iss4cf0ng.github.io/tags/Tools/"/>
     
     <category term="Eden-RAT" scheme="https://iss4cf0ng.github.io/tags/Eden-RAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Tools] dotNetPELoader——A C# PE loader for x64 and x86 PE files.</title>
-    <link href="https://iss4cf0ng.github.io/2026/02/06/2026-2-6-ToolDotNetPELoader/"/>
-    <id>https://iss4cf0ng.github.io/2026/02/06/2026-2-6-ToolDotNetPELoader/</id>
-    <published>2026-02-06T14:33:48.000Z</published>
-    <updated>2026-02-22T17:23:24.020Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Recently, when I was developing a fileless execution method for <a href="https://github.com/iss4cf0ng/DuplexSpyCS">DuplexSpy RAT</a> version 2, I could hardly find a C#-based x86 PE loader.<br>Most existing implementations I found were x64-only, such as the one developed by <a href="https://github.com/S3cur3Th1sSh1t/Creds/blob/master/Csharp/PEloader.cs">Casey Smith</a></p><p align="center" class='item-img' data-src='/images/meme/mika_neko.png'><img src="/images/meme/mika_neko.png" width="300"></p><p>Therefore, I decided to develop a C#-based x86 PE loader myself.</p><p>This console application allows you to load either x86 or x64 PE files into memory.<br>First, it reads the file bytes from the specified file path, then determines the architecture of both the loader and the target PE file.</p><p>An x64 PE cannot be loaded by an x86 loader, and vice versa.</p><p>View the GitHub repository <a href="https://github.com/iss4cf0ng/dotNetPELoader">here</a>  </p><h1 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h1><ul><li>Load <strong>x86 PE in x86 process</strong></li><li>Load <strong>x64 PE in x64 process</strong></li><li>Handles relocation and import resolving</li><li>Fully written in C#</li></ul><p>If you find this project useful, a ⭐ would be appreciated.</p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/mika_cute.jpg'><img src="https://iss4cf0ng.github.io/images/meme/mika_cute.jpg" width="200"></p><h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dotNetPELoader.exe --x64 x64_file.exe<br>dotNetPELoader.exe --x86 x86_file.exe<br>dotNetPELoader.exe --coffee<br></code></pre></td></tr></table></figure><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/hello.png'><img src="/images/article/tools/dotNetPELoader/hello.png" width="600"></p><h1 id="Demonstration"><a href="#Demonstration" class="headerlink" title="Demonstration"></a>Demonstration</h1><h2 id="x64-mimikatz"><a href="#x64-mimikatz" class="headerlink" title="x64 - mimikatz"></a>x64 - mimikatz</h2><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/anycpu.png'><img src="/images/article/tools/dotNetPELoader/anycpu.png" width="600"></p><p>If you try to load an x86 PE while the loader is an x64 loader, an exception will be thrown:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dotNetPELoader.exe --x64 mimikatz<br></code></pre></td></tr></table></figure></p><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x64.1.png'><img src="/images/article/tools/dotNetPELoader/x64.1.png" width="600"></p><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x64.2.png'><img src="/images/article/tools/dotNetPELoader/x64.2.png" width="600"></p><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x64.3.png'><img src="/images/article/tools/dotNetPELoader/x64.3.png" width="600"></p><h2 id="x86-mimikatz"><a href="#x86-mimikatz" class="headerlink" title="x86 - mimikatz"></a>x86 - mimikatz</h2><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x86_cpu.png'><img src="/images/article/tools/dotNetPELoader/x86_cpu.png" width="600"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dotNetPELoader.exe --x86 mimikatz<br></code></pre></td></tr></table></figure><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x86.1.png'><img src="/images/article/tools/dotNetPELoader/x86.1.png" width="600"></p><p align="center" class='item-img' data-src='/images/article/tools/dotNetPELoader/x86.2.png'><img src="/images/article/tools/dotNetPELoader/x86.2.png" width="600"></p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/rio_pc.jpg'><img src="/images/meme/rio_pc.jpg" width="400"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;Recently, when I was developin</summary>
-      
-    
-    
-    
-    <category term="Tools/dotNetPELoader" scheme="https://iss4cf0ng.github.io/categories/Tools-dotNetPELoader/"/>
-    
-    
-    <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
-    
-    <category term="Documentation" scheme="https://iss4cf0ng.github.io/tags/Documentation/"/>
-    
-    <category term="PE File" scheme="https://iss4cf0ng.github.io/tags/PE-File/"/>
-    
-    <category term="Fileless Execution" scheme="https://iss4cf0ng.github.io/tags/Fileless-Execution/"/>
-    
-    <category term="PE Loader" scheme="https://iss4cf0ng.github.io/tags/PE-Loader/"/>
-    
-    <category term="x86" scheme="https://iss4cf0ng.github.io/tags/x86/"/>
-    
-    <category term="x64" scheme="https://iss4cf0ng.github.io/tags/x64/"/>
     
   </entry>
   

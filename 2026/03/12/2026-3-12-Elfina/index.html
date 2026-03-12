@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Tools] Elfina—A multi-architecture ELF loader supporting x86 and x86-64 binaries | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Tools] Elfina—A multi-architecture ELF loader supporting x86 and x86-64 binaries</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-12T08:08:55.000Z" id="date"> 2026-03-12</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-12T15:51:50.034Z" id="updated"> 2026-03-12</time></div></span><br><span>Word Count: <div class="control">340</div></span><br><span>Read Time: <div class="control">2 min</div></span></div></div><hr><div id="post-content"><h1 id="Elfina"><a href="#Elfina" class="headerlink" title="Elfina"></a>Elfina</h1><p>Elfina is a multi-architecture ELF loader supporting x86 and x86-64 binaries.</p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>Recently, I have been studying reverse engineering on Windows and the PE file format.<br>After that, I started exploring ELF binaries to learn more about Linux reverse engineering and rootkit development.</p>
+<p>To better understand how ELF executables are loaded and executed, I developed <strong>Elfina</strong> as a learning project focused on the Linux kernel and the ELF file format.</p>
+<p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/himari_elf.png'><img src="https://iss4cf0ng.github.io/images/meme/himari_elf.png" width="700">
+</p>
+
+<p align="center">
+    If you find this project useful or informative, a ⭐ would be appreciated!
+</p>
+
+<h2 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h2><p>This project is intended for <strong>educational and research purposes only</strong>.</p>
+<p>It is designed to help understand:</p>
+<ul>
+<li>ELF file format</li>
+<li>Reverse engineering concepts</li>
+</ul>
+<p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/mika_rollcake_hit.png'><img src="https://iss4cf0ng.github.io/images/meme/mika_rollcake_hit.png" width=300>
+</p>
+
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li>Multi-architecture ELF loader</li>
+<li>Support for x86 and x86-64 ELF binaries</li>
+<li>Multiple execution methods<ul>
+<li><code>--mmap</code> loading</li>
+<li><code>--memfd</code> execution</li>
+</ul>
+</li>
+<li>ELF probing<ul>
+<li><code>--info</code> displays ELF metadata and structure</li>
+</ul>
+</li>
+</ul>
+<h2 id="Supported-ELF-Architectures"><a href="#Supported-ELF-Architectures" class="headerlink" title="Supported ELF Architectures"></a>Supported ELF Architectures</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th>Bits</th>
+<th>Common Devices</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x86 (i386)</td>
+<td>32-bit</td>
+<td>Old PCs, 32-bit Linux</td>
+</tr>
+<tr>
+<td>x86-64</td>
+<td>64-bit</td>
+<td>Modern PCs, servers</td>
+</tr>
+<tr>
+<td>ARM32</td>
+<td>32-bit</td>
+<td>Raspberry Pi 2, older Android</td>
+</tr>
+<tr>
+<td>AArch64 (ARM64)</td>
+<td>64-bit</td>
+<td>Raspberry Pi 3/4/5, modern Android</td>
+</tr>
+<tr>
+<td>RISC-V 64</td>
+<td>64-bit</td>
+<td>SiFive boards, VisionFive, emerging Linux devices</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install gcc-multilib<br></code></pre></td></tr></table></figure>
+<p>Download and extract the release package:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://github.com/iss4cf0ng/Elfina/releases/latest/download/elfina-linux.tar.gz<br>tar -xzf elfina-linux.tar.gz<br><span class="hljs-built_in">cd</span> elfina<br><span class="hljs-built_in">chmod</span> +x ./elfina<br><span class="hljs-built_in">chmod</span> +x ./elfina32<br></code></pre></td></tr></table></figure></p>
+<p>The layout is shown as follows:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">elfina/<br> ├ elfina<br> └ elfina32<br></code></pre></td></tr></table></figure></p>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">./elfina --coffee<br>./elfina --info &lt;x64_elf_path&gt;<br>./elfina --mmap &lt;x64_elf_path&gt; [arguments]<br>./elfina --memfd &lt;x64_elf_path&gt; [arguments]<br><br>./elfina32 --coffee<br>./elfina32 --info &lt;x86_elf_path&gt;<br>./elfina32 --mmap &lt;x86_elf_path&gt; [arguments]<br>./elfina32 --memfd &lt;x86_elf_path&gt; [arguments] <br></code></pre></td></tr></table></figure>
+<h2 id="Build-from-Source"><a href="#Build-from-Source" class="headerlink" title="Build from Source"></a>Build from Source</h2><p>Clone the repository and compile the project:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/iss4cf0ng/Elfina<br><span class="hljs-built_in">cd</span> Elfina<br>make<br></code></pre></td></tr></table></figure><br>or<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x build.sh<br>./build.sh<br></code></pre></td></tr></table></figure></p>
+<h2 id="Demonstration"><a href="#Demonstration" class="headerlink" title="Demonstration"></a>Demonstration</h2><h3 id="elfina-x86-64"><a href="#elfina-x86-64" class="headerlink" title="elfina (x86-64)"></a>elfina (x86-64)</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/1.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/1.png" width=700>
+</p>
+
+<p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/2.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/2.png" width=700>
+</p>
+
+<hr>
+<h3 id="elfina32-32-bit"><a href="#elfina32-32-bit" class="headerlink" title="elfina32 (32-bit)"></a>elfina32 (32-bit)</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/3.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/3.png" width=700>
+</p>
+
+<p>On Windows Subsystem for Linux (WSL2), Elfina cannot execute 32-bit ELF binary files. Probing (<code>--info</code>) and 64-bit execution work fine. For full 32-bit support, use a native Linux environment or a VM such as VirtualBox or VMWare.</p>
+<p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/4.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-12-Elfina/4.png" width=700>
+</p>
+
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/tea_party_sakura.jpg'><img src="/images/tea_party_sakura.jpg" width=700>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/03/10/2026-3-10-IronPE/">[Tools] IronPE—Minimal Windows PE manual loader written in Rust Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/musa.mp3",
+    "/mp3/music/air.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/midnight_trip.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Elfina"><span class="toc-number">1.</span> <span class="toc-text">Elfina</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">1.1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Disclaimer"><span class="toc-number">1.2.</span> <span class="toc-text">Disclaimer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Features"><span class="toc-number">1.3.</span> <span class="toc-text">Features</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Supported-ELF-Architectures"><span class="toc-number">1.4.</span> <span class="toc-text">Supported ELF Architectures</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.5.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Requirements"><span class="toc-number">1.5.1.</span> <span class="toc-text">Requirements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-number">1.5.2.</span> <span class="toc-text">Usage</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Build-from-Source"><span class="toc-number">1.6.</span> <span class="toc-text">Build from Source</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demonstration"><span class="toc-number">1.7.</span> <span class="toc-text">Demonstration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#elfina-x86-64"><span class="toc-number">1.7.1.</span> <span class="toc-text">elfina (x86-64)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elfina32-32-bit"><span class="toc-number">1.7.2.</span> <span class="toc-text">elfina32 (32-bit)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">2.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

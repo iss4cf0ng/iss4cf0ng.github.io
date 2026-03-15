@@ -35,7 +35,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
   --light-background: url('/img/bk.jpg');
 }</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing Gh0st RAT Beta 3.6</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-15T10:20:08.000Z" id="date"> 2026-03-15</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-15T17:35:27.332Z" id="updated"> 2026-03-16</time></div></span><br><span>Word Count: <div class="control">1.8k</div></span><br><span>Read Time: <div class="control">11 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generation</a>.</p>
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing Gh0st RAT Beta 3.6</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-15T10:20:08.000Z" id="date"> 2026-03-15</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-15T17:39:18.501Z" id="updated"> 2026-03-16</time></div></span><br><span>Word Count: <div class="control">1.8k</div></span><br><span>Read Time: <div class="control">11 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generation</a>.</p>
 <p>If you are interested in the full series, please refer to the linked article above.</p>
 <p>Key findings include:</p>
 <ul>
@@ -251,7 +251,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/22.png'><img src="/images/article/2026-3-15-Gh0st/22.png" width=400>
 </p>
 
-<p>Base on this observation, I initially suspected that Gh0st dynamically loads networking libraries at runtime.</p>
+<p>Based on this observation, I initially suspected that Gh0st dynamically loads networking libraries at runtime.</p>
 <p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/23.png'><img src="/images/article/2026-3-15-Gh0st/23.png" width=400>
 </p>
 
@@ -363,7 +363,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </p>
 
 <p>These analysis confirmed that this is the DLL file responsible for C2 communication.</p>
-<p>This raise another question: <strong>what is the purpose of <code>dll.tmp</code> (the initial DLL file)?</strong></p>
+<p>This raises another question: <strong>what is the purpose of <code>dll.tmp</code> (the initial DLL file)?</strong></p>
 <p>After further investigation, it appears that this component allows the compromised host to connect a specified proxy server.</p>
 <p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/40.png'><img src="/images/article/2026-3-15-Gh0st/40.png" width=700>
     <figcaption>
@@ -379,7 +379,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
     </figcaption>
 </p>
 
-<p>At first glace, this may appear to be a simple evasion technique. However, further analysis shows that this mechanism actually implements a self-destruction routine!</p>
+<p>At first glance, this may appear to be a simple evasion technique. However, further analysis shows that this mechanism actually implements a self-destruction routine!</p>
 <p>The payload allocates memory in the <code>winlogon.exe</code> process using <code>VirtualAllocEx()</code>.</p>
 <p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/43.png'><img src="/images/article/2026-3-15-Gh0st/43.png" width=700>
 </p>
@@ -406,7 +406,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </ol>
 <p>Why so sophisticated? The reason for this approach is that a running PE file cannot directly delete itself. By executing the cleanup routine inside <code>winlogon.exe</code>, the malware can remove its own service and registry artifacts, effectively implementing a self-destruction mechanism.</p>
 <h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article introduced the first variant in the Gh0st family and conducted reverse engineering. Gh0st RAT Beta 3.6 represents one of the earliest open-source implementations in the Gh0st ecosystem and serves as the foundation for many later variants.</p>
-<p>One important lesson from this analysis is how Gh0st implemented a self-desruction mechanism at such an early stage. Although this technique may not function correctly on modern operating systems such as Windows 10 or Windows 11, it demonstrates how early threat actors attemped to remove forensic traces of their tools.</p>
+<p>One important lesson from this analysis is how Gh0st implemented a self-destruction mechanism at such an early stage. Although this technique may not function correctly on modern operating systems such as Windows 10 or Windows 11, it demonstrates how early threat actors attemped to remove forensic traces of their tools.</p>
 <p>Again, since the Gh0st family contains numerous variants, it is difficult to analyze all of them within a single article. Future posts in this series will examine additional Gh0st variants and provide supplementary analysis.</p>
 <p>If you have any comments or suggestions, please feel free to leave them below!</p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><blockquote id="fn_1">

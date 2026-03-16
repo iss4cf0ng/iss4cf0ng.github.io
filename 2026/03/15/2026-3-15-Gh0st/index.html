@@ -35,7 +35,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
   --light-background: url('/img/bk.jpg');
 }</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing Gh0st RAT Beta 2.5-3.6</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-15T10:20:08.000Z" id="date"> 2026-03-15</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-16T02:50:32.376Z" id="updated"> 2026-03-16</time></div></span><br><span>Word Count: <div class="control">1.8k</div></span><br><span>Read Time: <div class="control">11 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generations of RATs</a>.</p>
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing Gh0st RAT Beta 2.5-3.6</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-15T10:20:08.000Z" id="date"> 2026-03-15</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-16T03:24:20.938Z" id="updated"> 2026-03-16</time></div></span><br><span>Word Count: <div class="control">1.8k</div></span><br><span>Read Time: <div class="control">11 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generations of RATs</a>.</p>
 <p>If you are interested in the full series, please refer to the linked article above.</p>
 <p>Key findings include:</p>
 <ul>
@@ -140,13 +140,13 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 
 <p>In this situation, one option is to switch the operating system to a Simplified Chinese environment.</p>
 <p>However, there is a simpler solution: <strong>Locale Emulator</strong>. This tool allows applications to be launched using a specified system locale.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/4.png'><img src="/images/article/2026-3-15-Gh0st/4.png" width=300>
+<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/4.png'><img src="/images/article/2026-3-15-Gh0st/4.png" width=400>
     <figcaption>
     Locale Emulator Installer
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/5.png'><img src="/images/article/2026-3-15-Gh0st/5.png" width=300>
+<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/5.png'><img src="/images/article/2026-3-15-Gh0st/5.png" width=400>
     <figcaption>
     Installing the Simplified Chinese locale
     </figcaption>
@@ -167,7 +167,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <hr>
 <h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><p>For readability, the first few secreenshots are taken from <strong>Gh0st Beta 3.6</strong>, since that version provides an English interface.</p>
 <p>Gh0st beta 2.5-3.6 provides the following graphical user interface:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/9.png'><img src="/images/article/2026-3-15-Gh0st/9.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/9.png'><img src="/images/article/2026-3-15-Gh0st/9.png" width=700>
     <figcaption>
     Gh0st RAT Beta 2.5-3.6
     </figcaption>
@@ -180,20 +180,20 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <li>Payload: executable deployed on the victim machines</li>
 </ul>
 <p>Configure and build the payload:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/10.png'><img src="/images/article/2026-3-15-Gh0st/10.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/10.png'><img src="/images/article/2026-3-15-Gh0st/10.png" width=700>
     <figcaption>
     Listening configuration
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/11.png'><img src="/images/article/2026-3-15-Gh0st/11.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/11.png'><img src="/images/article/2026-3-15-Gh0st/11.png" width=700>
     <figcaption>
     Payload configuration
     </figcaption>
 </p>
 
 <p>After deploying the payload on a remote machine, the compromised host will appear in the controller interface once a connection is established.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/12.png'><img src="/images/article/2026-3-15-Gh0st/12.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/12.png'><img src="/images/article/2026-3-15-Gh0st/12.png" width=700>
     <figcaption>
     Online machine(s)
     </figcaption>
@@ -256,7 +256,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 
 <p>However, I later noticed an interesting behavior. After the payload is executed, the executable file can be deleted while the process is still running. Therefore, I decided to analyze the sample using <strong>Immunity Debugger</strong> (although <strong>OllyDbg</strong> could also be used on Windows XP system).</p>
 <p>Further investigation revealed that the payload drops a DLL file into the %TEMP% directory.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/24.png'><img src="/images/article/2026-3-15-Gh0st/24.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-15-Gh0st/24.png'><img src="/images/article/2026-3-15-Gh0st/24.png" width=800>
     <figcaption>
     CreateFileA()
     </figcaption>

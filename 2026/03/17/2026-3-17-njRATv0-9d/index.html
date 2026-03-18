@@ -35,7 +35,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
   --light-background: url('/img/bk.jpg');
 }</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing njRAT v0.9</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-17T08:00:01.000Z" id="date"> 2026-03-17</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-18T17:54:28.734Z" id="updated"> 2026-03-19</time></div></span><br><span>Word Count: <div class="control">1.6k</div></span><br><span>Read Time: <div class="control">9 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generation of RATs</a>.</p>
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing njRAT v0.9</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-17T08:00:01.000Z" id="date"> 2026-03-17</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-18T18:04:07.401Z" id="updated"> 2026-03-19</time></div></span><br><span>Word Count: <div class="control">1.6k</div></span><br><span>Read Time: <div class="control">9 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-StudyingRAT/">Inside Different Generation of RATs</a>.</p>
 <p>For an overview of the full series, please refer to the article above.</p>
 <p>This article presents a reverse engineering analysis of <strong>njRAT v0.9</strong>, and serves as the second part of my analysis of the njRAT family.</p>
 <p align="center" class='item-img' data-src='/images/meme/seia_evil.jpg'><img src="/images/meme/seia_evil.jpg" width=250>
@@ -43,7 +43,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 
 <h1 id="njRAT-v0-9"><a href="#njRAT-v0-9" class="headerlink" title="njRAT v0.9"></a>njRAT v0.9</h1><p>In the previous article, I analyzed njRAT v0.7. The njRAT family contains many variants, and in this article, I highlight several interesting findings from analyzing njRAT v0.9.</p>
 <p>Version 0.9 is built upon version 0.7. If you are interested in the background of njRAT v0.9, please refer to the <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/">previous article</a>.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/17.png'><img src="/images/article/2026-3-17-njRATf0-9d/17.png" width=500>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/17.png'><img src="/images/article/2026-3-17-njRATv0-9d/17.png" width=500>
     <figcaption>
     About (Help)
     </figcaption>
@@ -112,34 +112,34 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-WinXpVMWareTool/">Installing VMware Tools on Windows XP and Windows 95 with VMware WorkStation 17</a></li>
 </ul>
 <h1 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h1><p>When I attempted to launch <code>Njrat.exe</code> (the controller application), it did not appear. <strong>Process Explorer</strong> showed that the process was created and then terminated immediately.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/1.png'><img src="/images/article/2026-3-17-njRATf0-9d/1.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/1.png'><img src="/images/article/2026-3-17-njRATv0-9d/1.png" width=600>
     <figcaption>
     Process Explorer
     </figcaption>
 </p>
 
 <p>Then, I launched the application using dnSpy (32-bit) and got an exception in the initial stage:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/2.png'><img src="/images/article/2026-3-17-njRATf0-9d/2.png" width=500>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/2.png'><img src="/images/article/2026-3-17-njRATv0-9d/2.png" width=500>
     <figcaption>
     Exception
     </figcaption>
 </p>
 
 <p>In addition, the controller application was obfuscated:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/3.png'><img src="/images/article/2026-3-17-njRATf0-9d/3.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/3.png'><img src="/images/article/2026-3-17-njRATv0-9d/3.png" width=700>
     <figcaption>
     Obfuscated code
     </figcaption>
 </p>
 
 <p>I suspected that the issue might be related to the obfuscator, so I de-obfuscated the binary using <strong>de4dot</strong>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">de4dot.exe NjRat.exe<br></code></pre></td></tr></table></figure></p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/4.png'><img src="/images/article/2026-3-17-njRATf0-9d/4.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/4.png'><img src="/images/article/2026-3-17-njRATv0-9d/4.png" width=700>
     <figcaption>
     de4dot
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/5.png'><img src="/images/article/2026-3-17-njRATf0-9d/5.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/5.png'><img src="/images/article/2026-3-17-njRATv0-9d/5.png" width=700>
     <figcaption>
     De-obfuscated code
     </figcaption>
@@ -151,14 +151,14 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </blockquote>
 <p>This issue was caused by corrupted performance counter data. I resolved it using:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lodctr /R<br></code></pre></td></tr></table></figure>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/6.png'><img src="/images/article/2026-3-17-njRATf0-9d/6.png" width=800>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/6.png'><img src="/images/article/2026-3-17-njRATv0-9d/6.png" width=800>
     <figcaption>
     lodctr /R (require administrator privilege)
     </figcaption>
 </p>
 
 <p>After applying this fix, the controller application launched successfully.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/7.png'><img src="/images/article/2026-3-17-njRATf0-9d/7.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/7.png'><img src="/images/article/2026-3-17-njRATv0-9d/7.png" width=700>
     <figcaption>
     lodctr /R (require administrator privilege)
     </figcaption>
@@ -166,7 +166,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 
 <hr>
 <h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><p>Compared to njRAT v.0.7, the graphical user interface in version 0.9 has been improved.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/8.png'><img src="/images/article/2026-3-17-njRATf0-9d/8.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/8.png'><img src="/images/article/2026-3-17-njRATv0-9d/8.png" width=700>
     <figcaption>
     njRAT v0.9
     </figcaption>
@@ -179,21 +179,21 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <li>Payload: executable deployed on the victim machines</li>
 </ul>
 <p>Using the provided builder to generate the payload:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/9.png'><img src="/images/article/2026-3-17-njRATf0-9d/9.png" width=400>
-    <img src="/images/article/2026-3-17-njRATf0-9d/10.png" width=400>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/9.png'><img src="/images/article/2026-3-17-njRATv0-9d/9.png" width=400>
+    <img src="/images/article/2026-3-17-njRATv0-9d/10.png" width=400>
     <figcaption>
     Configuration
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/11.png'><img src="/images/article/2026-3-17-njRATf0-9d/11.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/11.png'><img src="/images/article/2026-3-17-njRATv0-9d/11.png" width=600>
     <figcaption>
     Log of builder
     </figcaption>
 </p>
 
 <p>After deploying the payload, the compromised system appears in the controller once the connection is established.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/12.png'><img src="/images/article/2026-3-17-njRATf0-9d/12.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/12.png'><img src="/images/article/2026-3-17-njRATv0-9d/12.png" width=700>
     <figcaption>
     Controller application with an online machine
     </figcaption>
@@ -202,7 +202,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <p>The njRAT application retrieves the country (or region) flag based on the public IP address of the compromised machine. Here, the flag was not shown properly because I isolated the network environment.</p>
 <hr>
 <p>File Manager:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/13.png'><img src="/images/article/2026-3-17-njRATf0-9d/13.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/13.png'><img src="/images/article/2026-3-17-njRATv0-9d/13.png" width=700>
     <figcaption>
     File Manager
     </figcaption>
@@ -210,7 +210,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 
 <hr>
 <p>Process Manager:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/14.png'><img src="/images/article/2026-3-17-njRATf0-9d/14.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/14.png'><img src="/images/article/2026-3-17-njRATv0-9d/14.png" width=700>
     <figcaption>
     Process Manager
     </figcaption>
@@ -218,7 +218,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 
 <hr>
 <p>Connections:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/15.png'><img src="/images/article/2026-3-17-njRATf0-9d/15.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/15.png'><img src="/images/article/2026-3-17-njRATv0-9d/15.png" width=700>
     <figcaption>
     Connections
     </figcaption>
@@ -226,7 +226,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 
 <hr>
 <p>Remote Shell:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/16.png'><img src="/images/article/2026-3-17-njRATf0-9d/16.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/16.png'><img src="/images/article/2026-3-17-njRATv0-9d/16.png" width=700>
     <figcaption>
     Remote Shell
     </figcaption>
@@ -235,27 +235,27 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <p>The Remote Shell feature has also been improved. In version 0.9, the payload redirects <strong>stdin</strong>, <strong>stdout</strong> and <strong>stderr</strong>, enabling proper interactive command execution. In contrast, version 0.7 only supported a basic command execution model, which failed for interactive commands such as <code>nslookup</code>.</p>
 <hr>
 <p>Fun Manager:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/18.png'><img src="/images/article/2026-3-17-njRATf0-9d/18.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/18.png'><img src="/images/article/2026-3-17-njRATv0-9d/18.png" width=700>
     <figcaption>
     Fun Manager
     </figcaption>
 </p>
 
 <h1 id="Protocol-Analysis"><a href="#Protocol-Analysis" class="headerlink" title="Protocol Analysis"></a>Protocol Analysis</h1><p>The communication protocol of njRAT v0.9 is the same as that of version 0.7. Data is transmitted in plain text, with some fields encoded using <strong>Base64</strong> and others hashed for validation.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/19.png'><img src="/images/article/2026-3-17-njRATf0-9d/19.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/19.png'><img src="/images/article/2026-3-17-njRATv0-9d/19.png" width=700>
     <figcaption>
     Wireshark
     </figcaption>
 </p>
 
 <h1 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h1><h2 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h2><p>Open <code>NjRAT.exe</code> (controller application) and <code>Patch.exe</code> (payload) using <strong>ExeInfo PE</strong> and <strong>DIE (Detect It Easy)</strong></p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/20.png'><img src="/images/article/2026-3-17-njRATf0-9d/20.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/20.png'><img src="/images/article/2026-3-17-njRATv0-9d/20.png" width=600>
     <figcaption>
     ExeInfo PE
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/21.png'><img src="/images/article/2026-3-17-njRATf0-9d/21.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/21.png'><img src="/images/article/2026-3-17-njRATv0-9d/21.png" width=600>
     <figcaption>
     DIE (Detect It Easy)
     </figcaption>
@@ -263,34 +263,34 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 
 <p>Analysis using DIE revealed that the payload includes anti-dnSpy techniques. Additionally, the builder supports multiple packers/obfuscators.</p>
 <p>njRAT v0.9 builder provides several obfuscator (or packer):</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/22.png'><img src="/images/article/2026-3-17-njRATf0-9d/22.png" width=500>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/22.png'><img src="/images/article/2026-3-17-njRATv0-9d/22.png" width=500>
     <figcaption>
     Builder
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/23.png'><img src="/images/article/2026-3-17-njRATf0-9d/23.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/23.png'><img src="/images/article/2026-3-17-njRATv0-9d/23.png" width=700>
     <figcaption>
     DIE (Detect It Easy)
     </figcaption>
 </p>
 
 <p>Notice that DIE showed that the payload is an x86 ASM instead of a .NET executable. I then tried to de-obfuscate the payload using <strong>de4dot</strong>, the failure demonstrated the result of DIE:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/24.png'><img src="/images/article/2026-3-17-njRATf0-9d/24.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/24.png'><img src="/images/article/2026-3-17-njRATv0-9d/24.png" width=700>
     <figcaption>
     de4dot
     </figcaption>
 </p>
 
 <p>One of the reasons I decided to write this article is that I encountered several issues while analyzing this RAT. I tried to manually unpack the payload, but <strong>x32dbg</strong> threw exception (<code>EXCEPTION_ACCESS_VIOLATION</code>). Also Scylla was crashed:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/26.png'><img src="/images/article/2026-3-17-njRATf0-9d/26.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/26.png'><img src="/images/article/2026-3-17-njRATv0-9d/26.png" width=700>
     <figcaption>
     Scylla
     </figcaption>
 </p>
 
 <p>I tried to use x32dbg on Windows 7, but it failed since some DLL files are missing:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/27.png'><img src="/images/article/2026-3-17-njRATf0-9d/27.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/27.png'><img src="/images/article/2026-3-17-njRATv0-9d/27.png" width=600>
     <figcaption>
     x32dbg manual unpacking
     </figcaption>
@@ -299,7 +299,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <p>I attempted multiple approaches to resolve these issues, but none were successful. However, I realized that if you try to pack or obfuscate the payload <strong>using all three provided tools, then the payload crashes on Windows XP/7/10</strong> (I am not sure whether this is an implementation flaw or an unintended behavior).</p>
 <p>Except for this issue, de4dot works when only a single packer is used.</p>
 <p>You can also manually unpack it, if you are interested in it, please refer to <a href="https://iss4cf0ng.github.io/2026/02/27/2026-2-27-UnpackingUpxAndAspack/">this article</a>, the principle is the same as unpacking UPX and ASPack.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/25.png'><img src="/images/article/2026-3-17-njRATf0-9d/25.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/25.png'><img src="/images/article/2026-3-17-njRATv0-9d/25.png" width=700>
     <figcaption>
     x32dbg manual unpacking
     </figcaption>
@@ -307,129 +307,129 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 
 
 <p>Now, let’s analyze the de-obfuscated payload using dnSpy. Open the payload using dnSpy:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/28.png'><img src="/images/article/2026-3-17-njRATf0-9d/28.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/28.png'><img src="/images/article/2026-3-17-njRATv0-9d/28.png" width=700>
     <figcaption>
     dnSpy
     </figcaption>
 </p>
 
 <p>The <code>Main()</code> function only contains a few lines of code. In this version, njRAT payload adopts a special method to deploy the payload: it reads a zip file from its resources and executes another payload inside the zip file via <code>EntryPoint.Invoke()</code> function:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/29.png'><img src="/images/article/2026-3-17-njRATf0-9d/29.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/29.png'><img src="/images/article/2026-3-17-njRATv0-9d/29.png" width=700>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/30.png'><img src="/images/article/2026-3-17-njRATf0-9d/30.png" width=400>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/30.png'><img src="/images/article/2026-3-17-njRATv0-9d/30.png" width=400>
     <figcaption>
     a.zip file
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/31.png'><img src="/images/article/2026-3-17-njRATf0-9d/31.png" width=400>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/31.png'><img src="/images/article/2026-3-17-njRATv0-9d/31.png" width=400>
     <figcaption>
     Content of a.zip file, another Patch.exe
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/32.png'><img src="/images/article/2026-3-17-njRATf0-9d/32.png" width=400>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/32.png'><img src="/images/article/2026-3-17-njRATv0-9d/32.png" width=400>
     <figcaption>
     Content of the xml file
     </figcaption>
 </p>
 
 <p>Open <code>Patch.exe</code> using DIE:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/33.png'><img src="/images/article/2026-3-17-njRATf0-9d/33.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/33.png'><img src="/images/article/2026-3-17-njRATv0-9d/33.png" width=600>
     <figcaption>
     Result of DIE, a VB.NET executable
     </figcaption>
 </p>
 
 <p>Open this <code>Patch.exe</code> using dnSpy:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/34.png'><img src="/images/article/2026-3-17-njRATf0-9d/34.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/34.png'><img src="/images/article/2026-3-17-njRATv0-9d/34.png" width=700>
     <figcaption>
     Patch.exe
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/35.png'><img src="/images/article/2026-3-17-njRATf0-9d/35.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/35.png'><img src="/images/article/2026-3-17-njRATv0-9d/35.png" width=700>
     <figcaption>
     OK class
     </figcaption>
 </p>
 
 <p>The architecture of the payload in this version is almost same as <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/#Reverse-Engineering">njRAT v0.7</a>:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/36.png'><img src="/images/article/2026-3-17-njRATf0-9d/36.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/36.png'><img src="/images/article/2026-3-17-njRATv0-9d/36.png" width=700>
     <figcaption>
     OK.ko()
     </figcaption>
 </p>
 
 <p>The <code>INS()</code> function is used for installation:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/37.png'><img src="/images/article/2026-3-17-njRATf0-9d/37.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/37.png'><img src="/images/article/2026-3-17-njRATv0-9d/37.png" width=700>
 </p>
 
 <p>Using <code>netsh firewall add allowed program</code> command to modify firewall rules:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/38.png'><img src="/images/article/2026-3-17-njRATf0-9d/38.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/38.png'><img src="/images/article/2026-3-17-njRATv0-9d/38.png" width=700>
     <figcaption>
     Modifying firewall rules
     </figcaption>
 </p>
 
 <p>Modifying registry to maintain persistence:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/39.png'><img src="/images/article/2026-3-17-njRATf0-9d/39.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/39.png'><img src="/images/article/2026-3-17-njRATv0-9d/39.png" width=700>
     <figcaption>
     Modifying HKCU and HKLM
     </figcaption>
 </p>
 
 <p>Set payload attribute to hidden and copy it to startup folder:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/40.png'><img src="/images/article/2026-3-17-njRATf0-9d/40.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/40.png'><img src="/images/article/2026-3-17-njRATv0-9d/40.png" width=700>
     <figcaption>
     Hidden file and startup folder
     </figcaption>
 </p>
 
 <p>The <code>RC()</code> function is responsible for remote connection (or remote control), while the <code>WRK()</code> function is used for keylogger:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/41.png'><img src="/images/article/2026-3-17-njRATf0-9d/41.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/41.png'><img src="/images/article/2026-3-17-njRATv0-9d/41.png" width=700>
     <figcaption>
     RC() function and WRK() function
     </figcaption>
 </p>
 
 <p>The <code>Ind()</code> function is used for message handler:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/42.png'><img src="/images/article/2026-3-17-njRATf0-9d/42.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/42.png'><img src="/images/article/2026-3-17-njRATv0-9d/42.png" width=700>
     <figcaption>
     this.Ind((byte[])a0);
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/43.png'><img src="/images/article/2026-3-17-njRATf0-9d/43.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/43.png'><img src="/images/article/2026-3-17-njRATv0-9d/43.png" width=700>
     <figcaption>
     Message handler
     </figcaption>
 </p>
 
 <p>Compared to <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/#Reverse-Engineering">njRAT v0.7</a>, version 0.9 involves more operations for disabling system tools, such as <strong>Registry Tools</strong>, <strong>System Restore</strong>, <strong>Task Manager</strong>, etc.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/44.png'><img src="/images/article/2026-3-17-njRATf0-9d/44.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/44.png'><img src="/images/article/2026-3-17-njRATv0-9d/44.png" width=700>
     <figcaption>
     Disabling system tools
     </figcaption>
 </p>
 
 <p>Same as <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/#Reverse-Engineering">njRAT v0.7</a>, it also allows attackers to protect the payload process via <code>NtSetInformationProcess</code>. It raises BSOD (Blue Screen of Death) if it is terminated. I will explain this feature in the future post.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/45.png'><img src="/images/article/2026-3-17-njRATf0-9d/45.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/45.png'><img src="/images/article/2026-3-17-njRATv0-9d/45.png" width=700>
     <figcaption>
     Critical Process
     </figcaption>
 </p>
 
 <h2 id="Controller-Application"><a href="#Controller-Application" class="headerlink" title="Controller Application"></a>Controller Application</h2><p>I also learned something in this version of njRAT controller application. In this version, binder is provided. A binder can bind the payload into another executable. I was curious how it is achieved.</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/46.png'><img src="/images/article/2026-3-17-njRATf0-9d/46.png" width=600>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/46.png'><img src="/images/article/2026-3-17-njRATv0-9d/46.png" width=600>
     <figcaption>
     Merging App (Binder)
     </figcaption>
 </p>
 
 <p>I opened the controller application that I de-obfuscated in the previous section and found the binder function:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/47.png'><img src="/images/article/2026-3-17-njRATf0-9d/47.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/47.png'><img src="/images/article/2026-3-17-njRATv0-9d/47.png" width=700>
     <figcaption>
     Binding files
     </figcaption>
@@ -445,14 +445,14 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </ol>
 <p>Is the final binaries file executable? Of course! It is compliant with the PE format.</p>
 <p>So what does <code>AN.exe</code> do? Let’s investigate it using dnSpy:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/48.png'><img src="/images/article/2026-3-17-njRATf0-9d/48.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/48.png'><img src="/images/article/2026-3-17-njRATv0-9d/48.png" width=700>
     <figcaption>
     Stub_Load() of AN.exe
     </figcaption>
 </p>
 
 <p>Therefore, the principle of the binder of njRAT v0.9 is clear: <code>AN.exe</code> is the unpacker of the merged binaries. It reads itself and stores the file bytes into memory. It then splits it into different parts using the splitter <code>47150</code>. Eventually, it writes these different binaries parts onto disk and executes them respectively:</p>
-<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATf0-9d/49.png'><img src="/images/article/2026-3-17-njRATf0-9d/49.png" width=700>
+<p align="center" class='item-img' data-src='/images/article/2026-3-17-njRATv0-9d/49.png'><img src="/images/article/2026-3-17-njRATv0-9d/49.png" width=700>
     <figcaption>
     Process.Start()
     </figcaption>

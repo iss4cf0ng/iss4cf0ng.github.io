@@ -208,12 +208,7 @@ class Code {
             this.addEvent(getElement('.code-header', item));
         };
         this.clearMermaid = () => {
-            document.querySelectorAll('.mermaid').forEach((item) => {
-                let style = item.querySelector('style');
-                if (style) {
-                    style.remove();
-                }
-            });
+            
         };
         this.findCode = () => {
             let codeBlocks = document.querySelectorAll('.highlight');
@@ -237,13 +232,12 @@ class Code {
                     }
                 });
             }
-            mermaid.init();
-            this.clearMermaid();
         };
         this.findCode();
     }
 }
-let code = new Code();
+
+var code = new Code();
 class Cursor {
     constructor() {
         this.now = new MouseEvent('');
@@ -835,6 +829,8 @@ class Comments {
                 }
                 catch (e) { }
             });
+            
+            if (this.elements.length === 0) return;
             this.elements.forEach((item) => item.comment.style.display = 'none');
             this.nowActive = this.elements[0];
             for (let i of this.elements) {
@@ -845,7 +841,8 @@ class Comments {
         };
         this.setHTML();
         document.addEventListener('pjax:complete', this.setHTML);
-        this.nowActive = this.elements[0];
+        
+        this.nowActive = this.elements[0] || null;
     }
 }
 new Comments();

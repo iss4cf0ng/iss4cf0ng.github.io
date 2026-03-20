@@ -1,0 +1,938 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Studying] Analyzing njRAT Lime and Green Edition | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing njRAT Lime and Green Edition</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-17T18:47:56.000Z" id="date"> 2026-03-18</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-20T13:56:55.529Z" id="updated"> 2026-03-20</time></div></span><br><span>Word Count: <div class="control">2.9k</div></span><br><span>Read Time: <div class="control">18 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a>.</p>
+<p>If you are interested in the full series, please refer to the linked article above.</p>
+<p>This article focuses on several less-discussed aspects of <strong>njRAT Lime Edition</strong>, including:</p>
+<ul>
+<li>Analysis of destructive features (ransomware, DDoS, Bitcoin grabber)</li>
+<li>Identification of implementation flaws in attack mechanisms</li>
+<li>Comparison between Green and Lime editions</li>
+</ul>
+<p>The goal is not only to understand how njRAT works, but also to evaluate the quality and limitations of its implementation. In addition, it serves as the third part of my analysis of the <a href="/TheNjRatFamily/">njRAT family</a>.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_love.png'><img src="/images/meme/mika_love.png" width=200>
+</p>
+
+<h1 id="njRAT-Lime-Edition"><a href="#njRAT-Lime-Edition" class="headerlink" title="njRAT Lime Edition"></a>njRAT Lime Edition</h1><p>I analyzed two njRAT versions in previous articles. In this article, I present an analysis of one of the most well-known variants—<strong>njRAT Lime Edition</strong>.</p>
+<p>Compared to the official release, njRAT Lime Edition introduces multiple destructive features, such as DDoS (Slowloris), ransomware, a Bitcoin grabber, and UAC bypass techniques. At the time of writing, there is limited public analysis focusing on these specific malicious features. Therefore, I decided to focus not only on the communication mechanism and architecture, but also on these features.</p>
+<p>There is another edition with a similar name—Green Edition—but the two are different. Both are based on the official njRAT v0.7d; however, the Lime Edition includes more destructive features than the Green Edition.</p>
+<p>According to Wikipedia <sup><a href="#fn_1" id="reffn_1">1</a></sup>:</p>
+<blockquote>
+<p> To date, there are many versions of this virus, the most famous of which is the njRAT Green Edition.</p>
+</blockquote>
+<p>However, I believe this claim is debatable, as the Lime Edition provides more distinctive and aggressive features.</p>
+<p>This article compares the differences between the Green Edition and the Lime Edition, with a primary focus on the Lime Edition.</p>
+<h1 id="Experimental-Environment"><a href="#Experimental-Environment" class="headerlink" title="Experimental Environment"></a>Experimental Environment</h1><p>To safely conduct malware analysis, the environment should be isolated using virtual machines. Under no circumstances should malware be executed on a personal or production system.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ExeInfo PE</td>
+<td>Executable analysis tool used to detect packers, compilers, and basic file properties</td>
+</tr>
+<tr>
+<td>Detect It Easy (DIE)</td>
+<td>File identification tool used to detect packers, protectors, and compiler signatures</td>
+</tr>
+<tr>
+<td>Wireshark</td>
+<td>Network protocol analyzer used for packet capture and traffic analysis</td>
+</tr>
+<tr>
+<td>de4dot</td>
+<td>De-obfuscation tool for .NET PE</td>
+</tr>
+<tr>
+<td>dnSpy</td>
+<td>.NET debugger and assembly editor</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>IP Address</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 7 x64 (VM)</td>
+<td>192.168.85.5</td>
+<td>Victim machine used for executing both the controller and payload</td>
+</tr>
+<tr>
+<td>Windows 10 x64 (VM)</td>
+<td>192.168.85.3</td>
+<td>Analysis machine used for reverse engineering</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The two virtual machines were configured within an isolated internal network to prevent unintended external communication. If you want to know how to set up your experimental environment, please view:</p>
+<ul>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/">How to Setup Your Experimental Environment for Malware Analysis</a></li>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-WinXpVMWareTool/">Installing VMware Tools on Windows XP and Windows 95 with VMware WorkStation 17</a></li>
+</ul>
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><p>Same as njRAT v0.7, both the controller application and payload require .NET Framework 3.5. If you want to learn more about this phenomenon, please refer to <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/">this article</a>.</p>
+<h2 id="njRAT-Lime-Edition-1"><a href="#njRAT-Lime-Edition-1" class="headerlink" title="njRAT Lime Edition"></a>njRAT Lime Edition</h2><p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/2.png'><img src="/images/article/2026-3-18-njRATLime/2.png" width=700>
+    <figcaption>
+    njRAT Lime Edition
+    </figcaption>
+</p>
+
+<p>As mentioned in <a href="https://iss4cf0ng.github.io/2026/03/04/2026-3-4-StudyingRAT/">previous articles</a>, the term “server” might be confusing from a modern perspective. Compared to the previous articles, this GUI application acts as the server in the network architecture, while the payload is the client. However, in that era, the term <strong>server</strong> often referred to the service provider—the payload—which provides the remote manipulation features.</p>
+<p>To avoid confusion, this article uses the following terms:</p>
+<ul>
+<li>Controller: attacker-side application</li>
+<li>Payload: executable deployed on the victim machines</li>
+</ul>
+<p>Use the provided builder to generate the payload:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/3.png'><img src="/images/article/2026-3-18-njRATLime/3.png" width=400>
+    <figcaption>
+    Configuration
+    </figcaption>
+</p>
+
+<p>After deploying the payload, the compromised machine appears in the controller application once the connection is established.</p>
+<p>We can see that njRAT v0.8 Lime Edition provides multiple malicious features:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/5.png'><img src="/images/article/2026-3-18-njRATLime/5.png" width=700>
+    <figcaption>
+    njRAT v0.8 Lime Edition
+    </figcaption>
+</p>
+
+<p>Since regular functionalities such as <strong>File Manager</strong>, <strong>RegEdit</strong>, <strong>Remote Shell</strong>, <strong>Monitor</strong>, <strong>Keylogger</strong>, etc. are the same as those in previous versions.</p>
+<p>All of the following features will be analyzed in the reverse engineering section. Some functionalities do not function properly or are not clearly observable; therefore, they are not shown as screenshots, but I will still analyze and explain their underlying principles.</p>
+<hr>
+<p>Ransomware:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/6.png'><img src="/images/article/2026-3-18-njRATLime/6.png" width=500>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/7.png'><img src="/images/article/2026-3-18-njRATLime/7.png" width=500>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/8.png'><img src="/images/article/2026-3-18-njRATLime/8.png" width=600>
+    <figcaption>
+    Provided wallpapers
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/9.png'><img src="/images/article/2026-3-18-njRATLime/9.png" width=800>
+</p>
+
+<p>In practice, ransomware typically does not encrypt system files in order to maintain system stability, as the attacker’s goal is usually to receive payment.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/10.png'><img src="/images/article/2026-3-18-njRATLime/10.png" width=700>
+    <figcaption>
+    C:\Windows\System32
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/11.png'><img src="/images/article/2026-3-18-njRATLime/11.png" width=700>
+    <figcaption>
+    njRAT v0.8 Lime Edition
+    </figcaption>
+</p>
+
+<hr>
+<p>Lock Screen:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/12.png'><img src="/images/article/2026-3-18-njRATLime/12.png" width=400>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/13.png'><img src="/images/article/2026-3-18-njRATLime/13.png" width=700>
+    <figcaption>
+    Lock Screen
+    </figcaption>
+</p>
+
+<hr>
+<p>Disable Task Manager and cmd:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/14.png'><img src="/images/article/2026-3-18-njRATLime/14.png" width=400>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/15.png'><img src="/images/article/2026-3-18-njRATLime/15.png" width=600>
+    <figcaption>
+    Task manager and cmd are disabled
+    </figcaption>
+</p>
+
+<hr>
+<p>DDoS:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/16.png'><img src="/images/article/2026-3-18-njRATLime/16.png" width=500>
+    <figcaption>
+    Slowloris
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/17.png'><img src="/images/article/2026-3-18-njRATLime/17.png" width=500>
+    <figcaption>
+    ARME (I will explain it in the reverse engineering section)
+    </figcaption>
+</p>
+
+<h2 id="njRAT-Green-Edition"><a href="#njRAT-Green-Edition" class="headerlink" title="njRAT Green Edition"></a>njRAT Green Edition</h2><p>The Green Edition and the Lime Edition have a similar user graphical user interface:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/1.png'><img src="/images/article/2026-3-18-njRATLime/1.png" width=700>
+    <figcaption>
+    njRAT Green Edition
+    </figcaption>
+</p>
+
+
+<h1 id="Protocol-Analysis"><a href="#Protocol-Analysis" class="headerlink" title="Protocol Analysis"></a>Protocol Analysis</h1><p>As with <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/">njRAT v0.7</a> and <a href="https://iss4cf0ng.github.io/2026/03/17/2026-3-17-njRATv0-9d/">v0.9</a>, data is transmitted in plain text, with some fields encoded using <strong>Base64</strong> and some hashed using <strong>MD5</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/4.png'><img src="/images/article/2026-3-18-njRATLime/4.png" width=700>
+    <figcaption>
+    Wireshark
+    </figcaption>
+</p>
+
+<h1 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h1><h2 id="Key-Components-Overview"><a href="#Key-Components-Overview" class="headerlink" title="Key Components Overview"></a>Key Components Overview</h2><p>In this section, I analyzed both Green Edition and Lime Edition.</p>
+<p>The main components of the payload can be summarized as follows:</p>
+<ul>
+<li>Core: Initialization and main execution flow</li>
+<li>AntiProcess: Defensive evasion mechanism</li>
+<li>BotKiller: Removal of competing malware</li>
+<li>SPUSB: USB propagation module</li>
+<li>bitgrb: Bitcoin wallet detection</li>
+<li>Ind(): Message handler for C2 communication</li>
+</ul>
+<h2 id="Architecture-Overview"><a href="#Architecture-Overview" class="headerlink" title="Architecture Overview"></a>Architecture Overview</h2><p>Let’s start with njRAT Lime Edition. </p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/20.png'><img src="/images/article/2026-3-18-njRATLime/20.png" width=700>
+</p>
+
+<p>Open the payload using <strong>ExeInfo PE</strong> and <strong>DIE (Detect It Easy)</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/18.png'><img src="/images/article/2026-3-18-njRATLime/18.png" width=600>
+    <figcaption>
+    ExeInfo PE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/19.png'><img src="/images/article/2026-3-18-njRATLime/19.png" width=700>
+    <figcaption>
+    DIE (Detect It Easy)
+    </figcaption>
+</p>
+
+<p>It is interesting that DIE can detect that the payload is njRAT Lime Edition malware.</p>
+<p>Open the payload using dnSpy:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/21.png'><img src="/images/article/2026-3-18-njRATLime/21.png" width=600>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/22.png'><img src="/images/article/2026-3-18-njRATLime/22.png" width=600>
+    <figcaption>
+    Lime.StartNow.main
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/23.png'><img src="/images/article/2026-3-18-njRATLime/23.png" width=700>
+    <figcaption>
+    Core.eroc()
+    </figcaption>
+</p>
+
+<h3 id="Anti-Process"><a href="#Anti-Process" class="headerlink" title="Anti-Process"></a>Anti-Process</h3><p>If anti-process is enabled, then the payload calls <code>MyAntiProcess.Start()</code> function:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/24.png'><img src="/images/article/2026-3-18-njRATLime/24.png" width=600>
+    <figcaption>
+    MyAntiProcess.Start()
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/25.png'><img src="/images/article/2026-3-18-njRATLime/25.png" width=700>
+    <figcaption>
+    Handler
+    </figcaption>
+</p>
+
+<p>The <code>Hander()</code> function is invoked every second using the <code>Timer</code> class.</p>
+<p>I summarized all the branches and behaviors of the anti-process mechanism as follows:</p>
+<div class="mermaid">
+flowchart TD
+    A[Start Timer Handler] --> B[GetProcesses]
+
+    B --> C{Scan ProcessName or WindowTitle}
+
+    %% Analysis tools
+    C -->|Process Hacker / Process Explorer| D1[Send MSG to C2]
+    D1 --> D2[Kill Process]
+
+    %% Task Manager
+    C -->|taskmgr| E1[Send MSG Task Manager detected]
+    E1 --> E2[Kill Process]
+
+    %% Network tools
+    C -->|Wireshark TcpView cports NetworkMiner| F1[Kill Process]
+
+    %% Security tools
+    C -->|MBAM RogueKiller KeyScrambler| G1[Kill Process]
+
+    %% Sandbox
+    C -->|Sandboxie SbieCtrl| H1[EndApp Exit Malware]
+
+    %% Sandbox title
+    C -->|Sandboxie Control| H2[EndApp]
+
+    %% VMware
+    C -->|VMware VGAuthService| I1[Send MSG VMware detected]
+    I1 --> I2[Sleep]
+    I2 --> I3[UNS Self Delete]
+
+    %% VirtualBox
+    C -->|VirtualBox VBoxService| J1[Send MSG VBox detected]
+    J1 --> J2[Sleep]
+    J2 --> J3[UNS Self Delete]
+
+    %% Reverse tools
+    C -->|Reflector ExeInfo PE| K1[Kill Process]
+
+    %% DNS tools
+    C -->|ApateDNS IPBlocker| L1[Kill Process]
+
+    %% Title matching tools
+    C -->|SmartSniff CurrPorts TCPEye| M1[Kill Process]
+
+    %% Loop
+    D2 --> Z[Next Scan]
+    E2 --> Z
+    F1 --> Z
+    G1 --> Z
+    H1 --> Z
+    H2 --> Z
+    I3 --> Z
+    J3 --> Z
+    K1 --> Z
+    L1 --> Z
+    M1 --> Z
+
+    Z --> B
+</div>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/26.png'><img src="/images/article/2026-3-18-njRATLime/26.png" width=700>
+    <figcaption>
+    EndApp()
+    </figcaption>
+</p>
+
+
+<p>We can also classify them using table:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Name</th>
+      <th>Detection Method</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- System Tools -->
+    <tr><td rowspan="10">System Tools</td><td>taskmgr</td><td>ProcessName</td><td>Kill + Report</td></tr>
+    <tr><td>ProcessLasso</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>ProcessLassoLauncher</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>AdvancedProcessController</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>SystemExplorer</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>Process Hacker</td><td>WindowTitle</td><td>Kill + Report</td></tr>
+    <tr><td>Process Explorer</td><td>WindowTitle</td><td>Kill + Report</td></tr>
+    <tr><td>ProcessEye</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>MKN TaskExplorer</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>System Explorer</td><td>WindowTitle</td><td>Kill</td></tr>
+    <!-- Network Analysis -->
+    <tr><td rowspan="13">Network Analysis</td><td>wireshark</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>cports</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>Tcpview</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>NetSnifferCs</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>capsa</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>NetworkMiner</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>smsniff</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>SmartSniff</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>CurrPorts</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>Active Ports</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>TCPEye</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>DiamondCS Port Explorer</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>The Wireshark Network Analyzer</td><td>WindowTitle</td><td>Kill</td></tr>
+    <!-- Security Tools -->
+    <tr><td rowspan="7">Security Tools</td><td>mbam</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>RogueKiller</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>KeyScrambler</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>TiGeR-Firewall</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>Malwarebytes Anti-Malware</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>VirusTotal</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>Metascan Online</td><td>WindowTitle</td><td>Kill</td></tr>
+    <!-- Sandbox -->
+    <tr><td rowspan="5">Sandbox</td><td>SbieCtrl</td><td>ProcessName</td><td>EndApp</td></tr>
+    <tr><td>Sandboxie Control</td><td>WindowTitle</td><td>EndApp</td></tr>
+    <tr><td>apateDNS</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>ApateDNS</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>IPBlocker</td><td>ProcessName</td><td>Kill</td></tr>
+    <!-- Reverse Engineering -->
+    <tr><td rowspan="5">Reverse Engineering</td><td>exeinfoPE</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>regshot</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>Reflector</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>.NET Reflector</td><td>WindowTitle</td><td>Kill</td></tr>
+    <tr><td>xn5x</td><td>ProcessName</td><td>Kill</td></tr>
+    <!-- Debug Tools -->
+    <tr><td rowspan="3">Debug Tools</td><td>SpyTheSpy</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>SpeedGear</td><td>ProcessName</td><td>Kill</td></tr>
+    <tr><td>Speed Gear</td><td>WindowTitle</td><td>Kill</td></tr>
+    <!-- Anti-VM -->
+    <tr><td rowspan="2">Anti-VM</td><td>VGAuthService</td><td>ProcessName</td><td>Self Delete</td></tr>
+    <tr><td>VBoxService</td><td>ProcessName</td><td>Self Delete</td></tr>
+  </tbody>
+</table>
+
+<h3 id="Detecting-Bitcoin-Wallet"><a href="#Detecting-Bitcoin-Wallet" class="headerlink" title="Detecting Bitcoin Wallet"></a>Detecting Bitcoin Wallet</h3><p>The njRAT Lime Edition payload collects potential processes used for Bitcoin wallets if this feature is enabled:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/27.png'><img src="/images/article/2026-3-18-njRATLime/27.png" width=600>
+    <figcaption>
+    bitgrb.Start()
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/28.png'><img src="/images/article/2026-3-18-njRATLime/28.png" width=800>
+    <figcaption>
+    bitgrb class
+    </figcaption>
+</p>
+
+<h3 id="Eradicating-Competitors"><a href="#Eradicating-Competitors" class="headerlink" title="Eradicating Competitors"></a>Eradicating Competitors</h3><p>Another interesting finding is that the njRAT Lime Edition payload attempts to eradicate other “competitors” to ensure that it remains the sole controller of the system.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/29.png'><img src="/images/article/2026-3-18-njRATLime/29.png" width=500>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/30.png'><img src="/images/article/2026-3-18-njRATLime/30.png" width=700>
+    <figcaption>
+    BotKillers.RunStandardBotKiller()
+    </figcaption>
+</p>
+
+<p>First, it uses <code>ScanProcess</code> and <code>IsFileMalicious</code> to roughly scan the malicious processes (competitors):</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/35.png'><img src="/images/article/2026-3-18-njRATLime/35.png" width=700>
+    <figcaption>
+    ScanProcess()
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/36.png'><img src="/images/article/2026-3-18-njRATLime/36.png" width=700>
+    <figcaption>
+    IsFileMalicious()
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/37.png'><img src="/images/article/2026-3-18-njRATLime/37.png" width=600>
+</p>
+
+<p>It then uses <code>RunStartupKiller()</code> to remove startup applications:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/31.png'><img src="/images/article/2026-3-18-njRATLime/31.png" width=700>
+    <figcaption>
+    RunStartupKiller()
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/32.png'><img src="/images/article/2026-3-18-njRATLime/32.png" width=700>
+    <figcaption>
+    StartupFucker()
+    </figcaption>
+</p>
+
+<p>The <code>StartupFucker()</code> function checks the signature of processes via <code>WinTrust.VerifyEmbeddedSignature</code> to avoid terminating the processes with legal signature:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/33.png'><img src="/images/article/2026-3-18-njRATLime/33.png" width=600>
+    <figcaption>
+    StartupFucker()
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/32.png'><img src="/images/article/2026-3-18-njRATLime/32.png" width=700>
+    <figcaption>
+    WinTrust.VerifyEmbeddedSignature()
+    </figcaption>
+</p>
+
+<p>It uses <code>DestroyFile</code> to ensure those “competitors” cannot be recovered:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/38.png'><img src="/images/article/2026-3-18-njRATLime/38.png" width=700>
+    <figcaption>
+    DestroyFile()
+    </figcaption>
+</p>
+
+<p>Thus, I concluded these features as follows:</p>
+<p>Overall Flow:</p>
+<div class="mermaid">
+flowchart TD
+    A[Start BotKiller] --> B[Kill wscript / cmd]
+    B --> C[ScanProcess]
+    C --> D[RunStartupKiller]
+    D --> E[End]
+
+    C --> C1{Is Malicious?}
+    C1 -->|Yes| C2[Kill Process]
+    C2 --> C3[Destroy File]
+    C1 -->|No| C4[Skip]
+
+    D --> D1[Clean Registry Run Keys]
+    D --> D2[Clean Startup Folder]
+</div>
+
+<p>ScanProcess:</p>
+<div class="mermaid">
+
+flowchart TD
+    A[Get All Processes] --> B[For Each Process]
+    B --> C[Get File Path]
+    C --> D[IsFileMalicious?]
+
+    D -->|No| E[Skip]
+    D -->|Yes| F{Window Visible?}
+
+    F -->|Yes| E
+    F -->|No| G[Terminate Process]
+    G --> H[Destroy File]
+
+</div>
+
+<p>IsFileMalicious:</p>
+<div class="mermaid">
+
+flowchart TD
+    A[Input File Path]
+
+    A --> B{Is Self / Known Safe?}
+    B -->|Yes| Z[Return Safe]
+
+    B -->|No| C{Has Digital Signature?}
+    C -->|Yes| Z
+
+    C -->|No| D{Suspicious Location?}
+    D -->|Yes| X[Malicious]
+
+    D -->|No| E{Hidden/System File?}
+    E -->|Yes| X
+
+    E -->|No| F{Suspicious Name?}
+    F -->|Yes| X
+
+    F -->|No| Z
+
+</div>
+
+<p>RunStartupKiller:</p>
+<div class="mermaid">
+
+flowchart TD
+    A[Start StartupKiller]
+
+    A --> B[Scan Registry Run Keys]
+    A --> C[Scan Startup Folder]
+
+    B --> B1[Call StartupFucker]
+    C --> C1[Check Each File]
+
+    C1 -->|Is Self| C2[Skip]
+    C1 -->|Not Self| C3[Destroy File]
+
+</div>
+
+
+<p>StartupFucker:</p>
+<div class="mermaid">
+
+flowchart TD
+    A[Open Registry Key] --> B[For Each Entry]
+
+    B --> C[Parse File Path]
+    C --> D{Is Self?}
+
+    D -->|Yes| E[Skip]
+    D -->|No| F[Remove Registry Key]
+
+    F --> G{Has Signature?}
+    G -->|Yes| E
+    G -->|No| H[Kill Process]
+    H --> I[Destroy File]
+
+</div>
+
+<p>DestroyFile:</p>
+<div class="mermaid">
+
+flowchart TD
+    A[Check File Exists]
+
+    A -->|No| Z[End]
+    A -->|Yes| B[Change Permissions]
+
+    B --> C[Move to Temp]
+    C --> D[Overwrite Content]
+    D --> E[Lock File]
+    E --> F[Restrict Access]
+
+    F --> Z
+
+</div>
+
+<p>These features ensure exclusive control over the compromised machine. However, the design may lead to false positives and unintentionally destroy legitimate applications.</p>
+<h3 id="USB-Spread"><a href="#USB-Spread" class="headerlink" title="USB Spread"></a>USB Spread</h3><p>The payload will spread itself to USB devices (or removable drives) if this feature is enabled.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/39.png'><img src="/images/article/2026-3-18-njRATLime/39.png" width=400>
+    <figcaption>
+    SPUSB class
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/40.png'><img src="/images/article/2026-3-18-njRATLime/40.png" width=600>
+    <figcaption>
+    SPUSB.Enable()
+    </figcaption>
+</p>
+
+<p>First, it obtains all removable drives via <code>DriveInfo.GetDrive()</code> and <code>DriveType.Removable</code>. It then copies itself to the removable drive and sets its file attributes to hidden.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/41.png'><img src="/images/article/2026-3-18-njRATLime/41.png" width=700>
+    <figcaption>
+    WorkThread()
+    </figcaption>
+</p>
+
+<p>Next, it sets all files and directories attribute to hidden, and creates shortcut (<code>*.lnk</code>) files with itself as the destination (pretending the original files and directories). Eventually, the payload notifies the C2 server if the entire procedure it completed:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/42.png'><img src="/images/article/2026-3-18-njRATLime/42.png" width=700>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/43.png'><img src="/images/article/2026-3-18-njRATLime/43.png" width=700>
+</p>
+
+<p>The flow chart of USB spreading is shown below:</p>
+<div class="mermaid">
+
+flowchart TD
+    A[Start] --> B[Scan Drives]
+    B --> C{Is Removable USB?}
+    C -->|Yes| D[Copy Self to USB & Hide]
+    D --> E[Hide Files & Folders]
+    E --> F[Create .lnk Shortcuts to Self]
+    F --> G[Notify Controller]
+    C -->|No| H[Skip]
+    G --> I[End]
+
+</div>
+
+<h3 id="Persistence"><a href="#Persistence" class="headerlink" title="Persistence"></a>Persistence</h3><p>The payload maintains persistence via the <code>schtasks /create /tn</code> command:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/44.png'><img src="/images/article/2026-3-18-njRATLime/44.png" width=700>
+</p>
+
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><p>The installation method is the same as that of <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/">njRAT v0.7</a>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/45.png'><img src="/images/article/2026-3-18-njRATLime/45.png" width=700>
+</p>
+
+<h3 id="Message-Handler"><a href="#Message-Handler" class="headerlink" title="Message Handler"></a>Message Handler</h3><p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/46.png'><img src="/images/article/2026-3-18-njRATLime/46.png" width=700>
+    <figcaption>
+    Ind()
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/47.png'><img src="/images/article/2026-3-18-njRATLime/47.png" width=700>
+    <figcaption>
+    Message Handler
+    </figcaption>
+</p>
+
+<p>The architecture of <code>Ind()</code> function (message handler) is basically the same as that of <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/">njRAT v0.7</a>. Therefore, I am going to introduce certain new malicious features and try to explain how do they work in practical scenario.</p>
+<h3 id="Delete-all-Cookies-and-Login-Data"><a href="#Delete-all-Cookies-and-Login-Data" class="headerlink" title="Delete all Cookies and Login Data"></a>Delete all Cookies and Login Data</h3><p>njRAT Lime Edition payload allows attackers to delete all cookies and login data on the compromised machine. I presume this is used for the keylogger. If all cookies and login data were deleted, then the victims must re-type the credentials for the web services. Eventually, the credentials will be logged.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/48.png'><img src="/images/article/2026-3-18-njRATLime/48.png" width=700>
+</p>
+
+
+<h3 id="Turn-off-the-Monitor"><a href="#Turn-off-the-Monitor" class="headerlink" title="Turn off the Monitor"></a>Turn off the Monitor</h3><p>The payload allows attackers to turn off the monitor via the <code>SendMessage()</code> Windows API.</p>
+<p>In practice, this feature can be exploited in several scenarios:</p>
+<ol>
+<li>Disturbing the victims.</li>
+<li>Some victims might use their computer without a clear mind, especially at <strong>midnight</strong>, they might belive their computers are sleeping after they brushed their teeth.<blockquote>
+<p>How do the attackers know they are brushing their teeth? Well… njRAT involves several relative features such as remote camera and capturing microphone stream.</p>
+</blockquote>
+</li>
+<li>Using remote desktop or other features after turned off the monitor.</li>
+</ol>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/49.png'><img src="/images/article/2026-3-18-njRATLime/49.png" width=500>
+</p>
+
+<h3 id="Disable-Task-Manager-and-cmd-exe"><a href="#Disable-Task-Manager-and-cmd-exe" class="headerlink" title="Disable Task Manager and cmd.exe"></a>Disable Task Manager and cmd.exe</h3><p>Modifying the registry values to disable <strong>Task Manager</strong> and <strong>cmd.exe</strong> (require administrative privilege):</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/50.png'><img src="/images/article/2026-3-18-njRATLime/50.png" width=700>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/54.png'><img src="/images/article/2026-3-18-njRATLime/54.png" width=700>
+</p>
+
+<h3 id="Screen-Locker"><a href="#Screen-Locker" class="headerlink" title="Screen Locker"></a>Screen Locker</h3><p>Lock the screen with calling another window form and handling input keys such as <code>Alt+F4</code></p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/52.png'><img src="/images/article/2026-3-18-njRATLime/52.png" width=700>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/53.png'><img src="/images/article/2026-3-18-njRATLime/53.png" width=700>
+</p>
+
+<h3 id="DDoS"><a href="#DDoS" class="headerlink" title="DDoS"></a>DDoS</h3><p>Slowloris is a resource-exhaustion denial-of-service attack.</p>
+<p>Compared to the <a href="https://iss4cf0ng.github.io/2026/01/01/2026-1-1-SynFlooding/">previous article, which introduced SYN flooding</a>, Slowloris requires establishing TCP connections.</p>
+<p>The principle is that a web server identifies the end of an HTTP header using <code>\r\n\r\n</code>. If only <code>\r\n</code> is received, the server continues waiting for the complete header.</p>
+<p>Slowloris sends repeated <code>\r\n</code> fragments at intervals (below the timeout threshold), keeping many connections open simultaneously. Once the maximum number of connections is reached, legitimate users can no longer access the server.</p>
+<p>This attack does not consume significant bandwidth, but instead exhausts the connection pool.</p>
+<p>Therefore, we can presume that the <strong>Stress Test</strong> method was initially designed for web servers, of course it can also be applied for attacking other network devices.</p>
+<p>However, it can be observed that the author did <strong>NOT</strong> implement the DDoS method correctly:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/51.png'><img src="/images/article/2026-3-18-njRATLime/51.png" width=700>
+    <figcaption>
+    Slowloris
+    </figcaption>
+</p>
+
+<p>The reason is: it adopted <code>\r\n\r\n</code>, but according to the principle of Slowloris, ending with <code>\r\n\r\n</code> is incorrect. Plus, the socket connections are closed immediately.</p>
+<p>njRAT Lime Edition also provides another DDoS method named <strong>ARME</strong>. After further investigation, I believe that ARME stands for <strong>Apache Remote Memory Exhaustion</strong> <sup><a href="#fn_2" id="reffn_2">2</a></sup>.</p>
+<p>However, again, the author did <strong>NOT</strong> implement ARME correctly:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/55.png'><img src="/images/article/2026-3-18-njRATLime/55.png" width=700>
+</p>
+
+<h3 id="UAC-Bypass"><a href="#UAC-Bypass" class="headerlink" title="UAC Bypass"></a>UAC Bypass</h3><h3 id="Blocking-Webpage"><a href="#Blocking-Webpage" class="headerlink" title="Blocking Webpage"></a>Blocking Webpage</h3><p>The payload blocks website accessing via modifying <code>hosts</code> file:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/57.png'><img src="/images/article/2026-3-18-njRATLime/57.png" width=700>
+</p>
+
+<h3 id="Bitcoin-Grabber"><a href="#Bitcoin-Grabber" class="headerlink" title="Bitcoin Grabber"></a>Bitcoin Grabber</h3><p>This feature is used for stealing Bitcoin. However, the feature is not as advanced as I thought:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/28.png'><img src="/images/article/2026-3-18-njRATLime/28.png" width=700>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/56.png'><img src="/images/article/2026-3-18-njRATLime/56.png" width=700>
+</p>
+
+<h3 id="Ransomware"><a href="#Ransomware" class="headerlink" title="Ransomware"></a>Ransomware</h3><p>njRAT Lime Edition integrates ransomware functionality into the payload. However, this feature contains several flaws.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/58.png'><img src="/images/article/2026-3-18-njRATLime/58.png" width=700>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/59.png'><img src="/images/article/2026-3-18-njRATLime/59.png" width=700>
+</p>
+
+<p>First, it generates an AES key and stores it locally on disk, then encrypts file data using AES and writes the output to new files with the <code>.Lime</code> extension. Finally, it deletes the original files.</p>
+<p>There are several vulnerabilities. First, the AES key is stored locally, which allows users to recover the files. Second, the original files are deleted using <code>File.Delete()</code>, meaning they may be recoverable through digital forensics techniques.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/60.png'><img src="/images/article/2026-3-18-njRATLime/60.png" width=700>
+</p>
+
+<p>Overall, the ransomware implementation appears to be poorly designed and lacks operational security considerations. It is likely intended more as a scare tactic rather than a reliable monetization mechanism.</p>
+<h2 id="Controller-Application"><a href="#Controller-Application" class="headerlink" title="Controller Application"></a>Controller Application</h2><p>Although I failed to fully unpack the controller application, I still want to share my findings.</p>
+<p>Open the controller application using DIE:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/61.png'><img src="/images/article/2026-3-18-njRATLime/61.png" width=600>
+</p>
+
+<p>I tried to use <strong>de4dot</strong> and <strong>Unconfuser</strong> to unpack, but both failed:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/63.png'><img src="/images/article/2026-3-18-njRATLime/63.png" width=600>
+</p>
+
+<p>Therefore, I opened it using dnSpy:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/66.png'><img src="/images/article/2026-3-18-njRATLime/66.png" width=500>
+</p>
+
+<p>Compared to previous njRAT analysis articles, the architecture is obviously different. I then viewed the <code>Main()</code> function:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/62.png'><img src="/images/article/2026-3-18-njRATLime/62.png" width=700>
+</p>
+
+<p>It seemed like another payload was merged inside this application. After further investigation, I realized that this payload is the controller application. The payload is launched via the following procedure:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">// array = payload of controller application<br>GCHandle gchandle = &lt;Module&gt;.Decrypt(array, 3263930901U);<br>byte[] array2 = (byte[])gchandle.Target;<br>Module module = executingAssembly.LoadModule(&quot;koi&quot;, array2);<br><br>Array.Clear(array2, 0, array2.Length);<br>gchandle.Free();<br>Array.Clear(array, 0, array.Length);<br><br>&lt;Module&gt;.key = manifestModule.ResolveSignature(285212673);<br>MethodBase methodBase = module.ResolveMethod((int)&lt;Module&gt;.key[0] | ((int)&lt;Module&gt;.key[1] &lt;&lt; 8) | ((int)&lt;Module&gt;.key[2] &lt;&lt; 16) | ((int)&lt;Module&gt;.key[3] &lt;&lt; 24));<br><br>// invoke the controller application with parameters<br>object[] array3 = new object[methodBase.GetParameters().Length];<br>if (array3.Length != 0)<br>&#123;<br>    array3[0] = A_0; // passing parameters<br>&#125;<br>object obj = methodBase.Invoke(null, array3);<br></code></pre></td></tr></table></figure>
+<p>Therefore, I set breakpoint to the decryption function and saved the decrypted payload as an executable file:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/64.png'><img src="/images/article/2026-3-18-njRATLime/64.png" width=700>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/65.png'><img src="/images/article/2026-3-18-njRATLime/65.png" width=600>
+</p>
+
+<p>I then opened it using dnSpy, but it is still obfuscated:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/67.png'><img src="/images/article/2026-3-18-njRATLime/67.png" width=600>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/68.png'><img src="/images/article/2026-3-18-njRATLime/68.png" width=700>
+</p>
+
+<p>Therefore, I unpacked it using <strong>Unobfuser</strong>, but still obfuscated!</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/69.png'><img src="/images/article/2026-3-18-njRATLime/69.png" width=500>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/70.png'><img src="/images/article/2026-3-18-njRATLime/70.png" width=600>
+</p>
+
+<p>I then used <strong>de4dot</strong> and <strong>Unconfuser</strong> to unpack, which succeeded. However, there are some strings that still cannot be decrypted:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/71.png'><img src="/images/article/2026-3-18-njRATLime/71.png" width=600>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/72.png'><img src="/images/article/2026-3-18-njRATLime/72.png" width=600>
+</p>
+
+<p>I tried to de-obfuscate it using <strong>NETReactor Slayer</strong>, <strong>de4dot</strong>, <strong>Unobfuser</strong> and <strong>PEUnion</strong>, but none of them can completely deobfuscate this application.</p>
+<h2 id="njRAT-Green-Edition-1"><a href="#njRAT-Green-Edition-1" class="headerlink" title="njRAT Green Edition"></a>njRAT Green Edition</h2><p>Lastly, I want to talk about the Green Edition.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/76.png'><img src="/images/article/2026-3-18-njRATLime/76.png" width=700>
+    <figcaption>
+    njRAT Green Edition
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/75.png'><img src="/images/article/2026-3-18-njRATLime/75.png" width=500>
+    <figcaption>
+    Payload builder
+    </figcaption>
+</p>
+
+<p>Same as that the Lime Edition, njRAT Green Edition was based on official njRAT v0.7, they have similar code architecture. Therefore, I am not going to re-analyze it here. The difference is, DDoS feature was added into this version:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/73.png'><img src="/images/article/2026-3-18-njRATLime/73.png" width=500>
+    <figcaption>
+    DDoS
+    </figcaption>
+</p>
+
+<p>I believe the design of this feature was inspired by LOIC (Low Orbit Ionic Cannon).</p>
+<p>The decompiled code of the payload demonstrated it uses UDP flooding to perform denial-of-service attack:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/74.png'><img src="/images/article/2026-3-18-njRATLime/74.png" width=700>
+    <figcaption>
+    njRAT Green Edition
+    </figcaption>
+</p>
+
+<h1 id="Timeline"><a href="#Timeline" class="headerlink" title="Timeline"></a>Timeline</h1><p>I was curious about the release dates of the Green Edition and the Lime Edition. Therefore, I opened them using <strong>pestudio</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/77.png'><img src="/images/article/2026-3-18-njRATLime/77.png" width=600>
+    <figcaption>
+    njRAT Green Edition
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-18-njRATLime/78.png'><img src="/images/article/2026-3-18-njRATLime/78.png" width=600>
+    <figcaption>
+    njRAT Green Edition
+    </figcaption>
+</p>
+
+<p>The result of pestudio demonstrates that the release date of njRAT Green Edition is earlier than the Lime Edition.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>njRAT Green Edition was released around 2016, while njRAT Lime Edition appeared around 2017. Interestingly, WannaCry also spread in 2017, which may explain why the Lime Edition gained popularity during that period.</p>
+<p>Both versions are based on njRAT v0.7, which I analyzed in a previous article.</p>
+<p>Compared to the Green Edition, the Lime Edition introduces more destructive features, even though it is still presented as a remote access trojan. However, some features did not implement correctly. This also reflects a broader trend in commodity malware, where features are rapidly added without rigorous implementation, resulting in tools that are functionally rich but technically inconsistent.</p>
+<p>Although I was unable to fully unpack the controller application of njRAT Lime Edition, I learned a great deal during the analysis process.</p>
+<p>If you have any comments or suggestions, please feel free to leave a comment below!</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><blockquote id="fn_1">
+<sup>1</sup>. <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/NjRAT">https://en.wikipedia.org/wiki/NjRAT</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. <a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/17696">https://www.exploit-db.com/exploits/17696</a><a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/tea_party_new_year.png'><img src="/images/meme/tea_party_new_year.png" width=600>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/03/17/2026-3-17-SeriesRansomware/">[Series] Inside Different Generations of Ransomware Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/musa.mp3",
+    "/mp3/music/air.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/midnight_trip.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#njRAT-Lime-Edition"><span class="toc-number">2.</span> <span class="toc-text">njRAT Lime Edition</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experimental-Environment"><span class="toc-number">3.</span> <span class="toc-text">Experimental Environment</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Usage"><span class="toc-number">4.</span> <span class="toc-text">Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#njRAT-Lime-Edition-1"><span class="toc-number">4.1.</span> <span class="toc-text">njRAT Lime Edition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#njRAT-Green-Edition"><span class="toc-number">4.2.</span> <span class="toc-text">njRAT Green Edition</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Protocol-Analysis"><span class="toc-number">5.</span> <span class="toc-text">Protocol Analysis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reverse-Engineering"><span class="toc-number">6.</span> <span class="toc-text">Reverse Engineering</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Components-Overview"><span class="toc-number">6.1.</span> <span class="toc-text">Key Components Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Architecture-Overview"><span class="toc-number">6.2.</span> <span class="toc-text">Architecture Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Anti-Process"><span class="toc-number">6.2.1.</span> <span class="toc-text">Anti-Process</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Detecting-Bitcoin-Wallet"><span class="toc-number">6.2.2.</span> <span class="toc-text">Detecting Bitcoin Wallet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Eradicating-Competitors"><span class="toc-number">6.2.3.</span> <span class="toc-text">Eradicating Competitors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#USB-Spread"><span class="toc-number">6.2.4.</span> <span class="toc-text">USB Spread</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Persistence"><span class="toc-number">6.2.5.</span> <span class="toc-text">Persistence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Installation"><span class="toc-number">6.2.6.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Message-Handler"><span class="toc-number">6.2.7.</span> <span class="toc-text">Message Handler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete-all-Cookies-and-Login-Data"><span class="toc-number">6.2.8.</span> <span class="toc-text">Delete all Cookies and Login Data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Turn-off-the-Monitor"><span class="toc-number">6.2.9.</span> <span class="toc-text">Turn off the Monitor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Disable-Task-Manager-and-cmd-exe"><span class="toc-number">6.2.10.</span> <span class="toc-text">Disable Task Manager and cmd.exe</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Screen-Locker"><span class="toc-number">6.2.11.</span> <span class="toc-text">Screen Locker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDoS"><span class="toc-number">6.2.12.</span> <span class="toc-text">DDoS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UAC-Bypass"><span class="toc-number">6.2.13.</span> <span class="toc-text">UAC Bypass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Blocking-Webpage"><span class="toc-number">6.2.14.</span> <span class="toc-text">Blocking Webpage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitcoin-Grabber"><span class="toc-number">6.2.15.</span> <span class="toc-text">Bitcoin Grabber</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ransomware"><span class="toc-number">6.2.16.</span> <span class="toc-text">Ransomware</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controller-Application"><span class="toc-number">6.3.</span> <span class="toc-text">Controller Application</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#njRAT-Green-Edition-1"><span class="toc-number">6.4.</span> <span class="toc-text">njRAT Green Edition</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Timeline"><span class="toc-number">7.</span> <span class="toc-text">Timeline</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">9.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">10.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

@@ -35,7 +35,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
   --light-background: url('/img/bk.jpg');
 }</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Series] Inside Different Generations of RATs</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-18T05:02:44.000Z" id="date"> 2026-02-18</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-18T17:59:21.942Z" id="updated"> 2026-03-19</time></div></span><br><span>Word Count: <div class="control">462</div></span><br><span>Read Time: <div class="control">2 min</div></span></div></div><hr><div id="post-content"><h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Recently, I have been developing different types of remote access tools (RATs).<br>My interest in RAT development originates from personal curiosity and long-term fascination with how remote control malware works internally.</p>
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Series] Inside Different Generations of RATs</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-02-18T05:02:44.000Z" id="date"> 2026-02-18</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-20T13:47:59.884Z" id="updated"> 2026-03-20</time></div></span><br><span>Word Count: <div class="control">377</div></span><br><span>Read Time: <div class="control">2 min</div></span></div></div><hr><div id="post-content"><h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Recently, I have been developing different types of remote access tools (RATs).<br>My interest in RAT development originates from personal curiosity and long-term fascination with how remote control malware works internally.</p>
 <p align="center" class='item-img' data-src='/images/meme/mika_rollcake.png'><img src="/images/meme/mika_rollcake.png" width=200>
 </p>
 
@@ -57,63 +57,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <p align="center" class='item-img' data-src='/images/meme/mika_rollcake_hit.png'><img src="/images/meme/mika_rollcake_hit.png" width=300>
 </p>
 
-<h1 id="Articles"><a href="#Articles" class="headerlink" title="Articles"></a>Articles</h1><p>The table below lists all articles in this series analyzing various remote access tools.<br>It will be updated continuously as new research is published.</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>RAT</th>
-<th>Article</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Netbus</td>
-<td><a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-Netbus/">Analyzing NetBus</a></td>
-</tr>
-<tr>
-<td>Back Orifice</td>
-<td><a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-BackOrifice/">Analyzing BackOrifice</a></td>
-</tr>
-<tr>
-<td>Sub7</td>
-<td><a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-Subseven/">Analyzing Sub7</a></td>
-</tr>
-<tr>
-<td>ProRat</td>
-<td><a href="https://iss4cf0ng.github.io/2026/02/23/2026-2-23-ProRAT/">Analyzing ProRat</a></td>
-</tr>
-<tr>
-<td>Beast</td>
-<td><a href="https://iss4cf0ng.github.io/2026/02/20/2026-2-20-Beast/">Analyzing BeastDoor</a></td>
-</tr>
-<tr>
-<td>Poison Ivy</td>
-<td><a href="https://iss4cf0ng.github.io/2026/03/04/2026-3-4-PoisonIvy/">Analyzing Poison Ivy</a></td>
-</tr>
-<tr>
-<td>DarkComet</td>
-<td><a href="https://iss4cf0ng.github.io/2026/03/04/2026-3-4-DarkComet/">Analyzing DaroComet</a></td>
-</tr>
-<tr>
-<td>Conclusion (1990s-2000s)</td>
-<td><a href="https://iss4cf0ng.github.io/2026/03/04/2026-3-4-StudyingRAT/">Inside Different Generations of RATs (1990s-2000s)</a></td>
-</tr>
-<tr>
-<td>Gh0st RAT Beta 2.5-3.6</td>
-<td><a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-Gh0st/">Analyzing Gh0st RAT Beta 2.5-3.6</a></td>
-</tr>
-<tr>
-<td>njRAT v0.7d</td>
-<td><a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/">Analyzing njRAT v0.7d</a></td>
-</tr>
-<tr>
-<td>njRAT v0.9d</td>
-<td><a href="https://iss4cf0ng.github.io/2026/03/17/2026-3-17-njRATv0-9d/">Analyzing njRAT v0.9d</a></td>
-</tr>
-</tbody>
-</table>
-</div>
+<h1 id="Full-Series"><a href="#Full-Series" class="headerlink" title="Full Series"></a>Full Series</h1><p>Please <a href="/InsideDifferentGenerationsOfRATs/">click here</a>!</p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><blockquote id="fn_1">
 <sup>1</sup>. <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/The_Shadow_Brokers">https://en.wikipedia.org/wiki/The_Shadow_Brokers</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
 </blockquote>
@@ -186,7 +130,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
     }, 2000);
   });
 });
-</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Articles"><span class="toc-number">2.</span> <span class="toc-text">Articles</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">3.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANSK-FOR-READING"><span class="toc-number">4.</span> <span class="toc-text">THANSK FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Full-Series"><span class="toc-number">2.</span> <span class="toc-text">Full Series</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">3.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANSK-FOR-READING"><span class="toc-number">4.</span> <span class="toc-text">THANSK FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
 document.querySelector('.lg-container')?.remove()
 lightGallery(document.getElementById('post-bg'), {
   plugins: [lgZoom,lgThumbnail],

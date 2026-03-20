@@ -49,50 +49,36 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </blockquote>
 <h1 id="njRAT-Family"><a href="#njRAT-Family" class="headerlink" title="njRAT Family"></a>njRAT Family</h1><div class="mermaid">
 graph TD
-    njRAT["njRAT"]
+    njRAT("njRAT")
+    v0.7("njRAT v0.7d")
+    v0.9("njRAT v0.9d")
+    v0.10(njRAT v0.10d)
 
-    %% ===== Official Versions =====
-    subgraph "Official Versions"
-        v0_7["v0.7d"]
-        v0_9["v0.9d"]
-        v0_10["v0.10d"]
-    end
+    %% variants v0.8lime(njRAT v0.8 Lime Edition)
+    v0.7green(njRAT v0.7 Green Edition)
+    v0.7horror(njRAT v0.7 Horror Edition)
+    v2017danger(njRAT Danger Edition 2017)
+    v2018danger(njRAT Danger Edition 2018)
+    v2020danger(njRAT Danger Edition 2020)
+    dangerous(Dangerous RAT)
 
-    %% ===== Variants / Modified Editions =====
-    subgraph "Variants / Modified Editions"
-        lime["v0.8 Lime Edition"]
-        green["v0.7 Green Edition"]
-        horror["v0.7 Horror Edition"]
+    njRAT --> v0.7
+    v0.7 --> v0.9
+    v0.7 --> v0.8lime
+    v0.7 --> v0.7green
+    v0.7 --> v2017danger
+    v0.7 --> dangerous
+    v0.7 --> v0.7horror
 
-        danger17["Danger Edition 2017"]
-        danger18["Danger Edition 2018"]
-        danger20["Danger Edition 2020"]
+    v2017danger --> v2018danger
+    v2018danger --> v2020danger
 
-        dangerous["Dangerous RAT"]
-    end
+    v0.9 --> v0.10
 
-    %% ===== Relationships =====
-    njRAT --> v0_7
-
-    v0_7 --> v0_9
-    v0_9 --> v0_10
-
-    %% variants from v0.7
-    v0_7 --> lime
-    v0_7 --> green
-    v0_7 --> horror
-    v0_7 --> danger17
-    v0_7 --> dangerous
-
-    %% danger evolution
-    danger17 --> danger18
-    danger18 --> danger20
-
-    %% ===== Click Links =====
-    click v0_7 "https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/" "njRAT v0.7d"
-    click v0_9 "https://iss4cf0ng.github.io/2026/03/17/2026-3-17-njRATv0-9d/" "njRAT v0.9d"
-    click green "https://iss4cf0ng.github.io/2026/03/18/2026-3-18-njRATLime/" "njRAT Green Edition"
-    click lime "https://iss4cf0ng.github.io/2026/03/18/2026-3-18-njRATLime/" "njRAT Lime Edition"
+    click v0.7 "https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/" "njRAT v0.7d"
+    click v0.9 "https://iss4cf0ng.github.io/2026/03/17/2026-3-17-njRATv0-9d/" "njRAT v0.9d"
+    click v0.7green "https://iss4cf0ng.github.io/2026/03/18/2026-3-18-njRATLime/" "njRAT v0.7d Green Edition"
+    click v0.8lime "https://iss4cf0ng.github.io/2026/03/18/2026-3-18-njRATLime/" "njRAT v0.7d Lime Edition"
 </div>
 
 <p>Many variants are derived from njRAT v0.7, making it a foundational version for understanding the evolution of this malware family. Therefore, analyzing v0.7 provides critical insights into the design patterns reused across later variants.</p>

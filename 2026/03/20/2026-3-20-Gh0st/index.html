@@ -1,0 +1,454 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Studying] Analyzing Gh0st 1.0 Alpha | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing Gh0st 1.0 Alpha</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-19T18:44:01.000Z" id="date"> 2026-03-20</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-21T17:54:49.967Z" id="updated"> 2026-03-22</time></div></span><br><span>Word Count: <div class="control">1.4k</div></span><br><span>Read Time: <div class="control">8 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a>. It is also part of <a href="/TheGh0stFamily/">the Gh0st Family</a>.</p>
+<p>If you are interested in the full series, please refer to the linked page above.</p>
+<p>This article presents an analysis of <strong>Gh0st 1.0 Alpha</strong>, and documents my observations during reverse engineering.</p>
+<h2 id="Key-Takeaways"><a href="#Key-Takeaways" class="headerlink" title="Key Takeaways"></a>Key Takeaways</h2><ul>
+<li>Gh0st 1.0 Alpha focuses more on <strong>anti-analysis evolution</strong> rather than feature expansion</li>
+<li>Multi-layer packing significantly increases reverse engineering complexity. The presence of multiple <code>pushad</code> sequences suggests staged unpacking, a technique commonly used to complicate static analysis.</li>
+<li>The payload delivery mechanism (DLL-based) remains consistent with earlier versions</li>
+</ul>
+<h1 id="Gh0st-1-0-Alpha"><a href="#Gh0st-1-0-Alpha" class="headerlink" title="Gh0st 1.0 Alpha"></a>Gh0st 1.0 Alpha</h1><p>Gh0st 1.0 Alpha is part of <a href="/TheGh0stFamily/">the Gh0st Family</a>. Compared to <strong>Gh0st Beta 3.6</strong>, the overall functionality remains largely unchanged. However, its <strong>anti-analysis techniques are noticeably improved</strong>, primarily through the use of multiple layers of packing.</p>
+<h2 id="Version-Timeline-Observation"><a href="#Version-Timeline-Observation" class="headerlink" title="Version Timeline Observation"></a>Version Timeline Observation</h2><p>As mentioned in <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-Gh0st/">the previous article</a>:</p>
+<blockquote>
+<p>It is important to note that there is <strong>no official naming convention</strong> for Gh0st variants. Many versions were released by anonymous developers in underground communities, which can make identification confusing when analyzing samples.</p>
+</blockquote>
+<p>Gh0st 1.0 Alpha was released after Gh0st Beta 3.6. To demonstrate this, we can open these two versions using pestudio and view the “About” panel:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/1.png'><img src="/images/article/2026-3-20-Gh0st/1.png" width=700/>
+    <figcaption>
+    Gh0st RAT Beta 3.6
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/2.png'><img src="/images/article/2026-3-20-Gh0st/2.png" width=700/>
+    <figcaption>
+    Gh0st RAT 1.0 Alpha — About panel
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/3.png'><img src="/images/article/2026-3-20-Gh0st/3.png" width=700/>
+    <figcaption>
+    Gh0st RAT 1.0 Alpha — pestudio
+    </figcaption>
+</p>
+
+<p>We can infer that Gh0st RAT Beta was released in May 2008, while Gh0st RAT 1.0 Alpha was released in December 2008. This confirms that <strong>1.0 Alpha is a later iteration</strong>, with a development focus shifting toward obfuscation rather than feature expansion.</p>
+<h1 id="Experimental-Environment"><a href="#Experimental-Environment" class="headerlink" title="Experimental Environment"></a>Experimental Environment</h1><p>To safely conduct malware analysis, the environment should be isolated using virtual machines. Under no circumstances should malware be executed on a personal or production system.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ExeInfo PE</td>
+<td>Executable analysis tool used to detect packers, compilers, and basic file properties</td>
+</tr>
+<tr>
+<td>Detect It Easy (DIE)</td>
+<td>File identification tool used to detect packers, protectors, and compiler signatures</td>
+</tr>
+<tr>
+<td>Immunity Debugger</td>
+<td>Windows debugger commonly used for reverse engineering, malware analysis, and exploit development</td>
+</tr>
+<tr>
+<td>Wireshark</td>
+<td>Network protocol analyzer used for packet capture and traffic analysis</td>
+</tr>
+<tr>
+<td>pestudio</td>
+<td>Static PE analysis tool</td>
+</tr>
+<tr>
+<td>RegShot</td>
+<td>Registry differentiating tool</td>
+</tr>
+<tr>
+<td>Process Monitor</td>
+<td>Process activity monitor</td>
+</tr>
+<tr>
+<td>Ghidra</td>
+<td>Open-source software reverse engineering framework developed by the NSA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>IP Address</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows XP x86 (VM)</td>
+<td>192.168.85.2</td>
+<td>Victim machine used for executing both the controller and payload</td>
+</tr>
+<tr>
+<td>Windows 10 x64 (VM)</td>
+<td>192.168.85.3</td>
+<td>Analysis machine used for reverse engineering</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The two virtual machines were configured within an isolated internal network to prevent unintended external communication. If you want to know how to set up your experimental environment, please view:</p>
+<ul>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/">How to Setup Your Experimental Environment for Malware Analysis</a></li>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-WinXpVMWareTool/">Installing VMware Tools on Windows XP and Windows 95 with VMware WorkStation 17</a></li>
+</ul>
+<hr>
+<h1 id="Simplified-Chinese-Environment-and-Troubleshooting"><a href="#Simplified-Chinese-Environment-and-Troubleshooting" class="headerlink" title="Simplified Chinese Environment and Troubleshooting"></a>Simplified Chinese Environment and Troubleshooting</h1><p>As mentioned in <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-Gh0st/#Simplified-Chinese-Environment">the previous article</a>, Gh0st was primarily designed for <strong>Simplified Chinese users</strong>. The graphical user interface is written in Simplified Chinese, which means the UI text may appear corrupted if the program is executed on systems using other language settings. If you are interested in how to resolve this problem, please refer to the linked article above.</p>
+<p>Here, I want to share my discovery. Some versions of Gh0st provide an English GUI. However, some features might not function properly if you launch the controller using a non-Simplified Chinese language setting.</p>
+<p>One example is the payload builder. I did not launch the controller application in Simplified Chinese since an English GUI was provided. However, the payload it generated did not function normally. After generating it with the Simplified Chinese interface, it functioned normally.</p>
+<p>This finding also answered a question that arose during my analysis of Gh0st RAT Beta 3.6 in the previous article. Since it provided an English GUI, I did not launch it in Simplified Chinese, which caused the payload to malfunction. The payload generated by Gh0st RAT Beta 2.5 functioned normally because it only provided a Simplified Chinese interface, and I launched it accordingly.</p>
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><blockquote>
+<p>Note: To distinguish the terms “server”, “client”, “controller” and “payload”, please refer to <a href="/InsideDifferentGenerationsOfRATs/#Terminology">this section</a>.</p>
+</blockquote>
+<p>The graphical user interface of Gh0st RAT 1.0 Alpha is shown as follows:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/4.png'><img src="/images/article/2026-3-20-Gh0st/4.png" width=700/>
+</p>
+
+<p>Build the payload using the provided builder:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/5.png'><img src="/images/article/2026-3-20-Gh0st/5.png" width=500/>
+</p>
+
+<p>Before deploying the payload, I set up <strong>RegShot</strong> and <strong>Process Monitor</strong>, which would be used as references in the reverse engineering section.</p>
+<p>After deploying the payload on the remote machine, the compromised machine will be available in the controller application once the connection is established:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/6.png'><img src="/images/article/2026-3-20-Gh0st/6.png" width=700/>
+</p>
+
+<p>The feature set remains largely consistent with Gh0st Beta 3.6.</p>
+<p>File Manager:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/7.png'><img src="/images/article/2026-3-20-Gh0st/7.png" width=700/>
+</p>
+
+<hr>
+<p>Terminal:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/8.png'><img src="/images/article/2026-3-20-Gh0st/8.png" width=700/>
+</p>
+
+<hr>
+<p>System Manager:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/9.png'><img src="/images/article/2026-3-20-Gh0st/9.png" width=500/>
+    <img src="/images/article/2026-3-20-Gh0st/10.png" width=500/>
+</p>
+
+<hr>
+<p>Monitor:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/11.png'><img src="/images/article/2026-3-20-Gh0st/11.png" width=700/>
+</p>
+
+<h1 id="Protocol-Analysis"><a href="#Protocol-Analysis" class="headerlink" title="Protocol Analysis"></a>Protocol Analysis</h1><p>Compared to Gh0st Beta 3.6, in this version, the keyword <code>Gh0st</code> no longer appears during communication.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/12.png'><img src="/images/article/2026-3-20-Gh0st/12.png" width=700/>
+</p>
+
+<p>In addition, the payload uses different ports for different features:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/13.png'><img src="/images/article/2026-3-20-Gh0st/13.png" width=700/>
+</p>
+
+<h1 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h1><p>Open the payload using <strong>ExeInfo PE</strong> and <strong>DIE (Detect It Easy)</strong>.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/14.png'><img src="/images/article/2026-3-20-Gh0st/14.png" width=700/>
+    <figcaption>
+    ExeInfo PE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/15.png'><img src="/images/article/2026-3-20-Gh0st/15.png" width=800/>
+    <figcaption>
+    DIE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/16.png'><img src="/images/article/2026-3-20-Gh0st/16.png" width=1000/>
+    <figcaption>
+    DIE — Entropy
+    </figcaption>
+</p>
+
+<p>I then tried to manually unpack it:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/17.png'><img src="/images/article/2026-3-20-Gh0st/17.png" width=700/>
+    <figcaption>
+    DIE (Detect It Easy)
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/18.png'><img src="/images/article/2026-3-20-Gh0st/18.png" width=700/>
+</p>
+
+<p>However, the process is much more difficult than I thought.</p>
+<div align="center" class='item-img' data-src='/images/meme/mika_bothering.png'><img src="/images/meme/mika_bothering.png" width=200/>
+<h1>But hold on!</h1>
+</div>
+
+<p>According to <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-Gh0st/#Reverse-Engineering">the previous analysis article</a>, we know that the generated payload is not the final payload. The final payload is a DLL file. The philosophy of this design is to evade anti-virus applications.</p>
+<p>Therefore, we can obtain the final payload using <strong>RegShot</strong> and <strong>Process Monitor</strong>, which were set up in the previous section.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/19.png'><img src="/images/article/2026-3-20-Gh0st/19.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/20.png'><img src="/images/article/2026-3-20-Gh0st/20.png" width=700/>
+    <figcaption>
+    winet.dll (the payload)
+    </figcaption>
+</p>
+
+<p>ExeInfo PE and DIE confirmed that the payload DLL is packed. </p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/21.png'><img src="/images/article/2026-3-20-Gh0st/21.png" width=700/>
+    <figcaption>
+    ExeInfo PE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/22.png'><img src="/images/article/2026-3-20-Gh0st/22.png" width=700/>
+    <figcaption>
+    DIE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/23.png'><img src="/images/article/2026-3-20-Gh0st/23.png" width=700/>
+    <figcaption>
+    DIE — Entropy
+    </figcaption>
+</p>
+
+<p>Compared to version Beta 3.6, Gh0st 1.0 Alpha payload is heavily packed, which increases the difficulty of analysis, even though Ghidra can still display the imported DLLs:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/24.png'><img src="/images/article/2026-3-20-Gh0st/24.png" width=600/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/25.png'><img src="/images/article/2026-3-20-Gh0st/25.png" width=700/>
+</p>
+
+<p>At the point of writing, I could hardly find any tool capable of unpacking the payload. Therefore, I decided to manually unpack it.</p>
+<p><strong>x32dbg</strong> can debug DLL files by generating a loader executable, although I find it somewhat difficult to use.</p>
+<p align="center" class='item-img' data-src='/images/meme/toki_skill_issue.jpg'><img src="/images/meme/toki_skill_issue.jpg" width=250/>
+</p>
+
+<p>I then wrote a simple DLL loader using C++:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">//dll_loader.exe<br>#include &lt;iostream&gt;<br>#include &lt;windows.h&gt;<br><br>int main(int argc, char* argv[]) &#123;<br>	if (argc == 1) &#123;<br>		std::cout &lt;&lt; &quot;Usage: load_dll.exe &lt;DLL_PATH&gt;&quot; &lt;&lt; std::endl;<br>		return 1;<br>	&#125;<br>	<br>	std::cout &lt;&lt; &quot;DLL: &quot; &lt;&lt; argv[1] &lt;&lt; std::endl;<br>	<br>    LoadLibraryA(argv[1]);<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>To pass arguments using x32dbg, open <code>open_dll.exe</code> and navigate to: File -&gt; Change Command Line:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/26.png'><img src="/images/article/2026-3-20-Gh0st/26.png" width=700/>
+</p>
+
+<p>Modify the command line arguments:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/27.png'><img src="/images/article/2026-3-20-Gh0st/27.png" width=800/>
+</p>
+
+<p>Find the main function via strings reference:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/28.png'><img src="/images/article/2026-3-20-Gh0st/28.png" width=700/>
+</p>
+
+<p>Then, we can jump to the payload DLL:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/29.png'><img src="/images/article/2026-3-20-Gh0st/29.png" width=700/>
+    <figcaption>
+    Payload DLL
+    </figcaption>
+</p>
+
+<p>While unpacking the payload DLL, I made a mistake, but I still want to share. I saw <code>push ebp</code> and <code>mov ebp,esp</code> and believed that this is the OEP. Also Scylla “confirmed” my assumption:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/30.png'><img src="/images/article/2026-3-20-Gh0st/30.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/31.png'><img src="/images/article/2026-3-20-Gh0st/31.png" width=700/>
+    <figcaption>
+    DIE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/32.png'><img src="/images/article/2026-3-20-Gh0st/32.png" width=700/>
+    <figcaption>
+    DIE — Entropy
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/33.png'><img src="/images/article/2026-3-20-Gh0st/33.png" width=500/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/34.png'><img src="/images/article/2026-3-20-Gh0st/34.png" width=600/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/35.png'><img src="/images/article/2026-3-20-Gh0st/35.png" width=700/>
+</p>
+
+<p>After opening it using Ghidra, I realized a wrong DLL was occasionally dumped since I used a wrong address. This highlights an important lesson: dumping more artifacts does not necessarily mean the correct one has been captured.</p>
+<p>Then, I restarted the process. After further investigation, I found an instruction—<code>pushad</code>.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/36.png'><img src="/images/article/2026-3-20-Gh0st/36.png" width=800/>
+</p>
+
+<p>Therefore, the payload can be manually unpacked in the same way as UPX or ASPack (if you are interested in unpacking UPX and ASPack, please refer to <a href="https://iss4cf0ng.github.io/2026/02/27/2026-2-27-UnpackingUpxAndAspack/">this article</a>):</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/37.png'><img src="/images/article/2026-3-20-Gh0st/37.png" width=800/>
+</p>
+
+<p>I then dumped and fixed <code>winet.dll</code> using Scylla (make sure to select the DLL in Scylla before proceeding):</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/38.png'><img src="/images/article/2026-3-20-Gh0st/38.png" width=500/>
+    <img src="/images/article/2026-3-20-Gh0st/39.png" width=500/>
+</p>
+
+<p>Opening the dumped DLL in ExeInfo PE revealed that it was still packed:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/40.png'><img src="/images/article/2026-3-20-Gh0st/40.png" width=700/>
+</p>
+
+<p>Therefore, I went back to x32dbg and found another <code>pushad</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/41.png'><img src="/images/article/2026-3-20-Gh0st/41.png" width=800/>
+</p>
+
+<p>I dumped and fixed it again using Scylla, and opened it using Ghidra. Note that the decompiled code in Ghidra suggested that the payload might still be packed, but this no longer mattered as it did not affect the analysis:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/42.png'><img src="/images/article/2026-3-20-Gh0st/42.png" width=700/>
+    <figcaption>
+    Imported libraries
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/43.png'><img src="/images/article/2026-3-20-Gh0st/43.png" width=700/>
+    <figcaption>
+    Message handler — File Manager
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/44.png'><img src="/images/article/2026-3-20-Gh0st/44.png" width=800/>
+    <figcaption>
+    File Manager — Scan Directory
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-20-Gh0st/45.png'><img src="/images/article/2026-3-20-Gh0st/45.png" width=800/>
+    <figcaption>
+    Uninstall() function
+    </figcaption>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article presents an analysis of Gh0st RAT 1.0 Alpha. Compared to version Beta 3.6, the overall remote administration features did not change significantly (though some may have been improved at the code level), but the anti-analysis techniques were enhanced through the use of multiple layers of packing.</p>
+<p>This suggests a shift in development focus from feature expansion toward <strong>evasion and anti-analysis techniques</strong>.</p>
+<p>This evolution reflects how malware authors increasingly prioritize stealth and resistance against analysis over adding new capabilities.</p>
+<p>If you have any comments or suggestions, please feel free to leave them below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/tea_party_2.jpg'><img src="/images/meme/tea_party_2.jpg" width=700/>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/03/18/2026-3-18-njRATLime/">[Studying] Analyzing njRAT Lime and Green Edition Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/musa.mp3",
+    "/mp3/music/air.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/midnight_trip.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Takeaways"><span class="toc-number">1.1.</span> <span class="toc-text">Key Takeaways</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Gh0st-1-0-Alpha"><span class="toc-number">2.</span> <span class="toc-text">Gh0st 1.0 Alpha</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Version-Timeline-Observation"><span class="toc-number">2.1.</span> <span class="toc-text">Version Timeline Observation</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experimental-Environment"><span class="toc-number">3.</span> <span class="toc-text">Experimental Environment</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Simplified-Chinese-Environment-and-Troubleshooting"><span class="toc-number">4.</span> <span class="toc-text">Simplified Chinese Environment and Troubleshooting</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Usage"><span class="toc-number">5.</span> <span class="toc-text">Usage</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Protocol-Analysis"><span class="toc-number">6.</span> <span class="toc-text">Protocol Analysis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reverse-Engineering"><span class="toc-number">7.</span> <span class="toc-text">Reverse Engineering</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">But hold on!</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">9.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">10.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

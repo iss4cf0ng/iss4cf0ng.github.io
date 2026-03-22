@@ -48,7 +48,22 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 <blockquote>
 <p>Supplement: I didn’t find any source of why it was named “Bladabindi”, but <code>balad (بلد)</code> means “country” or “place” in Arabic. In addition, the author is named <code>njq8</code>, this is probably why the RAT is also known as <code>njRAT</code>.<br>njRAT is also one of the RATs that inspired my project <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/DuplexSpyCS/">DuplexSpy</a>.</p>
 </blockquote>
-<h1 id="The-njRAT-Family"><a href="#The-njRAT-Family" class="headerlink" title="The njRAT Family"></a>The njRAT Family</h1><div class="mermaid">
+<h1 id="The-njRAT-Family"><a href="#The-njRAT-Family" class="headerlink" title="The njRAT Family"></a>The njRAT Family</h1><blockquote>
+<p>The timeline was inferred from a combination of compiler timestamps, online analysis reports, log artifacts, and the “About” panels of the controller applications. While no official release dates exist, this multi-source approach allows for a coherent chronological mapping of Gh0st variants.</p>
+</blockquote>
+<div class="mermaid">
+
+timeline
+    title njRAT Version History
+
+    2013 : njRAT v0.7d
+    2016 : njRAT Green Edition
+    2017 : njRAT Lime Edition
+
+</div>
+
+<hr>
+<div class="mermaid">
 graph TD
     njRAT("njRAT")
     v0.7("njRAT v0.7d")
@@ -56,6 +71,7 @@ graph TD
     v0.10(njRAT v0.10d)
 
     %% variants 
+    v0.79lime(njRAT v0.79 Lime Edition)
     v0.8lime(njRAT v0.8 Lime Edition)
     v0.7green(njRAT v0.7 Green Edition)
     v0.7horror(njRAT v0.7 Horror Edition)
@@ -66,21 +82,24 @@ graph TD
 
     njRAT --> v0.7
     v0.7 --> v0.9
-    v0.7 --> v0.8lime
+    v0.7 --> v0.79lime
     v0.7 --> v0.7green
     v0.7 --> v2017danger
     v0.7 --> dangerous
     v0.7 --> v0.7horror
 
+    v0.79lime --> v0.8lime
+
     v2017danger --> v2018danger
     v2018danger --> v2020danger
 
-    v0.9 --> v0.10
+    v0.7 --> v0.10
 
     click v0.7 "/2026/03/15/2026-3-15-njRAT/" "njRAT v0.7d"
     click v0.9 "/2026/03/17/2026-3-17-njRATv0-9d/" "njRAT v0.9d"
     click v0.7green "/2026/03/18/2026-3-18-njRATLime/" "njRAT v0.7d Green Edition"
-    click v0.8lime "/2026/03/18/2026-3-18-njRATLime/" "njRAT v0.7d Lime Edition"
+    click v0.79lime "/2026/03/18/2026-3-18-njRATLime/" "njRAT v0.79d Lime Edition"
+    click v0.8lime "/2026/03/18/2026-3-18-njRATLime/" "njRAT v0.8d Lime Edition"
 </div>
 
 <blockquote>

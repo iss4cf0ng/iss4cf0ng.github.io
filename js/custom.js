@@ -2,7 +2,6 @@ console.log("custom loaded");
 
 function loadUtterances() {
   const commentsContainer = document.getElementById('utterances-container');
-
   if (commentsContainer && !commentsContainer.hasChildNodes()) {
     const script = document.createElement('script');
     script.src = 'https://utteranc.es/client.js';
@@ -22,7 +21,7 @@ async function loadMermaid() {
   if (mermaidLoaded) return;
 
   try {
-    const mermaid = await import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs');
+    const mermaid = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
 
     mermaid.default.initialize({
       startOnLoad: false,
@@ -51,10 +50,10 @@ async function renderMermaid() {
   elements.forEach(el => {
     let src = el.getAttribute('data-source');
     if (!src) {
-      src = el.textContent.trim();
+      src = el.innerHTML.trim();
       el.setAttribute('data-source', src);
     }
-    el.textContent = src;
+    el.innerHTML = src;
   });
 
   try {
@@ -88,10 +87,19 @@ async function renderMermaid() {
             const href = a.getAttribute('href') || a.getAttribute('xlink:href');
             if (href) {
               a.style.cursor = 'pointer';
-              a.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.location.href = href;
-              });
+              if (!a.dataset.pjaxBound) {
+                a.dataset.pjaxBound = "true";
+                a.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  const href = a.getAttribute('href') || a.getAttribute('xlink:href');
+                  if (!href) return;
+                  if (typeof pjax !== "undefined" && pjax.loadUrl) {
+                    pjax.loadUrl(href);
+                  } else {
+                    window.location.href = href;
+                  }
+                });
+              }
             }
           }
         });

@@ -11,6 +11,33 @@
   </url>
   
   <url>
+    <loc>https://iss4cf0ng.github.io/InsideDifferentGenerationsOfRATs/index.html</loc>
+    
+    <lastmod>2026-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/2026/03/21/2026-3-21-njRATv0-10/</loc>
+    
+    <lastmod>2026-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/2026/03/20/2026-3-20-Gh0st/</loc>
+    
+    <lastmod>2026-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/03/17/2026-3-17-njRATv0-9d/</loc>
     
     <lastmod>2026-03-22</lastmod>
@@ -32,24 +59,6 @@
     <loc>https://iss4cf0ng.github.io/TheGh0stFamily/index.html</loc>
     
     <lastmod>2026-03-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/InsideDifferentGenerationsOfRATs/index.html</loc>
-    
-    <lastmod>2026-03-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/2026/03/20/2026-3-20-Gh0st/</loc>
-    
-    <lastmod>2026-03-21</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -2166,6 +2175,13 @@
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/njRAT-v0-10d/</loc>
     <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

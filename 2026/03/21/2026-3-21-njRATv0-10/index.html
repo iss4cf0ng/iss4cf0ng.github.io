@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>2026-3-21-njRATv0.10 | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Analyzing njRAT v0.10d | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
  menuSettings: {
    zoom: "None"
  },
@@ -35,9 +35,12 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
   --light-background: url('/img/bk.jpg');
 }</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>2026-3-21-njRATv0.10</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-20T18:40:52.000Z" id="date"> 2026-03-21</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-22T17:55:56.621Z" id="updated"> 2026-03-23</time></div></span><br><span>Word Count: <div class="control">2.5k</div></span><br><span>Read Time: <div class="control">15 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a> and part of <a href="/TheNjRatFamily/">the njRAT Family</a>.</p>
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Analyzing njRAT v0.10d</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-20T18:40:52.000Z" id="date"> 2026-03-21</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-22T18:10:57.030Z" id="updated"> 2026-03-23</time></div></span><br><span>Word Count: <div class="control">2.5k</div></span><br><span>Read Time: <div class="control">15 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a> and part of <a href="/TheNjRatFamily/">the njRAT Family</a>.</p>
 <p>If you are interested in the full series, please refer to the linked pages above.</p>
 <p>This article presents an analysis of <strong>njRAT v0.10</strong>, and documents my <strong>observations</strong> during reverse engineering.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_rollcake_hit.png'><img src="/images/meme/mika_rollcake_hit.png" width=250/>
+</p>
+
 <h2 id="Key-Takeaways"><a href="#Key-Takeaways" class="headerlink" title="Key Takeaways"></a>Key Takeaways</h2><ul>
 <li>njRAT v0.10 is primarily based on <strong>v0.7</strong>, with features merged from later variants</li>
 <li>Additional <strong>anti-analysis and anti-forensics techniques</strong> were introduced</li>
@@ -234,8 +237,9 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </p>
 
 <p>Therefore, I summarized the target processes for the anti-process feature in the following table:</p>
-<p>&lt;!DOCTYPE html&gt;</p>
-<html lang="en-us">
+<div class="njrat-wrap">
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <title>NjRAT CsAntiProcess — Detection Table</title>
@@ -250,6 +254,14 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
     color: #e0e0e0;
     padding: 32px;
     min-height: 100vh;
+  }
+
+  .njrat-wrap {
+    position: relative;
+    padding: 32px;
+    background: #0a0a0f;
+    font-family: 'Share Tech Mono', monospace;
+    color: #e0e0e0;
   }
 
   .header {
@@ -368,7 +380,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   }
 
   .corner {
-    position: fixed;
+    position: absolute;
     font-family: 'Orbitron', sans-serif;
     font-size: 9px;
     color: #00ffcc44;
@@ -380,6 +392,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </head>
 <body>
 
+<div class="njrat-wrap">
 <div class="corner corner-tl">SYS://MALWARE.ANALYSIS</div>
 <div class="corner corner-br">MODULE: CsAntiProcess</div>
 
@@ -506,9 +519,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   </table>
 </div>
 
-</body>
-</html>
-
+<p>&lt;/div&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br>&lt;/div&gt;</p>
 <blockquote>
 <p>This theme is cool, right?</p>
 </blockquote>
@@ -541,11 +552,12 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 </p>
 
 <p>The following table describes the C2 commands:</p>
-<p>&lt;!DOCTYPE html&gt;</p>
+<div class="njrat-wrap">
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<title>njRAT v0.10 — C2 Command Handler</title>
+<title>NjRAT — C2 Command Handler</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -571,12 +583,14 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
   code { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #ffe566; background: #ffe5660d; padding: 1px 6px; border: 1px solid #ffe56622; }
   .desc { color: #8899aa; font-size: 12px; }
   .params { color: #aabbcc; font-size: 12px; font-style: italic; }
-  .corner { position: fixed; font-family: 'Orbitron', sans-serif; font-size: 9px; color: #00ffcc44; letter-spacing: 1px; }
+  .njrat-wrap { position: relative; padding: 32px; background: #0a0a0f; font-family: 'Share Tech Mono', monospace; color: #e0e0e0; }
+  .corner { position: absolute; font-family: 'Orbitron', sans-serif; font-size: 9px; color: #00ffcc44; letter-spacing: 1px; }
   .corner-tl { top: 10px; left: 10px; }
   .corner-br { bottom: 10px; right: 10px; }
 </style>
 </head>
 <body>
+<div class="njrat-wrap">
 <div class="corner corner-tl">SYS://MALWARE.ANALYSIS</div>
 <div class="corner corner-br">METHOD: Ind() — C2 Dispatcher</div>
 <div class="header">
@@ -699,8 +713,10 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
     </tbody>
   </table>
 </div>
+</div>
 </body>
 </html>
+</div>
 
 <hr>
 <p>The payload uses <code>Select * From AntiVirusProduct</code> to retrieve installed anti-virus products:</p>

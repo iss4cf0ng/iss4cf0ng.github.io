@@ -1,0 +1,753 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Studying] Analyzing njRAT v0.10d | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing njRAT v0.10d</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-20T18:40:52.000Z" id="date"> 2026-03-21</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-22T18:28:00.004Z" id="updated"> 2026-03-23</time></div></span><br><span>Word Count: <div class="control">2.6k</div></span><br><span>Read Time: <div class="control">15 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a> and part of <a href="/TheNjRatFamily/">the njRAT Family</a>.</p>
+<p>If you are interested in the full series, please refer to the linked pages above.</p>
+<p>This article presents an analysis of <strong>njRAT v0.10</strong>, and documents my <strong>observations</strong> during reverse engineering.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_rollcake_hit.png'><img src="/images/meme/mika_rollcake_hit.png" width=250/>
+</p>
+
+<h2 id="Key-Takeaways"><a href="#Key-Takeaways" class="headerlink" title="Key Takeaways"></a>Key Takeaways</h2><ul>
+<li>njRAT v0.10 is primarily based on <strong>v0.7</strong>, with features merged from later variants</li>
+<li>Additional <strong>anti-analysis and anti-forensics techniques</strong> were introduced</li>
+<li>Some builder options are <strong>fake and do not affect payload behavior</strong></li>
+<li>The controller uses <strong>.NET Reactor</strong> for obfuscation</li>
+</ul>
+<h1 id="njRAT-v0-10"><a href="#njRAT-v0-10" class="headerlink" title="njRAT v0.10"></a>njRAT v0.10</h1><p>njRAT v0.10 is one of the variants of <a href="https://iss4cf0ng.github.io/TheNjRatFamily/">the njRAT Family</a>. It was developed by <strong>FR3ON</strong>, and therefore represents an <strong>unofficial variant</strong> of the njRAT family.</p>
+<p>njRAT v0.10 was released in 2022. Compared to the official versions of njRAT, it adopts a more modern graphical user interface (GUI). The foundation of njRAT v0.10 is <a href="">njRAT v0.7</a>. The C2 functionality did not undergo significant changes. However, it incorporates additional obfuscation and anti-forensics techniques.</p>
+<p>The information in the “About” panel suggests that the author is Arabic.</p>
+<h1 id="Experimental-Environment"><a href="#Experimental-Environment" class="headerlink" title="Experimental Environment"></a>Experimental Environment</h1><p>To safely conduct malware analysis, the environment should be isolated using virtual machines. Under no circumstances should malware be executed on a personal or production system.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ExeInfo PE</td>
+<td>Executable analysis tool used to detect packers, compilers, and basic file properties</td>
+</tr>
+<tr>
+<td>Detect It Easy (DIE)</td>
+<td>File identification tool used to detect packers, protectors, and compiler signatures</td>
+</tr>
+<tr>
+<td>Wireshark</td>
+<td>Network protocol analyzer used for packet capture and traffic analysis</td>
+</tr>
+<tr>
+<td>de4dot</td>
+<td>De-obfuscation tool for .NET PE</td>
+</tr>
+<tr>
+<td>RegShot</td>
+<td>Registry differentiating tool</td>
+</tr>
+<tr>
+<td>Process Monitor</td>
+<td>Process activity monitor</td>
+</tr>
+<tr>
+<td>dnSpy</td>
+<td>.NET debugger and assembly editor</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>IP Address</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 7 x64 (VM)</td>
+<td>192.168.85.5</td>
+<td>Victim machine used for executing both the controller and payload</td>
+</tr>
+<tr>
+<td>Windows 10 x64 (VM)</td>
+<td>192.168.85.3</td>
+<td>Analysis machine used for reverse engineering</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The two virtual machines were configured within an isolated internal network to prevent unintended external communication. If you want to know how to set up your experimental environment, please view:</p>
+<ul>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/">How to Setup Your Experimental Environment for Malware Analysis</a></li>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-WinXpVMWareTool/">Installing VMware Tools on Windows XP and Windows 95 with VMware WorkStation 17</a></li>
+</ul>
+<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><blockquote>
+<p>Note: To distinguish the terms “server”, “client”, “controller” and “payload”, please refer to <a href="/InsideDifferentGenerationsOfRATs/#Terminology">this section</a>.</p>
+</blockquote>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/1.png'><img src="/images/article/2026-3-21-njRATv0-10d/1.png" width=800/>
+</p>
+
+<p>The GUI of the controller application is shown as follows:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/2.png'><img src="/images/article/2026-3-21-njRATv0-10d/2.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/12.png'><img src="/images/article/2026-3-21-njRATv0-10d/12.png" width=500/>
+</p>
+
+<p>Build the payload using the provided builder:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/3.png'><img src="/images/article/2026-3-21-njRATv0-10d/3.png" width=500/>
+    <img src="/images/article/2026-3-21-njRATv0-10d/4.png" width=500/>
+</p>
+
+<p>Before deploying the payload, I set up <strong>RegShot</strong> and <strong>Process Monitor</strong>, which were used as references in the reverse engineering section.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/5.png'><img src="/images/article/2026-3-21-njRATv0-10d/5.png" width=700/>
+    <figcaption>
+    Process Monitor
+    </figcaption>
+</p>
+
+<p>After deploying the payload on the remote machine, the compromised machine becomes available in the controller application once the connection is established:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/6.png'><img src="/images/article/2026-3-21-njRATv0-10d/6.png" width=700/>
+    <figcaption>
+    Online machine
+    </figcaption>
+</p>
+
+<hr>
+<h2 id="Remote-Shell"><a href="#Remote-Shell" class="headerlink" title="Remote Shell"></a>Remote Shell</h2><p>The remote shell feature was improved. Compared to <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/#Usage">njRAT v0.7d</a>, it redirects <code>stdin</code>, <code>stdout</code>, and <code>stderr</code>, allowing attackers to execute interactive commands such as <code>nslookup</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/7.png'><img src="/images/article/2026-3-21-njRATv0-10d/7.png" width=700/>
+    <figcaption>
+    Remote Shell
+    </figcaption>
+</p>
+
+<hr>
+<h2 id="Remote-Desktop"><a href="#Remote-Desktop" class="headerlink" title="Remote Desktop"></a>Remote Desktop</h2><p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/8.png'><img src="/images/article/2026-3-21-njRATv0-10d/8.png" width=800/>
+</p>
+
+<hr>
+<h2 id="Chatting"><a href="#Chatting" class="headerlink" title="Chatting"></a>Chatting</h2><p>The user interface is similar to that of <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/#Usage">njRAT v0.7</a>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/11.png'><img src="/images/article/2026-3-21-njRATv0-10d/11.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/10.png'><img src="/images/article/2026-3-21-njRATv0-10d/10.png" width=600/>
+</p>
+
+<h1 id="Protocol-Analysis"><a href="#Protocol-Analysis" class="headerlink" title="Protocol Analysis"></a>Protocol Analysis</h1><p>As in <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/#Protocol-Analysis">njRAT v0.7</a>, the communication channel is not cryptographically protected. The data is encoded using <strong>Base64</strong>, but the communication format differs from earlier versions:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/13.png'><img src="/images/article/2026-3-21-njRATv0-10d/13.png" width=800/>
+    <figcaption>
+    Wireshark
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/14.png'><img src="/images/article/2026-3-21-njRATv0-10d/14.png" width=800/>
+    <figcaption>
+    Base64 decode
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/15.png'><img src="/images/article/2026-3-21-njRATv0-10d/15.png" width=800/>
+    <figcaption>
+    Base64 decode
+    </figcaption>
+</p>
+
+<h1 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h1><p>During the reverse engineering process, I was able to clearly identify the foundation of this version and its relationship with previous variants.</p>
+<h2 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h2><p>Open the payload using <strong>ExeInfo PE</strong> and <strong>DIE (Detect It Easy)</strong>. Since I did not enable obfuscation when building the payload, it is not packed (however, the obfuscation method used by the controller will be discussed later):</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/16.png'><img src="/images/article/2026-3-21-njRATv0-10d/16.png" width=600/>
+    <figcaption>
+    ExeInfo PE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/17.png'><img src="/images/article/2026-3-21-njRATv0-10d/17.png" width=700/>
+    <figcaption>
+    DIE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/18.png'><img src="/images/article/2026-3-21-njRATv0-10d/18.png" width=800/>
+    <figcaption>
+    DIE — Entropy
+    </figcaption>
+</p>
+
+<p>Open the payload using <strong>dnSpy</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/19.png'><img src="/images/article/2026-3-21-njRATv0-10d/19.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/20.png'><img src="/images/article/2026-3-21-njRATv0-10d/20.png" width=800/>
+</p>
+
+<p>So far, it can be observed that the code structure is almost identical to <a href="https://iss4cf0ng.github.io/2026/03/15/2026-3-15-njRAT/#Payload">njRAT v0.7</a>.</p>
+<p>Interestingly, the string “v0.7” can be found within the payload:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/29.png'><img src="/images/article/2026-3-21-njRATv0-10d/29.png" width=800/>
+</p>
+
+<p>Compared to version 0.7 (why not the version 0.8? I will explain it in the conclusion section), an anti-process feature was added:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/22.png'><img src="/images/article/2026-3-21-njRATv0-10d/22.png" width=800/>
+    <figcaption>
+    CsAntiProcess
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/21.png'><img src="/images/article/2026-3-21-njRATv0-10d/21.png" width=800/>
+    <figcaption>
+    Using Timer class to invoke the anti-process function
+    </figcaption>
+</p>
+
+<p>Therefore, I summarized the target processes for the anti-process feature in the following table:</p>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap');
+.njrat-wrap { position: relative; padding: 32px; background: #0a0a0f; font-family: 'Share Tech Mono', monospace; color: #e0e0e0; }
+.njrat-wrap .header { margin-bottom: 24px; }
+.njrat-wrap .header h2 { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #00ffcc; text-shadow: 0 0 10px #00ffcc88; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.njrat-wrap .header .sub { font-size: 12px; color: #ff2d78; letter-spacing: 3px; text-transform: uppercase; }
+.njrat-wrap .scan-line { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, #00ffcc, #ff2d78, transparent); margin: 16px 0; opacity: 0.6; }
+.njrat-wrap .table-wrap { border: 1px solid #00ffcc44; box-shadow: 0 0 24px #00ffcc22, inset 0 0 40px #00000088; overflow: hidden; }
+.njrat-wrap table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.njrat-wrap thead tr { background: #00ffcc18; }
+.njrat-wrap th { font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 12px 16px; color: #00ffcc; border-bottom: 1px solid #00ffcc44; border-right: 1px solid #00ffcc22; white-space: nowrap; }
+.njrat-wrap td { padding: 8px 16px; border-bottom: 1px solid #ffffff0d; border-right: 1px solid #ffffff08; vertical-align: middle; color: #c8d0d8; }
+.njrat-wrap tr:hover td { background: #00ffcc0a; color: #fff; }
+.njrat-wrap td.cat { font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-align: center; white-space: nowrap; border-right: 1px solid #00ffcc33; }
+.njrat-wrap .cat-pm  { color: #ff2d78; text-shadow: 0 0 6px #ff2d7866; background: #ff2d7808; }
+.njrat-wrap .cat-net { color: #00ccff; text-shadow: 0 0 6px #00ccff66; background: #00ccff08; }
+.njrat-wrap .cat-re  { color: #bf5fff; text-shadow: 0 0 6px #bf5fff66; background: #bf5fff08; }
+.njrat-wrap .cat-fw  { color: #ffaa00; text-shadow: 0 0 6px #ffaa0066; background: #ffaa0008; }
+.njrat-wrap .cat-sb  { color: #00ffcc; text-shadow: 0 0 6px #00ffcc66; background: #00ffcc08; }
+.njrat-wrap .cat-vm  { color: #ff6622; text-shadow: 0 0 6px #ff662266; background: #ff662208; }
+.njrat-wrap code { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #ffe566; background: #ffe5660d; padding: 1px 6px; border: 1px solid #ffe56622; }
+.njrat-wrap .method { color: #888fa0; font-size: 12px; letter-spacing: 1px; }
+.njrat-wrap .action-endapp { color: #00ffcc; font-weight: 700; letter-spacing: 1px; font-size: 12px; text-shadow: 0 0 6px #00ffcc88; }
+.njrat-wrap .corner { position: absolute; font-family: 'Orbitron', sans-serif; font-size: 9px; color: #00ffcc44; letter-spacing: 1px; }
+.njrat-wrap .corner-tl { top: 10px; left: 10px; }
+.njrat-wrap .corner-br { bottom: 10px; right: 10px; }
+</style>
+
+<div class="njrat-wrap">
+  <div class="corner corner-tl">SYS://MALWARE.ANALYSIS</div>
+  <div class="corner corner-br">MODULE: CsAntiProcess</div>
+  <div class="header">
+    <h2>NjRAT — CsAntiProcess</h2>
+    <div class="sub">// Anti-Analysis Detection Table &nbsp;|&nbsp; 18 entries identified</div>
+  </div>
+  <div class="scan-line"></div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Name</th>
+          <th>Detection Method</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cat cat-pm" rowspan="2">Process<br>Monitor</td>
+          <td><code>procexp</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>processhacker</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td class="cat cat-net" rowspan="4">Network<br>Analysis</td>
+          <td><code>wireshark</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>smsniff</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>NetSnifferCs</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>apateDNS</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td class="cat cat-re" rowspan="5">Reverse<br>Engineering</td>
+          <td><code>dnSpy</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>ILSpy</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>CodeReflect</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>Reflector</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>exeinfoPE</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td class="cat cat-fw" rowspan="2">Firewall /<br>Blocker</td>
+          <td><code>IPBlocker</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>TiGeR-Firewall</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td class="cat cat-sb" rowspan="3">Sandbox</td>
+          <td><code>SbieCtrl</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>Sandboxie Control</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>SpyTheSpy</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td class="cat cat-vm" rowspan="2">Anti-VM</td>
+          <td><code>VGAuthService</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+        <tr>
+          <td><code>VBoxService</code></td>
+          <td class="method">ProcessName</td>
+          <td class="action-endapp">EndApp</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<blockquote>
+<p>This theme is cool, right?</p>
+</blockquote>
+<hr>
+<p>In this version, a <strong>USB spreading feature</strong> was also added:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/23.png'><img src="/images/article/2026-3-21-njRATv0-10d/23.png" width=800/>
+</p>
+
+<p>Compared to <a href="https://iss4cf0ng.github.io/2026/03/18/2026-3-18-njRATLime/#USB-Spread">njRAT Lime Edition</a>, it adopts a simpler method — copying itself to <strong>all available drives</strong>.</p>
+<p>Create a mutex to ensure only a single payload instance:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/24.png'><img src="/images/article/2026-3-21-njRATv0-10d/24.png" width=600/>
+</p>
+
+<p>The installation function is shown below (invoked if enabled):</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/25.png'><img src="/images/article/2026-3-21-njRATv0-10d/25.png" width=800/>
+</p>
+
+<p>The following flow chart illustrates the installation procedure:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs mermaid">flowchart TD<br>    A([START: INS called]) --&gt; B[Sleep 1000ms]<br>    B --&gt; C&#123;OK.Idr is true\nAND current path\n!= target path?&#125;<br><br>    C -- No --&gt; G<br>    C -- Yes --&gt; D&#123;Target EXE\nalready exists?&#125;<br><br>    D -- Yes --&gt; E[Delete existing EXE]<br>    D -- No --&gt; F<br>    E --&gt; F[Copy self to\ntarget directory]<br>    F --&gt; H[Update OK.LO\nto new path]<br>    H --&gt; I[Launch new\ncopy of self]<br>    I --&gt; J([EndApp — exit\ncurrent instance])<br><br>    G[Set env var\nSEE_MASK_NOZONECHECKS=1]<br>    G --&gt; K[Add firewall exception\nvia netsh]<br><br>    K --&gt; L&#123;OK.Isu:\nStartup via\nregistry?&#125;<br>    L -- Yes --&gt; M[Write to\nHKCU Run key]<br>    M --&gt; N[Write to\nHKLM Run key]<br>    N --&gt; O<br>    L -- No --&gt; O<br><br>    O&#123;OK.IsF:\nStartup via\nStartup folder?&#125;<br>    O -- Yes --&gt; P[Copy EXE to\nStartup folder]<br>    P --&gt; Q[Open file lock\non startup copy]<br>    Q --&gt; R([END])<br>    O -- No --&gt; R<br><br>    style A fill:#4a1b8c,color:#e0ccff,stroke:#7c3aed<br>    style J fill:#7c1d1d,color:#fecaca,stroke:#dc2626<br>    style R fill:#1a3a1a,color:#bbf7d0,stroke:#16a34a<br>    style E fill:#7c3a1d,color:#fed7aa,stroke:#ea580c<br>    style I fill:#1d3a6b,color:#bfdbfe,stroke:#2563eb<br>    style M fill:#2d1a4a,color:#ddd6fe,stroke:#7c3aed<br>    style N fill:#2d1a4a,color:#ddd6fe,stroke:#7c3aed<br>    style P fill:#2d1a4a,color:#ddd6fe,stroke:#7c3aed<br>    style Q fill:#2d1a4a,color:#ddd6fe,stroke:#7c3aed<br></code></pre></td></tr></table></figure>
+<hr>
+<p>Function <code>RC()</code> is responsible for remote connection:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/26.png'><img src="/images/article/2026-3-21-njRATv0-10d/26.png" width=800/>
+    <figcaption>
+    RC()
+    </figcaption>
+</p>
+
+<p>Function <code>Ind()</code> acts as the message handler:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/27.png'><img src="/images/article/2026-3-21-njRATv0-10d/27.png" width=800/>
+</p>
+
+<p>The following table describes the C2 commands:</p>
+<style>
+.njrat-c2-wrap { position: relative; padding: 32px; background: #0a0a0f; font-family: 'Share Tech Mono', monospace; color: #e0e0e0; }
+.njrat-c2-wrap .header { margin-bottom: 24px; }
+.njrat-c2-wrap .header h2 { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #00ffcc; text-shadow: 0 0 10px #00ffcc88; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.njrat-c2-wrap .header .sub { font-size: 12px; color: #ff2d78; letter-spacing: 3px; text-transform: uppercase; }
+.njrat-c2-wrap .scan-line { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, #00ffcc, #ff2d78, transparent); margin: 16px 0; opacity: 0.6; }
+.njrat-c2-wrap .table-wrap { border: 1px solid #00ffcc44; box-shadow: 0 0 24px #00ffcc22, inset 0 0 40px #00000088; overflow: hidden; }
+.njrat-c2-wrap table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.njrat-c2-wrap thead tr { background: #00ffcc18; }
+.njrat-c2-wrap th { font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 12px 16px; color: #00ffcc; border-bottom: 1px solid #00ffcc44; border-right: 1px solid #00ffcc22; white-space: nowrap; }
+.njrat-c2-wrap td { padding: 8px 16px; border-bottom: 1px solid #ffffff0d; border-right: 1px solid #ffffff08; vertical-align: middle; color: #c8d0d8; }
+.njrat-c2-wrap tr:hover td { background: #00ffcc0a; color: #fff; }
+.njrat-c2-wrap td.cat { font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-align: center; white-space: nowrap; border-right: 1px solid #00ffcc33; }
+.njrat-c2-wrap .cat-conn { color: #00ffcc; text-shadow: 0 0 6px #00ffcc66; background: #00ffcc08; }
+.njrat-c2-wrap .cat-sys  { color: #ff2d78; text-shadow: 0 0 6px #ff2d7866; background: #ff2d7808; }
+.njrat-c2-wrap .cat-file { color: #ffaa00; text-shadow: 0 0 6px #ffaa0066; background: #ffaa0008; }
+.njrat-c2-wrap .cat-cap  { color: #00ccff; text-shadow: 0 0 6px #00ccff66; background: #00ccff08; }
+.njrat-c2-wrap .cat-kl   { color: #bf5fff; text-shadow: 0 0 6px #bf5fff66; background: #bf5fff08; }
+.njrat-c2-wrap .cat-plg  { color: #ff6622; text-shadow: 0 0 6px #ff662266; background: #ff662208; }
+.njrat-c2-wrap .cat-reg  { color: #ffe566; text-shadow: 0 0 6px #ffe56666; background: #ffe56608; }
+.njrat-c2-wrap code { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #ffe566; background: #ffe5660d; padding: 1px 6px; border: 1px solid #ffe56622; }
+.njrat-c2-wrap .desc   { color: #8899aa; font-size: 12px; }
+.njrat-c2-wrap .params { color: #aabbcc; font-size: 12px; font-style: italic; }
+.njrat-c2-wrap .corner { position: absolute; font-family: 'Orbitron', sans-serif; font-size: 9px; color: #00ffcc44; letter-spacing: 1px; }
+.njrat-c2-wrap .corner-tl { top: 10px; left: 10px; }
+.njrat-c2-wrap .corner-br { bottom: 10px; right: 10px; }
+</style>
+
+<div class="njrat-c2-wrap">
+  <div class="corner corner-tl">SYS://MALWARE.ANALYSIS</div>
+  <div class="corner corner-br">METHOD: Ind() — C2 Dispatcher</div>
+  <div class="header">
+    <h2>NjRAT — C2 Command Handler</h2>
+    <div class="sub">// Ind() dispatcher &nbsp;|&nbsp; array[0] = command opcode</div>
+  </div>
+  <div class="scan-line"></div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Opcode</th>
+          <th>Sub-command / Params</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cat cat-conn">Connection</td>
+          <td><code>ll</code></td>
+          <td class="params">—</td>
+          <td class="desc">Disconnect — sets OK.Cn = false</td>
+        </tr>
+        <tr>
+          <td class="cat cat-kl">Keylogger</td>
+          <td><code>kl</code></td>
+          <td class="params">—</td>
+          <td class="desc">Send keylog buffer — returns OK.kq.Logs encoded via ENB()</td>
+        </tr>
+        <tr>
+          <td class="cat cat-reg" rowspan="3">Registry</td>
+          <td><code>prof</code></td>
+          <td class="params">array[1] = "~"</td>
+          <td class="desc">Set registry value (STV) — array[2]=key, array[3]=value</td>
+        </tr>
+        <tr>
+          <td><code>prof</code></td>
+          <td class="params">array[1] = "!"</td>
+          <td class="desc">Set registry value AND send back current value via getvalue</td>
+        </tr>
+        <tr>
+          <td><code>prof</code></td>
+          <td class="params">array[1] = "@"</td>
+          <td class="desc">Delete registry value (DLV) — array[2]=key</td>
+        </tr>
+        <tr>
+          <td class="cat cat-file" rowspan="2">Remote Execute</td>
+          <td><code>rn</code></td>
+          <td class="params">array[2][0] == 0x1F (embedded)</td>
+          <td class="desc">Execute embedded payload — decompress from packet, write to temp file, run</td>
+        </tr>
+        <tr>
+          <td><code>rn</code></td>
+          <td class="params">array[2] = URL</td>
+          <td class="desc">Download &amp; execute from URL — WebClient.DownloadData, write to temp, Process.Start</td>
+        </tr>
+        <tr>
+          <td class="cat cat-sys" rowspan="2">Update</td>
+          <td><code>up</code></td>
+          <td class="params">array[1][0] == 0x1F (embedded)</td>
+          <td class="desc">Self-update via embedded EXE — decompress, write to temp .exe, start with ".." arg, call UNS()</td>
+        </tr>
+        <tr>
+          <td><code>up</code></td>
+          <td class="params">array[1] = URL</td>
+          <td class="desc">Self-update via URL — download new EXE, replace self, restart</td>
+        </tr>
+        <tr>
+          <td class="cat cat-sys" rowspan="3">Control</td>
+          <td><code>un</code></td>
+          <td class="params">array[1] = "~"</td>
+          <td class="desc">Uninstall — calls UNS()</td>
+        </tr>
+        <tr>
+          <td><code>un</code></td>
+          <td class="params">array[1] = "!"</td>
+          <td class="desc">Kill process — calls pr(0) then EndApp</td>
+        </tr>
+        <tr>
+          <td><code>un</code></td>
+          <td class="params">array[1] = "@"</td>
+          <td class="desc">Restart — calls pr(0), Process.Start(OK.LO), EndApp</td>
+        </tr>
+        <tr>
+          <td class="cat cat-cap">Screenshot</td>
+          <td><code>CAP</code></td>
+          <td class="params">array[1]=width, array[2]=height</td>
+          <td class="desc">Capture screen — resize to specified dims, JPEG encode, MD5 deduplicate, send via Sendb()</td>
+        </tr>
+        <tr>
+          <td class="cat cat-plg" rowspan="4">Plugin</td>
+          <td><code>ret</code></td>
+          <td class="params">array[1]=plugin ID, array[2]=payload (opt)</td>
+          <td class="desc">Load plugin, call GT() to get result, send back via "ret" opcode</td>
+        </tr>
+        <tr>
+          <td><code>inv</code></td>
+          <td class="params">array[1]=plugin ID, array[2]=osk, array[3]=payload</td>
+          <td class="desc">Load plugin, set h/p/osk properties, call start(), wait for Off flag</td>
+        </tr>
+        <tr>
+          <td><code>Ex</code></td>
+          <td class="params">—</td>
+          <td class="desc">Dispatch raw bytes to loaded plugin via PLG.ind(b) via LateCall</td>
+        </tr>
+        <tr>
+          <td><code>PLG</code></td>
+          <td class="params">embedded payload</td>
+          <td class="desc">Load new plugin — decompress, load assembly via OK.Plugin(), set H/P/c properties</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+<p>The payload uses <code>Select * From AntiVirusProduct</code> to retrieve installed anti-virus products:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/28.png'><img src="/images/article/2026-3-21-njRATv0-10d/28.png" width=800/>
+</p>
+
+<p>As in njRAT v0.7, it uses <code>Assembly.Load()</code> to implement plugin-based functionality:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/30.png'><img src="/images/article/2026-3-21-njRATv0-10d/30.png" width=800/>
+</p>
+
+<h2 id="Controller-Application"><a href="#Controller-Application" class="headerlink" title="Controller Application"></a>Controller Application</h2><p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/35.png'><img src="/images/article/2026-3-21-njRATv0-10d/35.png" width=600/>
+    <figcaption>
+    ExeInfo PE
+    </figcaption>
+</p>
+
+<p>While building the payload, I noticed the following options:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/31.png'><img src="/images/article/2026-3-21-njRATv0-10d/31.png" width=600/>
+    <figcaption>
+    Melt X, LAN, UAC, Bypass Firewall, schtasks
+    </figcaption>
+</p>
+
+<p>However, no corresponding behavior was observed in <strong>RegShot</strong> or <strong>Process Monitor</strong>.</p>
+<p>After analyzing the controller using dnSpy, I found that these options are actually <strong>fake</strong>, as they only modify parameters in the stub without implementing the advertised functionality:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/36.png'><img src="/images/article/2026-3-21-njRATv0-10d/36.png" width=700/>
+    <figcaption>
+    Those options do not exist while building the payload
+    </figcaption>
+</p>
+
+<p>On the other hand, the controller application uses <strong>.NET Reactor</strong> for obfuscation:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/32.png'><img src="/images/article/2026-3-21-njRATv0-10d/32.png" width=700/>
+    <figcaption>
+    cmd.exe /C dotNET_Reactor.exe
+    </figcaption>
+</p>
+
+<p>The author also implemented an <code>IconN</code> class to modify the payload icon:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/33.png'><img src="/images/article/2026-3-21-njRATv0-10d/33.png" width=700/>
+    <figcaption>
+    IconN class
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-3-21-njRATv0-10d/34.png'><img src="/images/article/2026-3-21-njRATv0-10d/34.png" width=600/>
+    <figcaption>
+    Windows APIs for modifying the icon
+    </figcaption>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article presents an analysis of njRAT v0.10.</p>
+<p>I was particularly interested in the relationship between this version and the previous ones (v0.7 to v0.9). </p>
+<p>At first, I <strong>thought I had it all figured out</strong>. While analyzing v0.9, I assumed the author was still <code>njq8</code>, so I simply skipped version 0.8 and moved on.</p>
+<p>…yeah, that was a mistake.  </p>
+<p>After digging deeper, I realized that the authors of v0.8 and v0.9 are actually different from v0.7 — which completely broke my earlier assumption.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.png'><img src="/images/meme/mika_nagisa_rollcake.png" width=300/>
+</p>
+
+<p>So yeah — that was on me. My bad.</p>
+<p>After correcting that, things started to make much more sense. I found that njRAT v0.10 is primarily based on version 0.7, but the author has merged in several features from version 0.8, such as USB spreading, anti-process mechanisms, and the redirection of <code>stdin</code>, <code>stdout</code>, and <code>stderr</code> for a more interactive remote shell.</p>
+<p>Even though I’ve already analyzed version 0.9, I’ll still be covering version 0.8 in a future article. There are some significant changes between v0.8 and v0.9, and they’re important for understanding how this malware family evolved (especially since those two versions share the same author).</p>
+<p>This article is part of my ongoing study of RATs. If you have any comments or suggestions, feel free to leave a comment below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.gif'><img src="/images/meme/mika_nagisa_rollcake.gif" width=600>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/03/20/2026-3-20-Gh0st/">[Studying] Analyzing Gh0st 1.0 Alpha Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/musa.mp3",
+    "/mp3/music/air.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/midnight_trip.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Takeaways"><span class="toc-number">1.1.</span> <span class="toc-text">Key Takeaways</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#njRAT-v0-10"><span class="toc-number">2.</span> <span class="toc-text">njRAT v0.10</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experimental-Environment"><span class="toc-number">3.</span> <span class="toc-text">Experimental Environment</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Usage"><span class="toc-number">4.</span> <span class="toc-text">Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Remote-Shell"><span class="toc-number">4.1.</span> <span class="toc-text">Remote Shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Remote-Desktop"><span class="toc-number">4.2.</span> <span class="toc-text">Remote Desktop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chatting"><span class="toc-number">4.3.</span> <span class="toc-text">Chatting</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Protocol-Analysis"><span class="toc-number">5.</span> <span class="toc-text">Protocol Analysis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reverse-Engineering"><span class="toc-number">6.</span> <span class="toc-text">Reverse Engineering</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Payload"><span class="toc-number">6.1.</span> <span class="toc-text">Payload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.2.</span> <span class="toc-text">NjRAT — CsAntiProcess</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">6.3.</span> <span class="toc-text">NjRAT — C2 Command Handler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controller-Application"><span class="toc-number">6.4.</span> <span class="toc-text">Controller Application</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">7.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">8.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

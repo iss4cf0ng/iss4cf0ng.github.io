@@ -92,11 +92,22 @@ graph TD
     v0.7green("njRAT v0.7 Green Edition (im523)")
     v0.7horror(njRAT v0.7 Horror Edition)
 
+    v0.7golden("njRAT Golden Edition")
+
     v2017danger("njRAT Danger Edition 2017 (FranhSko)")
     v2018danger("njRAT Danger Edition 2018 (FranhSko)")
     v2020danger("njRAT Danger Edition 2020 (FranhSko)")
 
     dangerous(Dangerous RAT)
+
+    % Korean Variants
+    korean("Korean")
+    v0.7blue("Blue")
+    v0.7ziku("Ziku")
+    zikuwhite("White Rat")
+    zikuVIP("Ziku VIP")
+    cronos("CRONOS")
+
 
     njRAT --> v0.1.4
     v0.1.4 --> v0.3.5
@@ -111,9 +122,16 @@ graph TD
 
     v0.7 --> v0.79lime
     v0.7 --> v0.7green
+    v0.7 --> korean
     v0.7 --> v2017danger
     v0.7 --> dangerous
     v0.7 --> v0.7horror
+
+    korean --> v0.7blue
+    korean --> cronos
+    korean --> zikuwhite
+    zikuwhite --> v0.7ziku
+    v0.7ziku --> zikuVIP
 
     v0.79lime --> v0.8lime
 

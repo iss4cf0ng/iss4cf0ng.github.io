@@ -72,75 +72,76 @@ timeline
 <hr>
 <div class="mermaid">
 graph TD
-    njRAT("The njRAT Family")
-    v0.1.4("njRAT v0.1.4 (njq8)")
-    v0.3.5("njRAT v0.3.5 (njq8)")
-    v0.3.6("njRAT v0.3.6 (njq8)")
-    v0.4.1("njRAT v0.4.1 (njq8)")
-    v0.5.0("njRAT v0.5.0 (njq8)")
-    v0.6.4("njRAT v0.6.4 (njq8)")
-    v0.7("njRAT v0.7d (njq8)")
-    v0.11("njRAT v0.11G (njq8)")
+    njRAT("njRAT Family")
 
-    %% variants 
-    v0.8("njRAT v0.8d (Naseer2012)")
-    v0.9("njRAT v0.9d (Naseer2012)")
-    v0.10("njRAT v0.10d (FR3ON)")
+    %% merged early versions
+    early("v0.1.x ~ v0.6.x")
 
-    v0.79lime("njRAT v0.79 Lime Edition (NYAN-CAT)")
-    v0.8lime("njRAT v0.8 Lime Edition (NYAN-CAT)")
-    v0.7green("njRAT v0.7 Green Edition (im523)")
-    v0.7horror(njRAT v0.7 Horror Edition)
+    %% main versions
+    v0.7("v0.7")
+    v0.8("v0.8")
+    v0.9("v0.9")
+    v0.11("v0.11")
 
-    v0.7golden("njRAT Golden Edition")
+    %% grouping node
+    variants("Variants")
 
-    v2017danger("njRAT Danger Edition 2017 (FranhSko)")
-    v2018danger("njRAT Danger Edition 2018 (FranhSko)")
-    v2020danger("njRAT Danger Edition 2020 (FranhSko)")
+    %% main flow
+    njRAT --> early --> v0.7 --> v0.8 --> v0.9 --> v0.11
+    v0.7 --> variants
 
-    dangerous(Dangerous RAT)
+    %% --------------------
+    %% Variant groups
+    %% --------------------
 
-    %% Korean Variants
-    korean("Korean")
-    v0.7blue("Blue")
-    v0.7ziku("Ziku")
-    zikuwhite("White Rat")
-    zikuVIP("Ziku VIP")
-    cronos("CRONOS")
+    subgraph Lime
+        v0.79lime("v0.79 Lime")
+        v0.8lime("v0.8 Lime")
+        v0.79lime --> v0.8lime
+    end
 
+    subgraph Danger
+        d2017("2017")
+        d2018("2018")
+        d2020("2020")
+        d2017 --> d2018 --> d2020
+    end
 
-    njRAT --> v0.1.4
-    v0.1.4 --> v0.3.5
-    v0.3.5 --> v0.3.6
-    v0.3.6 --> v0.4.1
-    v0.4.1 --> v0.5.0
-    v0.5.0 --> v0.6.4
-    v0.6.4 --> v0.7
-    v0.7 --> v0.8
-    v0.8 --> v0.9
-    v0.9 --> v0.11
+    subgraph Korean
+        korean("Korean Base")
+        blue("Blue")
+        cronos("CRONOS")
+        white("White")
+        ziku("Ziku")
+        vip("VIP")
 
-    v0.7 --> v0.79lime
-    v0.7 --> v0.7green
-    v0.7 --> korean
-    v0.7 --> v2017danger
-    v0.7 --> dangerous
-    v0.7 --> v0.7horror
-    v0.7 --> v0.7golden
+        korean --> blue
+        korean --> cronos
+        korean --> white
+        white --> ziku --> vip
+    end
 
-    korean --> v0.7blue
-    korean --> cronos
-    korean --> zikuwhite
-    zikuwhite --> v0.7ziku
-    v0.7ziku --> zikuVIP
+    subgraph Other
+        v0.7green("Green")
+        horror("Horror")
+        golden("Golden")
+        dangerous("Dangerous RAT")
+        v0.10("v0.10")
+    end
 
-    v0.79lime --> v0.8lime
+    %% connect variants
+    variants --> v0.79lime
+    variants --> d2017
+    variants --> korean
+    variants --> v0.7green
+    variants --> horror
+    variants --> golden
+    variants --> dangerous
+    variants --> v0.10
 
-    v2017danger --> v2018danger
-    v2018danger --> v2020danger
-
-    v0.7 --> v0.10
-
+    %% --------------------
+    %% Click Events
+    %% --------------------
     click v0.7 "/2026/03/15/2026-3-15-njRAT/" "njRAT v0.7d"
     click v0.9 "/2026/03/17/2026-3-17-njRATv0-9d/" "njRAT v0.9d"
     click v0.7green "/2026/03/18/2026-3-18-njRATLime/" "njRAT v0.7d Green Edition"

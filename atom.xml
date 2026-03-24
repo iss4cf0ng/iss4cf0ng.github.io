@@ -524,8 +524,6 @@
     
     <category term="Fileless Execution" scheme="https://iss4cf0ng.github.io/tags/Fileless-Execution/"/>
     
-    <category term="Fileless" scheme="https://iss4cf0ng.github.io/tags/Fileless/"/>
-    
     <category term="Elfina" scheme="https://iss4cf0ng.github.io/tags/Elfina/"/>
     
     <category term="ELF" scheme="https://iss4cf0ng.github.io/tags/ELF/"/>
@@ -533,6 +531,8 @@
     <category term="Loader" scheme="https://iss4cf0ng.github.io/tags/Loader/"/>
     
     <category term="ELF Loader" scheme="https://iss4cf0ng.github.io/tags/ELF-Loader/"/>
+    
+    <category term="Fileless" scheme="https://iss4cf0ng.github.io/tags/Fileless/"/>
     
     <category term="Kernel" scheme="https://iss4cf0ng.github.io/tags/Kernel/"/>
     
@@ -596,8 +596,6 @@
     
     <category term="Fileless Execution" scheme="https://iss4cf0ng.github.io/tags/Fileless-Execution/"/>
     
-    <category term="Fileless" scheme="https://iss4cf0ng.github.io/tags/Fileless/"/>
-    
     <category term="Elfina" scheme="https://iss4cf0ng.github.io/tags/Elfina/"/>
     
     <category term="ELF" scheme="https://iss4cf0ng.github.io/tags/ELF/"/>
@@ -605,6 +603,8 @@
     <category term="Loader" scheme="https://iss4cf0ng.github.io/tags/Loader/"/>
     
     <category term="ELF Loader" scheme="https://iss4cf0ng.github.io/tags/ELF-Loader/"/>
+    
+    <category term="Fileless" scheme="https://iss4cf0ng.github.io/tags/Fileless/"/>
     
     <category term="C Language" scheme="https://iss4cf0ng.github.io/tags/C-Language/"/>
     
@@ -650,9 +650,9 @@
     
     <category term="PE Loader" scheme="https://iss4cf0ng.github.io/tags/PE-Loader/"/>
     
-    <category term="PE Format" scheme="https://iss4cf0ng.github.io/tags/PE-Format/"/>
-    
     <category term="Fileless" scheme="https://iss4cf0ng.github.io/tags/Fileless/"/>
+    
+    <category term="PE Format" scheme="https://iss4cf0ng.github.io/tags/PE-Format/"/>
     
     <category term="Executable" scheme="https://iss4cf0ng.github.io/tags/Executable/"/>
     

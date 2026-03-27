@@ -6,7 +6,7 @@
   <link href="https://iss4cf0ng.github.io/atom.xml" rel="self"/>
   
   <link href="https://iss4cf0ng.github.io/"/>
-  <updated>2026-03-25T09:30:42.350Z</updated>
+  <updated>2026-03-27T16:38:32.479Z</updated>
   <id>https://iss4cf0ng.github.io/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Studying] Analyzing Several Korean Variants of the njRAT Family</title>
+    <link href="https://iss4cf0ng.github.io/2026/03/25/2026-3-25-njRATKoreanVars/"/>
+    <id>https://iss4cf0ng.github.io/2026/03/25/2026-3-25-njRATKoreanVars/</id>
+    <published>2026-03-24T17:38:13.000Z</published>
+    <updated>2026-03-27T16:38:32.479Z</updated>
+    
+    <content type="html"><![CDATA[<p>Several Variants of the njRAT family… but with built-in backdoor!</p><span id="more"></span><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a> and part of <a href="/TheNjRatFamily/">the njRAT family</a>.</p><p>If you are interested in the full series, please refer to the linked pages above.</p><p align="center" class='item-img' data-src='/images/meme/mika_rollcake_hit.png'><img src="/images/meme/mika_rollcake_hit.png" width=250/></p><h1 id="njRAT-Korean-Variants"><a href="#njRAT-Korean-Variants" class="headerlink" title="njRAT Korean Variants"></a>njRAT Korean Variants</h1><p>This is not the name of a single variant of <a href="">the njRAT family</a>, but rather a collection of variants that user a Korean user interface.</p><p>Since these variants share similar features, I decided to cover them in a single article and discuss how they differ from their foundation.</p><p>Because these variants use a Korean user interface (and most readers may not be familiar with Korean), I added English translations to the screenshots in this article.</p><blockquote><p>Note: In Korean, many technical terms are transliterations of English (similar to Mandarin and Japanese). Therefore, if you can pronounce the words, you may still understand their meanings even if you have not seen them before.</p></blockquote><h1 id="Experimental-Environment"><a href="#Experimental-Environment" class="headerlink" title="Experimental Environment"></a>Experimental Environment</h1><p>To safely conduct malware analysis, the environment should be isolated using virtual machines. Under no circumstances should malware be executed on a personal or production system.</p><div class="table-container"><table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody><tr><td>ExeInfo PE</td><td>Detect packers, compilers, and basic file metadata</td></tr><tr><td>Detect It Easy (DIE)</td><td>Identify packers, protectors, and signatures</td></tr><tr><td>Process Monitor</td><td>Process monitoring tool</td></tr><tr><td>Wireshark</td><td>Network traffic analysis</td></tr><tr><td>de4dot</td><td>.NET de-obfuscation</td></tr><tr><td>dnSpy</td><td>.NET reverse engineering and debugging</td></tr><tr><td>pestudio</td><td>Static PE analysis tool</td></tr></tbody></table></div><hr><div class="table-container"><table><thead><tr><th>Device</th><th>IP Address</th><th>Description</th></tr></thead><tbody><tr><td>Windows 7 x64 (VM)</td><td>192.168.85.5</td><td>Victim machine</td></tr><tr><td>Windows 10 x64 (VM)</td><td>192.168.85.3</td><td>Analysis machine</td></tr></tbody></table></div><p>The two virtual machines were configured within an isolated internal network to prevent unintended external communication. If you want to know how to set up your experimental environment, please view:</p><ul><li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/">How to Setup Your Experimental Environment for Malware Analysis</a></li><li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-WinXpVMWareTool/">Installing VMware Tools on Windows XP and Windows 95 with VMware WorkStation 17</a></li></ul><h1 id="njRAT-Blue"><a href="#njRAT-Blue" class="headerlink" title="njRAT Blue"></a>njRAT Blue</h1><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/2.png'><img src="/images/article/2026-3-25-njRATKoreanVars/2.png" width=700/></p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/3.png'><img src="/images/article/2026-3-25-njRATKoreanVars/3.png" width=800/></p><p>As in <a href="/2026/03/15/2026-3-15-njRAT/#Controller-Application">njRAT v0.7</a>, the controller application is packed. Therefore, I used <strong>de4dot</strong> to de-obfuscate it:</p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/1.png'><img src="/images/article/2026-3-25-njRATKoreanVars/1.png" width=800/></p><p>Interestingly, njRAT Blue provides a “Bot” functionality that allows users to manually add fake compromised machines into the controller application.</p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/4.png'><img src="/images/article/2026-3-25-njRATKoreanVars/4.png" width=700/>    <figcaption>    Fake compromised machines    </figcaption></p><p>After analysis, the architecture, mechanisms, and protocol are identical to those of version 0.7. However, this variant contains a built-in backdoor.</p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/5.png'><img src="/images/article/2026-3-25-njRATKoreanVars/5.png" width=800/>    <figcaption>    WebClient() downloader    </figcaption></p><p>The author of this version implemented a simple backdoor: it downloads a payload from a remote server, stores it in the <code>%TEMP%</code> directory, and executes it.</p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/6.png'><img src="/images/article/2026-3-25-njRATKoreanVars/6.png" width=800/>    <figcaption>    VirusTotal    </figcaption></p><blockquote><p>This highlights why a properly isolated analysis environment is critical.</p></blockquote><h1 id="njRAT-CRONOS"><a href="#njRAT-CRONOS" class="headerlink" title="njRAT CRONOS"></a>njRAT CRONOS</h1><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/7.png'><img src="/images/article/2026-3-25-njRATKoreanVars/7.png" width=700/>    <figcaption>    Compile Timestamp    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/8.png'><img src="/images/article/2026-3-25-njRATKoreanVars/8.png" width=800/>    <figcaption>    The controller application    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/9.png'><img src="/images/article/2026-3-25-njRATKoreanVars/9.png" width=800/>    <figcaption>    Online machine    </figcaption></p><p>This is another Korean variant of njRAT. After reverse engineering, both the controller application and payload share the same architecture as version 0.7.</p><p>However, it again contains a built-in backdoor, this time located in the plugin file:</p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/10.png'><img src="/images/article/2026-3-25-njRATKoreanVars/10.png" width=800/>    <figcaption>    Built-in backdoor    </figcaption></p><p>To analyze it, I used a simple Python script to convert the <strong>Base64</strong>-encoded payload into a <strong><code>.bin</code></strong> file:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> base64<br><br>payload = <span class="hljs-string">&#x27;[BASE64 ENCODED PAYLOAD]&#x27;</span><br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;output.bin&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(base64.b64decode(payload))<br></code></pre></td></tr></table></figure><p>I then opened it using <strong>ExeInfo PE</strong>:</p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/11.png'><img src="/images/article/2026-3-25-njRATKoreanVars/11.png" width=600/>    <figcaption>    ExeInfo PE    </figcaption></p><p>Next, I analyzed it using <strong>dnSpy</strong>:</p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/12.png'><img src="/images/article/2026-3-25-njRATKoreanVars/12.png" width=800/></p><p>The embedded payload uses <code>Assembly.Load()</code> to load another payload received from the remote C2 server into memory.</p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/24.png'><img src="/images/article/2026-3-25-njRATKoreanVars/24.png" width=800/></p><h1 id="njRAT-Ziku"><a href="#njRAT-Ziku" class="headerlink" title="njRAT Ziku"></a>njRAT Ziku</h1><p><strong>Ziku</strong> (Unknown developer) introduces three variants of njRAT. Howerver, further investigation shows that <strong>all these variants contain a built-in backdoor</strong>.</p><p>Notably, all embedded payloads share the same C2 IP address and port number.</p><h2 id="WhiteRat-NewBie"><a href="#WhiteRat-NewBie" class="headerlink" title="WhiteRat NewBie"></a>WhiteRat NewBie</h2><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/14.png'><img src="/images/article/2026-3-25-njRATKoreanVars/14.png" width=700/>    <figcaption>    Compile Timestamp    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/13.png'><img src="/images/article/2026-3-25-njRATKoreanVars/13.png" width=800/>    <figcaption>    The controller application    </figcaption></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">xxd output.bin<br></code></pre></td></tr></table></figure><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/15.png'><img src="/images/article/2026-3-25-njRATKoreanVars/15.png" width=800/>    <figcaption>    Hexdump result    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/16.png'><img src="/images/article/2026-3-25-njRATKoreanVars/16.png" width=800/>    <figcaption>    VirusTotal    </figcaption></p><p>Note that the original version, njRAT v0.7, does not contain this embedded payload in the plugin file. Therefore, it can be inferred that the backdoor was added by a third-party malicious developer.</p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/17.png'><img src="/images/article/2026-3-25-njRATKoreanVars/17.png" width=800/></p><h2 id="njRAT-Ziku-1"><a href="#njRAT-Ziku-1" class="headerlink" title="njRAT Ziku"></a>njRAT Ziku</h2><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/20.png'><img src="/images/article/2026-3-25-njRATKoreanVars/20.png" width=700/>    <figcaption>    Compile Timestamp    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/18.png'><img src="/images/article/2026-3-25-njRATKoreanVars/18.png" width=800/>    <figcaption>    The controller application    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/19.png'><img src="/images/article/2026-3-25-njRATKoreanVars/19.png" width=800/>    <figcaption>    Built-in Base64 encoded payload    </figcaption></p><h2 id="ZikuRAT-VIP"><a href="#ZikuRAT-VIP" class="headerlink" title="ZikuRAT VIP"></a>ZikuRAT VIP</h2><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/23.png'><img src="/images/article/2026-3-25-njRATKoreanVars/23.png" width=700/>    <figcaption>    Compile Timestamp    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/21.png'><img src="/images/article/2026-3-25-njRATKoreanVars/21.png" width=800/>    <figcaption>    The controller application    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-3-25-njRATKoreanVars/22.png'><img src="/images/article/2026-3-25-njRATKoreanVars/22.png" width=800/>    <figcaption>    Built-in Base64 encoded payload    </figcaption></p><h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article presents an analysis of several Korean variants of <a href="">the njRAT Family</a>.</p><p>This is the first time I have encountered malware samples that contain an additional built-in backdoor within the controller ecosystem.</p><p>Although the background of the backdoor remains unclear, two distinct patterns can be observed:</p><ul><li>Some variants download the backdoor from a remote server and execute it from disk</li><li>Other load the payload directly into memory, increasing analysis complexity</li></ul><p>Finally, this case further emphasizes the importance of using a properly isolated environment when performing malware analysis.</p><p>If you have any comments or suggestions, please feel free to leave them below!</p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/tea_party.jpg'><img src="/images/meme/tea_party.jpg" width=700/></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Several Variants of the njRAT family… but with built-in backdoor!&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Studying/RAT" scheme="https://iss4cf0ng.github.io/categories/Studying-RAT/"/>
+    
+    
+    <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
+    
+    <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
+    
+    <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
+    
+    <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
+    
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
+    <category term="Remote Access Tool" scheme="https://iss4cf0ng.github.io/tags/Remote-Access-Tool/"/>
+    
+    <category term="Trojan" scheme="https://iss4cf0ng.github.io/tags/Trojan/"/>
+    
+    <category term="Backdoor" scheme="https://iss4cf0ng.github.io/tags/Backdoor/"/>
+    
+    <category term="njRAT" scheme="https://iss4cf0ng.github.io/tags/njRAT/"/>
+    
+    <category term="Bladabindi" scheme="https://iss4cf0ng.github.io/tags/Bladabindi/"/>
+    
+    <category term="dnSpy" scheme="https://iss4cf0ng.github.io/tags/dnSpy/"/>
+    
+    <category term="de4dot" scheme="https://iss4cf0ng.github.io/tags/de4dot/"/>
+    
+    <category term="Obfuscated" scheme="https://iss4cf0ng.github.io/tags/Obfuscated/"/>
+    
+    <category term="VB.NET" scheme="https://iss4cf0ng.github.io/tags/VB-NET/"/>
+    
+    <category term="Reverse" scheme="https://iss4cf0ng.github.io/tags/Reverse/"/>
+    
+    <category term="njRAT Korean" scheme="https://iss4cf0ng.github.io/tags/njRAT-Korean/"/>
+    
+    <category term="Built-in Backdoor" scheme="https://iss4cf0ng.github.io/tags/Built-in-Backdoor/"/>
+    
+  </entry>
   
   <entry>
     <title>[Studying] Analyzing njRAT Golden Edition</title>
@@ -929,42 +982,6 @@
     <category term="ASPack" scheme="https://iss4cf0ng.github.io/tags/ASPack/"/>
     
     <category term="x32dbg" scheme="https://iss4cf0ng.github.io/tags/x32dbg/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Reverse Engineering] How I Found a Suspicious Redistribution of My Project</title>
-    <link href="https://iss4cf0ng.github.io/2026/02/24/2026-2-24-UnofficialRedistribution/"/>
-    <id>https://iss4cf0ng.github.io/2026/02/24/2026-2-24-UnofficialRedistribution/</id>
-    <published>2026-02-24T08:30:40.000Z</published>
-    <updated>2026-03-16T03:37:01.541Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>By coincidence, I discovered a repository using the same name as my <a href="https://iss4cf0ng.github.io/2026/02/06/2026-2-6-ToolDotNetPELoader/">dotNetPELoader</a> project, which caught my attention. I found that the source code in this repository is identical to mine, but it also includes an AI-generated README file.</p><p>Given my recent experience studying malware analysis, I decided to perform reverse engineering on this suspicious executable.</p><h1 id="Repository"><a href="#Repository" class="headerlink" title="Repository"></a>Repository</h1><p>First, the excessive use of emojis suggests this repository may have been AI-generated.</p><p align="center" class='item-img' data-src='/images/article/2026-2-24-UnofficialRedistribution/1.png'><img src="/images/article/2026-2-24-UnofficialRedistribution/1.png" width=800></p><p>Second, the README claims that the tool requires administrative rights to run, which is incorrect. I have demonstrated that dotNetPELoader works under user mode.</p><h1 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h1><p>The repository provides a direct ZIP download, bypassing the official <strong>Releases</strong> feature on GitHub.</p><p align="center" class='item-img' data-src='/images/article/2026-2-24-UnofficialRedistribution/2.png'><img src="/images/article/2026-2-24-UnofficialRedistribution/2.png" width=700></p><p>When performing reverse engineering, make sure to work in a virtual environment. (If you want to learn how to set up a safe experimental virtual environment for malware analysis, please <a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/">click here</a> and <a href="https://iss4cf0ng.github.io/2026/02/22/2026-2-22-ConfigureVirtualNetwork/">here</a>).</p><p>Open the executable <code>jit.exe</code> with <code>ExeInfo</code>:</p><p align="center" class='item-img' data-src='/images/article/2026-2-24-UnofficialRedistribution/3.png'><img src="/images/article/2026-2-24-UnofficialRedistribution/3.png" width=700></p><p>The content of <code>App.cmd</code>:</p><p align="center" class='item-img' data-src='/images/article/2026-2-24-UnofficialRedistribution/4.png'><img src="/images/article/2026-2-24-UnofficialRedistribution/4.png" width=500></p><p>The content of <code>bcjit.ico</code>:</p><p align="center" class='item-img' data-src='/images/article/2026-2-24-UnofficialRedistribution/5.png'><img src="/images/article/2026-2-24-UnofficialRedistribution/5.png" width=700></p><p>The Lua code is obfuscated. From my analysis, it appears that <code>jit.exe</code> loads the obfuscated code from <code>bcjit.ico</code> into memory and executes it. Do <strong>NOT</strong> run these files outside a controlled virtual environment.</p><p>Next, I opened the <code>jit.exe</code> with Ghidra. The decompiled output confirms my hypothesis:</p><p align="center" class='item-img' data-src='/images/article/2026-2-24-UnofficialRedistribution/6.png'><img src="/images/article/2026-2-24-UnofficialRedistribution/6.png" width=300>    <figcaption>    It imports LUA51.DLL    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-2-24-UnofficialRedistribution/7.png'><img src="/images/article/2026-2-24-UnofficialRedistribution/7.png" width=700>    <figcaption>    lua_cpcall()    </figcaption></p><p align="center" class='item-img' data-src='/images/article/2026-2-24-UnofficialRedistribution/8.png'><img src="/images/article/2026-2-24-UnofficialRedistribution/8.png" width=700>    <figcaption>    lua_loadfile()    </figcaption></p><h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This is the first time I encounter this issue. Fortunately, I have been learning malware analysis recently. Regardless of the Lua script’s functionality—it might be as harmless as a “Hello world!”—it is still highly suspicious.</p><p>Again, this suspicious executable file with Lua loader is <strong>NOT</strong> my work.</p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/hakari_crying.jpeg'><img src="/images/meme/hakari_crying.jpeg" width=600></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Background&quot;&gt;&lt;a href=&quot;#Background&quot; class=&quot;headerlink&quot; title=&quot;Background&quot;&gt;&lt;/a&gt;Background&lt;/h1&gt;&lt;p&gt;By coincidence, I discovered a reposit</summary>
-      
-    
-    
-    
-    <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/categories/Malware-Analysis/"/>
-    
-    
-    <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
-    
-    <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
-    
-    <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
-    
-    <category term="Ghidra" scheme="https://iss4cf0ng.github.io/tags/Ghidra/"/>
-    
-    <category term="Lua" scheme="https://iss4cf0ng.github.io/tags/Lua/"/>
-    
-    <category term="Unofficial Redistribution" scheme="https://iss4cf0ng.github.io/tags/Unofficial-Redistribution/"/>
-    
-    <category term="Lua Loader" scheme="https://iss4cf0ng.github.io/tags/Lua-Loader/"/>
     
   </entry>
   

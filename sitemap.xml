@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://iss4cf0ng.github.io/2026/03/25/2026-3-25-njRATDanger2017/</loc>
-    
-    <lastmod>2026-03-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://iss4cf0ng.github.io/TheNjRatFamily/index.html</loc>
     
     <lastmod>2026-03-28</lastmod>
@@ -22,7 +13,16 @@
   <url>
     <loc>https://iss4cf0ng.github.io/InsideDifferentGenerationsOfRATs/index.html</loc>
     
-    <lastmod>2026-03-27</lastmod>
+    <lastmod>2026-03-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/2026/03/25/2026-3-25-njRATDanger2017/</loc>
+    
+    <lastmod>2026-03-28</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

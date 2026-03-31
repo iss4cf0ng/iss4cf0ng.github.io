@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Studying] Analyzing Other Variants of the njRAT Family | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing Other Variants of the njRAT Family</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-03-29T17:00:01.000Z" id="date"> 2026-03-30</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-03-31T09:08:26.816Z" id="updated"> 2026-03-31</time></div></span><br><span>Word Count: <div class="control">543</div></span><br><span>Read Time: <div class="control">3 min</div></span></div></div><hr><div id="post-content"><p>The last article of the njRAT family…maybe?</p>
+<span id="more"></span>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a> and part of <a href="/TheNjRatFamily/">the njRAT Family</a>.</p>
+<p>If you are interested in the full series, please refer to the linked pages above.</p>
+<p>This article presents an analysis of several similar variants of <a href="/TheNjRatFamily/">the njRAT Family</a>.</p>
+<h2 id="Observations"><a href="#Observations" class="headerlink" title="Observations"></a>Observations</h2><p>From these variants, it can be observed that most modifications fall into the following categories:</p>
+<ul>
+<li>Cosmetic changes (e.g., GUI redesign)</li>
+<li>Feature reuse across variants</li>
+<li>Minor functional extensions</li>
+</ul>
+<p>This suggests that many variants are not fundamentally new malware, but rather iterative modifications built on existing codebases.</p>
+<p align="center" class='item-img' data-src='/images/meme/natsu_cake.jpg'><img src="/images/meme/natsu_cake.jpg" width=250/>
+</p>
+
+<h1 id="Other-njRAT-Versions-and-Variants"><a href="#Other-njRAT-Versions-and-Variants" class="headerlink" title="Other njRAT Versions and Variants"></a>Other njRAT Versions and Variants</h1><p>As introduced in the previous article, I analyzed several Korean variants. This article also serves to document other versions and variants of <a href="/TheNjRatFamily/">the njRAT Family</a>.</p>
+<p>In my opinion, it is not meaningful to write separate articles for minor variations between these variants.</p>
+<p>Compared to the previous analysis articles, this article does not introduce significant new reverse engineering insights. I decided to write this article to complete the overall landscape of the njRAT Family.</p>
+<h1 id="Experimental-Environment"><a href="#Experimental-Environment" class="headerlink" title="Experimental Environment"></a>Experimental Environment</h1><p>To safely conduct malware analysis, the environment should be isolated using virtual machines. Under no circumstances should malware be executed on a personal or production system.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ExeInfo PE</td>
+<td>Detect packers, compilers, and basic file metadata</td>
+</tr>
+<tr>
+<td>Detect It Easy (DIE)</td>
+<td>Identify packers, protectors, and signatures</td>
+</tr>
+<tr>
+<td>Wireshark</td>
+<td>Network traffic analysis</td>
+</tr>
+<tr>
+<td>de4dot</td>
+<td>.NET de-obfuscator</td>
+</tr>
+<tr>
+<td>.NET Reactor Slayer</td>
+<td>.NET Reactor de-obfuscator</td>
+</tr>
+<tr>
+<td>dnSpy</td>
+<td>.NET reverse engineering and debugging</td>
+</tr>
+<tr>
+<td>pestudio</td>
+<td>Static PE analysis tool</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>IP Address</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 7 x64 (VM)</td>
+<td>192.168.85.5</td>
+<td>Victim machine</td>
+</tr>
+<tr>
+<td>Windows 10 x64 (VM)</td>
+<td>192.168.85.3</td>
+<td>Analysis machine</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The two virtual machines were configured within an isolated internal network to prevent unintended external communication. If you want to know how to set up your experimental environment, please view:</p>
+<ul>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/">How to Setup Your Experimental Environment for Malware Analysis</a></li>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-WinXpVMWareTool/">Installing VMware Tools on Windows XP and Windows 95 with VMware WorkStation 17</a></li>
+</ul>
+<h1 id="njRAT-v0-11"><a href="#njRAT-v0-11" class="headerlink" title="njRAT v0.11"></a>njRAT v0.11</h1><p>This version was developed by the original author <strong>njq8</strong> of <a href="/2026/03/15/2026-3-15-njRAT/">njRAT v0.7</a>.</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/1.png'><img src="/images/meme/2026-3-30-njRATOtherVars/1.png" width=700/>
+    <figcaption>
+    Timestamp
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/2.png'><img src="/images/meme/2026-3-30-njRATOtherVars/2.png" width=600/>
+    <figcaption>
+    About
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/3.png'><img src="/images/meme/2026-3-30-njRATOtherVars/3.png" width=600/>
+    <figcaption>
+    Controller application
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/4.png'><img src="/images/meme/2026-3-30-njRATOtherVars/4.png" width=600/>
+    <figcaption>
+    Builder
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/5.png'><img src="/images/meme/2026-3-30-njRATOtherVars/5.png" width=800/>
+    <figcaption>
+    Compromised machine
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/6.png'><img src="/images/meme/2026-3-30-njRATOtherVars/6.png" width=600/>
+    <figcaption>
+    Active Window
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/7.png'><img src="/images/meme/2026-3-30-njRATOtherVars/7.png" width=600/>
+    <figcaption>
+    Installed Program
+    </figcaption>
+</p>
+
+<h2 id="Stress-Test-and-Pastime"><a href="#Stress-Test-and-Pastime" class="headerlink" title="Stress Test and Pastime"></a>Stress Test and Pastime</h2><p>Compared to the previous versions, the author added new features such as <strong>Stress Test</strong> and <strong>Pastime (Fun stuff)</strong>:</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/10.png'><img src="/images/meme/2026-3-30-njRATOtherVars/10.png" width=700/>
+    <figcaption>
+    Stress Test (likely inspired by LOIC)
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/12.png'><img src="/images/meme/2026-3-30-njRATOtherVars/12.png" width=600/>
+    <figcaption>
+    Pastime
+    </figcaption>
+</p>
+
+<h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/8.png'><img src="/images/meme/2026-3-30-njRATOtherVars/8.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/6.png'><img src="/images/meme/2026-3-30-njRATOtherVars/6.png" width=800/>
+</p>
+
+<h1 id="Other-Variants"><a href="#Other-Variants" class="headerlink" title="Other Variants"></a>Other Variants</h1><p>Here, I also want to show several variants and provide a brief overview.</p>
+<h2 id="Horror-Edition"><a href="#Horror-Edition" class="headerlink" title="Horror Edition"></a>Horror Edition</h2><p>The biggest change in this variant is it provides a horror-themed graphical user interface (e.g., scenes from horror movies)</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/14.png'><img src="/images/meme/2026-3-30-njRATOtherVars/14.png" width=700/>
+    <figcaption>
+    Timestamp
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/3.png'><img src="/images/meme/2026-3-30-njRATOtherVars/3.png" width=800/>
+    <figcaption>
+    GUI with scenes from horror movies
+    </figcaption>
+</p>
+
+<h2 id="Dangerous-Edition"><a href="#Dangerous-Edition" class="headerlink" title="Dangerous Edition"></a>Dangerous Edition</h2><p>This variant was likely released by the same author of the Danger Edition. It appears to incorporate several features from <a href="/2026/03/28/2026-3-28-njRATDanger2018/">njRAT Danger Edition 2018</a>:</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/16.png'><img src="/images/meme/2026-3-30-njRATOtherVars/16.png" width=700/>
+    <figcaption>
+    Timestamp
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/15.png'><img src="/images/meme/2026-3-30-njRATOtherVars/15.png" width=800/>
+    <figcaption>
+    Dangerous Edition
+    </figcaption>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article presents a high-level overview of several variants within <a href="/TheNjRatFamily/">the njRAT Family</a>. In addition, it is probably the last article of <a href="/TheNjRatFamily/">the njRAT Family</a> analysis.</p>
+<p>Although these variants introduce minor differences, most of them share the same core architecture and functionality derived from earlier versions such as <a href="/2026/03/15/2026-3-15-njRAT/">njRAT v0.7</a>.</p>
+<p>This highlights a common pattern in malware evolution, where new variants are often created through incremental modifications rather than entirely new designs.</p>
+<p>If you have any comments or suggestions, please feel free to leave them below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/hakari_crying.jpeg'><img src="/images/meme/hakari_crying.jpeg" width=700/>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/03/29/2026-3-29-njRATDanger2020/">[Studying] Analyzing njRAT Danger Edition 2020 Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/musa.mp3",
+    "/mp3/music/air.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/midnight_trip.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/rio_battle.mp3",
+    "/mp3/music/rio_l2d.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Observations"><span class="toc-number">1.1.</span> <span class="toc-text">Observations</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Other-njRAT-Versions-and-Variants"><span class="toc-number">2.</span> <span class="toc-text">Other njRAT Versions and Variants</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experimental-Environment"><span class="toc-number">3.</span> <span class="toc-text">Experimental Environment</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#njRAT-v0-11"><span class="toc-number">4.</span> <span class="toc-text">njRAT v0.11</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Stress-Test-and-Pastime"><span class="toc-number">4.1.</span> <span class="toc-text">Stress Test and Pastime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Protocol"><span class="toc-number">4.2.</span> <span class="toc-text">Protocol</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Other-Variants"><span class="toc-number">5.</span> <span class="toc-text">Other Variants</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Horror-Edition"><span class="toc-number">5.1.</span> <span class="toc-text">Horror Edition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dangerous-Edition"><span class="toc-number">5.2.</span> <span class="toc-text">Dangerous Edition</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">6.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">7.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

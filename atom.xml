@@ -6,7 +6,7 @@
   <link href="https://iss4cf0ng.github.io/atom.xml" rel="self"/>
   
   <link href="https://iss4cf0ng.github.io/"/>
-  <updated>2026-03-31T06:32:05.941Z</updated>
+  <updated>2026-03-31T09:08:26.816Z</updated>
   <id>https://iss4cf0ng.github.io/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Studying] Analyzing Other Variants of the njRAT Family</title>
+    <link href="https://iss4cf0ng.github.io/2026/03/30/2026-3-30-njRATOtherVars/"/>
+    <id>https://iss4cf0ng.github.io/2026/03/30/2026-3-30-njRATOtherVars/</id>
+    <published>2026-03-29T17:00:01.000Z</published>
+    <updated>2026-03-31T09:08:26.816Z</updated>
+    
+    <content type="html"><![CDATA[<p>The last article of the njRAT family…maybe?</p><span id="more"></span><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a> and part of <a href="/TheNjRatFamily/">the njRAT Family</a>.</p><p>If you are interested in the full series, please refer to the linked pages above.</p><p>This article presents an analysis of several similar variants of <a href="/TheNjRatFamily/">the njRAT Family</a>.</p><h2 id="Observations"><a href="#Observations" class="headerlink" title="Observations"></a>Observations</h2><p>From these variants, it can be observed that most modifications fall into the following categories:</p><ul><li>Cosmetic changes (e.g., GUI redesign)</li><li>Feature reuse across variants</li><li>Minor functional extensions</li></ul><p>This suggests that many variants are not fundamentally new malware, but rather iterative modifications built on existing codebases.</p><p align="center" class='item-img' data-src='/images/meme/natsu_cake.jpg'><img src="/images/meme/natsu_cake.jpg" width=250/></p><h1 id="Other-njRAT-Versions-and-Variants"><a href="#Other-njRAT-Versions-and-Variants" class="headerlink" title="Other njRAT Versions and Variants"></a>Other njRAT Versions and Variants</h1><p>As introduced in the previous article, I analyzed several Korean variants. This article also serves to document other versions and variants of <a href="/TheNjRatFamily/">the njRAT Family</a>.</p><p>In my opinion, it is not meaningful to write separate articles for minor variations between these variants.</p><p>Compared to the previous analysis articles, this article does not introduce significant new reverse engineering insights. I decided to write this article to complete the overall landscape of the njRAT Family.</p><h1 id="Experimental-Environment"><a href="#Experimental-Environment" class="headerlink" title="Experimental Environment"></a>Experimental Environment</h1><p>To safely conduct malware analysis, the environment should be isolated using virtual machines. Under no circumstances should malware be executed on a personal or production system.</p><div class="table-container"><table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody><tr><td>ExeInfo PE</td><td>Detect packers, compilers, and basic file metadata</td></tr><tr><td>Detect It Easy (DIE)</td><td>Identify packers, protectors, and signatures</td></tr><tr><td>Wireshark</td><td>Network traffic analysis</td></tr><tr><td>de4dot</td><td>.NET de-obfuscator</td></tr><tr><td>.NET Reactor Slayer</td><td>.NET Reactor de-obfuscator</td></tr><tr><td>dnSpy</td><td>.NET reverse engineering and debugging</td></tr><tr><td>pestudio</td><td>Static PE analysis tool</td></tr></tbody></table></div><hr><div class="table-container"><table><thead><tr><th>Device</th><th>IP Address</th><th>Description</th></tr></thead><tbody><tr><td>Windows 7 x64 (VM)</td><td>192.168.85.5</td><td>Victim machine</td></tr><tr><td>Windows 10 x64 (VM)</td><td>192.168.85.3</td><td>Analysis machine</td></tr></tbody></table></div><p>The two virtual machines were configured within an isolated internal network to prevent unintended external communication. If you want to know how to set up your experimental environment, please view:</p><ul><li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/">How to Setup Your Experimental Environment for Malware Analysis</a></li><li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-WinXpVMWareTool/">Installing VMware Tools on Windows XP and Windows 95 with VMware WorkStation 17</a></li></ul><h1 id="njRAT-v0-11"><a href="#njRAT-v0-11" class="headerlink" title="njRAT v0.11"></a>njRAT v0.11</h1><p>This version was developed by the original author <strong>njq8</strong> of <a href="/2026/03/15/2026-3-15-njRAT/">njRAT v0.7</a>.</p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/1.png'><img src="/images/meme/2026-3-30-njRATOtherVars/1.png" width=700/>    <figcaption>    Timestamp    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/2.png'><img src="/images/meme/2026-3-30-njRATOtherVars/2.png" width=600/>    <figcaption>    About    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/3.png'><img src="/images/meme/2026-3-30-njRATOtherVars/3.png" width=600/>    <figcaption>    Controller application    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/4.png'><img src="/images/meme/2026-3-30-njRATOtherVars/4.png" width=600/>    <figcaption>    Builder    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/5.png'><img src="/images/meme/2026-3-30-njRATOtherVars/5.png" width=800/>    <figcaption>    Compromised machine    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/6.png'><img src="/images/meme/2026-3-30-njRATOtherVars/6.png" width=600/>    <figcaption>    Active Window    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/7.png'><img src="/images/meme/2026-3-30-njRATOtherVars/7.png" width=600/>    <figcaption>    Installed Program    </figcaption></p><h2 id="Stress-Test-and-Pastime"><a href="#Stress-Test-and-Pastime" class="headerlink" title="Stress Test and Pastime"></a>Stress Test and Pastime</h2><p>Compared to the previous versions, the author added new features such as <strong>Stress Test</strong> and <strong>Pastime (Fun stuff)</strong>:</p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/10.png'><img src="/images/meme/2026-3-30-njRATOtherVars/10.png" width=700/>    <figcaption>    Stress Test (likely inspired by LOIC)    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/12.png'><img src="/images/meme/2026-3-30-njRATOtherVars/12.png" width=600/>    <figcaption>    Pastime    </figcaption></p><h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/8.png'><img src="/images/meme/2026-3-30-njRATOtherVars/8.png" width=800/></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/6.png'><img src="/images/meme/2026-3-30-njRATOtherVars/6.png" width=800/></p><h1 id="Other-Variants"><a href="#Other-Variants" class="headerlink" title="Other Variants"></a>Other Variants</h1><p>Here, I also want to show several variants and provide a brief overview.</p><h2 id="Horror-Edition"><a href="#Horror-Edition" class="headerlink" title="Horror Edition"></a>Horror Edition</h2><p>The biggest change in this variant is it provides a horror-themed graphical user interface (e.g., scenes from horror movies)</p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/14.png'><img src="/images/meme/2026-3-30-njRATOtherVars/14.png" width=700/>    <figcaption>    Timestamp    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/3.png'><img src="/images/meme/2026-3-30-njRATOtherVars/3.png" width=800/>    <figcaption>    GUI with scenes from horror movies    </figcaption></p><h2 id="Dangerous-Edition"><a href="#Dangerous-Edition" class="headerlink" title="Dangerous Edition"></a>Dangerous Edition</h2><p>This variant was likely released by the same author of the Danger Edition. It appears to incorporate several features from <a href="/2026/03/28/2026-3-28-njRATDanger2018/">njRAT Danger Edition 2018</a>:</p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/16.png'><img src="/images/meme/2026-3-30-njRATOtherVars/16.png" width=700/>    <figcaption>    Timestamp    </figcaption></p><p align="center" class='item-img' data-src='/images/meme/2026-3-30-njRATOtherVars/15.png'><img src="/images/meme/2026-3-30-njRATOtherVars/15.png" width=800/>    <figcaption>    Dangerous Edition    </figcaption></p><h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article presents a high-level overview of several variants within <a href="/TheNjRatFamily/">the njRAT Family</a>. In addition, it is probably the last article of <a href="/TheNjRatFamily/">the njRAT Family</a> analysis.</p><p>Although these variants introduce minor differences, most of them share the same core architecture and functionality derived from earlier versions such as <a href="/2026/03/15/2026-3-15-njRAT/">njRAT v0.7</a>.</p><p>This highlights a common pattern in malware evolution, where new variants are often created through incremental modifications rather than entirely new designs.</p><p>If you have any comments or suggestions, please feel free to leave them below!</p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/hakari_crying.jpeg'><img src="/images/meme/hakari_crying.jpeg" width=700/></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;The last article of the njRAT family…maybe?&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Studying/RAT" scheme="https://iss4cf0ng.github.io/categories/Studying-RAT/"/>
+    
+    
+    <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
+    
+    <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
+    
+    <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
+    
+    <category term="Malware" scheme="https://iss4cf0ng.github.io/tags/Malware/"/>
+    
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
+    <category term="Remote Access Tool" scheme="https://iss4cf0ng.github.io/tags/Remote-Access-Tool/"/>
+    
+    <category term="Trojan" scheme="https://iss4cf0ng.github.io/tags/Trojan/"/>
+    
+    <category term="Backdoor" scheme="https://iss4cf0ng.github.io/tags/Backdoor/"/>
+    
+    <category term="njRAT" scheme="https://iss4cf0ng.github.io/tags/njRAT/"/>
+    
+    <category term="Bladabindi" scheme="https://iss4cf0ng.github.io/tags/Bladabindi/"/>
+    
+    <category term="dnSpy" scheme="https://iss4cf0ng.github.io/tags/dnSpy/"/>
+    
+    <category term="de4dot" scheme="https://iss4cf0ng.github.io/tags/de4dot/"/>
+    
+    <category term="Obfuscated" scheme="https://iss4cf0ng.github.io/tags/Obfuscated/"/>
+    
+    <category term="VB.NET" scheme="https://iss4cf0ng.github.io/tags/VB-NET/"/>
+    
+    <category term="Reverse" scheme="https://iss4cf0ng.github.io/tags/Reverse/"/>
+    
+    <category term="Built-in Backdoor" scheme="https://iss4cf0ng.github.io/tags/Built-in-Backdoor/"/>
+    
+    <category term="Conclusion" scheme="https://iss4cf0ng.github.io/tags/Conclusion/"/>
+    
+  </entry>
   
   <entry>
     <title>[Studying] Analyzing njRAT Danger Edition 2020</title>
@@ -972,38 +1025,6 @@
     <category term="Web Application" scheme="https://iss4cf0ng.github.io/tags/Web-Application/"/>
     
     <category term="C2" scheme="https://iss4cf0ng.github.io/tags/C2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Studying] Inside Different Generations of RATs (1990s-2000s)</title>
-    <link href="https://iss4cf0ng.github.io/2026/03/04/2026-3-4-StudyingRAT/"/>
-    <id>https://iss4cf0ng.github.io/2026/03/04/2026-3-4-StudyingRAT/</id>
-    <published>2026-03-03T18:03:27.000Z</published>
-    <updated>2026-03-21T10:25:47.137Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a>. If you are interested in the full series, please refer to the linked page above.</p><p>At the time of writing, I have posted 7 articles on reverse engineering different generations of remote access trojans (RATs).</p><p>I decided to write this article as a summary and conclusion of these works.</p><p align="center" class='item-img' data-src='/images/meme/mika_XD.png'><img src="/images/meme/mika_XD.png" width=200></p><h1 id="Early-RAT-1990s"><a href="#Early-RAT-1990s" class="headerlink" title="Early RAT (1990s)"></a>Early RAT (1990s)</h1><p>Examples:</p><ul><li>NetBus: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-Netbus/">Analyzing Netbus</a></li><li>Back Orifice: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-BackOrifice/">Analyzing Back Orifice</a></li><li>Sub7: <a href="https://iss4cf0ng.github.io/2026/02/18/2026-2-18-Subseven/">Analyzing Sub7</a></li></ul><p>Characteristics of these RATs include transferring data in plain text without any protection (except Back Orifice, which could be cracked). Most RATs of this era were written in Delphi or VB6.</p><p>As mentioned in my previous articles, the attacker’s side acts as the client in the network architecture, while the compromised machine acts as the server.</p><p>These RATs generate payload executables using a static patch method, which directly modifies the data (e.g., IPv4 address and binding port) of an existing server stub.</p><p align="center" class='item-img' data-src='/images/meme/koyuki_nihahahaha.png'><img src="/images/meme/koyuki_nihahahaha.png" width=600></p><h1 id="Commerical-and-Blackhat-Malware-2000s"><a href="#Commerical-and-Blackhat-Malware-2000s" class="headerlink" title="Commerical and Blackhat Malware (2000s)"></a>Commerical and Blackhat Malware (2000s)</h1><p>Examples:</p><ul><li>Beast: <a href="https://iss4cf0ng.github.io/2026/02/20/2026-2-20-Beast/">Analyzing BeastDoor</a></li><li>ProRat: <a href="https://iss4cf0ng.github.io/2026/02/23/2026-2-23-ProRAT/">Analyzing ProRat</a></li><li>Poison Ivy: <a href="https://iss4cf0ng.github.io/2026/03/04/2026-3-4-PoisonIvy/">Analyzing Poison Ivy</a></li><li>DarkComet: <a href="https://iss4cf0ng.github.io/2026/03/04/2026-3-4-DarkComet/">Analyzing DarkComet</a></li></ul><p>Compare to the previous generation, this RAT tools include a builder and are usually packed with UPX. They also have more advanced features, such as DLL injection, API hooking, remote plugins, and persistence techniques.</p><p>The principle of remote plugins is uploading the PE file (<code>.*exe</code> or <code>*.dll</code>) to the compromised machine and executing it, or loading it via <code>LoadLibraryA</code>.</p><p>Additionally, they often implement a mutex feature to prevent multiple instances of the payload from running simultaneously.</p><p align="center" class='item-img' data-src='/images/meme/koyuki_jail.jpg'><img src="/images/meme/koyuki_jail.jpg" width=300></p><h1 id="Terminologies"><a href="#Terminologies" class="headerlink" title="Terminologies"></a>Terminologies</h1><p>The term “Server” might be confusing from a modern perspective. In early-generation RATs, a “server” executable referred to the payload deployed on the victim machine, while a “client” referred to the application used to control the victim machines. As firewall technologies evolved and network security improved, attackers gradually shifted from direct connections to reverse connections. </p><p>Even today, some authors still use the term “server” for a payload that acts as a client from an internet architecture perspective. This is because “server” can refer to the role that provides services to a user (client). This is similar to how the terms “upload” and “download” are used.</p><p align="center" class='item-img' data-src='/images/meme/hakari_confused.gif'><img src="/images/meme/hakari_confused.gif" width=200></p><h1 id="Personal-Idea"><a href="#Personal-Idea" class="headerlink" title="Personal Idea"></a>Personal Idea</h1><p>One thing that surprised me is the creativity and ingenuity of the authors. They had already implemented many “fun features” and injection techniques in their tools.</p><p>During the process, I learned that reverse engineering a payload is not particularly difficult, but unpacking it can be challenging. Additionally, instead of learning to use a thousand different tools, it is more effective to master one tool.</p><p align="center" class='item-img' data-src='/images/meme/koyuki_shocking.png'><img src="/images/meme/koyuki_shocking.png" width=200></p><h1 id="What-Is-Next"><a href="#What-Is-Next" class="headerlink" title="What Is Next?"></a>What Is Next?</h1><p>This concludes the series summary. So… is this the end of the series?</p><p>Of course not! This is just the beginning. Conducting reverse engineering on early RATs has given me a lot of experience and improved my skills. In the next article of this series, I will start analyzing the next generation of RATs, such as <strong>Gh0st</strong> and <strong>njRAT (the whole family)</strong>.</p><p align="center" class='item-img' data-src='/images/meme/mika_love.png'><img src="/images/meme/mika_love.png" width=200></p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.gif'><img src="/images/meme/mika_nagisa_rollcake.gif" width=400></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h1&gt;&lt;p&gt;This article is part of my series: &lt;a href=&quot;/I</summary>
-      
-    
-    
-    
-    <category term="Studying/RAT" scheme="https://iss4cf0ng.github.io/categories/Studying-RAT/"/>
-    
-    
-    <category term="Studying" scheme="https://iss4cf0ng.github.io/tags/Studying/"/>
-    
-    <category term="Reverse Engineering" scheme="https://iss4cf0ng.github.io/tags/Reverse-Engineering/"/>
-    
-    <category term="Malware Analysis" scheme="https://iss4cf0ng.github.io/tags/Malware-Analysis/"/>
-    
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
-    
-    <category term="Conclusioin" scheme="https://iss4cf0ng.github.io/tags/Conclusioin/"/>
     
   </entry>
   

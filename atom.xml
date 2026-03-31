@@ -6,7 +6,7 @@
   <link href="https://iss4cf0ng.github.io/atom.xml" rel="self"/>
   
   <link href="https://iss4cf0ng.github.io/"/>
-  <updated>2026-03-31T09:30:00.182Z</updated>
+  <updated>2026-03-31T11:38:23.304Z</updated>
   <id>https://iss4cf0ng.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Thoughts] Ransomware vs. RAT</title>
+    <link href="https://iss4cf0ng.github.io/2026/03/31/2026-3-31-RatVsRansomware/"/>
+    <id>https://iss4cf0ng.github.io/2026/03/31/2026-3-31-RatVsRansomware/</id>
+    <published>2026-03-30T18:41:18.000Z</published>
+    <updated>2026-03-31T11:38:23.304Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article describes the difference between remote access tools and ransomware from the perspective of malware analysis and attackers.</p><p>It also serves as part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a> and <a href="/InsideDifferentGenerationsOfRansomware/">Inside Different Generations of Ransomware</a>.</p><h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Recently, I have been analyzing different variants of njRAT. Since I wanted to complete the landscape of <a href="">the njRAT Family</a>, I kept postponing this series. I appreciate your patience.</p><p align="center" class='item-img' data-src='/images/meme/natsu_cake.jpg'><img src="/images/meme/natsu_cake.jpg" width=250/>    <figcaption>    Waahhhhhhhhhhh!    </figcaption></p><p>At the time of writing, I am going to analyze the first ransomware of this series. Compared to analyzing RATs, analyzing ransomware is somewhat different. Therefore, I decided to write this article to share my thoughts about ransomware and RATs.</p><p>This article also serves as a preliminary note before diving deeper into ransomware analysis.</p><h1 id="Abstract-of-RATs"><a href="#Abstract-of-RATs" class="headerlink" title="Abstract of RATs"></a>Abstract of RATs</h1><p>Remote access tool (RAT, some people might call it remote access trojan or remote administration tool) is a tool (or program) used for gaining remote access. </p><p>There are many definitions available on the internet. Therefore, I want to provide the definition under my understanding. In the perspective of cybersecurity. In cybersecurity, the term RAT usually refers to a backdoor application used to access a target machine without authorization. Such tools typically provide features such as file management and remote shell access.</p><p>Applications such as <strong>MobaXterm</strong> and <strong>PuTTY</strong> are not considered RATs in the malicious sense, as they are legitimate remote administration tools.</p><h1 id="Abstract-of-Ransomware"><a href="#Abstract-of-Ransomware" class="headerlink" title="Abstract of Ransomware"></a>Abstract of Ransomware</h1><p>Ransomware is a type of malware that blocks victims from accessing their data until a ransom is paid (or other goals are achieved).  </p><p>In earlier decades, ransomware only used screen lockers to prevent users from accessing their data. As ransomware evolved, modern ransomware encrypts important files to achieve obstruction.</p><p>After 2017, following the outbreak of WannaCry, ransomware became one of the most prominent attack vectors. The RaaS (Ransomware-as-a-Service) ecosystem also rapidly evolved. Since the ecosystem of RaaS is deep and large, I will try to make an analysis of the ecosystem in the future article.</p><h1 id="Different-Purposes"><a href="#Different-Purposes" class="headerlink" title="Different Purposes"></a>Different Purposes</h1><p>RATs are primarily designed for stealthy control. Attackers aim to maintain long-term access to compromised systems while avoiding detection.</p><p>In contrast, ransomware is inherently noisy. It rapidly modifies files, interacts heavily with system APIs, and often reveals its presence. The objective is not stealth, but impact—forcing the victim into a situation where paying the ransom becomes the only viable option.</p><h1 id="Key-Differences"><a href="#Key-Differences" class="headerlink" title="Key Differences"></a>Key Differences</h1><p>The following table summarizes the key differences between RATs and ransomware:</p><div class="table-container"><table><thead><tr><th>Aspect</th><th>RAT (Remote Access Tool)</th><th>Ransomware</th></tr></thead><tbody><tr><td>Goal</td><td>Long-term control</td><td>Immediate monetization</td></tr><tr><td>Stealth</td><td>High</td><td>Low</td></tr><tr><td>Visibility</td><td>Hidden</td><td>Obvious</td></tr><tr><td>Interaction</td><td>Continuous</td><td>One-time (attack phase)</td></tr><tr><td>Damage</td><td>Indirect</td><td>Direct (data loss)</td></tr></tbody></table></div><h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article simply discuses the difference between ransomware and RATs.</p><p>While ransomware is generally more destructive in the short term due to direct data impact, RATs can be equally dangerous in the long term as they enable persistent access, data exfiltration, and further attacks. It is critical to perform analysis on a virtual environment.</p><p>See you in the next article!</p><p>If you have any comments or suggestions, please feel free to leave them below!</p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/tea_party_new_year.png'><img src="/images/meme/tea_party_new_year.png" width=700/></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;This article describes the dif</summary>
+      
+    
+    
+    
+    <category term="Thoughts" scheme="https://iss4cf0ng.github.io/categories/Thoughts/"/>
+    
+    
+    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
+    
+    <category term="Thoughts" scheme="https://iss4cf0ng.github.io/tags/Thoughts/"/>
+    
+    <category term="Notes" scheme="https://iss4cf0ng.github.io/tags/Notes/"/>
+    
+    <category term="Ransomware" scheme="https://iss4cf0ng.github.io/tags/Ransomware/"/>
+    
+  </entry>
   
   <entry>
     <title>[Studying] Analyzing Other Variants of the njRAT Family</title>
@@ -981,50 +1011,6 @@
     <category term="Windows Rust" scheme="https://iss4cf0ng.github.io/tags/Windows-Rust/"/>
     
     <category term="Fileless Malware" scheme="https://iss4cf0ng.github.io/tags/Fileless-Malware/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Tools] OpenShell v1.0.0—A lightweight, open-source reverse shell management server written in Go.</title>
-    <link href="https://iss4cf0ng.github.io/2026/03/08/2026-3-8-OpenShellServer/"/>
-    <id>https://iss4cf0ng.github.io/2026/03/08/2026-3-8-OpenShellServer/</id>
-    <published>2026-03-07T18:10:35.000Z</published>
-    <updated>2026-03-08T15:45:34.719Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="OpenShell"><a href="#OpenShell" class="headerlink" title="OpenShell"></a>OpenShell</h1><p>OpenShell is a lightweight, open-source reverse shell management server written in Go.<br>It allows users to establish reverse shell channels and interact with them through a simple web-based graphical user interface (GUI).</p><p>If you encounter bugs or have suggestions, feel free to open an issue.</p><p>If you find this project useful, a ⭐ on the repository would be greatly appreciated!</p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/nagisa_neko.png'><img src="https://iss4cf0ng.github.io/images/meme/nagisa_neko.png" width=200></p><p>Repository: <a href="https://github.com/iss4cf0ng/OpenShell">https://github.com/iss4cf0ng/OpenShell</a></p><h2 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h2><p>This project was developed as part of my personal interest in studying cybersecurity. However, it may potentially be misused for malicious purposes.<br>Please do NOT use this tool for any illegal activities.<br>The author is not responsible for any misuse of this software.</p><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/meme/mika_punch.jpg'><img src="https://iss4cf0ng.github.io/images/meme/mika_punch.jpg" width="500"></p><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>The idea of this project originated while I was learning web penetration testing and working on one of my side projects, <a href="https://github.com/iss4cf0ng/Eden-RAT">Eden-RAT</a>.</p><p>Compared to Eden-RAT, OpenShell focuses only on establishing reverse shell channels and providing a simple interactive interface.<br>Additional features may be added in the future.</p><h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul><li>Lightweight reverse shell server written in Go</li><li>Web-based GUI for interactive shell sessions</li><li>Simple reverse shell command to connect</li><li>Designed for learning and research purposes</li></ul><h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>Download the lastest release:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ wget https://github.com/iss4cf0ng/OpenShell/releases/latest/download/openshell-server-linux-amd64.tar.gz<br>$ tar -xzf openshell-server-linux-amd64.tar.gz<br>$ ./openshell-server<br></code></pre></td></tr></table></figure></p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><ol><li><p>Create <code>key.pem</code> and <code>cert.pem</code>:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365 -nodes<br></code></pre></td></tr></table></figure></li><li><p>Start the server</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ ./openshell-server<br></code></pre></td></tr></table></figure></li><li>Open your browser and navigate to:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">https://localhost:8080<br></code></pre></td></tr></table></figure></li><li>Login using the default password (Please change it in production):<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">123456<br></code></pre></td></tr></table></figure></li><li>Generate a reverse shell command and execute it on the target machine.</li><li>Have fun!</li></ol><h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>OpenShell consists of two main components:</p><ul><li><p><strong>Go Server</strong></p><ul><li>Handles reverse shell connections</li><li>Manages sessions</li><li>Provides WebSocket interface</li></ul></li><li><p><strong>Web GUI</strong></p><ul><li>Built with xterm.js</li><li>Allows interactive shell sessions in browser</li><li>Supports multiple terminal tabs</li></ul></li></ul><p align="center" class='item-img' data-src='/images/article/2026-3-8-OpenShell/architecture.png'><img src="/images/article/2026-3-8-OpenShell/architecture.png" width=800></p><h2 id="Tech-Stack"><a href="#Tech-Stack" class="headerlink" title="Tech Stack"></a>Tech Stack</h2><ul><li>Go</li><li>WebSocket</li><li>xterm.js</li><li>PTY (github.com/creack/pty)</li></ul><h2 id="Roadmap"><a href="#Roadmap" class="headerlink" title="Roadmap"></a>Roadmap</h2><p>Future improvements may include:</p><ul><li>File upload / download</li><li>Agent management</li><li>Session persistence</li><li>Authentication improvements</li></ul><h2 id="ScreenShot"><a href="#ScreenShot" class="headerlink" title="ScreenShot"></a>ScreenShot</h2><h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/6.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/6.png" width=700></p><h3 id="Login-Default-Password-123456-Please-change-it-in-production"><a href="#Login-Default-Password-123456-Please-change-it-in-production" class="headerlink" title="Login (Default Password: 123456. Please change it in production)"></a>Login (Default Password: <code>123456</code>. Please change it in production)</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/2.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/2.png" width=700></p><h3 id="Create-Reverse-Shell-Command"><a href="#Create-Reverse-Shell-Command" class="headerlink" title="Create Reverse Shell Command"></a>Create Reverse Shell Command</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/3.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/3.png" width=400></p><h3 id="Sessions"><a href="#Sessions" class="headerlink" title="Sessions"></a>Sessions</h3><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/4.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/4.png" width=800></p><h3 id="Interactive-Reverse-Shell-capable-to-use-vim-ssh-nano-nslookup-nc-etc"><a href="#Interactive-Reverse-Shell-capable-to-use-vim-ssh-nano-nslookup-nc-etc" class="headerlink" title="Interactive Reverse Shell (capable to use vim, ssh, nano, nslookup, nc, etc.)"></a>Interactive Reverse Shell (capable to use <code>vim</code>, <code>ssh</code>, <code>nano</code>, <code>nslookup</code>, <code>nc</code>, etc.)</h3><h4 id="vim"><a href="#vim" class="headerlink" title="vim"></a><code>vim</code></h4><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/1.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/1.png" width=1000></p><h4 id="nslookup"><a href="#nslookup" class="headerlink" title="nslookup"></a><code>nslookup</code></h4><p align="center" class='item-img' data-src='https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/5.png'><img src="https://iss4cf0ng.github.io/images/article/2026-3-8-OpenShell/5.png" width=1000></p><h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p>This project is licensed under the MIT License.</p><h2 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a>Acknowledgement</h2><ul><li><a href="https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/">Reverse Shell Cheatsheet (by swisskyrepo)</a></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;OpenShell&quot;&gt;&lt;a href=&quot;#OpenShell&quot; class=&quot;headerlink&quot; title=&quot;OpenShell&quot;&gt;&lt;/a&gt;OpenShell&lt;/h1&gt;&lt;p&gt;OpenShell is a lightweight, open-source re</summary>
-      
-    
-    
-    
-    <category term="Tools/OpenShell" scheme="https://iss4cf0ng.github.io/categories/Tools-OpenShell/"/>
-    
-    
-    <category term="Penetration" scheme="https://iss4cf0ng.github.io/tags/Penetration/"/>
-    
-    <category term="Go" scheme="https://iss4cf0ng.github.io/tags/Go/"/>
-    
-    <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
-    
-    <category term="Tools" scheme="https://iss4cf0ng.github.io/tags/Tools/"/>
-    
-    <category term="Reverse Shell" scheme="https://iss4cf0ng.github.io/tags/Reverse-Shell/"/>
-    
-    <category term="Penetration Testing" scheme="https://iss4cf0ng.github.io/tags/Penetration-Testing/"/>
-    
-    <category term="Go-lang" scheme="https://iss4cf0ng.github.io/tags/Go-lang/"/>
-    
-    <category term="Go Language" scheme="https://iss4cf0ng.github.io/tags/Go-Language/"/>
-    
-    <category term="Go-Web" scheme="https://iss4cf0ng.github.io/tags/Go-Web/"/>
-    
-    <category term="Web Application" scheme="https://iss4cf0ng.github.io/tags/Web-Application/"/>
-    
-    <category term="C2" scheme="https://iss4cf0ng.github.io/tags/C2/"/>
     
   </entry>
   

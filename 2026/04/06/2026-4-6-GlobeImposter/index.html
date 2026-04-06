@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Studying] Analyzing GlobeImposter 2018 | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing GlobeImposter 2018</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-04-05T17:01:56.000Z" id="date"> 2026-04-06</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-04-06T18:14:05.266Z" id="updated"> 2026-04-07</time></div></span><br><span>Word Count: <div class="control">859</div></span><br><span>Read Time: <div class="control">5 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRansomware/">Inside Different Generations of Ransomware</a>.</p>
+<p>If you are interested in the full series, please refer to the mentioned page.</p>
+<p>This article presents a reverse engineering analysis of <strong>GlobeImposter (aka LOLKEK)</strong>, focusing on its encryption mechanism, persistence, and anti-forensics behavior.</p>
+<p>Compared to <a href="/2026/04/03/2026-4-3-WannaCry/">WannaCry</a>, GlobeImposter demonstrates a simpler but more human-operated attack model.</p>
+<h2 id="Key-Takeaways"><a href="#Key-Takeaways" class="headerlink" title="Key Takeaways"></a>Key Takeaways</h2><ul>
+<li>No worming module</li>
+<li>Manual propagation via RDP brute force or social engineering</li>
+<li>Embedded AES implementation (no APIs used for AES)</li>
+<li>Dynamically generated encrypted artifacts (harder for static analysis)</li>
+</ul>
+<p align="center" class='item-img' data-src='/images/meme/terrible_cake.png'><img src="/images/meme/terrible_cake.png" width=250/>
+</p>
+
+<h1 id="GlobeImposter"><a href="#GlobeImposter" class="headerlink" title="GlobeImposter"></a>GlobeImposter</h1><p>GlobeImposter ransomware has been active since 2016 and is typically distributed via phishing emails and RDP brute force attacks.</p>
+<p>The name “GlobeImposter” comes from its attempt to mimic Globe ransomware payloads.</p>
+<p>According to researchers, this malware may disable anti-virus solutions and other OS security features, and may also prevent system restoration. <sup><a href="#fn_1" id="reffn_1">1</a></sup> <sup><a href="#fn_2" id="reffn_2">2</a></sup></p>
+<p>The GlobeImposter family contains multiple variants. Unlike <a href="/2026/04/03/2026-4-3-WannaCry/#Philosophy-of-Design">WannaCry</a>, some variants are more destructive, as they also encrypt <code>*.exe</code> and <code>*.dll</code> files.</p>
+<p>Unlike worm-based ransomware, GlobeImposter follows a <strong>human-driven intrusion model</strong>, relying on RDP brute force and social engineering rather than automated propagation.</p>
+<h1 id="Experimental-Environment"><a href="#Experimental-Environment" class="headerlink" title="Experimental Environment"></a>Experimental Environment</h1><p>To safely conduct malware analysis, the environment should be isolated using virtual machines. Under no circumstances should malware be executed on a personal or production system.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ExeInfo PE</td>
+<td>Detect packers, compilers, and basic file metadata</td>
+</tr>
+<tr>
+<td>Detect It Easy (DIE)</td>
+<td>Identify packers, protectors, and signatures</td>
+</tr>
+<tr>
+<td>Wireshark</td>
+<td>Network traffic analysis</td>
+</tr>
+<tr>
+<td>Ghidra</td>
+<td>Software reverse engineering framework</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>IP Address</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 7 x64 (VM)</td>
+<td>192.168.85.5</td>
+<td>Victim machine</td>
+</tr>
+<tr>
+<td>Windows 10 x64 (VM)</td>
+<td>192.168.85.3</td>
+<td>Analysis machine</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The two virtual machines were configured within an isolated internal network to prevent unintended external communication. If you want to know how to set up your experimental environment, please view:</p>
+<ul>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-HowToSetupYourExpEnv/">How to Setup Your Experimental Environment for Malware Analysis</a></li>
+<li><a href="https://iss4cf0ng.github.io/2026/02/21/2026-2-21-WinXpVMWareTool/">Installing VMware Tools on Windows XP and Windows 95 with VMware WorkStation 17</a></li>
+</ul>
+<h1 id="Launch"><a href="#Launch" class="headerlink" title="Launch"></a>Launch</h1><blockquote>
+<p>Note: I found two variants on the internet, one released in 2018 and another in 2021. For convenience, I use the name “the version 2018” and “the version 2021” in this article.</p>
+</blockquote>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/4.png'><img src="/images/meme/2026-4-5-GlobeImposter/4.png" width=600/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/5.png'><img src="/images/meme/2026-4-5-GlobeImposter/5.png" width=600/>
+</p>
+
+<h2 id="Version-2018"><a href="#Version-2018" class="headerlink" title="Version 2018"></a>Version 2018</h2><p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/1.png'><img src="/images/meme/2026-4-5-GlobeImposter/1.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/3.png'><img src="/images/meme/2026-4-5-GlobeImposter/3.png" width=700/>
+    <figcaption>
+    Extortion message
+    </figcaption>
+</p>
+
+<h2 id="Version-2021"><a href="#Version-2021" class="headerlink" title="Version 2021"></a>Version 2021</h2><p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/2.png'><img src="/images/meme/2026-4-5-GlobeImposter/2.png" width=1000/>
+    <figcaption>
+    Extortion message
+    </figcaption>
+</p>
+
+<p>Unlike <a href="/2026/04/05/2026-4-5-WannaCryProtocol/">WannaCry</a>, GlobeImposter does not include a worming module. It is manually propagated after a successful RDP brute force attack or social engineering (e.g., phishing email).</p>
+<h1 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h1><blockquote>
+<p>Note: This article focuses on the 2018 version. The 2021 version <strong>will be analyzed in a future article</strong> since it is much more complex than this version.</p>
+</blockquote>
+<p>Information of the version 2018:</p>
+<ul>
+<li>Language: Visual C++</li>
+<li>Compiler timestamp: Mon Apr 02 16:47:20 2018 (UTC)</li>
+<li>SHA256: <code>750984dff0d13260e17e9bb1a3482f1bae834d6e0de1bcd199028748a9f998dc</code></li>
+</ul>
+<p>Open the malware using <strong>ExeInfo PE</strong> and <strong>DIE (Detect It Easy)</strong>. Both tools confirmed that the malware is not packed:</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/6.png'><img src="/images/meme/2026-4-5-GlobeImposter/6.png" width=600/>
+    <figcaption>
+    ExeInfo PE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/7.png'><img src="/images/meme/2026-4-5-GlobeImposter/7.png" width=700/>
+    <figcaption>
+    DIE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/8.png'><img src="/images/meme/2026-4-5-GlobeImposter/8.png" width=800/>
+    <figcaption>
+    DIE — Entropy
+    </figcaption>
+</p>
+
+<p>Open the malware using <strong>Ghidra</strong>.</p>
+<p>Modify registry to maintain persistence:</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/17.png'><img src="/images/meme/2026-4-5-GlobeImposter/17.png" width=1000/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/18.png'><img src="/images/meme/2026-4-5-GlobeImposter/18.png" width=1000/>
+    <figcaption>
+    FUN_RegPersistence
+    </figcaption>
+</p>
+
+<p>Scan all available drives:</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/12.png'><img src="/images/meme/2026-4-5-GlobeImposter/12.png" width=1000/>
+</p>
+
+<blockquote>
+<p>Note: For readability, I renamed some functions based on their functionality</p>
+</blockquote>
+<p>Scan files:</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/9.png'><img src="/images/meme/2026-4-5-GlobeImposter/9.png" width=1000/>
+    <figcaption>
+    Thread_FileScanner
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/10.png'><img src="/images/meme/2026-4-5-GlobeImposter/10.png" width=1000/>
+</p>
+
+<p>Instead of relying on standard cryptographic APIs, the malware implements AES internally.</p>
+<p>This design reduces visibility from API-based monitoring and makes static detection more difficult, as typical cryptographic imports are absent.</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/11.png'><img src="/images/meme/2026-4-5-GlobeImposter/11.png" width=1000/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/13.png'><img src="/images/meme/2026-4-5-GlobeImposter/13.png" width=1000/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/14.png'><img src="/images/meme/2026-4-5-GlobeImposter/14.png" width=1000/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/15.png'><img src="/images/meme/2026-4-5-GlobeImposter/15.png" width=1000/>
+    <figcaption>
+    AES encryption algorithm
+    </figcaption>
+</p>
+
+<p>In addition, the malware dynamically constructs a file extension for each encrypted file using the encrypted keyword. Therefore, these keywords cannot be located via static analysis methods.</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/16.png'><img src="/images/meme/2026-4-5-GlobeImposter/16.png" width=1000/>
+    <figcaption>
+    Dynamically construct the file extension
+    </figcaption>
+</p>
+
+<p>Since GlobeImposter is installed by attackers after RDP brute force succeeds, the RDP login log file will be removed once the malware is successfully executed.</p>
+<p>Much of the embedded data is encrypted. Therefore, I used <strong>x32dbg</strong> to validate my hypothesis.</p>
+<blockquote>
+<p>Note: I am going to perform dynamic analysis via x32dbg. Since ransomware might encrypt your analysis result (e.g., Ghidra files), it is better to take a snapshot on the virtual machine to save your time!</p>
+</blockquote>
+<p>Save cmd commands into a batch file:</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/19.png'><img src="/images/meme/2026-4-5-GlobeImposter/19.png" width=800/>
+</p>
+
+<p>The content of the batch file is shown below:</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/20.png'><img src="/images/meme/2026-4-5-GlobeImposter/20.png" width=800/>
+</p>
+
+<p>Eventually, the malware removes itself:</p>
+<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/21.png'><img src="/images/meme/2026-4-5-GlobeImposter/21.png" width=1000/>
+</p>
+
+<p>This malware does not create a temporary file for every file encryption. This behavior increases the difficulty of digital forensics, as fewer artifacts are left on disk during encryption.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article presents an analysis of one of the variants of GlobeImposter which was released in 2018. The overall kill chain is shown below:</p>
+<div class="mermaid">
+
+flowchart TD
+    F["Infect via RDP brute force/social engineering"]
+    A["Malware start"]
+    B["Persistence"]
+    C["Encryption"]
+    D["Remove RDP logs"]
+    E["Self-Delete"]
+    G["Ransom"]
+
+    F --> A --> B --> C --> G --> D --> E
+
+</div>
+
+<p>From a research perspective, GlobeImposter highlights an alternative evolution path of ransomware.</p>
+<p>Instead of increasing exploitation sophistication (as seen in WannaCry), it focuses on:</p>
+<ul>
+<li>human-assisted intrusion (RDP brute force)</li>
+<li>stronger anti-forensics techniques</li>
+</ul>
+<p>This suggests that ransomware does not always evolve toward automation, but may instead prioritize operational stealth and flexibility.</p>
+<p>As mentioned in the last section, the version 2021 is much more complicated than this version, especially in evasion. Therefore, the analysis will be presented in the next article.</p>
+<p>If you have any comments or suggestions, please feel free to leave them below!</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><blockquote id="fn_1">
+<sup>1</sup>. <a target="_blank" rel="noopener" href="https://www.sentinelone.com/anthology/globeimposter/">https://www.sentinelone.com/anthology/globeimposter/</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. <a target="_blank" rel="noopener" href="https://malpedia.caad.fkie.fraunhofer.de/details/win.globeimposter">https://malpedia.caad.fkie.fraunhofer.de/details/win.globeimposter</a><a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.gif'><img src="/images/meme/mika_nagisa_rollcake.gif" width=700/>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/04/05/2026-4-5-WannaCryProtocol/">[Studying] Inside WannaCry: Exploit, Worming, and TOR Communication Explained Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/musa.mp3",
+    "/mp3/music/air.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/midnight_trip.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/rio_battle.mp3",
+    "/mp3/music/rio_l2d.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Key-Takeaways"><span class="toc-number">1.1.</span> <span class="toc-text">Key Takeaways</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GlobeImposter"><span class="toc-number">2.</span> <span class="toc-text">GlobeImposter</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experimental-Environment"><span class="toc-number">3.</span> <span class="toc-text">Experimental Environment</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Launch"><span class="toc-number">4.</span> <span class="toc-text">Launch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Version-2018"><span class="toc-number">4.1.</span> <span class="toc-text">Version 2018</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version-2021"><span class="toc-number">4.2.</span> <span class="toc-text">Version 2021</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reverse-Engineering"><span class="toc-number">5.</span> <span class="toc-text">Reverse Engineering</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">6.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">7.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">8.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

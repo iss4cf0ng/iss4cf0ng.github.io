@@ -38,7 +38,7 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing GlobeImposter 2018</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-04-05T17:01:56.000Z" id="date"> 2026-04-06</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-04-06T18:14:05.266Z" id="updated"> 2026-04-07</time></div></span><br><span>Word Count: <div class="control">859</div></span><br><span>Read Time: <div class="control">5 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRansomware/">Inside Different Generations of Ransomware</a>.</p>
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Analyzing GlobeImposter 2018</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-04-05T17:01:56.000Z" id="date"> 2026-04-06</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-04-06T18:18:46.520Z" id="updated"> 2026-04-07</time></div></span><br><span>Word Count: <div class="control">859</div></span><br><span>Read Time: <div class="control">5 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRansomware/">Inside Different Generations of Ransomware</a>.</p>
 <p>If you are interested in the full series, please refer to the mentioned page.</p>
 <p>This article presents a reverse engineering analysis of <strong>GlobeImposter (aka LOLKEK)</strong>, focusing on its encryption mechanism, persistence, and anti-forensics behavior.</p>
 <p>Compared to <a href="/2026/04/03/2026-4-3-WannaCry/">WannaCry</a>, GlobeImposter demonstrates a simpler but more human-operated attack model.</p>
@@ -117,22 +117,22 @@ gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3
 <h1 id="Launch"><a href="#Launch" class="headerlink" title="Launch"></a>Launch</h1><blockquote>
 <p>Note: I found two variants on the internet, one released in 2018 and another in 2021. For convenience, I use the name “the version 2018” and “the version 2021” in this article.</p>
 </blockquote>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/4.png'><img src="/images/meme/2026-4-5-GlobeImposter/4.png" width=600/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/4.png'><img src="/images/article/2026-4-5-GlobeImposter/4.png" width=600/>
 </p>
 
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/5.png'><img src="/images/meme/2026-4-5-GlobeImposter/5.png" width=600/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/5.png'><img src="/images/article/2026-4-5-GlobeImposter/5.png" width=600/>
 </p>
 
-<h2 id="Version-2018"><a href="#Version-2018" class="headerlink" title="Version 2018"></a>Version 2018</h2><p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/1.png'><img src="/images/meme/2026-4-5-GlobeImposter/1.png" width=700/>
+<h2 id="Version-2018"><a href="#Version-2018" class="headerlink" title="Version 2018"></a>Version 2018</h2><p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/1.png'><img src="/images/article/2026-4-5-GlobeImposter/1.png" width=700/>
 </p>
 
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/3.png'><img src="/images/meme/2026-4-5-GlobeImposter/3.png" width=700/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/3.png'><img src="/images/article/2026-4-5-GlobeImposter/3.png" width=700/>
     <figcaption>
     Extortion message
     </figcaption>
 </p>
 
-<h2 id="Version-2021"><a href="#Version-2021" class="headerlink" title="Version 2021"></a>Version 2021</h2><p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/2.png'><img src="/images/meme/2026-4-5-GlobeImposter/2.png" width=1000/>
+<h2 id="Version-2021"><a href="#Version-2021" class="headerlink" title="Version 2021"></a>Version 2021</h2><p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/2.png'><img src="/images/article/2026-4-5-GlobeImposter/2.png" width=1000/>
     <figcaption>
     Extortion message
     </figcaption>
@@ -149,19 +149,19 @@ gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3
 <li>SHA256: <code>750984dff0d13260e17e9bb1a3482f1bae834d6e0de1bcd199028748a9f998dc</code></li>
 </ul>
 <p>Open the malware using <strong>ExeInfo PE</strong> and <strong>DIE (Detect It Easy)</strong>. Both tools confirmed that the malware is not packed:</p>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/6.png'><img src="/images/meme/2026-4-5-GlobeImposter/6.png" width=600/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/6.png'><img src="/images/article/2026-4-5-GlobeImposter/6.png" width=600/>
     <figcaption>
     ExeInfo PE
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/7.png'><img src="/images/meme/2026-4-5-GlobeImposter/7.png" width=700/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/7.png'><img src="/images/article/2026-4-5-GlobeImposter/7.png" width=700/>
     <figcaption>
     DIE
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/8.png'><img src="/images/meme/2026-4-5-GlobeImposter/8.png" width=800/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/8.png'><img src="/images/article/2026-4-5-GlobeImposter/8.png" width=800/>
     <figcaption>
     DIE — Entropy
     </figcaption>
@@ -169,51 +169,51 @@ gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3
 
 <p>Open the malware using <strong>Ghidra</strong>.</p>
 <p>Modify registry to maintain persistence:</p>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/17.png'><img src="/images/meme/2026-4-5-GlobeImposter/17.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/17.png'><img src="/images/article/2026-4-5-GlobeImposter/17.png" width=1000/>
 </p>
 
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/18.png'><img src="/images/meme/2026-4-5-GlobeImposter/18.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/18.png'><img src="/images/article/2026-4-5-GlobeImposter/18.png" width=1000/>
     <figcaption>
     FUN_RegPersistence
     </figcaption>
 </p>
 
 <p>Scan all available drives:</p>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/12.png'><img src="/images/meme/2026-4-5-GlobeImposter/12.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/12.png'><img src="/images/article/2026-4-5-GlobeImposter/12.png" width=1000/>
 </p>
 
 <blockquote>
 <p>Note: For readability, I renamed some functions based on their functionality</p>
 </blockquote>
 <p>Scan files:</p>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/9.png'><img src="/images/meme/2026-4-5-GlobeImposter/9.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/9.png'><img src="/images/article/2026-4-5-GlobeImposter/9.png" width=1000/>
     <figcaption>
     Thread_FileScanner
     </figcaption>
 </p>
 
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/10.png'><img src="/images/meme/2026-4-5-GlobeImposter/10.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/10.png'><img src="/images/article/2026-4-5-GlobeImposter/10.png" width=1000/>
 </p>
 
 <p>Instead of relying on standard cryptographic APIs, the malware implements AES internally.</p>
 <p>This design reduces visibility from API-based monitoring and makes static detection more difficult, as typical cryptographic imports are absent.</p>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/11.png'><img src="/images/meme/2026-4-5-GlobeImposter/11.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/11.png'><img src="/images/article/2026-4-5-GlobeImposter/11.png" width=1000/>
 </p>
 
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/13.png'><img src="/images/meme/2026-4-5-GlobeImposter/13.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/13.png'><img src="/images/article/2026-4-5-GlobeImposter/13.png" width=1000/>
 </p>
 
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/14.png'><img src="/images/meme/2026-4-5-GlobeImposter/14.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/14.png'><img src="/images/article/2026-4-5-GlobeImposter/14.png" width=1000/>
 </p>
 
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/15.png'><img src="/images/meme/2026-4-5-GlobeImposter/15.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/15.png'><img src="/images/article/2026-4-5-GlobeImposter/15.png" width=1000/>
     <figcaption>
     AES encryption algorithm
     </figcaption>
 </p>
 
 <p>In addition, the malware dynamically constructs a file extension for each encrypted file using the encrypted keyword. Therefore, these keywords cannot be located via static analysis methods.</p>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/16.png'><img src="/images/meme/2026-4-5-GlobeImposter/16.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/16.png'><img src="/images/article/2026-4-5-GlobeImposter/16.png" width=1000/>
     <figcaption>
     Dynamically construct the file extension
     </figcaption>
@@ -225,15 +225,15 @@ gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3
 <p>Note: I am going to perform dynamic analysis via x32dbg. Since ransomware might encrypt your analysis result (e.g., Ghidra files), it is better to take a snapshot on the virtual machine to save your time!</p>
 </blockquote>
 <p>Save cmd commands into a batch file:</p>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/19.png'><img src="/images/meme/2026-4-5-GlobeImposter/19.png" width=800/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/19.png'><img src="/images/article/2026-4-5-GlobeImposter/19.png" width=800/>
 </p>
 
 <p>The content of the batch file is shown below:</p>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/20.png'><img src="/images/meme/2026-4-5-GlobeImposter/20.png" width=800/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/20.png'><img src="/images/article/2026-4-5-GlobeImposter/20.png" width=800/>
 </p>
 
 <p>Eventually, the malware removes itself:</p>
-<p align="center" class='item-img' data-src='/images/meme/2026-4-5-GlobeImposter/21.png'><img src="/images/meme/2026-4-5-GlobeImposter/21.png" width=1000/>
+<p align="center" class='item-img' data-src='/images/article/2026-4-5-GlobeImposter/21.png'><img src="/images/article/2026-4-5-GlobeImposter/21.png" width=1000/>
 </p>
 
 <p>This malware does not create a temporary file for every file encryption. This behavior increases the difficulty of digital forensics, as fewer artifacts are left on disk during encryption.</p>

@@ -1,0 +1,417 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Studying] Inside GlobeImposter 2021: Multi-Stage Payload &amp; In-Memory Execution Analysis | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Studying] Inside GlobeImposter 2021: Multi-Stage Payload &amp; In-Memory Execution Analysis</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-04-06T17:39:05.000Z" id="date"> 2026-04-07</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-04-07T09:25:35.858Z" id="updated"> 2026-04-07</time></div></span><br><span>Word Count: <div class="control">971</div></span><br><span>Read Time: <div class="control">6 min</div></span></div></div><hr><div id="post-content"><p>More complex evasion methods</p>
+<span id="more"></span>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <a href="/InsideDifferentGenerationsOfRansomware/">Inside Different Generations of Ransomware</a>.</p>
+<p>If you are interested in the full series, please refer to the mentioned page.</p>
+<p>In <a href="/2026/04/06/2026-4-6-GlobeImposter/">the previous article</a>, I briefly analyzed the version 2018 of GlobeImposter, released in 2018. Initially, I wanted to analyze both the version 2018 and 2021 in that article. However, I realized that the version 2021 is much more complicated.</p>
+<p>Therefore, I decided to separate the version 2021 into this article.</p>
+<p>This article presents a deeper analysis of one of the variants of GlobeImposter family, released in 2021. At the end of the article, I conclude the design philosophy of this ransomware.</p>
+<p align="center" class='item-img' data-src='/images/meme/natsu_cake.jpg'><img src="/images/meme/natsu_cake.jpg" width=250/>
+</p>
+
+<h1 id="GlobeImposter-2021"><a href="#GlobeImposter-2021" class="headerlink" title="GlobeImposter 2021"></a>GlobeImposter 2021</h1><blockquote>
+<p>Note: If you are interested in the background of GlobeImposter, please refer to <a href="/2026/04/06/2026-4-6-GlobeImposter/">this article</a>.</p>
+</blockquote>
+<p>GlobeImposter 2021 is written in .NET, most likely VB.NET.</p>
+<p>Initially, I thought the analysis of GlobeImposter 2021 is as simple as the version 2018. However, I then found out the 2021 version presents a significantly more complex architecture in evasion and anti-analysis.</p>
+<h1 id="Reverse-Engineering"><a href="#Reverse-Engineering" class="headerlink" title="Reverse Engineering"></a>Reverse Engineering</h1><p>Information of the version 2021:</p>
+<ul>
+<li>Language: .NET framework VB/C#</li>
+<li>Compiler timestamp: </li>
+<li>SHA256: <code>5c3ce324ded0942df4b4cbf80cf195263f105daf5c729255c628bb3a4f8ab3de</code></li>
+</ul>
+<p>Open the malware using <strong>ExeInfo PE</strong> and <strong>DIE (Detect It Easy)</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/1.png'><img src="/images/article/2026-4-7-GlobeImposter2021/1.png" width=600/>
+    <figcaption>
+    ExeInfo PE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/2.png'><img src="/images/article/2026-4-7-GlobeImposter2021/2.png" width=700/>
+    <figcaption>
+    DIE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/3.png'><img src="/images/article/2026-4-7-GlobeImposter2021/3.png" width=800/>
+    <figcaption>
+    DIE — Entropy
+    </figcaption>
+</p>
+
+<p>I opened the malware using <strong>dnSpy</strong> and realized that the malware is heavily obfuscated:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/12.png'><img src="/images/article/2026-4-7-GlobeImposter2021/12.png" width=800/>
+    <figcaption>
+    Obfuscated malware
+    </figcaption>
+</p>
+
+<p>I tried to use different de-obfuscators, such as <strong>de4dot</strong> and <strong>NETReactor Slayer</strong>, but all failed to de-obfuscate the malware.</p>
+<p>Therefore, I decided to dynamically analyze this malware using the provided functionality of dnSpy.</p>
+<blockquote>
+<p>Note: Since GlobeImposter encrypts <code>*.exe</code> and <code>*.dll</code>, which indicates dnSpy might malfunction once its DLL files are destroyed. You should take a snapshot of your virtual machine to save your time!</p>
+</blockquote>
+<p>Initially, I was confused by the image resource files:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/7.png'><img src="/images/article/2026-4-7-GlobeImposter2021/7.png" width=800/>
+</p>
+
+<p>After further investigation, I found out these image resources are not actual media content, but rather serve as containers for encrypted payloads. This technique helps evade static detection, as image resources are typically considered benign and may bypass superficial inspection.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/4.png'><img src="/images/article/2026-4-7-GlobeImposter2021/4.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/5.png'><img src="/images/article/2026-4-7-GlobeImposter2021/5.png" width=800/>
+    <figcaption>
+    Hexadecimal 4D5A, corresponding to MZ signature in ASCII
+    </figcaption>
+</p>
+
+<p>The payload stored in the image resource can be dumped after multiple decoding procedures:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/6.png'><img src="/images/article/2026-4-7-GlobeImposter2021/6.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/9.png'><img src="/images/article/2026-4-7-GlobeImposter2021/9.png" width=800/>
+    <figcaption>
+    Save "FeedbackSize" as payload.bin
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/8.png'><img src="/images/article/2026-4-7-GlobeImposter2021/8.png" width=800/>
+    <figcaption>
+    Hexdump of payload.bin
+    </figcaption>
+</p>
+
+<p>Open <code>payload.bin</code> using <strong>ExeInfo PE</strong> and <strong>DIE (Detect It Easy)</strong>. Both tools confirmed it is a DLL file written in .NET. In addition, it is obfuscated.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/10.png'><img src="/images/article/2026-4-7-GlobeImposter2021/10.png" width=600/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/11.png'><img src="/images/article/2026-4-7-GlobeImposter2021/11.png" width=700/>
+</p>
+
+<p>However, again, <strong>de4dot</strong> can only partially deobfuscate the payload.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/16.png'><img src="/images/article/2026-4-7-GlobeImposter2021/16.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/17.png'><img src="/images/article/2026-4-7-GlobeImposter2021/17.png" width=800/>
+</p>
+
+<p>Therefore, I decided to continue the dynamic analysis, and located the method it calls:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/14.png'><img src="/images/article/2026-4-7-GlobeImposter2021/14.png" width=800/>
+    <figcaption>
+    O5.Ga
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/15.png'><img src="/images/article/2026-4-7-GlobeImposter2021/15.png" width=800/>
+    <figcaption>
+    O5.Ga.aI
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/20.png'><img src="/images/article/2026-4-7-GlobeImposter2021/20.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/21.png'><img src="/images/article/2026-4-7-GlobeImposter2021/21.png" width=800/>
+</p>
+
+<p>The payload pauses (Thread.Sleep) itself for a while. This behavior is likely intended for anti-analysis.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/22.png'><img src="/images/article/2026-4-7-GlobeImposter2021/22.png" width=600/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/23.png'><img src="/images/article/2026-4-7-GlobeImposter2021/23.png" width=600/>
+</p>
+
+<p>The payload uses <code>Assembly.Load</code> to load another payload from resource after decoding:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/18.png'><img src="/images/article/2026-4-7-GlobeImposter2021/18.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/19.png'><img src="/images/article/2026-4-7-GlobeImposter2021/19.png" width=800/>
+</p>
+
+<p>I dumped another payload from memory. Again, the new payload is obfuscated using the same method. Both <strong>de4dot</strong> and <strong>NETReactor Slayer</strong> can only partially de-obfuscate it.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/24.png'><img src="/images/article/2026-4-7-GlobeImposter2021/24.png" width=700/>
+    <figcaption>
+    Hexdump
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/25.png'><img src="/images/article/2026-4-7-GlobeImposter2021/25.png" width=600/>
+    <figcaption>
+    ExeInfo PE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/26.png'><img src="/images/article/2026-4-7-GlobeImposter2021/26.png" width=700/>
+    <figcaption>
+    DIE
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/27.png'><img src="/images/article/2026-4-7-GlobeImposter2021/27.png" width=700/>
+    <figcaption>
+    Unpacking failed
+    </figcaption>
+</p>
+
+<p>Open the new DLL payload using dnSpy. It can be observed that there are numerous image resources:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/28.png'><img src="/images/article/2026-4-7-GlobeImposter2021/28.png" width=800/>
+</p>
+
+<p>The payload uses the same obfuscation method:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/29.png'><img src="/images/article/2026-4-7-GlobeImposter2021/29.png" width=800/>
+</p>
+
+<p>After further investigation, I believe this payload is the main ransomware module since it contains many critical APIs and modules for file encryption, such as <code>ProcessStart</code>, <code>DirectoryInfo</code>, <code>SymmetricAlgorithm</code> and <code>CryptoStream</code>.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/30.png'><img src="/images/article/2026-4-7-GlobeImposter2021/30.png" width=800/>
+    <figcaption>
+    SymmetricAlgorithm
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/31.png'><img src="/images/article/2026-4-7-GlobeImposter2021/31.png" width=800/>
+    <figcaption>
+    CreateDecryptor
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/32.png'><img src="/images/article/2026-4-7-GlobeImposter2021/32.png" width=800/>
+    <figcaption>
+    CryptoStream
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-4-7-GlobeImposter2021/33.png'><img src="/images/article/2026-4-7-GlobeImposter2021/33.png" width=800/>
+    <figcaption>
+    Create hidden window
+    </figcaption>
+</p>
+
+<p>Despite this, this payload still uses APIs such as <code>Assembly.Load()</code> and <code>LoadLibrary</code> for evasion, but the overall encryption routine remains largely the same as <a href="/2026/04/06/2026-4-6-GlobeImposter/#Reverse-Engineering">the version 2018</a>.</p>
+<p>Finally, the overall execution procedure is summarized below:</p>
+<div class="mermaid">
+
+graph TD
+    subgraph "Stage 1: Initial Executable (.NET)"
+        A[Start: GlobeImposter 2021 EXE] --> B{Obfuscation Check}
+        B -->|Heavily Obfuscated| C[Dynamic Analysis via dnSpy]
+        C --> D[Extract Encrypted Payload from Image Resources]
+        D --> E[Multi-step Decoding Procedure]
+        E --> F[Generate payload.bin in Memory]
+    end
+
+    subgraph "Stage 2: Intermediate Loader (payload.bin)"
+        F --> G[Assembly.Load: Load First DLL]
+        G --> H[Execution of O5.Ga.aI Method]
+        I[Evasion: Thread.Sleep - Anti-Analysis] --> J
+        H --> I
+        J[Extract & Decode Second Payload]
+    end
+
+    subgraph "Stage 3: Main Ransomware Module (Final DLL)"
+        J --> K[Assembly.Load: Load Final Ransomware DLL]
+        K --> L[Main Execution Core]
+
+        L --> M{Evasion & Persistence}
+        M --> M1[LoadLibrary: Dynamically Load Native DLLs]
+        M --> M2[Assembly.Load: In-memory Execution of Other Decoded Payloads]
+
+        L --> N{Encryption Workflow}
+        N --> O[SymmetricAlgorithm / CryptoStream - Encryption]
+        N --> P[DirectoryInfo / File Iteration]
+        N --> Q[ProcessStart - Create Hidden Window]
+
+        M1 & M2 & O & P & Q --> R[Full System Encryption & Final Impact]
+    end
+
+    style A fill:#f96,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#bbf,stroke:#333,stroke-width:2px,color:#000
+    style K fill:#f66,stroke:#333,stroke-width:4px,color:#fff
+
+    style M1 fill:#fff4dd,stroke:#d4a017,stroke-dasharray: 5 5,color:#000
+    style M2 fill:#fff4dd,stroke:#d4a017,stroke-dasharray: 5 5,color:#000
+
+</div>
+
+<p>This multi-stage design significantly increases analysis complexity, as each stage introduces additional layers of obfuscation and decoding, effectively delaying full payload exposure.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article presents an analysis of GlobeImposter 2021, with a focus on its multi-stage execution and evasion techniques.</p>
+<p>Since the outbreak of WannaCry, detection mechanisms for ransomware have significantly improved. Traditional indicators such as API imports and static string patterns are now commonly used for detection.</p>
+<p>In contrast, GlobeImposter adopts a different strategy. Instead of relying on exploitation-based propagation, it focuses on:</p>
+<ul>
+<li>multi-stage in-memory execution</li>
+<li>heavy obfuscation across all payload stages</li>
+<li>encoded resource-based payload delivery</li>
+</ul>
+<p>These techniques reduce the effectiveness of static analysis and increase the difficulty of reverse engineering.</p>
+<p>Furthermore, its reliance on RDP brute force for initial access indicates a shift toward targeted attacks, rather than large-scale automated propagation.</p>
+<p>Overall, GlobeImposter demonstrates how modern ransomware evolves not by becoming more aggressive, but by becoming more stealthy and modular.</p>
+<p>If you have any suggestions or comments, please feel free to leave them below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/mika_nagisa_rollcake.gif'><img src="/images/meme/mika_nagisa_rollcake.gif" width=700/>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/04/06/2026-4-6-GlobeImposter/">[Studying] Analyzing GlobeImposter 2018 Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/musa.mp3",
+    "/mp3/music/air.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/midnight_trip.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/rio_battle.mp3",
+    "/mp3/music/rio_l2d.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GlobeImposter-2021"><span class="toc-number">2.</span> <span class="toc-text">GlobeImposter 2021</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reverse-Engineering"><span class="toc-number">3.</span> <span class="toc-text">Reverse Engineering</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">5.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

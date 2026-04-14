@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iss4cf0ng.github.io/InsideDifferentGenerationsOfRansomware/index.html</loc>
+    
+    <lastmod>2026-04-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/04/12/2026-4-13-NotPetya/</loc>
     
     <lastmod>2026-04-14</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://iss4cf0ng.github.io/2026/04/12/2026-4-12-Petya/</loc>
-    
-    <lastmod>2026-04-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/InsideDifferentGenerationsOfRansomware/index.html</loc>
     
     <lastmod>2026-04-12</lastmod>
     

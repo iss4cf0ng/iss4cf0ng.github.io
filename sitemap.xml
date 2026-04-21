@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iss4cf0ng.github.io/2026/04/08/2026-4-8-MbrAndBootLoader/</loc>
+    
+    <lastmod>2026-04-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/04/17/2026-4-17-SeriesRootkitBootkit/</loc>
     
     <lastmod>2026-04-17</lastmod>
@@ -32,15 +41,6 @@
     <loc>https://iss4cf0ng.github.io/2026/03/17/2026-3-17-SeriesRansomware/</loc>
     
     <lastmod>2026-04-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/2026/04/08/2026-4-8-MbrAndBootLoader/</loc>
-    
-    <lastmod>2026-04-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

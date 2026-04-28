@@ -1,0 +1,223 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Book] Rootkit And Bootkit | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Book] Rootkit And Bootkit</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-04-28T07:01:58.000Z" id="date"> 2026-04-28</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-04-28T17:19:12.966Z" id="updated"> 2026-04-29</time></div></span><br><span>Word Count: <div class="control">1.2k</div></span><br><span>Read Time: <div class="control">7 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article serves as my study notes while reading <strong>Rootkit And Bootkit</strong>.</p>
+<p>As I continue learning about rootkits and bootkits, I will document important concepts, techniques, and case studies from the book, along with my own understanding.</p>
+<blockquote>
+<p>⚠️ This is a work-in-progress note.</p>
+</blockquote>
+<p><strong>The content will be continuously updated as I progress through the book</strong>.</p>
+<h1 id="El-Libro"><a href="#El-Libro" class="headerlink" title="El Libro"></a>El Libro</h1><p align="center" class='item-img' data-src='/images/article/2026-4-28-RootkitAndBootkit/libro.png'><img src="/images/article/2026-4-28-RootkitAndBootkit/libro.png" width=500/>
+</p>
+
+<h1 id="Chapter-1-What’s-In-a-Rootkit-The-TDL3-Case-Study"><a href="#Chapter-1-What’s-In-a-Rootkit-The-TDL3-Case-Study" class="headerlink" title="Chapter 1 - What’s In a Rootkit: The TDL3 Case Study"></a>Chapter 1 - What’s In a Rootkit: The TDL3 Case Study</h1><h2 id="History-of-TDL3-Distribution-in-the-Wild"><a href="#History-of-TDL3-Distribution-in-the-Wild" class="headerlink" title="History of TDL3 Distribution in the Wild"></a>History of TDL3 Distribution in the Wild</h2><p>It was first discovered in 2010.</p>
+<h2 id="Controlling-the-Flow-of-Data"><a href="#Controlling-the-Flow-of-Data" class="headerlink" title="Controlling the Flow of Data"></a>Controlling the Flow of Data</h2><p>To fulfill their mission of stealth, kernel rootkits must modify the control flow or the data flow (or both) of the kernel’s system calls.</p>
+<p>To do so, rootkits typically inject their code somewhere on the execution path of the system call implementation.</p>
+<h2 id="The-Hidden-Filesystem"><a href="#The-Hidden-Filesystem" class="headerlink" title="The Hidden Filesystem"></a>The Hidden Filesystem</h2><p>TDL3 was the first malware system to store its configuration files and payload in a hidden encrypted storage area on the target system, instead of relying on the filesystem service provided by the operating system. Today, TDL3’s approach has been adopted by other complex threats (e.g., <strong>Rovnix Bootkit</strong>, <strong>ZeroAccess</strong>, <strong>Avatar</strong> and <strong>Gapz</strong>).</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-28-RootkitAndBootkit/1.png'><img src="/images/article/2026-4-28-RootkitAndBootkit/1.png" width=800/>
+</p>
+
+<p>TDL3 allocates its image of the hidden filesystem on the hard disk. The image is divided into blocks of 1024 bytes each. The first block contains a file table whose entries describe files contained within the filesystem and include the following information:</p>
+<ul>
+<li>A filename limited to 16 characters, including the terminating null</li>
+<li>The size of the file</li>
+<li>The actual file offset, which is calculated by subtracting the starting offset of a file, multiplied by 1024, from the offset of the beginning of the filesystem</li>
+<li>The time the filesystem was created</li>
+</ul>
+<p>The contents of the filesystem are encrypted with a custom encryption algorithm on a per-block basis (e.g., <strong>RC4</strong> or <strong>XOR</strong> operation with a fixed key).</p>
+<p>From user mode, the payload accesses the hidden storage by opening a handle for a device object named <code>\Device\XXXXXXXX\YYYYYYYY</code> where <code>XXXXXXXX</code> and <code>YYYYYYYY</code> are randomly generated hexadecimal numbers.</p>
+<p>Note that the codepath to access this storage relies on many standard Windows components.</p>
+<p>The name of the device object is generated each time the system boots and then passed as a parameter to the payload modules.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-28-RootkitAndBootkit/2.png'><img src="/images/article/2026-4-28-RootkitAndBootkit/2.png" width=800/>
+</p>
+
+<p>The rootkit is responsible for maintaining and handling I/O requests to this filesystem. For example, when a payload module performs an I/O operation with a file stored in the hidden storage area, the OS transfers this request to the rootkit and executes its entry point functions to handle the request.</p>
+<p>TDL3 shows the general trend followed by rootkits. Rather than providing brand-new code for all of its operations, burdening the third-party malware developers with learning the peculiarities of that code, a rootkit piggybacks on the existing and familiar Windows functionality.</p>
+<blockquote>
+<p>Note: This design is particularly interesting because it avoids relying on the operating system’s filesystem, making traditional file-based detection much less effective.</p>
+</blockquote>
+<h1 id="Chapter-2-Festi-Rootkit-The-Most-Advanced-Spam-and-DDoS-Bot"><a href="#Chapter-2-Festi-Rootkit-The-Most-Advanced-Spam-and-DDoS-Bot" class="headerlink" title="Chapter 2 - Festi Rootkit: The Most Advanced Spam and DDoS Bot"></a>Chapter 2 - Festi Rootkit: The Most Advanced Spam and DDoS Bot</h1><p>Compared to TDL3, Festi adopts a more modular design by introducing a plug-in architecture, allowing its functionality to be extended dynamically.</p>
+<h2 id="Dissecting-the-Rootkit-Driver"><a href="#Dissecting-the-Rootkit-Driver" class="headerlink" title="Dissecting the Rootkit Driver"></a>Dissecting the Rootkit Driver</h2><p>The Festi rootkit is distributed mainly through a PPI scheme similar to the TDL3 rootkit. The dropper’s rather simple functionality installs into the system a kernel-mode driver that implements the main logic of the malware.</p>
+<p>A dropper is a special type of infector. Droppers carry payload to the victim system within itself. The payload is frequently compressed and encrypted or obfuscated. Once executed, a dropper extracts the payload from its image and installs it on a victim system.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-4-28-RootkitAndBootkit/3.png'><img src="/images/article/2026-4-28-RootkitAndBootkit/3.png" width=800/>
+</p>
+
+<h3 id="Plug-in-Management"><a href="#Plug-in-Management" class="headerlink" title="Plug-in Management"></a>Plug-in Management</h3><p>Plug-ins downloaded from the C7C server and loaded and executed by the malware. Festi maintains an array of pointers to a specially defined <code>PLUGIN_INTERFACE</code> structure.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">PLUGIN_INTERFACE</span></span><br><span class="hljs-class">&#123;</span><br>    PVOID Instalize; <span class="hljs-comment">// Initialize plug-in</span><br><br>    PVOID Release; <span class="hljs-comment">// Release plug-in, perform cleanup operations</span><br><br>    PVOID GetVersionInfo_1; <span class="hljs-comment">// Get plug-in version information</span><br><br>    PVOID GetVersionInfo_2; <span class="hljs-comment">// Get plug-in version information</span><br><br>    PVOID WriteIntoTcpStream; <span class="hljs-comment">// Write plug-in specific information into TCP stream</span><br><br>    PVOID ReadFromTcpStream; <span class="hljs-comment">// Read plug-in specific information from TCP stream and parse data</span><br><br>    PVOID Reserved_1;<br><br>    PVOID Reserved_2;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-4-28-RootkitAndBootkit/4.png'><img src="/images/article/2026-4-28-RootkitAndBootkit/4.png" width=800/>
+</p>
+
+<h3 id="AntiDebugging-Techniques"><a href="#AntiDebugging-Techniques" class="headerlink" title="AntiDebugging Techniques"></a>AntiDebugging Techniques</h3><p>Festi also checks for the presence of a kernel debugger in the system by examining the <code>KdDebuggerEnabled</code> variable exported from the operating system kernel image. If a system debugger is attached to the operating system, the variable contains the value <code>TRUE</code>; otherwise, it contains <code>FALSE</code>.</p>
+<p>Festi actively counteracts the system debugger by periodically zeroing the debugging registers <code>dr0</code> through <code>dr3</code>. These registers are used to store addresses for breakpoints, and removing the hardware breakpoints hinders the debugging process.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">char</span> _thiscall <span class="hljs-title function_">ProtoHandler_1</span><span class="hljs-params">(STRUCT_4_4 *this, PKEVENT a1)</span><br>&#123;<br>    __writedr(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// mov dr0, 0</span><br>    __writedr(<span class="hljs-number">1u</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// mov dr1, 0</span><br>    __writedr(<span class="hljs-number">2u</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// mov dr2, 0</span><br>    __writedr(<span class="hljs-number">3u</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// mov dr3, 0</span><br><br>    <span class="hljs-keyword">return</span> _ProtoHandler(&amp;this-&gt;struct43, a1);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="The-Method-for-Hiding-the-Malicious-Driver-on-Disk"><a href="#The-Method-for-Hiding-the-Malicious-Driver-on-Disk" class="headerlink" title="The Method for Hiding the Malicious Driver on Disk"></a>The Method for Hiding the Malicious Driver on Disk</h3><p>To protect and conceal the image of the malicious kernel-mode driver stored on the hard drive, Festi hooks the filesystem driver so that it can intercept and modify all requests sent to the filesystem driver to exclude evidence of its presence.</p>
+<p>A simplified version of the routine for installing the hook is shown below:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs C">NTSTATUS __stdcall <span class="hljs-title function_">SetHookOnSystemRoot</span><span class="hljs-params">(PDRIVER_OBJECT DriverObject, <span class="hljs-type">int</span> **HookParams)</span><br>&#123;<br>    RtlInitUnicodeString(&amp;DestinationString, <span class="hljs-string">L&quot;\\SystemRoot&quot;</span>);<br>    ObjectAttributes.Length = <span class="hljs-number">24</span>;<br>    ObjectAttributes.RootDirectory = <span class="hljs-number">0</span>;<br>    ObjectAttributes.Attributes = <span class="hljs-number">64</span>;<br>    ObjectAttributes.ObjectName = &amp;DestinationString;<br>    ObjectAttributes.SecurityDescriptor = <span class="hljs-number">0</span>;<br>    ObjectAttributes.SecurityQualityOfService = <span class="hljs-number">0</span>;<br><br>    NTSTATUS status = IoCreateFile(&amp;hSystemRoot, <span class="hljs-number">0x80000000</span>, &amp;ObjectAttributes, &amp;IoStatusBlock, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3u</span>, <span class="hljs-number">1u</span>, <span class="hljs-number">1u</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0x100u</span>);<br>    <span class="hljs-keyword">if</span> (status &lt; <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> status;<br><br>    status = ObReferenceObjectByHandle(hSystemRoot, <span class="hljs-number">1u</span> , <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, &amp;SystemRootFileObject, <span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">if</span> (status &lt; <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> status;<br><br>    PDEVICE_OBJECT TargetDevice = IoGetRelatedDeviceObject(SystemRootFileObject);<br>    <span class="hljs-keyword">if</span> (!TargetDevice)<br>        <span class="hljs-keyword">return</span> STATUS_UNSUCCESSFUL;<br>    <br>    ObfReferenceObject(TargetDevice);<br>    status = IoCreateDevice(DriverObject, <span class="hljs-number">0xCu</span>, <span class="hljs-number">0</span>, TargetDevice-&gt;DeviceType, TargetDevice-&gt;Characteristics, <span class="hljs-number">0</span>, &amp;SourceDevice);<br>    <span class="hljs-keyword">if</span> (status &lt; <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> status;<br><br>    PDEVICE_OBJECT DeviceAttachedTo = IoAttachDeviceToDeviceStack(SourceDevice, TargetDevice);<br>    <span class="hljs-keyword">if</span> (!DeviceAttachedTo)<br>    &#123;<br>        IoDeleteDevice(SourceDevice);<br>        <span class="hljs-keyword">return</span> STATUS_UNSUCCESSFUL;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> STATUS_SUCCESS;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>The malware first tries to obtain a handle to the special system file <strong>SystemRoot</strong>, which corresponds to the Windows installation directory. Then, by executing the <code>ObReferenceObjectByHandle</code> system routine, Festi obtains a pointer to the <code>FILE_OBJECT</code> that corresponds to the handle for <code>SystemRoot</code>.</p>
+<p>The <code>FILE_OBJECT</code> is a special data structure used by the operating system to manage access to device objects and so contains a pointer to the related device object.</p>
+<h3 id="The-Method-for-Protecting-the-Festi-Registry-Key"><a href="#The-Method-for-Protecting-the-Festi-Registry-Key" class="headerlink" title="The Method for Protecting the Festi Registry Key"></a>The Method for Protecting the Festi Registry Key</h3><p>Festi also hides a registry key corresponding to the registered kernel-mode driver using a similar method. Located in <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services</code>, the registry key contains Festi’s driver type and the path to the driver’s image on the filesystem. This makes it vulnerable to detection by security software, so Festi must hide the key.</p>
+<p>To do so, Festi first hooks the <code>ZwEnumerateKey</code>, a system service that queries information on a specified registry key and returns all of its subkeys, by modifying the <strong>System Service Descriptor Table (SSDT)</strong>, a special data structure in the operating system kernel that contains addresses of the system service handlers.</p>
+<h3 id="The-Festi-Network-Communication-Protocol"><a href="#The-Festi-Network-Communication-Protocol" class="headerlink" title="The Festi Network Communication Protocol"></a>The Festi Network Communication Protocol</h3><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/04/21/2026-4-21-PcAsmLang/">[Book] PC Assembly Language Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const indexDisplay = document.getElementById("music-index");
+
+  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#El-Libro"><span class="toc-number">2.</span> <span class="toc-text">El Libro</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-1-What%E2%80%99s-In-a-Rootkit-The-TDL3-Case-Study"><span class="toc-number">3.</span> <span class="toc-text">Chapter 1 - What’s In a Rootkit: The TDL3 Case Study</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#History-of-TDL3-Distribution-in-the-Wild"><span class="toc-number">3.1.</span> <span class="toc-text">History of TDL3 Distribution in the Wild</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controlling-the-Flow-of-Data"><span class="toc-number">3.2.</span> <span class="toc-text">Controlling the Flow of Data</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Hidden-Filesystem"><span class="toc-number">3.3.</span> <span class="toc-text">The Hidden Filesystem</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Chapter-2-Festi-Rootkit-The-Most-Advanced-Spam-and-DDoS-Bot"><span class="toc-number">4.</span> <span class="toc-text">Chapter 2 - Festi Rootkit: The Most Advanced Spam and DDoS Bot</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dissecting-the-Rootkit-Driver"><span class="toc-number">4.1.</span> <span class="toc-text">Dissecting the Rootkit Driver</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Plug-in-Management"><span class="toc-number">4.1.1.</span> <span class="toc-text">Plug-in Management</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AntiDebugging-Techniques"><span class="toc-number">4.1.2.</span> <span class="toc-text">AntiDebugging Techniques</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Method-for-Hiding-the-Malicious-Driver-on-Disk"><span class="toc-number">4.1.3.</span> <span class="toc-text">The Method for Hiding the Malicious Driver on Disk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Method-for-Protecting-the-Festi-Registry-Key"><span class="toc-number">4.1.4.</span> <span class="toc-text">The Method for Protecting the Festi Registry Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Festi-Network-Communication-Protocol"><span class="toc-number">4.1.5.</span> <span class="toc-text">The Festi Network Communication Protocol</span></a></li></ol></li></ol></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

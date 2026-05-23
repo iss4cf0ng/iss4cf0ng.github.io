@@ -6,7 +6,7 @@
   <link href="https://iss4cf0ng.github.io/atom.xml" rel="self"/>
   
   <link href="https://iss4cf0ng.github.io/"/>
-  <updated>2026-05-23T14:16:29.642Z</updated>
+  <updated>2026-05-23T14:22:19.762Z</updated>
   <id>https://iss4cf0ng.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2026-5-16-SeriousCryptography</title>
+    <title>[Book] Serious Cryptography</title>
     <link href="https://iss4cf0ng.github.io/2026/05/16/2026-5-16-SeriousCryptography/"/>
     <id>https://iss4cf0ng.github.io/2026/05/16/2026-5-16-SeriousCryptography/</id>
     <published>2026-05-16T12:52:39.000Z</published>
-    <updated>2026-05-23T14:16:29.642Z</updated>
+    <updated>2026-05-23T14:22:19.762Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article serves as one of my study notes while reading <strong>Serious Cryptography (by Jean-Philippe Aumasson)</strong>.</p><p>As I continue to learn practical cryptography, I document important concepts, techniques and figures, along with my own understanding.</p><blockquote><p>⚠️ This is a work-in-progress note.</p></blockquote><p><strong>The content will be continuously updated as I progress through the book</strong>.</p><h1 id="El-Libro"><a href="#El-Libro" class="headerlink" title="El Libro"></a>El Libro</h1><p align="center" class='item-img' data-src='/images/article/2026-5-16-SeriousCryptography2nd/libro.png'><img src="/images/article/2026-5-16-SeriousCryptography2nd/libro.png" width=450/></p>]]></content>
     
@@ -33,15 +33,25 @@
     
     
     
+    <category term="Book" scheme="https://iss4cf0ng.github.io/categories/Book/"/>
+    
+    
+    <category term="Book" scheme="https://iss4cf0ng.github.io/tags/Book/"/>
+    
+    <category term="Note" scheme="https://iss4cf0ng.github.io/tags/Note/"/>
+    
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Cryptography" scheme="https://iss4cf0ng.github.io/tags/Cryptography/"/>
     
   </entry>
   
   <entry>
-    <title>2026-5-16-WindowsSecurityInternals</title>
+    <title>[Book] Windows Security Internals</title>
     <link href="https://iss4cf0ng.github.io/2026/05/16/2026-5-16-WindowsSecurityInternals/"/>
     <id>https://iss4cf0ng.github.io/2026/05/16/2026-5-16-WindowsSecurityInternals/</id>
     <published>2026-05-16T12:51:26.000Z</published>
-    <updated>2026-05-23T14:16:21.488Z</updated>
+    <updated>2026-05-23T14:22:38.936Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article serves as one of my study notes while reading <strong>Windows Security Internals (by James Forshaw)</strong>.</p><p>As I continue to learn Windows Internals, I document important concepts, techniques and figures, along with my own understanding.</p><blockquote><p>⚠️ This is a work-in-progress note.</p></blockquote><p><strong>The content will be continuously updated as I progress through the book</strong>.</p><h1 id="El-Libro"><a href="#El-Libro" class="headerlink" title="El Libro"></a>El Libro</h1><p align="center" class='item-img' data-src='/images/article/2026-5-16-WindowsSecurityInternals/libro.png'><img src="/images/article/2026-5-16-WindowsSecurityInternals/libro.png"/></p>]]></content>
     
@@ -53,6 +63,24 @@
     
     
     
+    <category term="Book" scheme="https://iss4cf0ng.github.io/categories/Book/"/>
+    
+    
+    <category term="Book" scheme="https://iss4cf0ng.github.io/tags/Book/"/>
+    
+    <category term="Note" scheme="https://iss4cf0ng.github.io/tags/Note/"/>
+    
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Windows" scheme="https://iss4cf0ng.github.io/tags/Windows/"/>
+    
+    <category term="Kernel" scheme="https://iss4cf0ng.github.io/tags/Kernel/"/>
+    
+    <category term="Windows Kernel" scheme="https://iss4cf0ng.github.io/tags/Windows-Kernel/"/>
+    
+    <category term="Windows Security" scheme="https://iss4cf0ng.github.io/tags/Windows-Security/"/>
+    
+    <category term="Windows Internals" scheme="https://iss4cf0ng.github.io/tags/Windows-Internals/"/>
     
   </entry>
   

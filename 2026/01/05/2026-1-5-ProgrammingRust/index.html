@@ -50,7 +50,7 @@ gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3
 <p>The function’s body starts with a call to the <code>assert!</code> macro, verifying that neither argument is zero. The <code>!</code> character marks this as a marco invocation, not a function call.</p>
 <h2 id="Writing-and-Running-Unit-Tests"><a href="#Writing-and-Running-Unit-Tests" class="headerlink" title="Writing and Running Unit Tests"></a>Writing and Running Unit Tests</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">#[test]<br>fn test_gcd() &#123;<br>    assert_eq!(gcd(14, 15), 1);<br>    assert_eq!(gcd(2 * 3 * 5 * 11 * 17,<br>    3 * 7 * 11 * 13 * 19),<br>    3 * 11);<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>The <code>#[test]</code> marker is an example of an <em>attribute</em>. Attributes are an open-ended system for marking functions and other declarations with extra information, like attributes in C++ and C#, or annotations in Java. They’re used to control compiler warnings and code style checks, include code conditionally (like <code>#ifdef</code> in C and C++), tell Rust how to interact with code written in other languages, and so on.</p>
-<h2 id="Handling-Command-Line-Arguments"><a href="#Handling-Command-Line-Arguments" class="headerlink" title="Handling Command-Line Arguments"></a>Handling Command-Line Arguments</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">use std::str::FromStr;<br>use std::env;<br><br>fn main() &#123;<br>    let mut numbers = Vec::new();<br>    for arg in env::args().skip(1) &#123;<br>        numers.push(u64::from_str(&amp;arg).expect(&quot;error parsing argument&quot;));<br>    &#125;<br><br>    if numbers.len() == 0 &#123;<br>        eprintln!(&quot;Usage: gcd NUMBER ...&quot;);<br>        std::process::exit(1);<br>    &#125;<br><br>    let mut d = number[0];<br>    for m in &amp;numbers[1..] &#123;<br>        d = gcd(d, *m);<br>    &#125;<br><br>    println!(&quot;The greatest common divisor of &#123;:?&#125; is &#123;&#125;&quot;, numbers, d);<br>&#125;<br></code></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2026/01/05/2026-1-5-LearningGo/">← Next [Book] Learning Go</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/01/04/2026-1-4-BookReverseEngineeringCore/">[Book] Reverse Engineering Core (리버스 엔지니어링 핵심 원리) Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div><button class="music-btn" id="music-toggle">▶ Play Music</button><span id="music-index" style="margin-left:10px"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+<h2 id="Handling-Command-Line-Arguments"><a href="#Handling-Command-Line-Arguments" class="headerlink" title="Handling Command-Line Arguments"></a>Handling Command-Line Arguments</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">use std::str::FromStr;<br>use std::env;<br><br>fn main() &#123;<br>    let mut numbers = Vec::new();<br>    for arg in env::args().skip(1) &#123;<br>        numers.push(u64::from_str(&amp;arg).expect(&quot;error parsing argument&quot;));<br>    &#125;<br><br>    if numbers.len() == 0 &#123;<br>        eprintln!(&quot;Usage: gcd NUMBER ...&quot;);<br>        std::process::exit(1);<br>    &#125;<br><br>    let mut d = number[0];<br>    for m in &amp;numbers[1..] &#123;<br>        d = gcd(d, *m);<br>    &#125;<br><br>    println!(&quot;The greatest common divisor of &#123;:?&#125; is &#123;&#125;&quot;, numbers, d);<br>&#125;<br></code></pre></td></tr></table></figure><div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2026/01/05/2026-1-5-LearningGo/">← Next [Book] Learning Go</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/01/04/2026-1-4-BookReverseEngineeringCore/">[Book] Reverse Engineering Core (리버스 엔지니어링 핵심 원리) Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
   var playlist = [
     "/mp3/music/music_1.mp3",
     "/mp3/music/sugar_story.mp3",
@@ -65,9 +65,15 @@ gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3
   var current = 0;
   const audio = document.getElementById("bg-music");
   const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
   const indexDisplay = document.getElementById("music-index");
 
-  indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
 
   btn.addEventListener("click", function () {
     if (audio.paused) {
@@ -80,11 +86,38 @@ gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3
     }
   });
 
+  nextBtn.addEventListener("click", function () {
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+
+    if (!audio.paused) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+
+    if (!audio.paused) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
   audio.addEventListener("ended", function() {
     current = (current + 1) % playlist.length;
     audio.src = playlist[current];
     audio.play();
-    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+    updateDisplay();
   });
 });
 </script><script>document.addEventListener("DOMContentLoaded", function () {

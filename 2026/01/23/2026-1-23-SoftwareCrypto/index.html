@@ -353,11 +353,14 @@ delta &= \frac{\sqrt{5} - 1}{2} \times 2^{32}\\
   });
 
   nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
     current = (current + 1) % playlist.length;
 
     audio.src = playlist[current];
+    audio.load();
 
-    if (!audio.paused) {
+    if (wasPlaying) {
       audio.play();
     }
 
@@ -365,14 +368,17 @@ delta &= \frac{\sqrt{5} - 1}{2} \times 2^{32}\\
   });
 
   prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
     current--;
 
     if (current < 0)
       current = playlist.length - 1;
 
     audio.src = playlist[current];
+    audio.load();
 
-    if (!audio.paused) {
+    if (wasPlaying) {
       audio.play();
     }
 

@@ -350,11 +350,14 @@ I sincerely wish you all the best.
   });
 
   nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
     current = (current + 1) % playlist.length;
 
     audio.src = playlist[current];
+    audio.load();
 
-    if (!audio.paused) {
+    if (wasPlaying) {
       audio.play();
     }
 
@@ -362,14 +365,17 @@ I sincerely wish you all the best.
   });
 
   prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
     current--;
 
     if (current < 0)
       current = playlist.length - 1;
 
     audio.src = playlist[current];
+    audio.load();
 
-    if (!audio.paused) {
+    if (wasPlaying) {
       audio.play();
     }
 

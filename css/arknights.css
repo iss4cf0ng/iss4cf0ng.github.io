@@ -2234,11 +2234,14 @@ main:not(.up) .search #search-header input {
   display: inline-block;
 }
 main {
-  height: 100vh;
-  width: 100vw;
-  overflow: auto;
-  overflow: overlay;
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+  overflow: visible;
   box-sizing: border-box;
+}
+.mermaid {
+  overflow-x: auto;
 }
 article {
   transition: margin 0.3s;

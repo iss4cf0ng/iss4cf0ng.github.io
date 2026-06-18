@@ -6,7 +6,7 @@
   <link href="https://iss4cf0ng.github.io/atom.xml" rel="self"/>
   
   <link href="https://iss4cf0ng.github.io/"/>
-  <updated>2026-05-25T00:58:42.056Z</updated>
+  <updated>2026-06-18T10:56:15.313Z</updated>
   <id>https://iss4cf0ng.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Thoughts] After Reaching 200+ GitHub Followers: What is New?</title>
+    <link href="https://iss4cf0ng.github.io/2026/06/18/2026-6-18-GitHub200Followers/"/>
+    <id>https://iss4cf0ng.github.io/2026/06/18/2026-6-18-GitHub200Followers/</id>
+    <published>2026-06-18T00:47:49.000Z</published>
+    <updated>2026-06-18T10:56:15.313Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>Last month, I released <a href="https://github.com/iss4cf0ng/OpenPetya">OpenPetya</a> on GitHub. It became my first open-source project to reach more than 200 stars.</p><p>After that, I shared some of my ongoing work on a rewritten version of <a href="https://github.com/iss4cf0ng/Alien">Alien</a>, a multi-platform webshell management tool. SHortly afterward, I also reached 200+ GitHub followers.</p><p>Just like when I reached <a href="/2026/03/13/2026-3-13-OneHundredFollowers/">100+ GitHub Follower</a>, I would like to celebrate this milestone.</p><p>And, as a bonus, today is my birthday, so…</p><p>First, let me demonstrate how to eat a cake with my face:</p><p align="center" class='item-img' data-src='/images/meme/natsu_cake.jpg'><img src="/images/meme/natsu_cake.jpg" width=250>    <figcaption>    Waaaahhhhhhhhhhh!    </figcaption></p><h1 id="What-Now"><a href="#What-Now" class="headerlink" title="What Now?"></a>What Now?</h1><p>I would also like to share some of my recent activities.</p><p>If you frequently browse my blog (…do you?), you may have noticed that I have not been publishing articles as frequently as before.</p><div style="text-align:center; font-size:32px; font-weight:bold;">  What!? You think that I ran out all my ideas and passion? No!</div><p>So, what happened?</p><p>The answer is simple: I have been spending most of my time learning new things.</p><p>There are simply too many topics to explore: bootkits, UEFI, shellcode, implants, vulnerability exploitation, Programmable Logic Controllers (PLCs), Japanese, Korean, and English.</p><p>Recently, I have also been working on Alien, a webshell management tool (and technically a remote access tool as well). The project is currently being rewritten because the previous versions suffered from several design issues.</p><p>At the same time, I have been working on OpenPetya 2.0. One of my current goals is to extend the original implementation to support UEFI systems and modern versions of Windows.</p><h1 id="Why-Learn-So-Many-Stuffs"><a href="#Why-Learn-So-Many-Stuffs" class="headerlink" title="Why Learn So Many Stuffs?"></a>Why Learn So Many Stuffs?</h1><p>As I mentioned in my <a href="/2026/03/13/2026-3-13-OneHundredFollowers/">100+ GitHub Follower</a> article, I did not achieve particularly impressive grades during university.</p><p>That is one of the main reasons why I constantly push myself to learn new skills and improve my technical abilities.</p><p>I genuinely enjoy learning.</p><p>Cybersecurity, programming, operating systems, low-level development, and even foreign languages are all fascinating subjects to me.</p><p>I also believe that learning across different fields helps me write better articles and explain technical concepts more clearly.</p><p align="center" class='item-img' data-src='/images/meme/Rio/1.png'><img src="/images/meme/Rio/1.png" width=250/></p><h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion!"></a>Conclusion!</h1><p>Learning so many things at the same time is not easy.</p><p>However, I believe the effort is worthwhile.</p><p>Hopefully, the next few months will go smoothly, and I will be able to continue sharing more interesting projects, research, and articles with everyone.</p><p>Thank you to everyone who has followed my work, starred my projects, or read my articles.</p><p>See you in the next post!</p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING!"></a>THANKS FOR READING!</h1><p align="center" class='item-img' data-src='/images/meme/hakari_crying.jpeg'><img src="/images/meme/hakari_crying.jpeg" width=800></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Preface&quot;&gt;&lt;a href=&quot;#Preface&quot; class=&quot;headerlink&quot; title=&quot;Preface&quot;&gt;&lt;/a&gt;Preface&lt;/h1&gt;&lt;p&gt;Last month, I released &lt;a href=&quot;https://github.com</summary>
+      
+    
+    
+    
+    <category term="Thoughts" scheme="https://iss4cf0ng.github.io/categories/Thoughts/"/>
+    
+    
+    <category term="Thoughts" scheme="https://iss4cf0ng.github.io/tags/Thoughts/"/>
+    
+    <category term="Reflection" scheme="https://iss4cf0ng.github.io/tags/Reflection/"/>
+    
+    <category term="Personal" scheme="https://iss4cf0ng.github.io/tags/Personal/"/>
+    
+    <category term="Notes" scheme="https://iss4cf0ng.github.io/tags/Notes/"/>
+    
+  </entry>
   
   <entry>
     <title>[Learning] OpenPetya: A Proof-of-Concept of Petya Ransomware</title>
@@ -693,36 +723,6 @@
     <category term="Ransomware" scheme="https://iss4cf0ng.github.io/tags/Ransomware/"/>
     
     <category term="CryptoLocker" scheme="https://iss4cf0ng.github.io/tags/CryptoLocker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Thoughts] Ransomware vs. RAT</title>
-    <link href="https://iss4cf0ng.github.io/2026/03/31/2026-3-31-RatVsRansomware/"/>
-    <id>https://iss4cf0ng.github.io/2026/03/31/2026-3-31-RatVsRansomware/</id>
-    <published>2026-03-30T18:41:18.000Z</published>
-    <updated>2026-03-31T11:58:37.460Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article describes the difference between remote access tools and ransomware from the perspective of malware analysis and attackers.</p><p>It also serves as part of my series: <a href="/InsideDifferentGenerationsOfRATs/">Inside Different Generations of RATs</a> and <a href="/InsideDifferentGenerationsOfRansomware/">Inside Different Generations of Ransomware</a>.</p><h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Recently, I have been analyzing different variants of njRAT. Since I wanted to complete the landscape of <a href="">the njRAT Family</a>, I kept postponing this series. I appreciate your patience.</p><p align="center" class='item-img' data-src='/images/meme/natsu_cake.jpg'><img src="/images/meme/natsu_cake.jpg" width=250/>    <figcaption>    Waahhhhhhhhhhh!    </figcaption></p><p>At the time of writing, I am going to analyze the first ransomware of this series. Compared to analyzing RATs, analyzing ransomware is somewhat different. Therefore, I decided to write this article to share my thoughts about ransomware and RATs.</p><p>This article also serves as a preliminary note before diving deeper into ransomware analysis.</p><h1 id="Abstract-of-RATs"><a href="#Abstract-of-RATs" class="headerlink" title="Abstract of RATs"></a>Abstract of RATs</h1><p>Remote access tool (RAT, some people might call it remote access trojan or remote administration tool) is a tool (or program) used for gaining remote access. </p><p>There are many definitions available on the internet. Therefore, I want to provide the definition under my understanding. In the perspective of cybersecurity. In cybersecurity, the term RAT usually refers to a backdoor application used to access a target machine without authorization. Such tools typically provide features such as file management and remote shell access.</p><p>Applications such as <strong>MobaXterm</strong> and <strong>PuTTY</strong> are not considered RATs in the malicious sense, as they are legitimate remote administration tools.</p><p align="center" class='item-img' data-src='/images/meme/mika_bothering.png'><img src="/images/meme/mika_bothering.png" width=200/></p><h1 id="Abstract-of-Ransomware"><a href="#Abstract-of-Ransomware" class="headerlink" title="Abstract of Ransomware"></a>Abstract of Ransomware</h1><p>Ransomware is a type of malware that blocks victims from accessing their data until a ransom is paid (or other goals are achieved).  </p><p>In earlier decades, ransomware only used screen lockers to prevent users from accessing their data. As ransomware evolved, modern ransomware encrypts important files to achieve obstruction.</p><p>After 2017, following the outbreak of WannaCry, ransomware became one of the most prominent attack vectors. The RaaS (Ransomware-as-a-Service) ecosystem also rapidly evolved. Since the ecosystem of RaaS is deep and large, I will try to make an analysis of the ecosystem in the future article.</p><h1 id="Different-Purposes"><a href="#Different-Purposes" class="headerlink" title="Different Purposes"></a>Different Purposes</h1><p>RATs are primarily designed for stealthy control. Attackers aim to maintain long-term access to compromised systems while avoiding detection.</p><p>In contrast, ransomware is inherently noisy. It rapidly modifies files, interacts heavily with system APIs, and often reveals its presence. The objective is not stealth, but impact—forcing the victim into a situation where paying the ransom becomes the only viable option.</p><p align="center" class='item-img' data-src='/images/meme/koyuki_jail.jpg'><img src="/images/meme/koyuki_jail.jpg" width=300/></p><h1 id="Key-Differences"><a href="#Key-Differences" class="headerlink" title="Key Differences"></a>Key Differences</h1><p>The following table summarizes the key differences between RATs and ransomware:</p><div class="table-container"><table><thead><tr><th>Aspect</th><th>RAT (Remote Access Tool)</th><th>Ransomware</th></tr></thead><tbody><tr><td>Goal</td><td>Long-term control</td><td>Immediate monetization</td></tr><tr><td>Stealth</td><td>High</td><td>Low</td></tr><tr><td>Visibility</td><td>Hidden</td><td>Obvious</td></tr><tr><td>Interaction</td><td>Continuous</td><td>One-time (attack phase)</td></tr><tr><td>Damage</td><td>Indirect</td><td>Direct (data loss)</td></tr></tbody></table></div><h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article simply discuses the difference between ransomware and RATs.</p><p>While ransomware is generally more destructive in the short term due to direct data impact, RATs can be equally dangerous in the long term as they enable persistent access, data exfiltration, and further attacks. It is critical to perform analysis on a virtual environment.</p><p>See you in the next article!</p><p>If you have any comments or suggestions, please feel free to leave them below!</p><h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/tea_party_new_year.png'><img src="/images/meme/tea_party_new_year.png" width=700/></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;This article describes the dif</summary>
-      
-    
-    
-    
-    <category term="Thoughts" scheme="https://iss4cf0ng.github.io/categories/Thoughts/"/>
-    
-    
-    <category term="RAT" scheme="https://iss4cf0ng.github.io/tags/RAT/"/>
-    
-    <category term="Thoughts" scheme="https://iss4cf0ng.github.io/tags/Thoughts/"/>
-    
-    <category term="Notes" scheme="https://iss4cf0ng.github.io/tags/Notes/"/>
-    
-    <category term="Ransomware" scheme="https://iss4cf0ng.github.io/tags/Ransomware/"/>
     
   </entry>
   

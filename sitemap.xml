@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iss4cf0ng.github.io/2026/07/21/2026-7-21-EventHorizon/</loc>
+    
+    <lastmod>2026-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/07/21/2026-7-21-Webshell-Part3/</loc>
     
     <lastmod>2026-07-21</lastmod>
@@ -2891,6 +2900,20 @@
   
   <url>
     <loc>https://iss4cf0ng.github.io/tags/DarkMatter/</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/EventHorizon/</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/tags/Obfuscation/</loc>
     <lastmod>2026-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

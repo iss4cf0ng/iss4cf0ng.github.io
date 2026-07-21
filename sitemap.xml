@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iss4cf0ng.github.io/Alien/index.html</loc>
+    
+    <lastmod>2026-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/07/21/2026-7-21-EventHorizon/</loc>
     
     <lastmod>2026-07-21</lastmod>
@@ -824,15 +833,6 @@
     <loc>https://iss4cf0ng.github.io/tags/index.html</loc>
     
     <lastmod>2026-02-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/Alien/index.html</loc>
-    
-    <lastmod>2026-02-07</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

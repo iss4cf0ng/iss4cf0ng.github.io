@@ -38,10 +38,172 @@ if (window.localStorage.getItem('theme-mode') === 'dark') document.documentEleme
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
-</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Alien</h1></div><hr><div id="post-content"><h1 id="Alien"><a href="#Alien" class="headerlink" title="Alien"></a>Alien</h1><p>Alien is a C#-based webshell management tool for penetration testing.</p>
-<p><strong>This tool is currently being rewritten, as the previous four versions had architectural and design limitations due to my earlier experience level</strong>.</p>
-<p align="center" class='item-img' data-src='https://media1.tenor.com/m/ArvQZn-ShQUAAAAd/blue-archive-working.gif'><img src="https://media1.tenor.com/m/ArvQZn-ShQUAAAAd/blue-archive-working.gif" width="300">
-</p><div id="paginator"></div></div><div id="post-footer"></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>Alien</h1></div><hr><div id="post-content"><h1 id="Alien"><a href="#Alien" class="headerlink" title="Alien"></a>Alien</h1><p>Alien is a modular webshell framework developed for cybersecurity research and education.</p>
+<p>It provides a unified architecture for managing multiple types of webshells through modular components such as OneShell, NebulaPulsar, Event Horizon, and DriftingComet.</p>
+<h1 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h1><p>This project was developed as part of my personal interest in studying cybersecurity. It is designed for legistimated penetration testing and education purpose only.</p>
+<p>However, it may potentially be misused for malicious purposes.</p>
+<p>Please do <strong>NOT</strong> use this tool for any illegal activities.</p>
+<p>The author is not responsible for any misuse and damages of this software.</p>
+<h1 id="Warning"><a href="#Warning" class="headerlink" title="Warning"></a>Warning</h1><p>Your antivirus software may detect and automatically delete certain files (such as webshell source code used for exploitation).</p>
+<p>This behavior is expected.</p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Alien was originally developed during my second year at university as my first webshell management tool. Although the project was functional, its architecture was difficult to maintain and lacked extensibility. As my experience in software engineering and offensive security grew, I decided to archive the original implementation and redesign the project from scratch. However, it had been suspened for some reasons.</p>
+<p>After several months of redesign and development, Alien has evolved into a modular framework rather than simply another webshell client.</p>
+<p>If you find this project helpful or informative, I would truly appreciate a ⭐ on the repository. Your support would be a great motivation for me to continue improving this tool!</p>
+<h1 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h1><p align="center" class='item-img' data-src='./images/architecture.png'><img src="./images/architecture.png" width=1000/>
+</p>
+
+<h1 id="Supported-Web-Technologies"><a href="#Supported-Web-Technologies" class="headerlink" title="Supported Web Technologies"></a>Supported Web Technologies</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Server</th>
+<th>Execution Method</th>
+<th>Payload Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHP</td>
+<td>Linux/Windows</td>
+<td>v5.X, v7.X</td>
+<td>OneShell</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>v8.X</td>
+<td>OneShell, ECDH(Elliptic Curve Diffie-Hellman)</td>
+</tr>
+<tr>
+<td>ASP</td>
+<td>Windows</td>
+<td>Classic</td>
+<td>OneShell</td>
+</tr>
+<tr>
+<td>ASPX, ASHX, ASMX</td>
+<td>Linux/Windows</td>
+<td>JScript</td>
+<td>OneShell</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>NebulaPulsar</td>
+<td>DarkMatter</td>
+</tr>
+<tr>
+<td>JSP</td>
+<td>Linux/Windows</td>
+<td>Nashorn</td>
+<td>OneShell</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>NebulaPulsar</td>
+<td>DarkMatter</td>
+</tr>
+<tr>
+<td>JSPX</td>
+<td>Linux/Windows</td>
+<td>Nashorn</td>
+<td>OneShell</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>NebulaPulsar</td>
+<td>DarkMatter</td>
+</tr>
+<tr>
+<td>CFML</td>
+<td>Linux/Windows</td>
+<td>NebulaPulsar</td>
+<td>DarkMatter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h1><p>Alien includes many functionalities, like a remote access tool:</p>
+<h2 id="File-Manager"><a href="#File-Manager" class="headerlink" title="File Manager"></a>File Manager</h2><p>The features below are provided:</p>
+<ul>
+<li><strong>Image</strong>: Display selected image files.</li>
+<li><strong>Edit</strong>: Edit text or binary files using the built-in text editor or hex editor.</li>
+<li><strong>Copy</strong>: Copy selected files and directories to the clipboard.</li>
+<li><strong>Move</strong>: Move selected files and directories.</li>
+<li><strong>Paste</strong>: Copy or move all files from clipboard. If the <code>Move</code> flag is true, all the files in clipboard will be removed.</li>
+<li><strong>Rename</strong>: Rename a file or directory.</li>
+<li><strong>Delete</strong>: Delete selected files and directories.</li>
+<li><strong>Upload</strong>: Upload file to current directory.</li>
+<li><strong>Download</strong>: Download files from remote server to <code>./Victim/[Server Domain]/Downloads</code>.</li>
+<li><strong>WGET</strong>: Download files from another server to the remote server.</li>
+<li><strong>Datetime</strong>: Modify the <code>LastModified</code> and <code>LastAccessed</code> timestamp.</li>
+<li><strong>New</strong>: Create a new text file or a folder.</li>
+<li><strong>Find</strong>: Search files under specified directories, supporting Regex.</li>
+</ul>
+<p align="center" class='item-img' data-src='./images/file.png'><img src="./images/file.png" width=700/>
+</p>
+
+<h2 id="Virtual-Shell"><a href="#Virtual-Shell" class="headerlink" title="Virtual Shell"></a>Virtual Shell</h2><p>This includes the features below:</p>
+<ul>
+<li><strong>Exec Shell</strong>: Execute a single command and display the output, this feature does not support interactive shell such as ssh or nslookup.</li>
+<li><strong>Virtual Shell</strong>: Execute command in a virtual shell interface, this feature does not support interactive shell such as ssh or nslookup.</li>
+<li><strong>Piped &amp; PTY</strong>: This interface provides a piped shell for Windows server or PTY shell for Linux. This feature supports interactive shell such as nslookup, vi, vim, ssh. However, if the webshell is ASP, ASP.NET, it requires a <code>worker.ps1</code> PowerShell script</li>
+</ul>
+<p align="center" class='item-img' data-src='./images/shell.png'><img src="./images/shell.png" width=700/>
+</p>
+
+<h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><p>This panel allows the user managing databases.</p>
+<p>Supported databases:</p>
+<ul>
+<li><strong>MySQL</strong>: Supported through PHP 5.x, PHP 7.x and PHP 8.x (MariaDB).</li>
+<li><strong>Access DB</strong>: Usually used by ASP</li>
+<li><strong>PostgreSQL</strong></li>
+<li><strong>SQL Server</strong>: Usually used by ASP.NET</li>
+<li><strong>Oracle</strong>: Usually used by Java</li>
+</ul>
+<p align="center" class='item-img' data-src='./images/database.png'><img src="./images/database.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='./images/database_sql.png'><img src="./images/database_sql.png" width=700/>
+</p>
+
+<h2 id="Code-Exec"><a href="#Code-Exec" class="headerlink" title="Code Exec"></a>Code Exec</h2><p>Execute arbitrary code directly or send custom HTTP POST requests for testing and debugging purposes.</p>
+<p align="center" class='item-img' data-src='./images/code_exec_eval.png'><img src="./images/code_exec_eval.png" width=700/>
+</p>
+
+<h2 id="Void"><a href="#Void" class="headerlink" title="Void"></a>Void</h2><p>Void provides several network-oriented post-exploitation utilities, including TCP-based LAN scanning.</p>
+<p align="center" class='item-img' data-src='./images/void.png'><img src="./images/void.png" width=700/>
+</p>
+
+<h2 id="SOCKS5"><a href="#SOCKS5" class="headerlink" title="SOCKS5"></a>SOCKS5</h2><p>Expose a local SOCKS5 proxy through the compromised server, allowing access to internal network resources.</p>
+<p align="center" class='item-img' data-src='./images/socks5.png'><img src="./images/socks5.png" width=700/>
+</p>
+
+<h2 id="Linux-Windows"><a href="#Linux-Windows" class="headerlink" title="Linux/Windows"></a>Linux/Windows</h2><p>Provide features for Unix-like or Windows servers.</p>
+<p align="center" class='item-img' data-src='./images/regedit.png'><img src="./images/regedit.png" width=700/>
+</p>
+
+<h2 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h2><p>Plugins are dynamically loaded and can be developed independently from the core framework.</p>
+<p align="center" class='item-img' data-src='./images/plugins.png'><img src="./images/plugins.png" width=700/>
+</p>
+
+<h2 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h2><p>You can write anything in this page.</p>
+<p align="center" class='item-img' data-src='./images/note.png'><img src="./images/note.png" width=700/>
+</p>
+
+<h2 id="Event-Horizon"><a href="#Event-Horizon" class="headerlink" title="Event Horizon"></a>Event Horizon</h2><p>Event Horizon is Alien’s traffic obfuscation framework.</p>
+<p>It supports custom tamper scripts, bilateral HTTP traffic obfuscation, payload builders, and wrapper injection for improving flexibility and evasion.</p>
+<p align="center" class='item-img' data-src='./images/eventhorizon.png'><img src="./images/eventhorizon.png" width=700/>
+</p>
+
+<h2 id="DriftingComet"><a href="#DriftingComet" class="headerlink" title="DriftingComet"></a>DriftingComet</h2><p>DriftingComet is Alien’s webshell pivoting mechanism.</p>
+<p>It allows traffic to be relayed through compromised web servers, enabling access to otherwise unreachable internal targets.</p>
+<p align="center" class='item-img' data-src='./images/comet.png'><img src="./images/comet.png" width=700/>
+</p>
+<div id="paginator"></div></div><div id="post-footer"></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
   var playlist = [
     "/mp3/music/music_1.mp3",
     "/mp3/music/sugar_story.mp3",
@@ -189,7 +351,7 @@ gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3
     }
   });
 });
-</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Alien"><span class="toc-number">1.</span> <span class="toc-text">Alien</span></a></li></ol></div><section id="total"><a id="total-archives" href="/archives"><span class="total-title">Archives Total:</span><span class="total-number">101</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">251</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">19</span></div></section></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Alien"><span class="toc-number">1.</span> <span class="toc-text">Alien</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Disclaimer"><span class="toc-number">2.</span> <span class="toc-text">Disclaimer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Warning"><span class="toc-number">3.</span> <span class="toc-text">Warning</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">4.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Architecture"><span class="toc-number">5.</span> <span class="toc-text">Architecture</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Supported-Web-Technologies"><span class="toc-number">6.</span> <span class="toc-text">Supported Web Technologies</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Features"><span class="toc-number">7.</span> <span class="toc-text">Features</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File-Manager"><span class="toc-number">7.1.</span> <span class="toc-text">File Manager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Virtual-Shell"><span class="toc-number">7.2.</span> <span class="toc-text">Virtual Shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Database"><span class="toc-number">7.3.</span> <span class="toc-text">Database</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Code-Exec"><span class="toc-number">7.4.</span> <span class="toc-text">Code Exec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Void"><span class="toc-number">7.5.</span> <span class="toc-text">Void</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SOCKS5"><span class="toc-number">7.6.</span> <span class="toc-text">SOCKS5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-Windows"><span class="toc-number">7.7.</span> <span class="toc-text">Linux&#x2F;Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plugins"><span class="toc-number">7.8.</span> <span class="toc-text">Plugins</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Note"><span class="toc-number">7.9.</span> <span class="toc-text">Note</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Event-Horizon"><span class="toc-number">7.10.</span> <span class="toc-text">Event Horizon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DriftingComet"><span class="toc-number">7.11.</span> <span class="toc-text">DriftingComet</span></a></li></ol></li></ol></div><section id="total"><a id="total-archives" href="/archives"><span class="total-title">Archives Total:</span><span class="total-number">101</span></a><div id="total-tags"><span class="total-title">Tags:</span><span class="total-number">251</span></div><div id="total-categories"><span class="total-title">Categories:</span><span class="total-number">19</span></div></section></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
 document.querySelector('.lg-container')?.remove()
 lightGallery(document.getElementById('post-bg'), {
   plugins: [lgZoom,lgThumbnail],

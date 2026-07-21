@@ -1,0 +1,302 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learning] Inside Different Generations of WebShells (Part 3: Java and C#) | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learning] Inside Different Generations of WebShells (Part 3: Java and C#)</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-07-20T16:59:01.000Z" id="date"> 2026-07-21</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-07-21T06:21:52.993Z" id="updated"> 2026-07-21</time></div></span><br><span>Word Count: <div class="control">996</div></span><br><span>Read Time: <div class="control">6 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of the <strong>Inside Different Generations of WebShells</strong> series.</p>
+<p>In the previous articles, I introduced OneShell implementations in PHP, ASP, ASP.NET, Perl, and Ruby. I also briefly discussed how a webshell client can be implemented. </p>
+<p>In addition, I introduced <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/NebulaPulsar">NebulaPulsar</a>, a webshell implant that allows attackers to transfer code and commands. In this article, I am going to introduce how to integrate it into Alien, and some of the practical engineering challenges I encountered while developing Alien, such as <strong>DriftingComet</strong>.</p>
+<p align="center" class='item-img' data-src='/images/meme/rio_crying.jpg'><img src="/images/meme/rio_crying.jpg" width=250/>
+</p>
+
+<h1 id="NebulaPulsar"><a href="#NebulaPulsar" class="headerlink" title="NebulaPulsar"></a>NebulaPulsar</h1><p>NebulaPulsar is a subproject of Alien. The primary purpose of NebulaPulsar is to experiment with and demonstrate techniques for achieving arbitrary code execution in Java and .NET environments.</p>
+<p>A NebulaPulsar webshell is implemented as either a JSP or ASP.NET script. During the initial request, it decrypts the NebulaPulsar implant using XOR and stores the loaded implant inside the current session. Subsequent payloads (DarkMatter) are then decrypted using AES and executed through the implant.</p>
+<p>This is the overall architecture of NebulaPulsar.</p>
+<blockquote>
+<p>Note: If you are interested in the underlying principle of NebulaPulsar, you may refer to these articles: <a href="https://iss4cf0ng.github.io/2026/06/27/2026-6-27-NebulaPulsar/">NebulaPulsar: A Proof-of-Concept In-Memory Implant Framework for JSP and ASP.NET</a>, <a href="https://iss4cf0ng.github.io/2026/07/01/2026-7-1-NebulaPulsar2-0/">NebulaPulsar 2.0: CFM Webshell and New Features</a>.</p>
+</blockquote>
+<div class="mermaid">
+
+flowchart TD
+    ATTACKER([Attacker])
+    POST[HTTP POST Request]
+
+    CHECK{NebulaPulsar Installed?}
+
+    subgraph First Infection
+        XOR[XOR Decrypt]
+        LOAD[Load NebulaPulsar]
+    end
+
+    subgraph Subsequent Requests
+        AES[AES Decrypt]
+        EXEC[Execute Arbitrary Code]
+    end
+
+    ATTACKER --> POST
+    POST --> CHECK
+
+    CHECK -- No --> XOR
+    XOR --> LOAD
+    LOAD --> AES
+
+    CHECK -- Yes --> AES
+
+    AES --> EXEC
+
+</div>
+
+<h1 id="Integrating-into-Alien"><a href="#Integrating-into-Alien" class="headerlink" title="Integrating into Alien"></a>Integrating into Alien</h1><p>From both an engineering and research perspective, once a problem has been solved, reproducing the solution is usually much easier the second time.</p>
+<p>Since I had already implemented the concept in Python, integrating it into Alien turned out to be much easier than I expected.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-Webshell-3/2.png'><img src="/images/article/2026-7-21-Webshell-3/2.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-Webshell-3/1.png'><img src="/images/article/2026-7-21-Webshell-3/1.png" width=700/>
+</p>
+
+<p>As shown in the figure above, the payload is encrypted using AES and transferred as raw binary data.</p>
+<p>What I did not expect was that my “bad” naming convention would actually become an advantage from an engineering perspective. Instead of embedding every payload directly into the client application, Alien loads payloads dynamically at runtime. All payloads are stored under the <code>./Payload</code> directory, making them much easier to develop, test, and debug independently.</p>
+<p>I intentionally use lowercase names for all payload files. For example, the code below shows how Alien reads a payload file:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;<span class="hljs-built_in">string</span>&gt; <span class="hljs-title">fnszRead</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> szFilePath</span>)</span><br>&#123;<br>    <span class="hljs-built_in">string</span> szContent = <span class="hljs-keyword">await</span> m_web.fnszSendPayload(<span class="hljs-string">&quot;file_read&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] &#123; szFilePath &#125;);<br>    <span class="hljs-keyword">if</span> (szContent.Contains(<span class="hljs-string">&quot;ERROR://&quot;</span>))<br>    &#123;<br>        MessageBox.Show(szContent);<br>        <span class="hljs-keyword">return</span> szContent;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> clsEzData.fnszB64d2str(szContent);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Here, <code>file_read</code> is the payload file, the <code>fnszSendPayload</code> function then loads the corresponding payload file. The scripting language depends on the target selected by the user. In this case, it is <code>file_read.class</code> since I selected CFMf and NebulaPulsar.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-Webshell-3/3.png'><img src="/images/article/2026-7-21-Webshell-3/3.png" width=700/>
+</p>
+
+<p>Now, if you read the source code of the Java payload, you can see the code is implemented as follows:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">file_read</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ClassLoader</span><br>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">file_read</span><span class="hljs-params">(ClassLoader objParent)</span> &#123; <span class="hljs-built_in">super</span>(objParent); &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">file_read</span><span class="hljs-params">()</span> &#123; <span class="hljs-built_in">super</span>(file_read.class.getClassLoader()); &#125;<br><br>    <span class="hljs-comment">/* Blablabla... */</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>The naming convention may look somewhat unconventional. However, I believe this turned out to be a surprisingly good design decision (not because I wrote it!) because it guarantees that class names will never conflict with third-party libraries.</p>
+<p>For example, if I later develop plugins that depend on external libraries, this naming convention greatly reduces the chance of naming conflicts. This naming convention effectively avoids ambiguity caused by those libraries.</p>
+<p>In addition, it can also prevent duplicate class names on the target server. For example, <code>http</code>, <code>Http</code>, and <code>HTTP</code> are considered different identifiers.</p>
+<p>Fortunately, this naming convention was adopted only after I had already implemented the PHP, ASP, and ASP.NET payloads. This fortunate coincidence saved me from renaming every payload and modifying Alien accordingly.</p>
+<p>The C# payloads adopt the same implementation:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">file_read</span><br>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Run</span>()</span><br>    &#123;<br>        <span class="hljs-comment">// BlaBlabla...</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="MemoryShell"><a href="#MemoryShell" class="headerlink" title="MemoryShell"></a>MemoryShell</h1><p>After completing roughly 80% of Alien, I decided to start implementing the plugin system. One of the largest components is MemoryShell.</p>
+<p>If you are unfamiliar with the concept, a MemoryShell is an in-memory webshell that operates without leaving files on disk.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-Webshell-3/5.png'><img src="/images/article/2026-7-21-Webshell-3/5.png" width=700/>
+</p>
+
+<blockquote>
+<p>Note: Originally, I planned to discuss both Java and .NET MemoryShell implementations in this article. However, I soon realized that the topic deserved a dedicated article. On top of that, MemoryShells are advanced techniques that go beyond the scope of NebulaPulsar. They are also more closely related to Alien’s plugin architecture than to NebulaPulsar itself.</p>
+</blockquote>
+<h1 id="Issues-of-DriftingComet"><a href="#Issues-of-DriftingComet" class="headerlink" title="Issues of DriftingComet"></a>Issues of DriftingComet</h1><p><strong>DriftingComet</strong> is Alien’s webshell hopping (pivoting) mechanism. It allows users to pivot through previously compromised web servers to reach additional targets.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-21-Webshell-3/4.png'><img src="/images/article/2026-7-21-Webshell-3/4.png" width=700/>
+</p>
+
+<p>While implementing this feature, I encountered a problem: DriftingComet currently supports only text-based OneShells. NebulaPulsar, however, communicates entirely through binary payloads, making it incompatible with the current implementation.</p>
+<p align="center" class='item-img' data-src='/images/meme/toki_skill_issue.jpg'><img src="/images/meme/toki_skill_issue.jpg" width=230/>
+</p>
+
+<p>At the time of writing, DriftingComet in Alien v5.0.0 supports only traditional OneShells (including those protected by <strong>Event Horizon</strong>, which will be discussed in the next article).</p>
+<p>Supporting NebulaPulsar is planned for a future release.</p>
+<p>In addition, the initial XOR-based implant loader will become configurable, allowing additional algorithms such as RC4 to be used.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In this article, I introduced how NebulaPulsar was integrated into Alien and discussed several engineering decisions made during its development.</p>
+<p>Although NebulaPulsar provides arbitrary code execution for Java and .NET environments, integrating it into a practical webshell framework required much more than simply executing code. Dynamic payload loading, naming conventions, and compatibility between different scripting environments all became important design considerations.</p>
+<p>I also introduced <strong>DriftingComet</strong> and briefly discussed the challenges of supporting binary-based implants. Although the current implementation has some limitations, it provides a solid foundation for future improvements.</p>
+<p>In the next article, I will introduce <strong>Event Horizon</strong>, an obfuscation framework designed for OneShells, and explain how it can be combined with <strong>DriftingComet</strong> to improve both flexibility and evasion.</p>
+<p>Feedback and suggestions are always welcome!</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_love.png'><img src="/images/meme/mika_love.png" width=250/>
+</p>
+
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/Wallpaper/working.jpg'><img src="/images/meme/Wallpaper/working.jpg" width=700/>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/07/20/2026-7-20-Webshell-Part2/">[Learning] Inside Different Generations of WebShells (Part 2: CGI WebShells) Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NebulaPulsar"><span class="toc-number">2.</span> <span class="toc-text">NebulaPulsar</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Integrating-into-Alien"><span class="toc-number">3.</span> <span class="toc-text">Integrating into Alien</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MemoryShell"><span class="toc-number">4.</span> <span class="toc-text">MemoryShell</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Issues-of-DriftingComet"><span class="toc-number">5.</span> <span class="toc-text">Issues of DriftingComet</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">6.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">7.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

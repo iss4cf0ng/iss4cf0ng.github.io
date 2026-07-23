@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iss4cf0ng.github.io/MyRATs/index.html</loc>
+    
+    <lastmod>2026-07-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/InsideDifferentGenerationsOfRATs/index.html</loc>
+    
+    <lastmod>2026-07-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/07/23/2026-7-23-Alien5-0-0/</loc>
     
     <lastmod>2026-07-23</lastmod>
@@ -335,15 +353,6 @@
   </url>
   
   <url>
-    <loc>https://iss4cf0ng.github.io/InsideDifferentGenerationsOfRATs/index.html</loc>
-    
-    <lastmod>2026-03-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://iss4cf0ng.github.io/2026/03/31/2026-3-31-RatVsRansomware/</loc>
     
     <lastmod>2026-03-31</lastmod>
@@ -563,15 +572,6 @@
     <loc>https://iss4cf0ng.github.io/Thoughts/index.html</loc>
     
     <lastmod>2026-03-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/MyRATs/index.html</loc>
-    
-    <lastmod>2026-03-19</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

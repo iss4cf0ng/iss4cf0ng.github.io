@@ -36,19 +36,19 @@
     <category term="Studying/Exploit" scheme="https://iss4cf0ng.github.io/categories/Studying-Exploit/"/>
     
     
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
     <category term="Studying" scheme="https://iss4cf0ng.github.io/tags/Studying/"/>
     
-    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    <category term="BufferOverflow" scheme="https://iss4cf0ng.github.io/tags/BufferOverflow/"/>
+    
+    <category term="Exploit" scheme="https://iss4cf0ng.github.io/tags/Exploit/"/>
     
     <category term="Debugging" scheme="https://iss4cf0ng.github.io/tags/Debugging/"/>
     
     <category term="Debugger" scheme="https://iss4cf0ng.github.io/tags/Debugger/"/>
     
-    <category term="Exploit" scheme="https://iss4cf0ng.github.io/tags/Exploit/"/>
-    
     <category term="BoF" scheme="https://iss4cf0ng.github.io/tags/BoF/"/>
-    
-    <category term="BufferOverflow" scheme="https://iss4cf0ng.github.io/tags/BufferOverflow/"/>
     
     <category term="RCE" scheme="https://iss4cf0ng.github.io/tags/RCE/"/>
     
@@ -74,6 +74,22 @@
     <category term="Studying/Exploit" scheme="https://iss4cf0ng.github.io/categories/Studying-Exploit/"/>
     
     
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Studying" scheme="https://iss4cf0ng.github.io/tags/Studying/"/>
+    
+    <category term="BufferOverflow" scheme="https://iss4cf0ng.github.io/tags/BufferOverflow/"/>
+    
+    <category term="Exploit" scheme="https://iss4cf0ng.github.io/tags/Exploit/"/>
+    
+    <category term="Debugging" scheme="https://iss4cf0ng.github.io/tags/Debugging/"/>
+    
+    <category term="Debugger" scheme="https://iss4cf0ng.github.io/tags/Debugger/"/>
+    
+    <category term="BoF" scheme="https://iss4cf0ng.github.io/tags/BoF/"/>
+    
+    <category term="RCE" scheme="https://iss4cf0ng.github.io/tags/RCE/"/>
+    
   </entry>
   
   <entry>
@@ -96,6 +112,22 @@
     <category term="Studying/Exploit" scheme="https://iss4cf0ng.github.io/categories/Studying-Exploit/"/>
     
     
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Studying" scheme="https://iss4cf0ng.github.io/tags/Studying/"/>
+    
+    <category term="BufferOverflow" scheme="https://iss4cf0ng.github.io/tags/BufferOverflow/"/>
+    
+    <category term="Exploit" scheme="https://iss4cf0ng.github.io/tags/Exploit/"/>
+    
+    <category term="Debugging" scheme="https://iss4cf0ng.github.io/tags/Debugging/"/>
+    
+    <category term="Debugger" scheme="https://iss4cf0ng.github.io/tags/Debugger/"/>
+    
+    <category term="BoF" scheme="https://iss4cf0ng.github.io/tags/BoF/"/>
+    
+    <category term="RCE" scheme="https://iss4cf0ng.github.io/tags/RCE/"/>
+    
   </entry>
   
   <entry>
@@ -117,6 +149,22 @@
     
     <category term="Studying/Exploit" scheme="https://iss4cf0ng.github.io/categories/Studying-Exploit/"/>
     
+    
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Studying" scheme="https://iss4cf0ng.github.io/tags/Studying/"/>
+    
+    <category term="BufferOverflow" scheme="https://iss4cf0ng.github.io/tags/BufferOverflow/"/>
+    
+    <category term="Exploit" scheme="https://iss4cf0ng.github.io/tags/Exploit/"/>
+    
+    <category term="Debugging" scheme="https://iss4cf0ng.github.io/tags/Debugging/"/>
+    
+    <category term="Debugger" scheme="https://iss4cf0ng.github.io/tags/Debugger/"/>
+    
+    <category term="BoF" scheme="https://iss4cf0ng.github.io/tags/BoF/"/>
+    
+    <category term="RCE" scheme="https://iss4cf0ng.github.io/tags/RCE/"/>
     
   </entry>
   
@@ -142,6 +190,26 @@
     <category term="Learning" scheme="https://iss4cf0ng.github.io/categories/Learning/"/>
     
     
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Assembly" scheme="https://iss4cf0ng.github.io/tags/Assembly/"/>
+    
+    <category term="Tools" scheme="https://iss4cf0ng.github.io/tags/Tools/"/>
+    
+    <category term="Petya" scheme="https://iss4cf0ng.github.io/tags/Petya/"/>
+    
+    <category term="Bootloader" scheme="https://iss4cf0ng.github.io/tags/Bootloader/"/>
+    
+    <category term="Bootkit" scheme="https://iss4cf0ng.github.io/tags/Bootkit/"/>
+    
+    <category term="NotPetya" scheme="https://iss4cf0ng.github.io/tags/NotPetya/"/>
+    
+    <category term="NASM" scheme="https://iss4cf0ng.github.io/tags/NASM/"/>
+    
+    <category term="Booting" scheme="https://iss4cf0ng.github.io/tags/Booting/"/>
+    
+    <category term="OpenPetya" scheme="https://iss4cf0ng.github.io/tags/OpenPetya/"/>
+    
   </entry>
   
   <entry>
@@ -163,6 +231,16 @@
     
     <category term="Alien" scheme="https://iss4cf0ng.github.io/categories/Alien/"/>
     
+    
+    <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
+    
+    <category term="Fileless" scheme="https://iss4cf0ng.github.io/tags/Fileless/"/>
+    
+    <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
+    
+    <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
+    
+    <category term="MemoryShell" scheme="https://iss4cf0ng.github.io/tags/MemoryShell/"/>
     
   </entry>
   
@@ -186,6 +264,14 @@
     <category term="Alien" scheme="https://iss4cf0ng.github.io/categories/Alien/"/>
     
     
+    <category term="Pentest" scheme="https://iss4cf0ng.github.io/tags/Pentest/"/>
+    
+    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
+    
+    <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
+    
+    <category term="MemoryShell" scheme="https://iss4cf0ng.github.io/tags/MemoryShell/"/>
+    
   </entry>
   
   <entry>
@@ -207,6 +293,16 @@
     
     <category term="Alien" scheme="https://iss4cf0ng.github.io/categories/Alien/"/>
     
+    
+    <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
+    
+    <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
+    
+    <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
+    
+    <category term="Plugins" scheme="https://iss4cf0ng.github.io/tags/Plugins/"/>
+    
+    <category term="OneShell" scheme="https://iss4cf0ng.github.io/tags/OneShell/"/>
     
   </entry>
   
@@ -230,6 +326,14 @@
     <category term="Tools" scheme="https://iss4cf0ng.github.io/categories/Tools/"/>
     
     
+    <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
+    
+    <category term="Tools" scheme="https://iss4cf0ng.github.io/tags/Tools/"/>
+    
+    <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
+    
+    <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
+    
   </entry>
   
   <entry>
@@ -251,6 +355,16 @@
     
     <category term="Alien" scheme="https://iss4cf0ng.github.io/categories/Alien/"/>
     
+    
+    <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
+    
+    <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
+    
+    <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
+    
+    <category term="EventHorizon" scheme="https://iss4cf0ng.github.io/tags/EventHorizon/"/>
+    
+    <category term="Obfuscation" scheme="https://iss4cf0ng.github.io/tags/Obfuscation/"/>
     
   </entry>
   
@@ -274,6 +388,30 @@
     <category term="Alien" scheme="https://iss4cf0ng.github.io/categories/Alien/"/>
     
     
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
+    
+    <category term="Linux" scheme="https://iss4cf0ng.github.io/tags/Linux/"/>
+    
+    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
+    
+    <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
+    
+    <category term="Windows" scheme="https://iss4cf0ng.github.io/tags/Windows/"/>
+    
+    <category term=".NET" scheme="https://iss4cf0ng.github.io/tags/NET/"/>
+    
+    <category term="NebulaPulsar" scheme="https://iss4cf0ng.github.io/tags/NebulaPulsar/"/>
+    
+    <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
+    
+    <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
+    
+    <category term="IIS" scheme="https://iss4cf0ng.github.io/tags/IIS/"/>
+    
+    <category term="DarkMatter" scheme="https://iss4cf0ng.github.io/tags/DarkMatter/"/>
+    
   </entry>
   
   <entry>
@@ -295,6 +433,22 @@
     
     <category term="Alien" scheme="https://iss4cf0ng.github.io/categories/Alien/"/>
     
+    
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
+    
+    <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
+    
+    <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
+    
+    <category term="CGI" scheme="https://iss4cf0ng.github.io/tags/CGI/"/>
+    
+    <category term="IIS" scheme="https://iss4cf0ng.github.io/tags/IIS/"/>
+    
+    <category term="Perl" scheme="https://iss4cf0ng.github.io/tags/Perl/"/>
+    
+    <category term="Ruby" scheme="https://iss4cf0ng.github.io/tags/Ruby/"/>
     
   </entry>
   
@@ -318,6 +472,26 @@
     <category term="Alien" scheme="https://iss4cf0ng.github.io/categories/Alien/"/>
     
     
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="PHP" scheme="https://iss4cf0ng.github.io/tags/PHP/"/>
+    
+    <category term="ASP" scheme="https://iss4cf0ng.github.io/tags/ASP/"/>
+    
+    <category term="ASPX" scheme="https://iss4cf0ng.github.io/tags/ASPX/"/>
+    
+    <category term="Pentesting" scheme="https://iss4cf0ng.github.io/tags/Pentesting/"/>
+    
+    <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
+    
+    <category term="ASMX" scheme="https://iss4cf0ng.github.io/tags/ASMX/"/>
+    
+    <category term="ASHX" scheme="https://iss4cf0ng.github.io/tags/ASHX/"/>
+    
+    <category term="Alien" scheme="https://iss4cf0ng.github.io/tags/Alien/"/>
+    
+    <category term="ASP.NET" scheme="https://iss4cf0ng.github.io/tags/ASP-NET/"/>
+    
   </entry>
   
   <entry>
@@ -339,6 +513,26 @@
     
     <category term="NebulaPulsar" scheme="https://iss4cf0ng.github.io/categories/NebulaPulsar/"/>
     
+    
+    <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
+    
+    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
+    
+    <category term="ASPX" scheme="https://iss4cf0ng.github.io/tags/ASPX/"/>
+    
+    <category term="JSP" scheme="https://iss4cf0ng.github.io/tags/JSP/"/>
+    
+    <category term="NebulaPulsar" scheme="https://iss4cf0ng.github.io/tags/NebulaPulsar/"/>
+    
+    <category term="Implant" scheme="https://iss4cf0ng.github.io/tags/Implant/"/>
+    
+    <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
+    
+    <category term="ASMX" scheme="https://iss4cf0ng.github.io/tags/ASMX/"/>
+    
+    <category term="ASHX" scheme="https://iss4cf0ng.github.io/tags/ASHX/"/>
+    
+    <category term="JSPX" scheme="https://iss4cf0ng.github.io/tags/JSPX/"/>
     
   </entry>
   
@@ -362,6 +556,24 @@
     <category term="NebulaPulsar" scheme="https://iss4cf0ng.github.io/categories/NebulaPulsar/"/>
     
     
+    <category term="C#" scheme="https://iss4cf0ng.github.io/tags/C/"/>
+    
+    <category term="Java" scheme="https://iss4cf0ng.github.io/tags/Java/"/>
+    
+    <category term="ASPX" scheme="https://iss4cf0ng.github.io/tags/ASPX/"/>
+    
+    <category term="JSP" scheme="https://iss4cf0ng.github.io/tags/JSP/"/>
+    
+    <category term="NebulaPulsar" scheme="https://iss4cf0ng.github.io/tags/NebulaPulsar/"/>
+    
+    <category term="Implant" scheme="https://iss4cf0ng.github.io/tags/Implant/"/>
+    
+    <category term="Webshell" scheme="https://iss4cf0ng.github.io/tags/Webshell/"/>
+    
+    <category term="ASMX" scheme="https://iss4cf0ng.github.io/tags/ASMX/"/>
+    
+    <category term="ASHX" scheme="https://iss4cf0ng.github.io/tags/ASHX/"/>
+    
   </entry>
   
   <entry>
@@ -383,6 +595,14 @@
     
     <category term="Thoughts" scheme="https://iss4cf0ng.github.io/categories/Thoughts/"/>
     
+    
+    <category term="Thoughts" scheme="https://iss4cf0ng.github.io/tags/Thoughts/"/>
+    
+    <category term="Reflection" scheme="https://iss4cf0ng.github.io/tags/Reflection/"/>
+    
+    <category term="Personal" scheme="https://iss4cf0ng.github.io/tags/Personal/"/>
+    
+    <category term="Notes" scheme="https://iss4cf0ng.github.io/tags/Notes/"/>
     
   </entry>
   
@@ -406,6 +626,26 @@
     <category term="Learning" scheme="https://iss4cf0ng.github.io/categories/Learning/"/>
     
     
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Assembly" scheme="https://iss4cf0ng.github.io/tags/Assembly/"/>
+    
+    <category term="Tools" scheme="https://iss4cf0ng.github.io/tags/Tools/"/>
+    
+    <category term="Petya" scheme="https://iss4cf0ng.github.io/tags/Petya/"/>
+    
+    <category term="Bootloader" scheme="https://iss4cf0ng.github.io/tags/Bootloader/"/>
+    
+    <category term="Bootkit" scheme="https://iss4cf0ng.github.io/tags/Bootkit/"/>
+    
+    <category term="NotPetya" scheme="https://iss4cf0ng.github.io/tags/NotPetya/"/>
+    
+    <category term="NASM" scheme="https://iss4cf0ng.github.io/tags/NASM/"/>
+    
+    <category term="Booting" scheme="https://iss4cf0ng.github.io/tags/Booting/"/>
+    
+    <category term="OpenPetya" scheme="https://iss4cf0ng.github.io/tags/OpenPetya/"/>
+    
   </entry>
   
   <entry>
@@ -427,6 +667,14 @@
     
     <category term="Book" scheme="https://iss4cf0ng.github.io/categories/Book/"/>
     
+    
+    <category term="Book" scheme="https://iss4cf0ng.github.io/tags/Book/"/>
+    
+    <category term="Note" scheme="https://iss4cf0ng.github.io/tags/Note/"/>
+    
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Cryptography" scheme="https://iss4cf0ng.github.io/tags/Cryptography/"/>
     
   </entry>
   
@@ -450,6 +698,22 @@
     <category term="Book" scheme="https://iss4cf0ng.github.io/categories/Book/"/>
     
     
+    <category term="Book" scheme="https://iss4cf0ng.github.io/tags/Book/"/>
+    
+    <category term="Note" scheme="https://iss4cf0ng.github.io/tags/Note/"/>
+    
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Windows" scheme="https://iss4cf0ng.github.io/tags/Windows/"/>
+    
+    <category term="Kernel" scheme="https://iss4cf0ng.github.io/tags/Kernel/"/>
+    
+    <category term="Windows Kernel" scheme="https://iss4cf0ng.github.io/tags/Windows-Kernel/"/>
+    
+    <category term="Windows Security" scheme="https://iss4cf0ng.github.io/tags/Windows-Security/"/>
+    
+    <category term="Windows Internals" scheme="https://iss4cf0ng.github.io/tags/Windows-Internals/"/>
+    
   </entry>
   
   <entry>
@@ -471,6 +735,18 @@
     
     <category term="Learning" scheme="https://iss4cf0ng.github.io/categories/Learning/"/>
     
+    
+    <category term="Learning" scheme="https://iss4cf0ng.github.io/tags/Learning/"/>
+    
+    <category term="Assembly" scheme="https://iss4cf0ng.github.io/tags/Assembly/"/>
+    
+    <category term="Bootloader" scheme="https://iss4cf0ng.github.io/tags/Bootloader/"/>
+    
+    <category term="Bootkit" scheme="https://iss4cf0ng.github.io/tags/Bootkit/"/>
+    
+    <category term="NASM" scheme="https://iss4cf0ng.github.io/tags/NASM/"/>
+    
+    <category term="Booting" scheme="https://iss4cf0ng.github.io/tags/Booting/"/>
     
   </entry>
   

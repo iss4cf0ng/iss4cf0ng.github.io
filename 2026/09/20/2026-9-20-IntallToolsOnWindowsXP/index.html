@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Troubleshooting] How to Install WinDbg and Visual Studio 2008 on Windows XP | ISSAC/iss4cf0ng's blog</title><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Troubleshooting] How to Install WinDbg and Visual Studio 2008 on Windows XP | ISSAC/iss4cf0ng's blog"><meta name="twitter:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/9.png"><meta property="og:title" content="[Troubleshooting] How to Install WinDbg and Visual Studio 2008 on Windows XP"><meta property="og:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/9.png"><meta property="og:url" content="https://iss4cf0ng.github.io/2026/09/20/2026-9-20-IntallToolsOnWindowsXP/index.html"><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Arsenal/"><span class="navItemTitle">Arsenal</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Troubleshooting] How to Install WinDbg and Visual Studio 2008 on Windows XP</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-09-20T07:04:10.000Z" id="date"> 2026-09-20</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-09-21T13:39:49.724Z" id="updated"> 2026-09-21</time></div></span><br><span>Word Count: <div class="control">672</div></span><br><span>Read Time: <div class="control">4 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <strong><a href="/FromBugToExploit">From Bug To Exploit</a></strong>.</p>
+<p>In this article, I will introduce how to install WinDbg and Visual Studio 2008 on Windows XP.</p>
+<p>Recently, I have been studying buffer overflow attacks. While practicing the examples from my textbooks, I found that one of the biggest headaches is setting up the experimental environment.</p>
+<p>My textbooks use tools such as WinDbg and Visual Studio. These two applications can absolutely be installed on modern operating systems like Windows 10 or 11.</p>
+<p>Researchers can easily install modern versions of Visual Studio and WinDbg on Windows 10 and 11. However, Microsoft no longer supports legacy operating systems such as Windows XP. In other words, you cannot directly install these two tools on Windows XP.</p>
+<p align="center" class='item-img' data-src='/images/meme/Rio/6.png'><img src="/images/meme/Rio/6.png" width=250/>
+</p>
+
+<p>After a number of tests, I successfully installed these two applications on Windows XP. Therefore, I decided to write this article to document how to install Visual Studio 2008 and WinDbg on a Windows XP virtual machine.</p>
+<p align="center" class='item-img' data-src='/images/meme/Rio/3.png'><img src="/images/meme/Rio/3.png" width=250/>
+</p>
+
+<h1 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h1><p>In this article, I will use VMware Workstation. <strong>VMware Tools</strong> are essential. If you don’t know how to install them on Windows XP, please refer to <a href="/2026/02/21/2026-2-21-WinXpVMWareTool/">this article</a>.</p>
+<p align="center" class='item-img' data-src='/images/meme/Rio/1.png'><img src="/images/meme/Rio/1.png" width=250/>
+</p>
+
+<h1 id="Install-WinDbg"><a href="#Install-WinDbg" class="headerlink" title="Install WinDbg"></a>Install WinDbg</h1><p>The solution to installing these two applications on Windows XP is to use the legacy installers.</p>
+<p>Since Microsoft doesn’t provide these two installers online anymore, they can be very difficult to find. Therefore, I have already uploaded them to <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/Nday-ToyStore/tree/main/ToolsForXP">my GitHub</a>.</p>
+<blockquote>
+<p>Murmur: Well, at least I didn’t find them on Microsoft’s website. If you find them, please let me know. BTW, although I have installed them on my virtual machine, you should not execute any unknown executable on your production machine. That’s why I put them into an archive file to avoid any unintentional execution.</p>
+</blockquote>
+<p>What we need to do is run the installer <code>dbg_x86.msi</code>, follow the installation procedure, and then WinDbg will be installed.</p>
+<blockquote>
+<p>Note: If your operating system uses an x64 architecture, please run <code>dbg_amd64.msi</code>.</p>
+</blockquote>
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/1.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/1.png" width=800/>
+</p>
+
+<p>After installation, we need the symbol files. Otherwise, WinDbg cannot function properly. Note that you cannot use the symbol files from Windows 10 or 11. You must use the symbol files for Windows XP.</p>
+<p>Microsoft’s servers may disable legacy TLS protocols, but that’s fine! Download <code>symbol.7z</code> from <a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/Nday-ToyStore/tree/main/ToolsForXP">my GitHub</a> as well. Then, extract the file under <code>C:\Symbols\</code> (or wherever you like).</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/2.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/2.png" width=800/>
+</p>
+
+<p>Next, open your WinDbg, and click <code>File</code> —&gt; <code>Symbol File Path</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/3.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/3.png" width=800/>
+</p>
+
+<p>Enter the path <code>C:\Symbols</code> and remember to check <code>Reload</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/4.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/4.png" width=700/>
+</p>
+
+<p>At this point, you have successfully installed WinDbg on Windows XP. Let’s try to view the structure of <code>TEB</code>!</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/5.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/5.png" width=800/>
+</p>
+
+<h1 id="Install-Visual-Studio-2008"><a href="#Install-Visual-Studio-2008" class="headerlink" title="Install Visual Studio 2008"></a>Install Visual Studio 2008</h1><p>Similar to WinDbg, the installer is very difficult to find online.</p>
+<p>However, we can still install it on Windows XP using an ISO file.</p>
+<p>First, download a suitable ISO file from <a target="_blank" rel="noopener" href="https://archive.org/details/VisualStudio2008_Collection">archive.org</a></p>
+<p>Then, just like when installing VMware Tools on Windows XP, open the virtual machine settings, select <code>CD/DVD</code>, and change the ISO image file path to the ISO file you downloaded earlier:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/6.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/6.png" width=800/>
+</p>
+
+<p>And the rest is the same as installing VMware Tools.</p>
+<p>If you cannot find the ISO file on your computer, this is probably because your ISO file is too large. In my case, I downloaded <code>en_visual_studio_2008_professional_x86_dvd_x14-26326.iso</code>, which is over 3 GB.</p>
+<p>In this case, move the ISO file onto your Windows XP virtual machine.</p>
+<blockquote>
+<p>Murmur: This is why you need to install VMware Tools.</p>
+</blockquote>
+<p>Extract the ISO file to a directory you like:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/7.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/7.png" width=800/>
+</p>
+
+<p>Run <code>setup.exe</code>, and then wait for the installation to complete.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/8.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/8.png" width=600/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/9.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/9.png" width=600/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/10.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/10.png" width=600/>
+</p>
+
+<p>Then, you can use Visual Studio 2008 on Windows XP!</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-20-InstallToolsOnWindowsXP/11.png'><img src="/images/article/2026-9-20-InstallToolsOnWindowsXP/11.png" width=800/>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In this article, I discussed how to install legacy versions of WinDbg and Visual Studio 2008 on a Windows XP virtual machine using VMware.</p>
+<p>Again, setting up an experimental environment for studying legacy techniques is always a challenge! I hope everyone can find something useful in this article!</p>
+<p>This is the end of this article. If you have any comments or issues, please feel free to leave them below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING!"></a>THANKS FOR READING!</h1><p>I drew a <a target="_blank" rel="noopener" href="https://www.pixiv.net/users/129297091">new drawing</a>!</p>
+<p align="center" class='item-img' data-src='/images/meme/Wallpaper/MyArt/9.png'><img src="/images/meme/Wallpaper/MyArt/9.png" width=700/>
+    <figcaption>
+    どうしたの？
+    </figcaption>
+</p>
+
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/09/19/2026-9-19-SecurityCookie/">[Learing] Bypassing Security Cookie with SEH Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Prerequisite"><span class="toc-number">2.</span> <span class="toc-text">Prerequisite</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Install-WinDbg"><span class="toc-number">3.</span> <span class="toc-text">Install WinDbg</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Install-Visual-Studio-2008"><span class="toc-number">4.</span> <span class="toc-text">Install Visual Studio 2008</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">6.</span> <span class="toc-text">THANKS FOR READING!</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

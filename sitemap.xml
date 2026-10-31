@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iss4cf0ng.github.io/FromBugToExploit/index.html</loc>
+    
+    <lastmod>2026-10-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/10/31/2026-10-31-KernelDebugging/</loc>
     
     <lastmod>2026-10-31</lastmod>
@@ -14,15 +23,6 @@
     <loc>https://iss4cf0ng.github.io/2026/10/17/2026-10-17-Heartbleed/</loc>
     
     <lastmod>2026-10-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://iss4cf0ng.github.io/FromBugToExploit/index.html</loc>
-    
-    <lastmod>2026-10-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iss4cf0ng.github.io/2026/10/31/2026-10-31-KernelDebugging/</loc>
+    
+    <lastmod>2026-10-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://iss4cf0ng.github.io/2026/10/17/2026-10-17-Heartbleed/</loc>
     
     <lastmod>2026-10-21</lastmod>
@@ -3391,6 +3400,13 @@
   
   <url>
     <loc>https://iss4cf0ng.github.io/categories/Alien/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://iss4cf0ng.github.io/categories/Studying/</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
